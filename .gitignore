@@ -1,0 +1,32 @@
+# Ignore docs files
+_site
+.ruby-version
+
+# Always-ignore extensions
+*.diff
+*.err
+*.log
+*.orig
+*.rej
+*.swo
+*.swp
+*.zip
+*.vi
+*~
+
+# OS or Editor folders
+.DS_Store
+._*
+Thumbs.db
+.cache
+.idea
+.project
+.settings
+.tmproj
+*.esproj
+*.sublime-project
+*.sublime-workspace
+
+# grunt-html-validation
+validation-status.json
+validation-report.json

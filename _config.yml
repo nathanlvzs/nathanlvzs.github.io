@@ -1,0 +1,19 @@
+# Dependencies
+markdown: kramdown
+highlighter: pygments
+
+
+encoding: utf-8
+
+# Permalinks
+permalink: pretty
+
+# Setup
+title: "Nathan Lui's blog"
+url: http://NathanLvzs.github.io
+baseurl: /
+github:
+repo: https://github.com/NathanLvzs/NathanLvzs.github.io
+author:
+name: 'Nathan Lui'
+#url: https://twitter.com/blabla
