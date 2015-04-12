@@ -1,19 +1,34 @@
 # Dependencies
 markdown: kramdown
+# markdown: redcarpet
 highlighter: pygments
-
+lsi: true
+safe: true
+auto: true
 
 encoding: utf-8
 
 # Permalinks
-permalink: pretty
+# permalink: pretty
+permalink: /:title.html
 
-# Setup
+comments: disqus
+
+# Personal Config
 title: "Nathan Lui's blog"
 url: http://NathanLvzs.github.io
 baseurl: /
-github:
+github: https://github.com/NathanLvzs
 repo: https://github.com/NathanLvzs/NathanLvzs.github.io
 author:
-name: 'Nathan Lui'
-#url: https://twitter.com/blabla
+  name: 'Nathan Lui'
+  #url: https://twitter.com/blabla
+
+
+seo: 
+  keyword: 
+  description: 
+config:
+  js_dir:
+  img_dir:
+  css_dir:
