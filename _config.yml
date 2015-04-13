@@ -1,34 +1,42 @@
 # Dependencies
-markdown: kramdown
-# markdown: redcarpet
+markdown: redcarpet
 highlighter: pygments
-lsi: true
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+lsi: false
 safe: true
-auto: true
 
 encoding: utf-8
+timezone: Asia/Chongqing
 
-# Permalinks
 # permalink: pretty
-permalink: /:title.html
+permalink: /blog/:title.html
 
-comments: disqus
+# Keybase
+include:
+  - .well-known
+
+# White-listed plugins
+gems:
+  - jekyll-sitemap
+
 
 # Personal Config
-title: "Nathan Lui's blog"
-url: http://NathanLvzs.github.io
-baseurl: /
+title: Nathan Lui
+url: # http://NathanLvzs.github.io
+twitter: https://twitter.com/NathanLZS
 github: https://github.com/NathanLvzs
-repo: https://github.com/NathanLvzs/NathanLvzs.github.io
+baseurl: /
 author:
-  name: 'Nathan Lui'
-  #url: https://twitter.com/blabla
+  name: Nathan Lui
+  nickname: Nathan
+  email: lvzshen@outlook.com
+  site: https://github.com/NathanLvzs/NathanLvzs.github.io
 
-
-seo: 
-  keyword: 
-  description: 
-config:
-  js_dir:
-  img_dir:
-  css_dir:
+# seo: 
+#   keyword: 
+#   description: 
+# config:
+#   js_dir:
+#   img_dir:
+#   css_dir:

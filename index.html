@@ -1,23 +1,44 @@
 ---
-layout: index
-index: true
+layout: default
+category: about
+title: Nathan Lui's homepage
+description: 
 ---
 
-{% for post in site.posts limit:32 %}
-<article class="post">
- <div class="date">
-  <span class="day">{{ post.date | date:"%d" }}</span>
-  <span class="month">{{ post.date | date:"%b" }}</span>
-  <span class="year">{{ post.date | date:"%Y" }}</span>
- </div>
- <header>
- <h2><a href="{{ site.url }}{{post.url}}" title="{{ post.title }}">{{ post.title }}</a></h2>
- </header>
- <div class="con">
-   <p>
-   {{ post.content  | | split:'<!--more-->' | first | strip_html }}
-   <a class="more" href="{{ site.url }}{{ post.url }}">[继续阅读]</a>
-   </p>
- </div>
-</article>
-{% endfor %}
+<section class="about-me inner" itemscope itemtype="http://data-vocabulary.org/Person">
+  <div class="pull-right speak-french"></div>
+
+  <h1>
+    <div class="book-me">
+      <!--<a class="btn btn-lg" href="/contact">Contact me</a>-->
+      <a class="btn btn-lg" href="/cn/">中文</a>
+    </div>
+    <span class="hello">
+      <em>Welcome</em>
+      <small>to <a href="/">Nathan Lui</a>'s homepage.
+    </span>
+  </h1>
+  <blockquote>
+  <p>
+    Super awesome!
+  </p>
+  </blockquote>
+  <p>
+    
+  </p>
+  <p>
+    
+  </p>
+  <p>
+    
+  </p>  
+  <p>
+    
+  </p>
+  <p>
+    Here's my <strong>resume</strong>,
+    and <a href="/contact"><strong>contact me</strong></a>.</small>
+  </p>
+</section>
+
+  <a href="{{ site.author.site }}"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>

@@ -1,6 +1,6 @@
 ---
 title: nav
-layout: page
+layout: 
 nav: true
 ---
 
