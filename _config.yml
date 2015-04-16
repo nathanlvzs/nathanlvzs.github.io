@@ -20,6 +20,10 @@ include:
 gems:
   - jekyll-sitemap
 
+comments :
+  provider : duoshuo
+  duoshuo :
+    short_name : nathan
 
 # Personal Config
 title: Nathan Lui
