@@ -4,7 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="sOBHuBNj7Igq5XR4btoazJqgeYvNu-SMrJCDchvHNnM" />
-  <meta name="baidu-site-verification" content="UQvkeXQBgq" />
+  <!-- <meta name="baidu-site-verification" content="UQvkeXQBgq" /> -->
+  {% if page.url == "/404.html" %}
+    <meta http-equiv="refresh" content="3; url=/" />
+  {% endif %}
   <title>
     {{ page.title }}
     {% if page.category == 'blog' and page.url != '/blog/index.html' %}
@@ -12,7 +15,7 @@
     {% endif %}
   </title>
   <link rel="stylesheet" href="../css/site.css">
-  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <!-- <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 标题栏图标-->
   {% if page.description %}<meta name="description" content="{{page.description}}" />{% endif %}
   <link rel="alternate" type="application/atom+xml" title="RSS Feed for Nathan Lui's blog" href="/feed.xml" />
 
@@ -31,13 +34,7 @@
   {% endif %}
 </head>
 <body>
-  <!-- <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-                    tex2jax: {inlineMath: [['$','$']]}
-                            });
-  </script>-->
-  <!-- , ['\\(','\\)'] -->
-  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
   <div class="top-bar">
   </div>
 
@@ -51,7 +48,7 @@
         <!--<a class="{% if page.category == 'resume' %} selected {% endif %}" href="/resume/">Resume</a>-->
         <a href="/resume/">简历</a>
         <!--<a class="{% if page.category == 'contact' %} selected {% endif %} contact" href="/contact/">Contact</a>-->
-		    <a href="https://jinshuju.net/f/b3L2Be">雇佣</a>
+        <a href="/books/">阅读</a>
         <a href="{{ site.github }}">Github</a>
       </nav>
       {% else %}
@@ -73,9 +70,9 @@
           <small>
             <em>
               {% if page.url == '/cn/index.html' %}
-                <a href="/cn">开发者</a>
+                <a href="/cn">make believe</a>
               {% else %}
-                <a href="/">developer</a>
+                <a href="/">make believe</a>
               {% endif %}
             </em>
           </small>
@@ -92,20 +89,16 @@
 
   <div  style="border-bottom: 1px solid #ddd"></div>
     <footer>
-    <p class="linkings">
-        Friend: 
+    <!-- <p class="linkings">
+        Useful links: 
+    </p> -->
+    <p>
+      Powered by <a href="http://jekyllrb.com/">Jekyll</a> | Hosted at <a href="https://github.com">Github</a> | Copyright © 2015 - {{ site.author.name }}
     </p>
-    <p class="linkings">
-        Utils: <a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html">rogerioferis</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caffe.berkeleyvision.org/">Caffe</a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-learn.org/stable/index.html">scikit-learn</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.astroml.org/index.html">AstroML</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-image.org/">scikit-image</a>
-    </p>
-    <!--p>
-      Made with <a href="http://jekyllrb.com/">Jekyll</a>,
-      hosted on <a href="https://github.com/willard-yuan/willard-yuan.github.io">Github Pages</a>. Theme inspired by <a href="http://ssaunier.github.io">ssaunier</a>.
-    </p-->
-    </p>
+    <!-- </p>
       <a href="http://www.easycounter.com/">
       <img src="http://www.easycounter.com/counter.php?nathanlvzs" border="0" alt="Free Hit Counter"></a> since April 2015.
-    </p>
+    </p> -->
   </footer>
 
   <script type="text/javascript">

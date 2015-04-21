@@ -218,8 +218,8 @@ header nav {
 }
 
 .separator {
-  padding-bottom: 0.8em;
-  margin-bottom: 1.4em;
+  padding-bottom: 0.6em;
+  margin-bottom: 1.0em;
 }
 
 header .logo a, header .logo a:hover {
@@ -236,7 +236,7 @@ header .logo a, header .logo a:hover {
 }
 
 .inner, pre code, .post > * {
-  max-width: 680px;
+  max-width: 760px;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
@@ -432,7 +432,7 @@ header h1.title a:hover {
 }
 
 article h1 {
-  margin-bottom: 8px;
+  margin-bottom: 3px;
   line-height: 120%;
   text-align: center !important;
 }
@@ -540,11 +540,9 @@ blockquote {
 }
 
 .post-footer-self-promotion {
-  margin-top: 1.6em;
-  margin-bottom: 0.3em;
+  margin-top: 1.2em;
+  margin-bottom: 0em;
   font-style: italic;
-  margin-top: 4em;
-  margin-bottom: 6em;
   border: 1px solid #eee;
   border-radius: 5px;
   padding: 0 1em;

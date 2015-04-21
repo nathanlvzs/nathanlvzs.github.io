@@ -3,12 +3,12 @@ layout: default
 ---
 
 <!--添加侧边菜单-->
-<!--<link rel="stylesheet" href="{{site.url}}/css/side-menu.css" />
+<link rel="stylesheet" href="{{site.url}}/css/side-menu.css" />
  <style>
         .side-menu {
             width: 200px;
             top: 150px;
-            right: 0;
+            left: 80px;
         }
  </style>
 <script type="text/javascript" src="{{site.url}}/js/jquery.min.js"></script>
@@ -19,7 +19,14 @@ $(function () {
                 hs: ['h2']
             });
         });
+</script>
+<!-- <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+                    tex2jax: {inlineMath: [['$','$']]}
+                            });
 </script>-->
+<!-- , ['\\(','\\)'] -->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 {% if page.photo %}
 <div class="post-photo" style="background-image: url('/images/posts/{{ page.photo }}')">
@@ -32,7 +39,7 @@ $(function () {
     {{ page.title }}
   </h1>
 
-  <p class="meta">{{ page.date | date: "%A %-d %B %Y" }}</p>
+  <p class="meta">{{ site.author.name }} &nbsp;&nbsp;|&nbsp;&nbsp; {{ page.date | date: "%A %-d %B %Y" }}</p>
   
   <div id="menu"></div>
   <div id="main" class="span9">
@@ -43,11 +50,13 @@ $(function () {
 </article>
 
 <section class="post-footer-self-promotion inner">
-	<p>
+	<p style="text-align:center;">
 	Thanks for reading! You can follow 
 	<a href="{{ site.twitter }}" target="_blank">my twitter </a>
 	or 
-	<a href="http://weibo.com/destinylzs">my weibo</a>.
+	<a href="http://weibo.com/destinylzs" target="_blank">my weibo</a>.
+	<br/>
+	Feel free to <a href="/blog">browse other articles on my blog</a>.
 	</p>
 	
 	<!-- <p>
@@ -67,10 +76,6 @@ $(function () {
 		  ... or <a href="/blog">some other article</a> from my blog.
 		  Oh and I also take <a href="/photos">pictures</a>!
 		</p>
-	  {% else %}
-	  <p>
-		If you liked this, feel free to <a href="/blog">browse other articles on my blog</a>.
-	  </p>
 	  {% endif %}
 	</div> -->
   
