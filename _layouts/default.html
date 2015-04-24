@@ -32,6 +32,8 @@
       <meta property="og:image" content="/images/posts/{{ page.photo }}" />
     {% endif %}
   {% endif %}
+
+  <script type="text/javascript" src="{{site.url}}/js/jquery.min.js"></script>
 </head>
 <body>
   
@@ -58,7 +60,7 @@
         <a class="{% if page.category == 'project' %} selected {% endif %}" href="/project/">Project</a>
         <!--<a class="{% if page.category == 'resume' %} selected {% endif %}" href="/resume/">Resume</a>-->
 		    <a href="/resume/">Resume</a>
-    		<a href="/books/">Book</a>
+    		<a href="/books/">Books</a>
         <!--<a class="{% if page.category == 'contact' %} selected {% endif %} contact" href="/contact/">Contact</a>-->
         <a href="{{ site.github }}">Github</a>
       </nav>

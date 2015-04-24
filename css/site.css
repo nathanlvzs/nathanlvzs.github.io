@@ -138,7 +138,6 @@ a.discreet {
 }
 
 /*article {
-  /*定义article字号和字体颜色*/
   font-size: 18px;
   color:#424b50;
 }*/
@@ -785,10 +784,74 @@ fieldset[disabled] .btn-primary.active {
 #ds-reset .ds-powered-by {
   display: none;
 }
-/*#ds-thread {
-  clear: none !important;
+
+
+/* douban
+----------------------------------------------- */
+#douban {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.post .douban li {
+  list-style:none outside none;
+  float:left;
+  width:80px;
+  padding: 0;
+}
+.post .douban li img{
+  width: 70px;
+  height: 100px;
+}
+
+.douban-list ul li {
+  width: 80px;
   float: left;
-  margin-top: 0;
-  width: 100%;
-}*/
+  list-style: inside none none;
+  min-height: 20px;
+  line-height: 1.4em;
+  padding: 4px 0px;
+  margin-left: auto;
+}
+
+.douban-list ul li img {
+  width: 70px;
+  height: 100px;
+  border: solid 1px #DDD;
+}
+
+.douban-title {
+  color:#4094AA;
+  margin-top:8px;
+  border-left:solid 5px #40aa52;
+  padding-left:15px;
+}
+
+.clear {
+  clear:both;
+}
+
+
+/* prev-and-next
+----------------------------------------------- */
+.prev_and_next{
+  max-width: 760px;
+  font-size: 15px;
+  text-align: left;
+  margin-top:25px;
+}
+.prev_and_next a{
+  /*color: #40AA52;*/
+}
+.prev_and_next div{
+  line-height: 30px;
+}
+.prev_and_next div span{
+  font-weight:normal;
+  color:#666;
+  margin-left:10px;
+  font-size: 12px;
+}
+
 

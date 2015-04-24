@@ -2,6 +2,7 @@
 layout: default
 ---
 
+<!-- {% if page.read != true %} -->
 <!--添加侧边菜单-->
 <link rel="stylesheet" href="{{site.url}}/css/side-menu.css" />
  <style>
@@ -27,6 +28,7 @@ $(function () {
 </script>-->
 <!-- , ['\\(','\\)'] -->
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- {% endif %} -->
 
 {% if page.photo %}
 <div class="post-photo" style="background-image: url('/images/posts/{{ page.photo }}')">
@@ -46,8 +48,22 @@ $(function () {
   <div class="post">
     {{ content }}
   </div>
+  <p></p>
+  <div class="prev_and_next inner">
+	{% if page.previous %}
+	<div><strong>上一篇： <a href="{{ site.url }}{{ page.previous.url }}" title="{{ page.previous.title }}">{{ page.previous.title }}</a></strong></div>
+	{% else %}
+	<div><strong>上一篇： 这个真没有！！！</strong></div>
+	{% endif %}
+	{% if page.next %}
+	<div><strong>下一篇： <a href="{{ site.url }}{{ page.next.url }}" title="{{ page.next.title }}">{{ page.next.title }}</a></strong></div>
+	{% else %}
+	<div><strong>下一篇： 这个真没有！！！</strong></div>
+	{% endif %}
+  </div>
   </div>
 </article>
+
 
 <section class="post-footer-self-promotion inner">
 	<p style="text-align:center;">
