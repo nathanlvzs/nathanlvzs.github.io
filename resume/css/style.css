@@ -77,14 +77,14 @@ header .logo a, header .logo a:hover {
   display: inline-block;
 }
 
-.inner, pre code, .post > * {
+/*.inner, pre code, .post > * {
   max-width: 680px;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
   width: 100%;
   display: block;
-}
+}*/
 
 .twitter-tweet.twitter-tweet-rendered {
   margin: 1em auto !important;
@@ -224,12 +224,3 @@ header h1.title a:hover {
     float: right;
 }
 
-
-.inner, pre code, .post > * {
-    max-width: 680px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-    width: 100%;
-    display: block;
-}

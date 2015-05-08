@@ -2,14 +2,13 @@
 layout: default
 ---
 
-<!-- {% if page.read != true %} -->
 <!--添加侧边菜单-->
 <link rel="stylesheet" href="{{site.url}}/css/side-menu.css" />
  <style>
         .side-menu {
             width: 200px;
-            top: 150px;
-            left: 80px;
+            top: 140px;
+            left: 30px;
         }
  </style>
 <script type="text/javascript" src="{{site.url}}/js/jquery.min.js"></script>
@@ -19,6 +18,11 @@ $(function () {
             $('#main').sideMenu({
                 hs: ['h2']
             });
+            var winWidth = $(document).width();
+            if(winWidth > 1000){
+            	$('.side-menu').css('left', winWidth/12);
+            }
+            $('.side-menu').css('text-align', 'left');
         });
 </script>
 <!-- <script type="text/x-mathjax-config">
@@ -28,7 +32,6 @@ $(function () {
 </script>-->
 <!-- , ['\\(','\\)'] -->
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<!-- {% endif %} -->
 
 {% if page.photo %}
 <div class="post-photo" style="background-image: url('/images/posts/{{ page.photo }}')">
@@ -43,7 +46,7 @@ $(function () {
 
   <p class="meta">{{ site.author.name }} &nbsp;&nbsp;|&nbsp;&nbsp; {{ page.date | date: "%A %-d %B %Y" }}</p>
   
-  <div id="menu"></div>
+  <!-- <div id="menu"></div> -->
   <div id="main" class="span9">
   <div class="post">
     {{ content }}
@@ -53,12 +56,12 @@ $(function () {
 	{% if page.previous %}
 	<div><strong>上一篇： <a href="{{ site.url }}{{ page.previous.url }}" title="{{ page.previous.title }}">{{ page.previous.title }}</a></strong></div>
 	{% else %}
-	<div><strong>上一篇： 这个真没有！！！</strong></div>
+	<div><strong>上一篇： 这个真没有</strong></div>
 	{% endif %}
 	{% if page.next %}
 	<div><strong>下一篇： <a href="{{ site.url }}{{ page.next.url }}" title="{{ page.next.title }}">{{ page.next.title }}</a></strong></div>
 	{% else %}
-	<div><strong>下一篇： 这个真没有！！！</strong></div>
+	<div><strong>下一篇： 这个可以有</strong></div>
 	{% endif %}
   </div>
   </div>
@@ -74,26 +77,6 @@ $(function () {
 	<br/>
 	Feel free to <a href="/blog">browse other articles on my blog</a>.
 	</p>
-	
-	<!-- <p>
-	<form action="http://saunier.us8.list-manage.com/subscribe/post?u=3e666bd315f84f1bbdfe80c3b&amp;id=0494cf26c5" method="post"target="_blank">
-	  <input type="email" class="form-control" name="EMAIL" placeholder="Enter your email address"
-		><input type="submit" value="Subscribe to my newsletter" >
-	</form>
-	</p> -->
-
-	<!-- <div id="more-articles">
-	  {% if has_res %}
-		<p>Since you scrolled this far, you might as well take a look at some other things I wrote !</p>
-		<ul>
-		  {{ res }}
-		</ul>
-		<p>
-		  ... or <a href="/blog">some other article</a> from my blog.
-		  Oh and I also take <a href="/photos">pictures</a>!
-		</p>
-	  {% endif %}
-	</div> -->
   
 </section>
 
