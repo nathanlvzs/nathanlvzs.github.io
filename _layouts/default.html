@@ -49,7 +49,7 @@
         <a class="{% if page.category == 'blog' %} selected {% endif %}" href="/blog/">博客</a>
         <a class="{% if page.category == 'project' %} selected {% endif %}" href="/project/">项目</a>
         <!--<a class="{% if page.category == 'resume' %} selected {% endif %}" href="/resume/">Resume</a>-->
-        <a href="/resume/">简历</a>
+        <!-- <a href="/resume/">简历</a> -->
         <!--<a class="{% if page.category == 'contact' %} selected {% endif %} contact" href="/contact/">Contact</a>-->
         <a href="/books/">阅读</a>
         <a href="{{ site.github }}">Github</a>
@@ -60,8 +60,9 @@
         <a class="{% if page.category == 'blog' %} selected {% endif %}" href="/blog/">Blog</a>
         <a class="{% if page.category == 'project' %} selected {% endif %}" href="/project/">Project</a>
         <!--<a class="{% if page.category == 'resume' %} selected {% endif %}" href="/resume/">Resume</a>-->
-		    <a href="/resume/">Resume</a>
+		    <!-- <a href="/resume/">Resume</a> -->
     		<a href="/books/">Books</a>
+        <a href="/Links.html">Links</a>
         <!--<a class="{% if page.category == 'contact' %} selected {% endif %} contact" href="/contact/">Contact</a>-->
         <a href="{{ site.github }}">Github</a>
       </nav>
@@ -87,14 +88,14 @@
     <div class="clear"></div>
   </div>
 
+  <div  style="min-height: 640px">
   {{ content }}
+  </div>
+
   <div class="separator"></div>
 
   <div  style="border-bottom: 1px solid #ddd"></div>
     <footer>
-    <!-- <p class="linkings">
-        Useful links: 
-    </p> -->
     <p>
       Powered by <a href="http://jekyllrb.com/">Jekyll</a> | Hosted at <a href="https://github.com">Github</a> | Copyright © 2015 - {{ site.author.name }}
     </p>
@@ -135,23 +136,6 @@
       window.top.location.replace(window.self.location.href);
     }
   </script>
-
-  <!--
-  <script id="_webengage_script_tag" type="text/javascript">
-    // var _weq = _weq || {};
-    // _weq['webengage.licenseCode'] = '11b563c38';
-    // _weq['webengage.widgetVersion'] = "4.0";
-
-    // (function(d){
-    //   var _we = d.createElement('script');
-    //   _we.type = 'text/javascript';
-    //   _we.async = true;
-    //   _we.src = (d.location.protocol == 'https:' ? "https://ssl.widgets.webengage.com" : "http://cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-4.0.js";
-    //   var _sNode = d.getElementById('_webengage_script_tag');
-    //   _sNode.parentNode.insertBefore(_we, _sNode);
-    // })(document);
-  </script>
-  -->
 
 </body>
 </html>

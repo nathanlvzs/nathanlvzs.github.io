@@ -1,0 +1,37 @@
+---
+layout: default
+---
+
+<!--添加侧边菜单-->
+<link rel="stylesheet" href="{{site.url}}/css/side-menu.css" />
+ <style>
+        .side-menu {
+            width: 200px;
+            top: 140px;
+            left: 30px;
+        }
+ </style>
+<script type="text/javascript" src="{{site.url}}/js/jquery.min.js"></script>
+<script type="text/javascript" src="{{site.url}}/js/jquery.side.menu.js"></script>
+<script>
+$(function () {
+            $('#main').sideMenu({
+                hs: ['h2']
+            });
+            var winWidth = $(document).width();
+            if(winWidth > 1000){
+            	$('.side-menu').css('left', winWidth/12);
+            }
+            $('.side-menu').css('text-align', 'left');
+        });
+</script>
+
+<article>
+  
+  <div id="main" class="span9">
+  <div class="post">
+    {{ content }}
+  </div>
+</article>
+
+

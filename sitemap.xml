@@ -8,62 +8,72 @@
 
 <url>
   <loc>http://nathanlvzs.github.io/</loc>
-  <lastmod>2015-05-08T17:18:14+00:00</lastmod>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/</loc>
-  <lastmod>2015-05-08T17:18:14+00:00</lastmod>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/project/</loc>
-  <lastmod>2015-05-08T17:18:14+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-</url>
-<url>
-  <loc>http://nathanlvzs.github.io/resume/</loc>
-  <lastmod>2015-05-08T17:18:14+00:00</lastmod>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/books/</loc>
-  <lastmod>2015-05-08T17:18:14+00:00</lastmod>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://nathanlvzs.github.io/cn/</loc>
-  <lastmod>2015-05-08T17:18:14+00:00</lastmod>
+  <loc>http://nathanlvzs.github.io/Links.html</loc>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/contact/</loc>
-  <lastmod>2015-05-08T17:18:14+00:00</lastmod>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/index.html</loc>
-  <lastmod>2015-05-08T17:18:14+00:00</lastmod>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/categories.html</loc>
-  <lastmod>2015-05-08T17:18:14+00:00</lastmod>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://nathanlvzs.github.io/blog/XML-Deserialize-And-Handling-Enum-Field.html</loc>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://nathanlvzs.github.io/blog/MOOC-Conclusion.html</loc>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://nathanlvzs.github.io/blog/Algo-Note2-BinarySearch-BitonicSearch.html</loc>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/Algo-Note1.html</loc>
-  <lastmod>2015-05-08T17:18:14+00:00</lastmod>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/Windows-Remote-Desktop-Issue.html</loc>
-  <lastmod>2015-05-08T17:18:14+00:00</lastmod>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/Building-Personal-Site-With-Jekyll.html</loc>
-  <lastmod>2015-05-08T17:18:14+00:00</lastmod>
+  <lastmod>2015-06-21T20:33:13+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 </urlset>
