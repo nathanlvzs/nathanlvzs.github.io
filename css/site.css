@@ -40,7 +40,7 @@ body {
   background-color: lightyellow;
   line-height: 32px;
   color: #666;
-  border-bottom: 5px solid #ed5252 ;;
+  border-bottom: 5px solid #2A3440 ;;
 }
 
 h1, h2, h3 {
@@ -105,16 +105,16 @@ table td, table th {
 /* Common */
 
 a {
-  color: #e0115f;
+  color: #1863A1;
   text-decoration: none;
 }
 
 a:active {
-  color: #e0115f;
+  color: #1863A1;
 }
 
 a:visited {
-  color: #e0115f;
+  color: #751590;
 }
 
 a:hover {
@@ -609,7 +609,7 @@ img {
 /* From http://designmodo.github.io/Flat-UI/ */
 .btn {
   border: none;
-  font-size: 15px;
+  font-size: 100%; /*15px*/
   font-weight: normal;
   line-height: 1.4;
   border-radius: 4px;
@@ -695,8 +695,8 @@ img {
 /* button   
 ---------------------------------------------- */  
 .button {  
-  padding: 15px 135px;
-  font-size: 15px;
+  padding: 10px 100px; /*15px 135px*/
+  font-size: 100%; /*15px*/
   font-weight: normal;
   line-height: 1.4;
   border: none;
@@ -717,7 +717,7 @@ img {
 
 .btn-primary {
   color: #fff;
-  background-color: #1abc9c;
+  background-color: #349BCB;
   }
 .btn-primary:hover,
 .btn-primary.hover,
@@ -726,8 +726,8 @@ img {
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #fff;
-  background-color: #48c9b0;
-  border-color: #48c9b0;
+  background-color: #409DCB;
+  border-color: #409DCB;
   }
 .btn-primary:active,
 .btn-primary.active,
