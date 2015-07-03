@@ -19,10 +19,15 @@ $(function () {
                 hs: ['h2']
             });
             var winWidth = $(document).width();
-            if(winWidth > 1000){
-            	$('.side-menu').css('left', winWidth/12);
-            }
             $('.side-menu').css('text-align', 'left');
+            if(winWidth < 1200){
+              $('.side-menu').css('display', 'none');
+            }
+            else{
+              if(winWidth > 1400){
+                $('.side-menu').css('left', winWidth/14);
+              }
+            }
         });
 </script>
 

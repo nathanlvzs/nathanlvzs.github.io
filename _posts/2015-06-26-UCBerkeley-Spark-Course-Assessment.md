@@ -88,4 +88,11 @@ Lab 1 用了三个多钟；Lab 2 用时四个钟左右；Lab 3 用了差不多8�
 
 ![Image]({{ site.url }}/images/posts/2015/2015-06-26/2015-06-26-SparkCurrentProgress.png)
 
+> 2015-06-28补充
+
+第五周完成了，Lab 4是关于电影推荐的。虽然之前上了Andrew Ng的机器学习课程，对这块有一点点了解，但是做Lab还是花了四个小时。。。搞错一个小地方结果调试了好久。
+
+课程最终完成情况如下：
+
+![Image]({{ site.url }}/images/posts/2015/2015-06-26/2015-06-26-SparkFinalProgress.png)
 
