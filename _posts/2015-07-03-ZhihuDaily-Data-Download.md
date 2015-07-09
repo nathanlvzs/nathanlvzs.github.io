@@ -27,11 +27,14 @@ published: true
 
 将通过以下文章进行阐述：
 
-- [【我是占位符，待更新】](http://nathanlvzs.github.io/blog/)
+- [知乎日报数据下载存储]({{ site.url }}/blog/ZhihuDaily-Data-Download.html)（即本文）
+
+- [知乎日报数据网页输出及提取文章正文]({{ site.url }}/blog/ZhihuDaily-Page-Generation-And-Text-Extraction.html)
 
 - [【我是占位符，待更新】](http://nathanlvzs.github.io/blog/)
 
-- [【我是占位符，待更新】](http://nathanlvzs.github.io/blog/)
+
+环境：Windows8.1 ×64，Python 2.7.8，PyMongo 3.0.2。
 
 
 对于知乎日报数据的下载保存，可以分为如下几个部分处理：
