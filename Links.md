@@ -7,7 +7,8 @@ title: Links
 
 ## Search Engine
 
-| [Google](https://www.google.com/ncr) | [Glgoo](http://www.iglgoo.com/) | [Googto](http://www.googto.com/) |
+| [Google](https://www.google.com/ncr) | [Microsoft Academic Search](http://academic.research.microsoft.com/) | [Wolfram|Alpha](http://www.wolframalpha.com/) |
+| [Googto](http://www.googto.com/) |
 
 
 ## MOOC
@@ -19,16 +20,21 @@ title: Links
 ## Dev Tools
 
 | [在线工具 开源中国社区](http://tool.oschina.net/) | [JSON 在线编辑器](http://www.bejson.com/jsoneditoronline/) | [Online regex tester and debugger](https://regex101.com/) |
-| [Check Browser Compatibility](http://browsershots.org/) | [XML Sitemaps Generator](https://www.xml-sitemaps.com/) |
+| [Check Browser Compatibility](http://browsershots.org/) | [Visual Studio Online](https://lzsdev.visualstudio.com/) | 
 
 
 ## Doc Link
 
-| [NumPy](http://docs.scipy.org/doc/numpy/reference/index.html) |
+| [NumPy](http://docs.scipy.org/doc/numpy/reference/index.html) | [MSDN](http://msdn.microsoft.com/zh-cn/) |
 | [Regex(Python)](https://docs.python.org/2/library/re.html) | [MongoDB(Python)](http://docs.mongodb.org/getting-started/python/) | [Spark](https://spark.apache.org/documentation.html) |
 | [ML(Matlab)](http://cn.mathworks.com/machine-learning/) | [YALMIP Wiki](http://users.isy.liu.se/johanl/yalmip/) | [RStudio Docs](https://support.rstudio.com/hc/en-us/categories/200035113-Documentation?version=0.98.507&mode=desktop) |
 | [Conda Wiki](http://conda.pydata.org/docs/index.html) | [Jekyll Plugins](http://jekyllcn.com/docs/plugins/) | [WebP](https://developers.google.com/speed/webp/docs/using) |
 | [OpenCV](http://docs.opencv.org/) | [Ice - ZeroC](https://doc.zeroc.com/display/Ice/Home) | 
+
+
+## Cheatsheet
+
+| [Python Regular Expression Cheatsheet](https://www.debuggex.com/cheatsheet/regex/python) | 
 
 
 ## Booksite
@@ -50,17 +56,11 @@ title: Links
 
 ## Invitation
 
-| [Dropbox](https://db.tt/j1h8LSpu) | [DigitalOcean](https://www.digitalocean.com/?refcode=cd2f8bc40d75) |
+| [Dropbox](https://db.tt/j1h8LSpu) | [DigitalOcean](https://www.digitalocean.com/?refcode=cd2f8bc40d75) | [WizNote](https://note.wiz.cn/i/ea3408db)
 
 
 
 ## Less Frequent
-
-### !@#$%^&*
-
-| [downforeveryoneorjustme](http://www.downforeveryoneorjustme.com/) | [AlternativeTo](http://alternativeto.net/) | [VirusTotal](https://www.virustotal.com/) |
-| [MindMup](https://www.mindmup.com/) |
-
 
 ### Text
 
@@ -74,5 +74,12 @@ title: Links
 | [iConvert Icons](http://iconverticons.com/) |
 
 
+### !@#$%^&*
 
+| [VirusTotal](https://www.virustotal.com/) |
 
+| [MindMup](https://www.mindmup.com/) | [ProcessOn](http://www.processon.com/) |
+
+| [Rainy Mood](http://www.rainymood.com/) | [Labuat](http://herraizsoto.com/works/2009/labuat/soytuaire/) | [豆瓣电影TOP250](http://movie.douban.com/top250) |
+
+| [Typing Test English](http://10fastfingers.com/typing-test/english) |

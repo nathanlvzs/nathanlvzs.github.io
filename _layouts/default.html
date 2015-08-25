@@ -3,9 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-site-verification" content="sOBHuBNj7Igq5XR4btoazJqgeYvNu-SMrJCDchvHNnM" />
-  <meta name="msvalidate.01" content="89CFDC701B2E8476CF0D0070BC0F4CF1" />
-  <!-- <meta name="baidu-site-verification" content="UQvkeXQBgq" /> -->
+  {% if page.url != "/Links.html" and page.url != "/Admin.html" %}
+      <meta name="google-site-verification" content="sOBHuBNj7Igq5XR4btoazJqgeYvNu-SMrJCDchvHNnM" />
+      <meta name="msvalidate.01" content="89CFDC701B2E8476CF0D0070BC0F4CF1" />
+      <!-- <meta name="baidu-site-verification" content="UQvkeXQBgq" /> -->
+  {% endif %}
   {% if page.url == "/404.html" %}
     <meta http-equiv="refresh" content="3; url=/" />
   {% endif %}
