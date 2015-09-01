@@ -7,7 +7,7 @@ title: Links
 
 ## Search Engine
 
-| [Google](https://www.google.com/ncr) | [Microsoft Academic Search](http://academic.research.microsoft.com/) | [Wolfram|Alpha](http://www.wolframalpha.com/) |
+| [Google](https://www.google.com/ncr) | [Microsoft Academic Search](http://academic.research.microsoft.com/) | [WolframAlpha](http://www.wolframalpha.com/) |
 | [Googto](http://www.googto.com/) |
 
 
@@ -25,7 +25,7 @@ title: Links
 
 ## Doc Link
 
-| [NumPy](http://docs.scipy.org/doc/numpy/reference/index.html) | [MSDN](http://msdn.microsoft.com/zh-cn/) |
+| [NumPy](http://docs.scipy.org/doc/numpy/reference/index.html) | [MSDN](http://msdn.microsoft.com/zh-cn/) | [Git - Reference](http://git-scm.com/docs) |
 | [Regex(Python)](https://docs.python.org/2/library/re.html) | [MongoDB(Python)](http://docs.mongodb.org/getting-started/python/) | [Spark](https://spark.apache.org/documentation.html) |
 | [ML(Matlab)](http://cn.mathworks.com/machine-learning/) | [YALMIP Wiki](http://users.isy.liu.se/johanl/yalmip/) | [RStudio Docs](https://support.rstudio.com/hc/en-us/categories/200035113-Documentation?version=0.98.507&mode=desktop) |
 | [Conda Wiki](http://conda.pydata.org/docs/index.html) | [Jekyll Plugins](http://jekyllcn.com/docs/plugins/) | [WebP](https://developers.google.com/speed/webp/docs/using) |
@@ -77,9 +77,6 @@ title: Links
 ### !@#$%^&*
 
 | [VirusTotal](https://www.virustotal.com/) |
-
 | [MindMup](https://www.mindmup.com/) | [ProcessOn](http://www.processon.com/) |
-
 | [Rainy Mood](http://www.rainymood.com/) | [Labuat](http://herraizsoto.com/works/2009/labuat/soytuaire/) | [豆瓣电影TOP250](http://movie.douban.com/top250) |
-
 | [Typing Test English](http://10fastfingers.com/typing-test/english) |
