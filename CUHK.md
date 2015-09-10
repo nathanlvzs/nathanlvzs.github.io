@@ -9,7 +9,13 @@ title: CUHK
 
 [GS Platform](https://www.gradsch.cuhk.edu.hk/pgstudent/pgstud_main.aspx)
 
+[eLearning](https://elearn.cuhk.edu.hk/)
+
 [MyCUHK](https://portal.cuhk.edu.hk/psp/epprd/?cmd=login)
+
+[CUHK Library](http://www.lib.cuhk.edu.hk/en)
+
+[Library Record](https://library.cuhk.edu.hk/patroninfo~S15)
 
 [ISO Calendar](http://www.iso.cuhk.edu.hk/english/publications/calendar/)
 
@@ -35,7 +41,8 @@ title: CUHK
 | --- | --- | --- |
 | CMSC5733 - Social Computing | Mon 7:00pm - 10:00pm | Classroom 108 of Productivity Training Institute (HKPC Building, 78 Tat Chee Avenue, Kowloon) |
 | CMSC5741 - Big Data Technology and Applications | Tue 7:00pm - 10:00pm | YIA_403, Yasumoto International Academic Park, CUHK Campus |
-| CMSC5736 - Mobile Apps Design and Implementation | Wed 7:00pm - 10:00pm | YIA_403\503, Yasumoto International Academic Park, CUHK Campus |
+| CMSC5736 - Mobile Apps Design and Implementation | Wed 7:00pm - 10:00pm | YIA_503, Yasumoto International Academic Park, CUHK Campus |
+| CMSC5735 - Advanced Topics in Cloud Computing | Thu 7:00pm - 10:00pm | Classroom 108 of Productivity Training Institute (HKPC Building, 78 Tat Chee Avenue, Kowloon) |
 | CMSC5707 - Advanced Topics in Artificial Intelligence | Fri 7:00pm - 10:00pm | YIA_403, Yasumoto International Academic Park, CUHK Campus |
 
 
@@ -54,4 +61,4 @@ title: CUHK
 
 [港币汇率--快易理财网](http://www.kuaiyilicai.com/huilv/c-hkd.html)
 
-
+[银联港币历史汇率](http://www.kuaiyilicai.com/huilv/d-unionpay-hkd.html)
