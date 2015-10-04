@@ -42,3 +42,4 @@ title: CUHK
 ## Other
 
 | [港币汇率--快易理财网](http://www.kuaiyilicai.com/huilv/c-hkd.html) | [银联港币历史汇率](http://www.kuaiyilicai.com/huilv/d-unionpay-hkd.html) | [Online Application](https://www.gradsch.cuhk.edu.hk/OnlineApp/login.aspx) |
+| [CUHK Wi-Fi Hotspot Partnership Programme](https://wifipartners.itsc.cuhk.edu.hk) | [Mail :: Horde](https://webmail.cse.cuhk.edu.hk/imp/) | 

@@ -19,6 +19,7 @@ title: Links
 
 ## Dev Tools
 
+| [AWS Console](https://aws.amazon.com/console/) | [DigitalOcean](https://cloud.digitalocean.com/droplets) |
 | [在线工具 开源中国社区](http://tool.oschina.net/) | [JSON 在线编辑器](http://www.bejson.com/jsoneditoronline/) | [Online regex tester and debugger](https://regex101.com/) |
 | [Check Browser Compatibility](http://browsershots.org/) | [Visual Studio Online](https://lzsdev.visualstudio.com/) | 
 
