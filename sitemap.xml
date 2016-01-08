@@ -8,92 +8,112 @@
 
 <url>
   <loc>http://nathanlvzs.github.io/</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/project/</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/books/</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/Links.html</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/contact/</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/index.html</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/categories.html</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://nathanlvzs.github.io/blog/DGIM-Algorithm-and-Python-Implementation.html</loc>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://nathanlvzs.github.io/blog/Crawl-Zhihu-with-Python-Multiprocessing.html</loc>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://nathanlvzs.github.io/blog/Installing-Scikit-Learn-And-Other-Packages-On-Ubuntu.html</loc>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://nathanlvzs.github.io/blog/Python-Virtualenv.html</loc>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/ZhihuDaily-Page-Generation-And-Text-Extraction.html</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/ZhihuDaily-Data-Download.html</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/UCBerkeley-Spark-Course-Assessment.html</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/Python-Basis-Reminder.html</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/XML-Deserialize-And-Handling-Enum-Field.html</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/MOOC-Conclusion.html</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/Algo-Note2-BinarySearch-BitonicSearch.html</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/Algo-Note1.html</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/Windows-Remote-Desktop-Issue.html</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>http://nathanlvzs.github.io/blog/Building-Personal-Site-With-Jekyll.html</loc>
-  <lastmod>2015-07-25T10:14:34+00:00</lastmod>
+  <lastmod>2016-01-08T09:32:37+00:00</lastmod>
   <changefreq>monthly</changefreq>
 </url>
 </urlset>

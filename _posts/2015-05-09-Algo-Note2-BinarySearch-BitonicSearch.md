@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 二分查找、双调查找
-categories: [Algorithm Notes]
-tags: [Algorithm Notes]
+categories: [Algorithm, Java]
+tags: [Algorithm, Java]
 published: true
 ---
 

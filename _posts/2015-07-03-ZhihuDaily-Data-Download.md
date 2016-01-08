@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 知乎日报数据下载存储
-categories: [python]
-tags: [python]
+categories: [Python]
+tags: [Python]
 published: true
 ---
 

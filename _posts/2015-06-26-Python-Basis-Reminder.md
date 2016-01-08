@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Python基本用法备忘
-categories: [python]
-tags: [python]
+categories: [Python]
+tags: [Python]
 published: true
 ---
 
@@ -190,6 +190,5 @@ def quickSort(lst):
 data = xrange(1, 10001)
 
 {% endhighlight %}
-
 
 

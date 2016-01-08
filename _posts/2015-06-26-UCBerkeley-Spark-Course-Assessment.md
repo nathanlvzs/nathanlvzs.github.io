@@ -1,8 +1,8 @@
 ---
 layout: post
 title: UCBerkeley的Spark入门课程评价
-categories: [MOOC]
-tags: [MOOC]
+categories: [MOOC, Spark]
+tags: [MOOC, Spark]
 published: true
 ---
 
@@ -86,7 +86,7 @@ Lab 1 用了三个多钟；Lab 2 用时四个钟左右；Lab 3 用了差不多8�
 
 还剩最后一周的内容，课程还没完就开始写评价了也是有些心急。。。今天想写写就写了吧，课程完结之后如有需要再补充了。最后，贴上当前的完成进度~
 
-![Image]({{ site.url }}/images/posts/2015/2015-06-26/2015-06-26-SparkCurrentProgress.png)
+![CurrentProgress]({{ site.url }}/images/posts/2015/2015-06-26/2015-06-26-SparkCurrentProgress.png)
 
 > 2015-06-28补充
 
@@ -94,5 +94,5 @@ Lab 1 用了三个多钟；Lab 2 用时四个钟左右；Lab 3 用了差不多8�
 
 课程最终完成情况如下：
 
-![Image]({{ site.url }}/images/posts/2015/2015-06-26/2015-06-26-SparkFinalProgress.png)
+![FinalProgress]({{ site.url }}/images/posts/2015/2015-06-26/2015-06-26-SparkFinalProgress.png)
 

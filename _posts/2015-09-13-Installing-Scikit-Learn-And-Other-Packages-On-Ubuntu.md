@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 在Ubuntu上安装scikit-learn等Python packages
-categories: [python, ubuntu]
-tags: [python, ubuntu]
+categories: [Python, Ubuntu]
+tags: [Python, Ubuntu]
 published: true
 ---
 

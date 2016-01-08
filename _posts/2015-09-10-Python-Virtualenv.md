@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Python virtualenv
-categories: [python]
-tags: [python]
+categories: [Python]
+tags: [Python]
 published: true
 ---
 
