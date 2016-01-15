@@ -1,6 +1,7 @@
 ---
 layout: plaincontent
 title: Links
+category: links
 ---
 
 > Just for personal convenience

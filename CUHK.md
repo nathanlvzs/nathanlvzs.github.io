@@ -10,6 +10,7 @@ title: CUHK
 | [CUHK Library](http://www.lib.cuhk.edu.hk/en) | [Library Record](https://library.cuhk.edu.hk/patroninfo~S15) |
 | [ISO Calendar](http://www.iso.cuhk.edu.hk/english/publications/calendar/) | [Office 365](https://portal.office.com/Home) |
 | [CSE Department](http://translate.itsc.cuhk.edu.hk/uniTS/www.cse.cuhk.edu.hk/v7/b5/index.html) | [Timetable](http://msc.cse.cuhk.edu.hk/en/corner/timetable.html) |
+| [CS LUI](http://www.cse.cuhk.edu.hk/~cslui/) | |
 
 
 ## Timetable
@@ -29,9 +30,11 @@ title: CUHK
 
 | Course | Time | Venue | Remarks |
 | --- | --- | --- | --- |
-| CMSC5712 - Computer Models for E-Business | Tue 7:00pm - 10:00pm | YIA_402, Yasumoto International Academic Park, CUHK Campus | None |
-| CMSC5711 - Image Processing and Computer Vision | Wed 7:00pm - 10:00pm | Classroom 108 of Productivity Training Institute (HKPC Building, 78 Tat Chee Avenue, Kowloon) | None |
-| CMSC5718 - Introduction to Computational Finance | Thu 7:00pm - 10:00pm | YIA_403, Yasumoto International Academic Park, CUHK Campus | None |
+| [ENGG 5104 - Image Processing and Computer Vision](http://www.cse.cuhk.edu.hk/~engg5104/) | Mon 2:30pm - 5:15pm | William M W Mong Eng Bldg 703 | None |
+| [SEEM 5680 Text Mining Models and Applications](http://www1.se.cuhk.edu.hk/~seem5680/) | Tue 3:30pm - 6:15pm | William M W Mong Eng Bldg 703 | None |
+| [CSCI 5150 - Machine Learning Algorithms and Applications](https://elearn.cuhk.edu.hk/) | Tue, Wed 3:30pm - 5:15pm | Basic Med Sci Bldg Rm2, Rm1 | None |
+| [ECLT5810 E-Commerce Data Mining Technique](http://www1.se.cuhk.edu.hk/~eclt5810/) | Wed 7:00pm - 10:00pm | William M W Mong Eng Bldg 803 | None |
+| [CMSC5718 - Introduction to Computational Finance](https://elearn.cuhk.edu.hk/) | Thu 7:00pm - 10:00pm | YIA_403, Yasumoto International Academic Park, CUHK Campus | None |
 
 
 ## Living
@@ -43,3 +46,4 @@ title: CUHK
 
 | [港币汇率--快易理财网](http://www.kuaiyilicai.com/huilv/c-hkd.html) | [银联港币历史汇率](http://www.kuaiyilicai.com/huilv/d-unionpay-hkd.html) | [Online Application](https://www.gradsch.cuhk.edu.hk/OnlineApp/login.aspx) |
 | [CUHK Wi-Fi Hotspot Partnership Programme](https://wifipartners.itsc.cuhk.edu.hk) | [Mail :: Horde](https://webmail.cse.cuhk.edu.hk/imp/) | 
+

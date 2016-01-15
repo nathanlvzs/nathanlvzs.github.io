@@ -314,6 +314,7 @@ nav a.selected:hover {
   max-width: 50px;
   vertical-align: -9px;
   margin-left: 12px;
+  /*box-shadow: 0px 0px 0px 4px #FFF, 0px 0px 4px 4px #4D4D4D;*/
 }
 
 .links {
