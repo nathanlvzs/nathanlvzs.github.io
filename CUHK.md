@@ -31,9 +31,9 @@ title: CUHK
 | Course | Time | Venue | Remarks |
 | --- | --- | --- | --- |
 | [ENGG 5104 - Image Processing and Computer Vision](http://www.cse.cuhk.edu.hk/~engg5104/) | Mon 2:30pm - 5:15pm | William M W Mong Eng Bldg 703 | None |
-| [SEEM 5680 Text Mining Models and Applications](http://www1.se.cuhk.edu.hk/~seem5680/) | Tue 3:30pm - 6:15pm | William M W Mong Eng Bldg 703 | None |
+| [SEEM 5680 - Text Mining Models and Applications](http://www1.se.cuhk.edu.hk/~seem5680/) | Tue 3:30pm - 6:15pm | William M W Mong Eng Bldg 703 | None |
 | [CSCI 5150 - Machine Learning Algorithms and Applications](https://elearn.cuhk.edu.hk/) | Tue, Wed 3:30pm - 5:15pm | Basic Med Sci Bldg Rm2, Rm1 | None |
-| [ECLT5810 E-Commerce Data Mining Technique](http://www1.se.cuhk.edu.hk/~eclt5810/) | Wed 7:00pm - 10:00pm | William M W Mong Eng Bldg 803 | None |
+| [ECLT5810 - E-Commerce Data Mining Technique](http://www1.se.cuhk.edu.hk/~eclt5810/) | Wed 7:00pm - 10:00pm | William M W Mong Eng Bldg 803 | None |
 | [CMSC5718 - Introduction to Computational Finance](https://elearn.cuhk.edu.hk/) | Thu 7:00pm - 10:00pm | YIA_403, Yasumoto International Academic Park, CUHK Campus | None |
 
 

@@ -77,7 +77,7 @@ class DateNewsIdDict(object):
 
 存入MongoDB中，如下图所示：
 
-![Image]({{ site.url }}/images/posts/2015/2015-07-03/2015-07-03-DB-DateIDsExample.png)
+![Image]({{ site.url }}/media/images/posts/2015/2015-07-03/2015-07-03-DB-DateIDsExample.png)
 
 
 ## 下载保存文章html内容
@@ -110,7 +110,7 @@ class DateNewsIdDict(object):
 
 这里只需要body（文章的主体内容）、title（文章标题）、id（文章编号）、share_url（分享链接）以及这篇文章的日期。提取出这些数据之后生成一个Article对象，然后将其存储到MongoDB中，如下例所示：
 
-![Image]({{ site.url }}/images/posts/2015/2015-07-03/2015-07-03-DB-ArticleExample.png)
+![Image]({{ site.url }}/media/images/posts/2015/2015-07-03/2015-07-03-DB-ArticleExample.png)
 
 
 ## 下载保存图片数据
@@ -166,7 +166,7 @@ class ImageUrlMap(object):
 
 遍历图像url的list时，生成ImageUrlMap对象，存储到MongoDB中，
 
-![Image]({{ site.url }}/images/posts/2015/2015-07-03/2015-07-03-DB-ImgMapExample.png)
+![Image]({{ site.url }}/media/images/posts/2015/2015-07-03/2015-07-03-DB-ImgMapExample.png)
 
 注：截至2015-06-27的日报内容中，对应有85000+张图像（貌似相当一部分是头像），其中有47张图片无法下载。
 

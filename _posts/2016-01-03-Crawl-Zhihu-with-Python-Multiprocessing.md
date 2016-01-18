@@ -37,7 +37,7 @@ zhihu-python是单线程实现的，由于要爬取的数据较多，所以会�
 
 关于layer
 
-![Image]({{ site.url }}/images/posts/2016/2016-01-03/2016-01-03-layer-explanation.png)
+![Image]({{ site.url }}/media/images/posts/2016/2016-01-03/2016-01-03-layer-explanation.png)
 
 根据zhihu-python的实现方式以及数据之间的联系，可将数据爬取分为两个阶段--用户数据的爬取、问题话题数据的爬取，这样代码编写实现起来会快一些，出现问题也方便更快地解决。
 
@@ -48,11 +48,11 @@ zhihu-python是单线程实现的，由于要爬取的数据较多，所以会�
 
 主进程的流程
 
-![Image]({{ site.url }}/images/posts/2016/2016-01-03/2016-01-03-Stage1-mainprocess.png)
+![Image]({{ site.url }}/media/images/posts/2016/2016-01-03/2016-01-03-Stage1-mainprocess.png)
 
 子进程的流程
 
-![Image]({{ site.url }}/images/posts/2016/2016-01-03/2016-01-03-Stage1-childprocess.png)
+![Image]({{ site.url }}/media/images/posts/2016/2016-01-03/2016-01-03-Stage1-childprocess.png)
 
 
 ### 结束条件
@@ -68,11 +68,11 @@ zhihu-python是单线程实现的，由于要爬取的数据较多，所以会�
 
 主进程的流程
 
-![Image]({{ site.url }}/images/posts/2016/2016-01-03/2016-01-03-Stage2-mainprocess.png)
+![Image]({{ site.url }}/media/images/posts/2016/2016-01-03/2016-01-03-Stage2-mainprocess.png)
 
 子进程的流程
 
-![Image]({{ site.url }}/images/posts/2016/2016-01-03/2016-01-03-Stage2-childprocess.png)
+![Image]({{ site.url }}/media/images/posts/2016/2016-01-03/2016-01-03-Stage2-childprocess.png)
 
 
 ### 结束条件

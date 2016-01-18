@@ -35,7 +35,7 @@ pip install virtualenv
 
 由于我的机器上跑的是windows，使用了Anaconda套件，conda提供了类似的虚拟环境功能，尝试安装virtualenv时会有如下的提示。
 
-![Image]({{ site.url }}/images/posts/2015/2015-09-10/2015-09-10-conda-pip-virtualenv.png)
+![Image]({{ site.url }}/media/images/posts/2015/2015-09-10/2015-09-10-conda-pip-virtualenv.png)
 
 
 ### 使用

@@ -147,7 +147,7 @@ sudo pip install networkx ggplot virtualenv
 
 一番折腾之后，到scikit-learn的目录下面找，还是没有找到苦苦寻觅的教程资源。。。使用文件管理器搜索，在系统中也没有找到相关记录。。。坑啊，只好另想方法。一阵尝试之后，最后到Github上搜索`scikit-learn`，找到官方的Repo，发现有doc文件夹，点进去看果然有text_analytics文件夹！如下图。
 
-![Image]({{ site.url }}/images/posts/2015/2015-09-13/2015-09-13-Tutorial-Repository-Screenshot.png)
+![Image]({{ site.url }}/media/images/posts/2015/2015-09-13/2015-09-13-Tutorial-Repository-Screenshot.png)
 
 此时意识教程上面可能默认大家的安装方式是将它的repo pull下来自己build安装。怪不得之前到处找不到`scikit-learn`文件夹，只能找到`sklearn`文件夹。现在这样子的话`scikit-learn/doc/tutorial/text_analytics/`这个路径也就说得通了。最后把官方的repo整个clone了下来。
 

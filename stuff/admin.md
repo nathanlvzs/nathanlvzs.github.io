@@ -7,7 +7,8 @@ title: Admin
 
 
 | [Google WebMaster](https://www.google.com/webmasters/tools/home?hl=en) | [DuoShuo](http://nathanlvzs.duoshuo.com/admin/) | [XML Sitemaps Generator](https://www.xml-sitemaps.com/) |
-| [Site Checker](http://www.downforeveryoneorjustme.com/) | [Douban Dev](http://developers.douban.com/apikey/) | [Registered Sites](http://www.reg007.com/) |
+| [Site Checker](http://www.downforeveryoneorjustme.com/) | [Douban Dev](http://developers.douban.com/apikey/) | [Google Analytics](https://analytics.google.com/analytics/web) |
+| [Registered Sites](http://www.reg007.com/) |
 
 <p></p>
 

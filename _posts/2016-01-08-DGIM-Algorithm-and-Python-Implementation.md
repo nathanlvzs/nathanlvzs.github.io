@@ -32,11 +32,11 @@ DGIM算法的主要思想是用bucket来记录数据流中的1的个数，它保
 
 下图是一个例子，其中将数据流表示成几个bucket（2个size为1的，1个size为2的，2个size为4的和1个size为8的）。
 
-![Bucketized-Stream-Example-Step1]({{ site.url }}/images/posts/2016/2016-01-08/2016-01-08-Bucketized-Stream-Example-Step1.png)
+![Bucketized-Stream-Example-Step1]({{ site.url }}/media/images/posts/2016/2016-01-08/2016-01-08-Bucketized-Stream-Example-Step1.png)
 
 当进来一个位1之后，bucket表示更新如下图所示。
 
-![Bucketized-Stream-Example-Step2]({{ site.url }}/images/posts/2016/2016-01-08/2016-01-08-Bucketized-Stream-Example-Step2.png)
+![Bucketized-Stream-Example-Step2]({{ site.url }}/media/images/posts/2016/2016-01-08/2016-01-08-Bucketized-Stream-Example-Step2.png)
 
 
 ### 更新规则

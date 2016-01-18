@@ -3,7 +3,7 @@ layout: default
 ---
 
 <!--添加侧边菜单-->
-<link rel="stylesheet" href="{{site.url}}/css/side-menu.css" />
+<link rel="stylesheet" href="{{site.url}}/media/css/side-menu.css" />
  <style>
         .side-menu {
             width: 200px;
@@ -11,8 +11,8 @@ layout: default
             left: 30px;
         }
  </style>
-<script type="text/javascript" src="{{site.url}}/js/jquery.min.js"></script>
-<script type="text/javascript" src="{{site.url}}/js/jquery.side.menu.js"></script>
+<script type="text/javascript" src="{{site.url}}/media/js/jquery.min.js"></script>
+<script type="text/javascript" src="{{site.url}}/media/js/jquery.side.menu.js"></script>
 <script>
 $(function () {
             $('#main').sideMenu({
@@ -39,7 +39,7 @@ $(function () {
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 {% if page.photo %}
-<div class="post-photo" style="background-image: url('/images/posts/{{ page.photo }}')">
+<div class="post-photo" style="background-image: url('/media/images/posts/{{ page.photo }}')">
 
 </div>
 {% endif %}
