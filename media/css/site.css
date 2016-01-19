@@ -568,6 +568,8 @@ img.inline.pull-left {
 
 img {
   max-width: 100%;
+  display: block;/*new*/
+  margin: auto;/*new*/
 }
 
 .french-flag {

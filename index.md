@@ -23,24 +23,31 @@ description:
   <strong>Under construction =)</strong>
 </p>
 
-<p>
-  目前CUHK的MSc in Computer Science在读。
-</p>
-
-<p>
+<!-- <p>
   可以通过邮箱联系我，邮箱地址是<a href="mailto:{{ site.author.email }}">lvzshen [at] outlook [dot] com</a>。欢迎关注我的<a href="{{ site.twitter }}" title="Connect with me on Twitter">Twitter</a>，<a href="{{ site.linkedin }}" title="Connect with me on LinkedIn">LinkedIn</a>和<a href="{{ site.weibo }}" title="Connect with me on Weibo">Weibo</a>。
-</p>
+</p> -->
+
+<div class="post">
+
+{% highlight bash %}
+
+>>> whoami
+NathanLVZS, 目前CUHK的MSc in Computer Science在读.
+
+>>> contact
+Email: lvzshen [at] outlook [dot] com
+Twitter: {{ site.twitter }}
+LinkedIn: {{ site.linkedin }}
+Weibo: {{ site.weibo }}
+
+{% endhighlight %}
+
+</div>
 
 <p>
   P.S.&nbsp;&nbsp;我的<a href="/stuff/books.html">豆瓣书单</a>
 </p>
   
 </section>
-
-{% highlight python %}
-
-
-
-{% endhighlight %}
 
 
