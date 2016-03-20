@@ -9,7 +9,8 @@ category: links
 ## Search Engine
 
 | [Google](https://www.google.com/ncr) | [Microsoft Academic Search](http://academic.research.microsoft.com/) | [WolframAlpha](http://www.wolframalpha.com/) |
-| [Googto](http://www.googto.com/) |
+| [Googto](http://www.googto.com/) | [Web of Knowledge](http://apps.webofknowledge.com/WOS_GeneralSearch_input.do?product=WOS&search_mode=GeneralSearch&SID=V1nDmfriygQ6H1GbAmr&preferencesSaved=&editions=SCI) | [Scopus](http://www.scopus.com/home.url?zone=header&origin=searchbasic) |
+| [ScienceDirect](http://www.sciencedirect.com/) | [Academics.IO](http://www.academics.io/) | [Bielefeld Academic Search Engine](http://www.base-search.net/) |
 
 
 ## MOOC
@@ -60,6 +61,9 @@ category: links
 
 | [Dropbox](https://db.tt/j1h8LSpu) | [DigitalOcean](https://www.digitalocean.com/?refcode=cd2f8bc40d75) | [WizNote](https://note.wiz.cn/i/ea3408db)
 
+
+## Email
+| [Outlook](www.outlook.com) | [GMail](https://mail.google.com/) | []() |
 
 
 ## Less Frequent

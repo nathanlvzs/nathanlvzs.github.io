@@ -32,10 +32,10 @@ title: CUHK
 | --- | --- | --- | --- |
 | [ENGG 5104 - Image Processing and Computer Vision](http://www.cse.cuhk.edu.hk/~engg5104/) | Mon 2:30pm - 5:15pm | William M W Mong Eng Bldg 703 | None |
 | [SEEM 5680 - Text Mining Models and Applications](http://www1.se.cuhk.edu.hk/~seem5680/) | Tue 3:30pm - 6:15pm | William M W Mong Eng Bldg 703 | None |
-| [CSCI 5150 - Machine Learning Algorithms and Applications](https://elearn.cuhk.edu.hk/) | Tue, Wed 3:30pm - 5:15pm | Basic Med Sci Bldg Rm2, Rm1 | None |
+| CSCI 5150 - Machine Learning Algorithms and Applications | Tue, Wed 3:30pm - 5:15pm | Basic Med Sci Bldg Rm2, Rm1 | None |
 | [ECLT5810 - E-Commerce Data Mining Technique](http://www1.se.cuhk.edu.hk/~eclt5810/) | Wed 7:00pm - 10:00pm | William M W Mong Eng Bldg 803 | None |
-| [CMSC5718 - Introduction to Computational Finance](https://elearn.cuhk.edu.hk/) | Thu 7:00pm - 10:00pm | YIA_403, Yasumoto International Academic Park | None |
-| [ENGG 5781 - Matrix Analysis and Computations](http://www.cse.cuhk.edu.hk/~engg5104/) | Fri 2:30pm - 5:15pm | William M W Mong Eng Bldg 404 | None |
+| CMSC5718 - Introduction to Computational Finance | Thu 7:00pm - 10:00pm | YIA_403, Yasumoto International Academic Park | None |
+| [ENGG 5781 - Matrix Analysis and Computations](http://www.ee.cuhk.edu.hk/~wkma/engg5781/) | Fri 2:30pm - 5:15pm | William M W Mong Eng Bldg 404 | None |
 
 
 ## Living
@@ -46,5 +46,5 @@ title: CUHK
 ## Other
 
 | [港币汇率--快易理财网](http://www.kuaiyilicai.com/huilv/c-hkd.html) | [银联港币历史汇率](http://www.kuaiyilicai.com/huilv/d-unionpay-hkd.html) | [Online Application](https://www.gradsch.cuhk.edu.hk/OnlineApp/login.aspx) |
-| [CUHK Wi-Fi Hotspot Partnership Programme](https://wifipartners.itsc.cuhk.edu.hk) | [Mail :: Horde](https://webmail.cse.cuhk.edu.hk/imp/) | 
+| [CUHK Wi-Fi Hotspot Partnership Programme](https://wifipartners.itsc.cuhk.edu.hk) | [Mail :: Horde](https://webmail.cse.cuhk.edu.hk/imp/) | [ITSC: @Link Email for Students](https://www.cuhk.edu.hk/itsc/o365/email.html) |
 
