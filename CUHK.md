@@ -1,5 +1,6 @@
 ---
 layout: plaincontent
+sitemap: false
 title: CUHK
 ---
 

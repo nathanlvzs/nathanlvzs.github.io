@@ -1,11 +1,12 @@
 # Dependencies
 markdown: kramdown
 # markdown: redcarpet
-highlighter: pygments
+highlighter: rouge
+# highlighter: pygments
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
 lsi: false
-safe: true
+# safe: true
 
 encoding: utf-8
 timezone: Asia/Chongqing
