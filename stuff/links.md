@@ -31,7 +31,7 @@ category: links
 | [NumPy](http://docs.scipy.org/doc/numpy/reference/index.html) | [MSDN](http://msdn.microsoft.com/zh-cn/) | [Git Reference](http://git-scm.com/docs) |
 | [Regex(Python)](https://docs.python.org/2/library/re.html) | [MongoDB(Python)](http://docs.mongodb.org/getting-started/python/) | [Spark](https://spark.apache.org/documentation.html) |
 | [ML(Matlab)](http://cn.mathworks.com/machine-learning/) | [YALMIP Wiki](http://users.isy.liu.se/johanl/yalmip/) | [RStudio Docs](https://support.rstudio.com/hc/en-us/categories/200035113-Documentation?version=0.98.507&mode=desktop) |
-| [Conda Wiki](http://conda.pydata.org/docs/index.html) | [Jekyll Plugins](http://jekyllcn.com/docs/plugins/) |  |
+| [Conda Wiki](http://conda.pydata.org/docs/index.html) | [Jekyll Plugins](http://jekyllcn.com/docs/plugins/) | [MathJax reference](http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference) |
 
 
 ## Cheatsheet

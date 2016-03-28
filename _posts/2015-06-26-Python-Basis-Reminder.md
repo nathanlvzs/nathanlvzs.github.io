@@ -6,7 +6,7 @@ tags: [Python]
 published: true
 ---
 
-> 之前接触过Python，但使用不多。最近由于跟UC-Berkeley的Spark入门课程（[传送门](https://www.edx.org/course/introduction-big-data-apache-spark-uc-berkeleyx-cs100-1x)）和拉取知乎日报的数据需要使用Python，使用过程中经常要不断搜索、查看文档，比较繁琐，于是将自己不熟的用法以及一些tricks记录一下，供以后补充及翻阅。
+> 之前接触过Python，但使用不多。最近由于跟UC-Berkeley的Spark入门课程（[传送门](https://www.edx.org/course/introduction-big-data-apache-spark-uc-berkeleyx-cs100-1x)）和拉取知乎日报的数据需要使用Python，使用过程中经常要搜索、查看文档，比较繁琐，于是将一些常用用法记录一下，供以后翻阅。
 
 
 ## 常用帮助函数
@@ -21,6 +21,31 @@ dir(object)
 
 # 用于查看关于对象的帮助信息
 help(object)
+
+{% endhighlight %}
+
+
+## string
+
+{% highlight python %}
+
+'a' + 'b'#'ab'
+
+'a' * 5#'aaaaa'
+
+'%d,%.2f,%s' % (1, 1.12345, 'hello')
+
+{% endhighlight %}
+
+
+## 数据类型转换
+
+{% highlight python %}
+
+ord('A')#65
+chr(66)#'B'
+int('1')#1
+str(1)#'1'
 
 {% endhighlight %}
 
@@ -42,6 +67,9 @@ x,y = pair  # x=3, y=5
 list中存的每一个元素可以是任意Python对象。索引从0开始。
 
 {% highlight python %}
+
+# list拼接
+[1] + [2, 3, 4]
 
 # 创建一个list并打印所有元素
 ll = [1, 2, 3]
@@ -77,6 +105,14 @@ setOfBooks - setOfFavoriteBooks # 差difference
 setOfBooks & setOfFavoriteBooks # 交intersection
 
 setOfBooks | setOfFavoriteBooks # 并union
+
+# examples
+a = set([1,2,3])
+b = set([2,3,4])
+a & b#set([2, 3])
+a - b#set([1])
+b - a#set([4])
+a | b#set([1, 2, 3, 4])
 
 {% endhighlight %}
 
