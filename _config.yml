@@ -29,17 +29,17 @@ comments :
 
 # Personal Config
 title: NathanLVZS
-url: # http://NathanLvzs.github.io
+url: http://nathanlvzs.github.io
 twitter: https://twitter.com/NathanLZS
 github: https://github.com/NathanLvzs
 linkedin: https://www.linkedin.com/in/lvzishen
 weibo: http://weibo.com/destinylzs
-baseurl: /
+# baseurl: /#default is "", means the root
 author:
   name: NathanLVZS
   nickname: Nathan
   email: lvzshen@outlook.com
-  site: https://github.com/NathanLvzs/NathanLvzs.github.io
+  site: http://nathanlvzs.github.io
 
 # seo: 
 #   keyword: 
