@@ -1,8 +1,10 @@
 ---
 layout: post
 title: 离散随机数生成、数组shuffle排列
-categories: [Algorithm, Java]
+categories: [Algorithm]
 tags: [Algorithm, Java]
+language: zh
+published: true
 ---
 
 

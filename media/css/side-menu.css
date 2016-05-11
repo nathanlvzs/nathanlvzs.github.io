@@ -19,7 +19,7 @@
 	left: -5px;
 	width: 10px;
 	height: 10px;
-	background: transparent url(../images/side-menu.png) 0 -199px no-repeat;
+	background: transparent url(/media/images/side-menu.png) 0 -199px no-repeat;
 	overflow: hidden;
 	cursor: pointer;
 }
@@ -45,16 +45,16 @@
 	cursor: pointer;
 }
 .side-menu .side-scroll-up {
-	background: transparent url(side-menu.png) -246px -83px no-repeat;
+	background: transparent url(/media/images/side-menu.png) -246px -83px no-repeat;
 }
 .side-menu .side-scroll-down {
-	background: transparent url(side-menu.png) -246px -108px no-repeat;
+	background: transparent url(/media/images/side-menu.png) -246px -108px no-repeat;
 }
 .side-menu .side-scroll-up.disabled {
-	background: transparent url(side-menu.png) -273px -83px no-repeat;
+	background: transparent url(/media/images/side-menu.png) -273px -83px no-repeat;
 }
 .side-menu .side-scroll-down.disabled {
-	background: transparent url(side-menu.png) -273px -108px no-repeat;
+	background: transparent url(/media/images/side-menu.png) -273px -108px no-repeat;
 }
 .side-menu .side-catalog {
 	overflow: hidden;
@@ -109,7 +109,7 @@
 	width: 6px;
 	font-size: 12px;
 	line-height: 12px;
-	background: transparent url(side-menu.png) 0 -222px no-repeat;
+	background: transparent url(/media/images/side-menu.png) 0 -222px no-repeat;
 	left: -17px;
 	top: 4px;
 	cursor: pointer;

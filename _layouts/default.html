@@ -11,7 +11,7 @@
   <title>
     {{ page.title }} - NathanLVZS
   </title>
-  <link rel="stylesheet" href="../media/css/site.css">
+  <link rel="stylesheet" href="/media/css/site.css">
   <!-- <link href="/media/images/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 标题栏图标-->
   {% if page.description %}<meta name="description" content="{{page.description}}" />{% endif %}
 
@@ -23,7 +23,7 @@
     {% endif %}
   {% endif %}
 
-  <script type="text/javascript" src="{{site.url}}/media/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/media/js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -33,9 +33,9 @@
   <div class="header-container">
     <header class="inner">
       <nav>
-        <a class="{% if page.category == 'home' %} selected {% endif %}" href="/">Home</a>
-        <a class="{% if page.category == 'blog' %} selected {% endif %}" href="/blog/">Blog</a>
-        <a class="{% if page.category == 'links' %} selected {% endif %}" href="/stuff/links.html">Links</a>
+        <a class="{% if page.type == 'home' %} selected {% endif %}" href="/">Home</a>
+        <a class="{% if page.type == 'blog' %} selected {% endif %}" href="/blog/">Blog</a>
+        <a class="{% if page.type == 'links' %} selected {% endif %}" href="/stuff/links.html">Links</a>
         <a href="{{ site.github }}">Github</a>
       </nav>
       

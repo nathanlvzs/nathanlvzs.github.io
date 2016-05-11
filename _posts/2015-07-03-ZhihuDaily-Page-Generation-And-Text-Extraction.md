@@ -1,8 +1,9 @@
 ---
 layout: post
 title: 知乎日报数据网页输出及提取文章正文
-categories: [Python]
-tags: [Python]
+categories: [Web]
+tags: [Python, Web]
+language: zh
 published: true
 ---
 

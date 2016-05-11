@@ -2,7 +2,8 @@
 layout: post
 title: Python基本用法备忘
 categories: [Python]
-tags: [Python]
+tags: [Python, Basis]
+language: zh
 published: true
 ---
 

@@ -1,7 +1,10 @@
 ---
 layout: post
 title: Windows远程桌面Credentials did not work
-categories: [triviality]
+categories: [Miscellaneous]
+tags: [Windows]
+language: zh
+published: true
 ---
 
 电脑（暂且叫做小C）系统装的是win8.1 ×64，当初使用的是微软账号，最近需要将其设置为本地账号，账号名为LZS，除此之外其他设置是没有改变的。之前在另外一台电脑（小A，win8.1 ×64）上使用微软账号 destinydev@outlook.com 作为用户名是可以远程连接到小C的，远程桌面连接页面如下图所示。

@@ -1,16 +1,17 @@
 ---
 layout: post
 title: Movie Recommendation on Apache Spark
-categories: [Spark, Recommendation, Python]
+categories: [DataMining/MachineLearning, Recommendation]
 tags: [Spark, Recommendation, Python]
+language: en
 published: true
 ---
 
-> [click me towords the code repo](https://github.com/NathanLvzs/MovieRecommendationSpark)
+> [click me towards the code repo](https://github.com/NathanLvzs/MovieRecommendationSpark)
 
 ## Environment
 
-Apache Spark 1.3.1 (local standalone mode) + PySpark + IPython Notebook
+Apache Spark 1.3.1 (local mode) + PySpark + IPython Notebook
 
 
 ## Dataset

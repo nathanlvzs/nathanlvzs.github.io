@@ -1,6 +1,6 @@
 ---
 layout: default
-category: home
+type: home
 title: NathanLVZS's homepage
 description: 
 ---
@@ -15,7 +15,7 @@ description:
 
 <blockquote>
 <p>
-  欢迎来到我的一亩三分地。这里主要承载和分享我学习过程中的一些点滴。
+  欢迎来到我的一亩三分地。
 </p>
 </blockquote>
 

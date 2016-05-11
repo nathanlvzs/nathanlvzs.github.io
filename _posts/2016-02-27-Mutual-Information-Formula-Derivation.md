@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 互信息的公式推导
-categories: [DataMining, Derivation]
-tags: [DataMining, Derivation]
+categories: [DataMining/MachineLearning]
+tags: [Derivation]
 language: zh
 published: true
 ---

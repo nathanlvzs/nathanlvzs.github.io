@@ -1,8 +1,9 @@
 ---
 layout: post
 title: DGIM算法及其Python实现
-categories: [Python, Algorithm]
-tags: [Python, Algorithm]
+categories: [DataMining/MachineLearning]
+tags: [Python, Streaming, Algorithm]
+language: zh
 published: true
 ---
 

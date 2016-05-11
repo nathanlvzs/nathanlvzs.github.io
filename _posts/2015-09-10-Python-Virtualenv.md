@@ -1,8 +1,9 @@
 ---
 layout: post
-title: Python virtualenv
+title: Python Virtualenv
 categories: [Python]
 tags: [Python]
+language: zh
 published: true
 ---
 

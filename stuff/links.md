@@ -1,7 +1,7 @@
 ---
 layout: plaincontent
 title: Links
-category: links
+type: links
 ---
 
 > Just for personal convenience
@@ -62,7 +62,7 @@ category: links
 
 ## Email
 
-| [Outlook](www.outlook.com) | [GMail](https://mail.google.com/) |  |
+| [Outlook](http://www.outlook.com) | [GMail](https://mail.google.com/) |  |
 
 
 ## Less Frequent

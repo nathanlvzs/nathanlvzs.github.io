@@ -1,8 +1,9 @@
 ---
 layout: post
 title: 使用Python Multiprocessing爬取知乎数据
-categories: [Python, Multiprocessing]
-tags: [Python, Multiprocessing]
+categories: [Python]
+tags: [Python, Multiprocessing, Zhihu]
+language: zh
 published: true
 ---
 

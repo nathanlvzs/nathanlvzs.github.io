@@ -1,8 +1,9 @@
 ---
 layout: post
 title: 二分查找、双调查找
-categories: [Algorithm, Java]
+categories: [Algorithm]
 tags: [Algorithm, Java]
+language: zh
 published: true
 ---
 

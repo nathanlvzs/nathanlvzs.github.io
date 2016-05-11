@@ -1,8 +1,9 @@
 ---
 layout: post
 title: UCBerkeley的Spark入门课程评价
-categories: [MOOC, Spark]
-tags: [MOOC, Spark]
+categories: [MOOC]
+tags: [MOOC, DataScience, Spark]
+language: zh
 published: true
 ---
 

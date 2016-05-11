@@ -1,8 +1,9 @@
 ---
 layout: post
 title: C#中XML反序列化以及Enum字段的处理
-categories: [.Net]
-tags: [.Net, Deserialize, Enum]
+categories: [C#]
+tags: [C#, Deserialize, Enum]
+language: zh
 published: true
 ---
 

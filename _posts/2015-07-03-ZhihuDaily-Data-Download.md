@@ -2,7 +2,8 @@
 layout: post
 title: 知乎日报数据下载存储
 categories: [Python]
-tags: [Python]
+tags: [Python, Zhihu, MongoDB]
+language: zh
 published: true
 ---
 
