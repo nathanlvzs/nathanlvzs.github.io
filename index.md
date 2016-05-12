@@ -32,7 +32,9 @@ description:
 {% highlight bash %}
 
 >>> whoami
-NathanLVZS, 目前CUHK的MSc in Computer Science在读.
+NathanLVZS
+About to graduate from the Chinese University of Hong Kong, majoring in Computer Science
+Strong interest in data mining and machine learning
 
 >>> contact
 Email: lvzshen [at] outlook [dot] com

@@ -34,7 +34,8 @@
     <header class="inner">
       <nav>
         <a class="{% if page.type == 'home' %} selected {% endif %}" href="/">Home</a>
-        <a class="{% if page.type == 'blog' %} selected {% endif %}" href="/blog/">Blog</a>
+        <a class="{% if page.type == 'blog' %} selected {% endif %}" href="/blog/" style="margin-right: 0">Blog</a>
+        <a href="/stuff/feed.xml" title="Subscribe with RSS"><i class="icon-feed"></i></a>
         <a class="{% if page.type == 'links' %} selected {% endif %}" href="/stuff/links.html">Links</a>
         <a href="{{ site.github }}">Github</a>
       </nav>

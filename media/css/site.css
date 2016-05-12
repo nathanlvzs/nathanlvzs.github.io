@@ -232,6 +232,7 @@ header .logo a, header .logo a:hover {
 
 .logo .name {
   display: inline-block;
+  font-size: 120%;
 }
 
 .inner, pre code, .post > * {
@@ -286,10 +287,9 @@ nav a {
   display: inline-block;
   margin-right: 1.2em;
   padding-bottom: 0.2em;
-  /*font-weight: normal;*/
-  font-weight: thick;
+  font-weight: bold;
   border-bottom: 3px solid transparent;
-  font-size: 100%;
+  font-size: 120%;
 }
 
 nav a:last-child {
@@ -859,14 +859,14 @@ fieldset[disabled] .btn-primary.active {
 
 /* tags
 ----------------------------------------------- */
-.tags {
+.tagsforlist {
   list-style: none;
   margin: 0 0 0 100px;
   overflow: hidden; 
   padding: 0;
 }
 
-.tags li {
+.tagsforlist li {
   float: left; 
 }
 
@@ -915,5 +915,30 @@ fieldset[disabled] .btn-primary.active {
 
 .tag:hover::after {
    border-left-color: crimson; 
+}
+
+.tagsforpost {
+  list-style: none;
+  font-size: 0.9em;
+  overflow: hidden; 
+  /*padding: 0;*/
+  display: inline-block;
+}
+
+.tagsforpost li {
+  float: left; 
+}
+
+.catforpost {
+  background: #bed4ed;
+  border-radius: 3px 3px 3px 3px;
+  color: #5C5858;
+  display: inline-block;
+  height: 26px;
+  font-size: 95%;
+  line-height: 26px;
+  padding: 0 20px 0 23px;
+  position: relative;
+  margin: 0 10px 10px 0;
 }
 

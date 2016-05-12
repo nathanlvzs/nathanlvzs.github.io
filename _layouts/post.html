@@ -55,6 +55,16 @@ MathJax.Hub.Config({
   </h1>
 
   <p class="meta">{{ site.author.name }} &nbsp;&nbsp;|&nbsp;&nbsp; {{ page.date | date: "%A %-d %B %Y" }}</p>
+  <br/>
+  <p class="catforpost">
+  Category:{% for cat in page.categories %}&nbsp;&nbsp;{{cat}}{% endfor %}
+  </p>
+  <br/>
+  <ul class="tagsforpost">
+    {% for tag in page.tags %}
+    <li><div class="tag">{{ tag }}</div></li>
+    {% endfor %}
+  </ul>
   
   <!-- <div id="menu"></div> -->
   <div id="main" class="span9">

@@ -5,16 +5,14 @@ type: blog
 ---
 
 <div class="row">
-<a class="button btn-primary" href="/blog/index.html">By year</a>
-<a class="button btn-primary" href="/blog/categories.html">By categories</a>
-<a href="/stuff/feed.xml" title="Subscribe with RSS"><i class="icon-feed"></i></a>
+<a class="button btn-primary" href="/blog/index.html">By Year</a>
 </div>
 
 <section class="inner">
 <div id='tag_cloud'>
 {% assign sorted_cats = (site.categories | sort) %}
 {% for cat in sorted_cats %}
-<a href="#{{ cat[0] }}" title="{{ cat[0] }}" rel="{{ cat[1].size }}">{{ cat[0] }} ({{ cat[1].size }})</a>
+<a href="#{{ cat[0] }}" title="{{ cat[0] }}" rel="{{ cat[1].size }}">{{ cat[0] }} ({{ cat[1].size }})&nbsp;&nbsp;</a>
 {% endfor %}
 </div>
 
@@ -25,7 +23,7 @@ type: blog
   <li class="listing-item">
   <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-      <ul class="tags">
+      <ul class="tagsforlist">
         {% for tag in post.tags %}
         <li><div class="tag">{{ tag }}</div></li>
         {% endfor %}
