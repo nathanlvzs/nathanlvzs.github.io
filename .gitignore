@@ -6,6 +6,7 @@ _site
 *.diff
 *.err
 *.log
+*.lock
 *.orig
 *.rej
 *.swo
