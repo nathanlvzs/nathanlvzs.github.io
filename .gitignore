@@ -31,3 +31,4 @@ Thumbs.db
 # grunt-html-validation
 validation-status.json
 validation-report.json
+run.sh
