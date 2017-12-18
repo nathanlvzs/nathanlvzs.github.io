@@ -21,7 +21,7 @@ type: links
 
 ## Dev Tools
 
-| [AWS Console](https://aws.amazon.com/console/) | [DigitalOcean](https://cloud.digitalocean.com/droplets) |
+| [AWS Console](https://aws.amazon.com/console/) | [DigitalOcean](https://cloud.digitalocean.com/droplets) | [Online Diff Check](https://www.diffchecker.com/) |
 | [在线工具 开源中国社区](http://tool.oschina.net/) | [JSON 在线编辑器](http://www.bejson.com/jsoneditoronline/) | [regex tester and debugger](https://regex101.com/) |
 | [Check Browser Compatibility](http://browsershots.org/) | [Visual Studio Online](https://lzsdev.visualstudio.com/) | 
 
