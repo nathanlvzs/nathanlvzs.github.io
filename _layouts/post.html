@@ -41,7 +41,7 @@ MathJax.Hub.Config({
     }
 });
 </script>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 {% if page.photo %}
 <div class="post-photo" style="background-image: url('/media/images/posts/{{ page.photo }}')">
@@ -72,18 +72,35 @@ MathJax.Hub.Config({
     {{ content }}
   </div>
   <p></p>
+  {% unless page.hidden %}
+  {% assign visible_posts = site.posts | where_exp: "post", "post.hidden != true" %}
+  {% assign visible_previous = nil %}
+  {% assign visible_next = nil %}
+  {% for post in visible_posts %}
+    {% if post.url == page.url %}
+      {% unless forloop.first %}
+        {% assign previous_index = forloop.index0 | minus: 1 %}
+        {% assign visible_next = visible_posts[previous_index] %}
+      {% endunless %}
+      {% unless forloop.last %}
+        {% assign next_index = forloop.index0 | plus: 1 %}
+        {% assign visible_previous = visible_posts[next_index] %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
   <div class="prev_and_next inner">
-	{% if page.previous %}
-	<div><strong>上一篇： <a href="{{ page.previous.url }}" title="{{ page.previous.title }}">{{ page.previous.title }}</a></strong></div>
+	{% if visible_previous %}
+	<div><strong>上一篇： <a href="{{ visible_previous.url }}" title="{{ visible_previous.title }}">{{ visible_previous.title }}</a></strong></div>
 	{% else %}
 	<div><strong>上一篇： 这个真没有</strong></div>
 	{% endif %}
-	{% if page.next %}
-	<div><strong>下一篇： <a href="{{ page.next.url }}" title="{{ page.next.title }}">{{ page.next.title }}</a></strong></div>
+	{% if visible_next %}
+	<div><strong>下一篇： <a href="{{ visible_next.url }}" title="{{ visible_next.title }}">{{ visible_next.title }}</a></strong></div>
 	{% else %}
 	<div><strong>下一篇： 这个可以有</strong></div>
 	{% endif %}
   </div>
+  {% endunless %}
   </div>
 </article>
 
@@ -94,12 +111,3 @@ MathJax.Hub.Config({
 </section> -->
 
 <div class="separator"></div>
-
-<section class="comments inner">
-
-<!-- UY BEGIN -->
-<div id="uyan_frame"></div>
-<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146971"></script>
-<!-- UY END -->
-
-</section>

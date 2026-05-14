@@ -20,21 +20,9 @@ type: blog
     &nbsp;&nbsp;&nbsp;&nbsp;
     <a href="/categories.html">View By Category</a>
   </p>
-<!--  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <span class="date">{{ post.date | date_to_string }}</span>
-        <strong><a href="{{ post.url }}">{{ post.title }}</a></strong>
-        {% if post.french %}
-          <img src="/images/french.png" alt="French post" class="french-flag" title="This post is in french" />
-        {% endif %}
-        <br />
-        <span class="description">{{ post.description }}</span>
-      </li>
-    {% endfor %}
-  </ul>-->
   <ul class="posts">
     {% for post in site.posts %}
+      {% unless post.hidden %}
 	  {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
 	  {% if year != y %}
 		{% assign year = y %}
@@ -49,6 +37,7 @@ type: blog
         {% endfor %}
       </ul>
 	  </li>
+      {% endunless %}
     {% endfor %}
   </ul>
 </section>

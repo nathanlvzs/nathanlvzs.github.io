@@ -32,3 +32,6 @@ Thumbs.db
 validation-status.json
 validation-report.json
 run.sh
+
+
+tmp/

@@ -10,7 +10,10 @@
     <link>{{ site.url }}</link>
     <lastBuildDate>{{ site.time | date_to_xmlschema }}</lastBuildDate>
     <webMaster>{{ site.author.email }}</webMaster>
-    {% for post in site.posts limit:10 %}
+    {% assign visible_posts_count = 0 %}
+    {% for post in site.posts %}
+    {% unless post.hidden %}
+    {% if visible_posts_count < 10 %}
     <item>
       <title>{{ post.title | xml_escape }}</title>
       <link>{{ site.url }}{{ post.url }}</link>
@@ -19,6 +22,9 @@
       <guid isPermaLink="true">{{ site.url }}{{ post.id }}</guid>
       <content:encoded><![CDATA[{{ post.content }}]]></content:encoded>
     </item>
+    {% assign visible_posts_count = visible_posts_count | plus: 1 %}
+    {% endif %}
+    {% endunless %}
     {% endfor %}
   </channel>
 </rss>

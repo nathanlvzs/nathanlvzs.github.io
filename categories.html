@@ -16,16 +16,32 @@ type: blog
   </p>
 
 <div id='tag_cloud'>
-{% assign sorted_cats = (site.categories | sort) %}
+{% assign sorted_cats = site.categories | sort %}
 {% for cat in sorted_cats %}
-<a class="catforpost" href="#{{ cat[0] }}" title="{{ cat[0] }}" rel="{{ cat[1].size }}">{{ cat[0] }} ({{ cat[1].size }})&nbsp;&nbsp;</a>
+{% assign visible_count = 0 %}
+{% for post in cat[1] %}
+  {% unless post.hidden %}
+    {% assign visible_count = visible_count | plus: 1 %}
+  {% endunless %}
+{% endfor %}
+{% if visible_count > 0 %}
+<a class="catforpost" href="#{{ cat[0] }}" title="{{ cat[0] }}" rel="{{ visible_count }}">{{ cat[0] }} ({{ visible_count }})&nbsp;&nbsp;</a>
+{% endif %}
 {% endfor %}
 </div>
 
 <ul class="listing">
 {% for cat in sorted_cats %}
+{% assign visible_count = 0 %}
+{% for post in cat[1] %}
+  {% unless post.hidden %}
+    {% assign visible_count = visible_count | plus: 1 %}
+  {% endunless %}
+{% endfor %}
+{% if visible_count > 0 %}
   <li class="listing-seperator" id="{{ cat[0] }}">{{ cat[0] }}</li>
 {% for post in cat[1] %}
+  {% unless post.hidden %}
   <li class="listing-item">
   <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
@@ -35,7 +51,9 @@ type: blog
         {% endfor %}
       </ul>
   </li>
+  {% endunless %}
 {% endfor %}
+{% endif %}
 {% endfor %}
 </ul>
 </section>

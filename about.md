@@ -41,9 +41,6 @@ NathanLVZS
 
 >>> contact
 Email: lvzshen [at] outlook [dot] com
-Twitter: {{ site.twitter }}
-LinkedIn: {{ site.linkedin }}
-Weibo: {{ site.weibo }}
 
 {% endhighlight %}
 
