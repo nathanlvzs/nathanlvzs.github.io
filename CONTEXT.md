@@ -1,4 +1,4 @@
-当前任务：提交 GitHub Pages 维护刷新、隐私政策隐藏博文和相关文档。
-上次停在：本地构建和手动测试通过；隐私政策完整 URL 可访问，首页、分类页、RSS、sitemap 不暴露入口；favicon 改为 `/media/images/puppy.jpg`。
-待确认事项：是否继续引入自定义 GitHub Actions workflow、评论系统或统计系统。
-下一步行动：提交当前工作区变更，后续按需推送部署。
+当前任务：将 `tmp/specs-driven-ai-collaboration-blog.md` 整理为可发布博文，并说明 SEO 优化方式。
+上次停在：已新增 `_posts/2026-05-24-Specs-Driven-AI-Collaboration.md`，包含发布 front matter、分类标签和 SEO description。
+待确认事项：全站 `bundle exec jekyll build` 在 `feed.xml` 生成阶段长时间未退出，需后续单独排查构建卡住原因。
+下一步行动：检查文章预览/部署效果；如需发布，提交新增博文和本次 `CONTEXT.md` 更新。
