@@ -17,7 +17,7 @@
 - [x] 评估是否加入 GitHub Actions Pages workflow。
 - [x] 新增 GitHub Actions Pages workflow。
 - [x] 在 GitHub 仓库 `Settings > Pages` 中把 Source 切换为 `GitHub Actions`。
-- [ ] 推送后确认 GitHub Actions Pages workflow 构建和部署成功。
+- [x] 推送后确认 GitHub Actions Pages workflow 构建和部署成功。
 - [ ] 决定是否恢复评论系统，候选为 giscus 或 utterances。
 - [ ] 决定是否恢复统计系统，候选为 GA4 或轻量统计方案。
 - [x] 升级本地 Ruby/Bundler 并验证 Jekyll build 和 serve。
