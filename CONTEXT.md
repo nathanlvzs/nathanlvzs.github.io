@@ -1,4 +1,4 @@
-当前任务：将 `tmp/specs-driven-ai-collaboration-blog.md` 整理为可发布博文，并说明 SEO 优化方式。
-上次停在：已新增 `_posts/2026-05-24-Specs-Driven-AI-Collaboration.md`，包含发布 front matter、分类标签和 SEO description。
-待确认事项：全站 `bundle exec jekyll build` 在 `feed.xml` 生成阶段长时间未退出，需后续单独排查构建卡住原因。
-下一步行动：检查文章预览/部署效果；如需发布，提交新增博文和本次 `CONTEXT.md` 更新。
+当前任务：先升级本站 GitHub Pages 发布链路，暂缓 `invest_learn` 图谱发布。
+上次停在：已新增 `.github/workflows/pages.yml`，本站仍保留 Jekyll 和历史 URL。
+待确认事项：当前 Codex 执行环境无法访问 rbenv，本地 Jekyll build 未完成；推送后需要检查 GitHub Actions 构建日志。
+下一步行动：提交并推送 GitHub Actions Pages workflow；如线上构建失败，再按日志修复构建链路。

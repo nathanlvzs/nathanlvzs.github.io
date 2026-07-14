@@ -14,7 +14,10 @@
 - [x] 修复新版 Liquid 对分类页旧 `assign` 写法的警告。
 - [x] 在 GitHub 仓库 `Settings > Pages` 中确认发布 Source。
 - [x] 验证隐私政策完整 URL 可访问，且首页、分类页、RSS、sitemap 不暴露入口。
-- [ ] 评估是否加入 GitHub Actions Pages workflow。
+- [x] 评估是否加入 GitHub Actions Pages workflow。
+- [x] 新增 GitHub Actions Pages workflow。
+- [x] 在 GitHub 仓库 `Settings > Pages` 中把 Source 切换为 `GitHub Actions`。
+- [ ] 推送后确认 GitHub Actions Pages workflow 构建和部署成功。
 - [ ] 决定是否恢复评论系统，候选为 giscus 或 utterances。
 - [ ] 决定是否恢复统计系统，候选为 GA4 或轻量统计方案。
 - [x] 升级本地 Ruby/Bundler 并验证 Jekyll build 和 serve。
