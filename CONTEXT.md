@@ -1,4 +1,4 @@
-当前任务：接入 `invest_learn` 私有仓库到 Pages GitHub Actions 自动化发布。
-上次停在：`.github/workflows/pages.yml` 已改为 checkout `site/` 和 `invest_learn/`，校验内容后导出到 `site/` 并构建 `site/_site`。
-待确认事项：需要在本仓库 Actions secrets 配置 `INVEST_LEARN_READ_TOKEN`，然后推送触发线上 workflow 并检查日志。
-下一步行动：配置 secret 后 push workflow，确认 Pages 部署成功且日志未输出 token。
+当前任务：收尾 `invest_learn` GitHub Actions 自动发布和 Node.js 20 warning。
+上次停在：已配置 `INVEST_LEARN_READ_TOKEN` 并确认线上 workflow 成功；本地已升级 Pages actions 到 Node 24 对应主版本。
+待确认事项：action 版本升级尚未按用户要求提交/推送。
+下一步行动：用户确认后提交并推送 action 版本升级，再确认 Node.js 20 warning 消失。

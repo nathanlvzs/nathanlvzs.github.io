@@ -13,6 +13,10 @@
 - GitHub Actions 发布 workflow 单独处理，不和本轮配置修复混在一起。
 - 评论系统如果恢复，优先选择基于 GitHub Discussions 或 Issues 的方案，例如 giscus 或 utterances。
 - 统计系统如果恢复，优先新增 GA4 或轻量替代；旧 Universal Analytics 代码不再作为长期方案。
+- 评论系统和统计系统均为可选增强，不影响当前站点发布链路；后续按真实使用需求再推进。
+- Astro、Next.js、Docusaurus 等现代框架迁移只有在主站整体视觉、信息架构、搜索、学习进度和复杂交互都要重做时才值得评估。
+- 当前不迁移主站框架，因为迁移会同时触碰历史 URL、RSS、模板、MathJax 和资源路径，短期收益不足以覆盖风险。
+- 历史追溯价值较低的 `docs/research/` 和 `docs/decisions/` 发布过程文档已清理；当前设计结论以本 spec 和 README 为准。
 
 ## 验证方式
 - 使用文本搜索确认旧配置和旧脚本不再出现于站点关键文件。

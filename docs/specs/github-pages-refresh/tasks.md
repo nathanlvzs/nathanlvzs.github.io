@@ -21,3 +21,15 @@
 - [ ] 决定是否恢复评论系统，候选为 giscus 或 utterances。
 - [ ] 决定是否恢复统计系统，候选为 GA4 或轻量统计方案。
 - [x] 升级本地 Ruby/Bundler 并验证 Jekyll build 和 serve。
+- [x] 接入 `invest_learn` 私有仓库导出流程，并确认 GitHub Actions build/deploy 成功。
+- [x] 将投资学习本地生成物加入 `.gitignore`，避免提交 `/invest/`、`/media/invest/` 和专用 layout 生成物。
+- [x] 本地升级 Pages actions 到 Node.js 24 对应主版本，处理 Node.js 20 deprecation warning。
+- [ ] 推送 Pages actions 版本升级，并确认线上 workflow 不再出现 Node.js 20 deprecation warning。
+
+## 后续可选事项
+
+- 评论系统：可视需求继续评估 giscus 或 utterances；当前不急于恢复，避免重新引入第三方脚本和隐私/维护成本。
+- 统计系统：可视需求继续评估 GA4 或轻量统计方案；旧 Universal Analytics 不再作为长期方案。
+- 现代框架迁移：只有当主站整体视觉、信息架构、搜索、学习进度、复杂交互都要重做时，才值得评估 Astro、Next.js、Docusaurus 等迁移。
+- 暂不迁移原因：现在迁移会同时触碰历史 URL、RSS、模板、MathJax、资源路径，收益不够覆盖风险。
+- 文档清理：已删除历史追溯价值较低的 `docs/research/` 和 `docs/decisions/` 发布过程文档；当前核心结论保留在本 spec 和 README。
