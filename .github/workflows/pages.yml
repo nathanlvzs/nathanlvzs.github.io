@@ -17,8 +17,34 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout site
         uses: actions/checkout@v6
+        with:
+          path: site
+
+      - name: Check invest_learn token
+        env:
+          INVEST_LEARN_READ_TOKEN: ${{ secrets.INVEST_LEARN_READ_TOKEN }}
+        run: |
+          if [ -z "$INVEST_LEARN_READ_TOKEN" ]; then
+            echo "::error::Missing Actions secret INVEST_LEARN_READ_TOKEN. Create a fine-grained PAT with read-only Contents access to NathanLvzs/invest_learn."
+            exit 1
+          fi
+
+      - name: Checkout invest_learn
+        uses: actions/checkout@v6
+        with:
+          repository: NathanLvzs/invest_learn
+          token: ${{ secrets.INVEST_LEARN_READ_TOKEN }}
+          path: invest_learn
+
+      - name: Validate invest_learn content
+        working-directory: invest_learn
+        run: ruby scripts/validate_content_structure.rb
+
+      - name: Export invest_learn site
+        working-directory: invest_learn
+        run: ruby scripts/export_jekyll_site.rb --output ../site
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -26,11 +52,13 @@ jobs:
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./
-          destination: ./_site
+          source: ./site
+          destination: ./site/_site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./site/_site
 
   deploy:
     runs-on: ubuntu-latest

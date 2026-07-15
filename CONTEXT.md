@@ -1,4 +1,4 @@
-当前任务：先升级本站 GitHub Pages 发布链路，暂缓 `invest_learn` 图谱发布。
-上次停在：已新增并推送 `.github/workflows/pages.yml`，GitHub Actions build/deploy 已成功。
-待确认事项：当前 Codex 执行环境无法访问 rbenv，本地 Jekyll build 未完成；线上 Actions 构建可作为当前发布验证。
-下一步行动：后续可继续处理评论系统、统计系统，或在需要时推进 `invest_learn` `/invest/` 子站发布。
+当前任务：接入 `invest_learn` 私有仓库到 Pages GitHub Actions 自动化发布。
+上次停在：`.github/workflows/pages.yml` 已改为 checkout `site/` 和 `invest_learn/`，校验内容后导出到 `site/` 并构建 `site/_site`。
+待确认事项：需要在本仓库 Actions secrets 配置 `INVEST_LEARN_READ_TOKEN`，然后推送触发线上 workflow 并检查日志。
+下一步行动：配置 secret 后 push workflow，确认 Pages 部署成功且日志未输出 token。
