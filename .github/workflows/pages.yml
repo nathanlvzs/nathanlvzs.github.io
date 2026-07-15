@@ -31,6 +31,15 @@ jobs:
             exit 1
           fi
 
+      - name: Check crossborder_ecom_learn token
+        env:
+          CROSSBORDER_ECOM_LEARN_READ_TOKEN: ${{ secrets.CROSSBORDER_ECOM_LEARN_READ_TOKEN }}
+        run: |
+          if [ -z "$CROSSBORDER_ECOM_LEARN_READ_TOKEN" ]; then
+            echo "::error::Missing Actions secret CROSSBORDER_ECOM_LEARN_READ_TOKEN. Create a fine-grained PAT with read-only Contents access to NathanLvzs/crossborder_ecom_learn."
+            exit 1
+          fi
+
       - name: Checkout invest_learn
         uses: actions/checkout@v6
         with:
@@ -38,12 +47,27 @@ jobs:
           token: ${{ secrets.INVEST_LEARN_READ_TOKEN }}
           path: invest_learn
 
+      - name: Checkout crossborder_ecom_learn
+        uses: actions/checkout@v6
+        with:
+          repository: NathanLvzs/crossborder_ecom_learn
+          token: ${{ secrets.CROSSBORDER_ECOM_LEARN_READ_TOKEN }}
+          path: crossborder_ecom_learn
+
       - name: Validate invest_learn content
         working-directory: invest_learn
         run: ruby scripts/validate_content_structure.rb
 
       - name: Export invest_learn site
         working-directory: invest_learn
+        run: ruby scripts/export_jekyll_site.rb --output ../site
+
+      - name: Validate crossborder_ecom_learn content
+        working-directory: crossborder_ecom_learn
+        run: ruby scripts/validate_publishable_content.rb
+
+      - name: Export crossborder_ecom_learn site
+        working-directory: crossborder_ecom_learn
         run: ruby scripts/export_jekyll_site.rb --output ../site
 
       - name: Setup Pages

@@ -39,5 +39,8 @@ invest/
 media/invest/
 _layouts/invest.html
 _layouts/invest_graph.html
+crossborder-ecom/
+media/crossborder-ecom/
+_layouts/crossborder_ecom.html
 
 tmp/
