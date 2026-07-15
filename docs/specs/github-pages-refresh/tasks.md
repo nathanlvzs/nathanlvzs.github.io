@@ -24,7 +24,7 @@
 - [x] 接入 `invest_learn` 私有仓库导出流程，并确认 GitHub Actions build/deploy 成功。
 - [x] 将投资学习本地生成物加入 `.gitignore`，避免提交 `/invest/`、`/media/invest/` 和专用 layout 生成物。
 - [x] 本地升级 Pages actions 到 Node.js 24 对应主版本，处理 Node.js 20 deprecation warning。
-- [ ] 推送 Pages actions 版本升级，并确认线上 workflow 不再出现 Node.js 20 deprecation warning。
+- [x] 推送 Pages actions 版本升级，并确认线上 workflow 不再出现 Node.js 20 deprecation warning。
 
 ## 后续可选事项
 

@@ -1,4 +1,4 @@
-当前任务：收尾 `invest_learn` GitHub Actions 自动发布和 Node.js 20 warning。
-上次停在：已配置 `INVEST_LEARN_READ_TOKEN` 并确认线上 workflow 成功；本地已升级 Pages actions 到 Node 24 对应主版本。
-待确认事项：action 版本升级尚未按用户要求提交/推送。
-下一步行动：用户确认后提交并推送 action 版本升级，再确认 Node.js 20 warning 消失。
+当前任务：修复 GitHub Pages 把维护文档和构建文件发布到 sitemap/站点的问题。
+上次停在：已在 `_config.yml` 排除 `README.md`、`CONTEXT.md`、`docs/`、`Gemfile*`、`Rakefile` 和 `tmp/`，本地构建验证 `_site/sitemap.xml` 不再包含这些路径。
+待确认事项：Pages actions 版本升级仍未提交/推送；本次 sitemap 排除修复也尚未提交/推送。
+下一步行动：提交并推送 `_config.yml` 和 `CONTEXT.md`，等待 GitHub Actions 部署后复查线上 sitemap 与旧维护文件 URL。

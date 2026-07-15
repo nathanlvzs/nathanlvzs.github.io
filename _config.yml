@@ -19,6 +19,15 @@ permalink: /:title.html
 include:
   - .well-known
 
+exclude:
+  - README.md
+  - CONTEXT.md
+  - docs
+  - Gemfile
+  - Gemfile.lock
+  - Rakefile
+  - tmp
+
 # White-listed plugins
 plugins:
   - jekyll-sitemap
