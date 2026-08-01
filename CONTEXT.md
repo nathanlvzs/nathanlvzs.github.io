@@ -1,4 +1,4 @@
-当前任务：接入跨境电商学习 `/crossborder-ecom/` 子站。
-上次停在：已在 workflow checkout/export `crossborder_ecom_learn`，本地导出并构建通过，sitemap 无重复且未暴露维护路径。
-待确认事项：本轮 Pages 变更尚未提交/推送。
-下一步行动：提交并推送 Pages workflow/README/.gitignore/CONTEXT；部署后复查 `/crossborder-ecom/`、线上 sitemap 和旧隐藏路径。
+当前任务：将站点访问统计从 Universal Analytics 升级至 GA4。
+上次停在：已在全站布局配置 GA4 衡量 ID `G-LLZX5SJ7ET`，并移除失效的 UA 统计脚本。
+待确认事项：本轮变更尚未提交/推送；Jekyll 构建受本地环境禁止读取 `/etc/resolv.conf` 阻断。
+下一步行动：提交并推送后访问网站触发一次页面浏览，并在 GA4 实时报告确认数据。

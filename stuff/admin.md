@@ -13,6 +13,3 @@ title: Admin
 
 <p></p>
 
-| [SYSU Mail](http://exmail.qq.com/cgi-bin/frame_html?sid=HPizFhIjgTCT3UYU,7&r=64763ae26caed791b05816762d4325f6) |
-
-
