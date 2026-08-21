@@ -68,7 +68,7 @@ MathJax.Hub.Config({
   
   <!-- <div id="menu"></div> -->
   <div id="main" class="span9">
-  <div class="post">
+  <div class="post{% if page.post_class %} {{ page.post_class }}{% endif %}">
     {{ content }}
   </div>
   <p></p>
