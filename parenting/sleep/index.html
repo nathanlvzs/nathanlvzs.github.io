@@ -1,0 +1,308 @@
+---
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1–2 岁睡眠与作息表</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:-apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background:#F7F6F2; color:#2C2C2A; padding:28px 18px 56px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap { max-width:1000px; margin:0 auto; }
+
+h1 { font-size:22px; font-weight:600; letter-spacing:-.2px; }
+.sub { font-size:13.5px; color:#5F5E5A; margin-top:6px; }
+.sub b { color:#3C3489; }
+
+.bar { display:flex; justify-content:flex-end; gap:8px; margin-bottom:14px; }
+.btn {
+  border:1px solid rgba(0,0,0,.13); background:#fff; color:#2C2C2A;
+  font-size:12.5px; padding:6px 13px; border-radius:7px; cursor:pointer; font-family:inherit;
+}
+.btn:hover { background:#F1EFE8; }
+
+.card {
+  background:#fff; border:1px solid rgba(0,0,0,.07); border-radius:13px;
+  overflow:hidden; margin-bottom:15px; break-inside:avoid;
+}
+.ch { padding:11px 18px; font-size:15.5px; font-weight:600; border-bottom:1px solid rgba(0,0,0,.05); }
+.c-a .ch { background:#E6F1FB; }
+.c-b .ch { background:#EEEDFE; }
+.c-c .ch { background:#E1F5EE; }
+.c-d .ch { background:#FAEEDA; }
+.c-e .ch { background:#FCEBEB; }
+.c-f .ch { background:#F1EFE8; }
+
+.cb { padding:13px 18px 16px; font-size:13px; }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+
+.big { font-size:26px; font-weight:600; color:#0C447C; letter-spacing:-.5px; }
+.bign { font-size:12.5px; color:#5F5E5A; margin-top:2px; }
+
+table { width:100%; border-collapse:collapse; font-size:12.5px; }
+th, td { text-align:left; padding:4.5px 7px; border-bottom:1px solid rgba(0,0,0,.06); }
+th { font-size:12px; color:#5F5E5A; font-weight:600; }
+tr:last-child td { border-bottom:none; }
+td.t { white-space:nowrap; font-variant-numeric:tabular-nums; font-weight:600; color:#3C3489; }
+.hl td { background:#FAF9FE; }
+
+ol, ul { margin-left:16px; }
+li { margin-bottom:4px; }
+li:last-child { margin-bottom:0; }
+.n2 { font-weight:600; }
+
+.subh { font-size:13px; font-weight:600; margin:11px 0 5px; }
+.subh:first-child { margin-top:0; }
+
+label { display:flex; gap:8px; align-items:flex-start; cursor:pointer; font-size:13px; padding:1.5px 0; }
+input[type=checkbox] { width:14px; height:14px; margin-top:4px; accent-color:#534AB7; flex:0 0 14px; cursor:pointer; }
+
+.warn { margin-top:10px; padding:9px 12px; border-radius:8px; background:#FCEBEB; font-size:12px; color:#791F1F; line-height:1.6; }
+.warn b { font-weight:600; }
+.tip { margin-top:10px; padding:9px 12px; border-radius:8px; background:#F1EFE8; font-size:12px; color:#444441; line-height:1.6; }
+.tip b { color:#2C2C2A; }
+.good { margin-top:10px; padding:9px 12px; border-radius:8px; background:#E1F5EE; font-size:12px; color:#085041; line-height:1.6; }
+
+.steps { counter-reset:s; list-style:none; margin-left:0; }
+.steps li { counter-increment:s; position:relative; padding-left:26px; margin-bottom:5px; }
+.steps li::before {
+  content:counter(s); position:absolute; left:0; top:3px; width:18px; height:18px; border-radius:50%;
+  background:#EEEDFE; color:#3C3489; font-size:11px; font-weight:600;
+  display:flex; align-items:center; justify-content:center;
+}
+
+.wk { width:100%; border-collapse:collapse; font-size:12px; }
+.wk th { text-align:center; padding:5px 4px; font-size:11.5px; }
+.wk th.r { text-align:left; min-width:96px; }
+.wk td { border:1px solid #DFDDD5; height:26px; }
+.wk td.r { border:none; font-size:12px; padding-left:2px; }
+.wk td.r small { color:#79776F; font-size:10.5px; }
+
+.foot {
+  background:#fff; border:1px solid rgba(0,0,0,.07); border-radius:13px;
+  padding:18px 22px; font-size:12.5px; color:#5F5E5A; line-height:1.7;
+}
+.foot h3 { font-size:14.5px; font-weight:600; color:#2C2C2A; margin-bottom:8px; }
+.foot ol { margin-left:16px; }
+.foot li { margin-bottom:4px; }
+.foot b { color:#2C2C2A; }
+.src { margin-top:10px; font-size:11.5px; color:#888780; }
+
+@media (max-width:760px){ .two { grid-template-columns:1fr; } }
+@media print {
+  @page { size:A4 portrait; margin:10mm; }
+  body { background:#fff; padding:0; font-size:10pt; }
+  .bar { display:none; }
+  .card { border:1px solid #ccc; }
+  .ch, .warn, .tip, .good, td.hl { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+</style>
+  <link rel="stylesheet" href="/media/parenting/site.css">
+  <link rel="canonical" href="https://nathanlvzs.github.io/parenting/sleep/">
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "{{ site.google_analytics_measurement_id }}");
+  </script>
+</head>
+<body>
+<nav class="parenting-site-nav" aria-label="育儿工具导航"><a class="parenting-brand" href="/parenting/">育儿工具</a><div class="parenting-nav-links"><a href="/parenting/#growth">成长</a><a href="/parenting/#daily-care">照护</a><a href="/parenting/#safety">安全</a><a href="/parenting/#kindergarten">入园</a><a href="/">博客</a></div></nav>
+<div class="wrap">
+
+  <h1>1–2 岁睡眠与作息表</h1>
+  <div class="sub">最难的一段是<b>两次小睡转一次</b>。这段过渡通常在 15–18 个月完成，早的 12 个月就开始，晚的拖到 2 岁——都在正常范围。</div>
+
+  <div class="bar"><button class="btn" onclick="window.print()">打印 / 存 PDF</button></div>
+
+  <div class="two">
+
+    <section class="card c-a">
+      <div class="ch">每天该睡多久</div>
+      <div class="cb">
+        <div class="big">11–14 小时</div>
+        <div class="bign">1–2 岁全天总睡眠（夜间 + 小睡）</div>
+        <div class="subh">拆分参考</div>
+        <table>
+          <tr><td>夜间睡眠</td><td class="t">10–11.5 小时</td></tr>
+          <tr><td>白天小睡</td><td class="t">2–3 小时</td></tr>
+          <tr class="hl"><td>18 个月后小睡</td><td class="t">通常 1 次 · 2–3 小时</td></tr>
+        </table>
+        <div class="tip"><b>就寝时间一般不晚于 21:00</b>，但也不提倡过早上床。上床后超过 <b>20 分钟</b>还没睡着，说明这个点选早了——往后推，别让她在床上翻。</div>
+      </div>
+    </section>
+
+    <section class="card c-b">
+      <div class="ch">两套作息 · 对照着试</div>
+      <div class="cb">
+        <div class="subh">两次小睡（约 12–15 月）</div>
+        <table>
+          <tr><td class="t">7:00</td><td>起床</td></tr>
+          <tr><td class="t">9:30</td><td>上午小睡 1–1.5 小时</td></tr>
+          <tr><td class="t">12:00</td><td>午餐</td></tr>
+          <tr><td class="t">13:00</td><td>午睡 1.5 小时</td></tr>
+          <tr><td class="t">15:30</td><td>点心</td></tr>
+          <tr><td class="t">18:00</td><td>晚餐</td></tr>
+          <tr><td class="t">19:30</td><td>睡前程序</td></tr>
+          <tr class="hl"><td class="t">20:00</td><td>入睡</td></tr>
+        </table>
+        <div class="subh">一次小睡（约 16–18 月+）</div>
+        <table>
+          <tr><td class="t">7:00</td><td>起床</td></tr>
+          <tr><td class="t">12:00</td><td>午餐</td></tr>
+          <tr class="hl"><td class="t">12:30</td><td>午睡 2–2.5 小时</td></tr>
+          <tr><td class="t">15:00</td><td>点心</td></tr>
+          <tr><td class="t">18:00</td><td>晚餐</td></tr>
+          <tr><td class="t">19:30</td><td>睡前程序</td></tr>
+          <tr class="hl"><td class="t">20:00</td><td>入睡</td></tr>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="two">
+
+    <section class="card c-c">
+      <div class="ch">该转一次小睡了吗 · 对照勾选</div>
+      <div class="cb">
+        <div class="subh">转向「一次」的信号</div>
+        <label><input type="checkbox"><span>上午小睡躺下 20–30 分钟仍不睡，连续一周以上</span></label>
+        <label><input type="checkbox"><span>上午睡了，晚上就拖到 21:30 以后才睡得着</span></label>
+        <label><input type="checkbox"><span>傍晚那次小睡醒来后，晚上完全不困</span></label>
+        <label><input type="checkbox"><span>小睡只睡 30–45 分钟就醒，醒来精神很好</span></label>
+        <label><input type="checkbox"><span>已经 15 个月以上</span></label>
+        <div class="subh">先别急着转的信号</div>
+        <label><input type="checkbox"><span>上午小睡 15 分钟内就睡着，还能睡 1 小时以上</span></label>
+        <label><input type="checkbox"><span>傍晚明显撑不住、情绪崩溃（不是撒娇，是真困）</span></label>
+        <label><input type="checkbox"><span>正在生病、刚打疫苗、出行中、刚入托</span></label>
+        <div class="warn"><b>别在特殊时期改作息。</b>生病、疫苗、旅行、入园这些时候维持原样，等她状态稳定了再动——同时改两件事，哪件都改不好。</div>
+      </div>
+    </section>
+
+    <section class="card c-d">
+      <div class="ch">过渡四步法 · 用 2–4 周慢慢挪</div>
+      <div class="cb">
+        <ol class="steps">
+          <li><span class="n2">推迟上午小睡。</span>每周往后推 15–30 分钟：9:30 → 10:00 → 10:30，一步步挪。</li>
+          <li><span class="n2">缩短上午小睡。</span>超过 45 分钟就叫醒，控制在 30–45 分钟以内。</li>
+          <li><span class="n2">把午睡锚定。</span>午睡固定在 12:00–12:30 开始，逐步延长到 2–2.5 小时。</li>
+          <li><span class="n2">晚上临时提前。</span>过渡期她容易过度疲劳，先把晚上就寝提前到 19:30，稳定几周后再回调到 20:00。</li>
+        </ol>
+        <div class="tip"><b>三个锚点不要动：</b>起床时间、午睡开始时间、晚上就寝时间。其他都可浮动，这三个稳住了，作息就有骨架。<br>过渡期会有几天「白天撑不住、晚上又睡不沉」，是正常的，别中途反复横跳。</div>
+        <div class="warn"><b>越累越睡不着是真的。</b>过度疲劳会让皮质醇升高，反而更难入睡、更容易夜醒。看到她揉眼睛、发呆、烦躁，就别再撑了。</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="two">
+
+    <section class="card c-b">
+      <div class="ch">睡前程序 · 20 分钟内，顺序固定</div>
+      <div class="cb">
+        <ol class="steps">
+          <li><span class="n2">洗澡</span>（不必每天，但顺序不变）</li>
+          <li><span class="n2">刷牙</span>（喝完奶就刷，之后不再进食）</li>
+          <li><span class="n2">换睡衣、拉窗帘</span>，进入卧室</li>
+          <li><span class="n2">绘本 1–2 本 / 摇篮曲</span>，关灯</li>
+        </ol>
+        <div class="tip">
+          <b>奶和睡分开：</b>官方建议至少在睡前 1 小时喂奶。奶睡会让她把「喝奶」和「睡着」绑定——夜里每次醒来都需要同样的条件才能重新入睡。<br>
+          <b>放下时是「困但还醒」。</b>瞌睡了但还没睡着时放进小床，让她学会自己完成最后一步。不宜摇睡、搂睡。可以给她一个安抚物（小毯子、玩偶）抱着。
+        </div>
+      </div>
+    </section>
+
+    <section class="card c-e">
+      <div class="ch">夜醒了怎么办 · 官方推荐的做法</div>
+      <div class="cb">
+        <ol class="steps">
+          <li><span class="n2">先耐心等几分钟。</span>很多夜醒她会自己接觉回去，大人一冲进去反而彻底弄醒。</li>
+          <li><span class="n2">进去待 1–2 分钟就离开。</span>少开灯、少说话、不抱起来、不喂奶，简短安抚后立刻走开。</li>
+          <li><span class="n2">逐步延长等候时间。</span>今晚等 2 分钟，明晚 4 分钟，后天 6 分钟……让她慢慢学会自己接觉。</li>
+        </ol>
+        <div class="good"><b>这是渐进式消退法，也是标准里明确推荐的方法。</b>它既不是「一哭就抱起来哄」，也不是「哭到不管」——是在「回应」和「给机会自己睡回去」之间取中间路线。关键是<b>一致</b>：家里所有人用同一套做法，坚持 1–2 周才看得出效果。</div>
+        <div class="warn">如果她明显是饿了、病了、做噩梦、或者换了环境，那就直接安抚，不用管流程。<b>规则是给习惯用的，不是给特殊情况用的。</b></div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="two">
+
+    <section class="card c-a">
+      <div class="ch">睡眠环境</div>
+      <div class="cb">
+        <ul>
+          <li><span class="n2">温度 20–22℃</span>，空气流通。穿盖比大人多一层就够，别捂。</li>
+          <li><span class="n2">睡后熄灯</span>。需要的话在墙角放暖色小夜灯，别在正上方、别对着脸。</li>
+          <li><span class="n2">卧室不放电视、平板、手机</span>——不是怕她看，是屏幕光本身会推迟入睡。</li>
+          <li><span class="n2">床只用来睡觉。</span>睡前活动在床以外的地方做完，别让她在床上玩。</li>
+          <li>白天小睡<b>不必刻意营造全黑安静</b>，正常的自然光和家务声音有助于昼夜节律建立。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card c-e">
+      <div class="ch">睡眠安全 · 别漏这几条</div>
+      <div class="cb">
+        <ul>
+          <li><span class="n2">床上保持清空</span>：不放大枕头、厚被子、毛绒玩具、床围。</li>
+          <li><span class="n2">会爬出婴儿床就换矮床</span>——别等她真的摔一次。</li>
+          <li><span class="n2">窗帘绳、百叶窗拉绳卷高固定</span>（缠绕窒息）。</li>
+          <li><span class="n2">床边的柜子、镜子固定在墙上</span>，别放能攀爬的东西。</li>
+          <li>1 岁前仰睡；<span class="n2">她能自己翻身变换姿势后就随她，但要保证床面平整</span>。</li>
+        </ul>
+        <div class="tip">这几条在《12–18 月龄家庭安全排查清单》的卧室部分里也有，两处一致。</div>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="card c-f">
+    <div class="ch">本周睡眠记录 · 打印出来手写</div>
+    <div class="cb">
+      <table class="wk">
+        <tr><th class="r"></th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr>
+        <tr><td class="r">昨晚入睡时间</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="r">今早起床时间</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="r">午睡时长<small>（几点到几点）</small></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="r">夜醒次数</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="r">全天总睡眠<small>（小时）</small></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="r">白天状态<small>（情绪/食欲）</small></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </table>
+      <div class="tip">连记一周再判断。看的是<b>趋势</b>：总时长是否落在 11–14 小时、入睡是否稳定在 20 分钟内、夜醒有没有减少。<b>单独某一天睡得差不说明任何问题。</b></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <h3>六个常见坑</h3>
+    <ol>
+      <li><b>午睡太晚太长。</b>15:30 以后才睡、或一睡超过 3 小时，晚上就别想按时睡了。该叫醒就叫醒。</li>
+      <li><b>睡前程序超过 20 分钟、内容天天变。</b>程序越短越固定越有效，拖成一小时只会让她越玩越兴奋。</li>
+      <li><b>奶睡、抱睡、摇睡。</b>省事在当下，代价是每次夜醒都要重来一遍。</li>
+      <li><b>上床太早。</b>躺下超过 20 分钟睡不着，说明睡意还不够——往后推 15–30 分钟，不是继续在床上耗。</li>
+      <li><b>周末和平差太多。</b>作息差 1 小时以上，周一到周三都在倒时差。可以晚半小时，别晚两小时。</li>
+      <li><b>今天这个方法、明天那个方法。</b>任何方法都要连续用 1–2 周才看得出效果，来回换等于没做。</li>
+    </ol>
+    <h3 style="margin-top:14px;">什么时候该去看医生</h3>
+    <ol>
+      <li>入睡潜伏期<b>持续超过 20 分钟</b>。</li>
+      <li>夜醒后<b>无法自主入睡、每次都要家长干预</b>，且长期如此。</li>
+      <li>全天总睡眠明显<b>不在 11–14 小时</b>范围内。</li>
+      <li>睡觉<b>打鼾、张口呼吸、呼吸暂停</b>——可能是腺样体或扁桃体问题，别当成"睡得香"。</li>
+      <li>频繁夜惊、梦游、噩梦惊醒。</li>
+    </ol>
+    <div class="src">依据：中华人民共和国卫生行业标准 WS/T 579—2017《0 岁~5 岁儿童睡眠卫生指南》（国家卫生和计划生育委员会发布）。本表为家庭参考，不能替代儿童保健科的专业睡眠评估。</div>
+  </div>
+
+</div>
+</body>
+</html>

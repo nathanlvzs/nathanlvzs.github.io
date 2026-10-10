@@ -1,0 +1,433 @@
+---
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0–3 岁发育自测卡</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:-apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background:#F7F6F2; color:#2C2C2A; padding:28px 18px 56px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap { max-width:1000px; margin:0 auto; }
+
+h1 { font-size:22px; font-weight:600; letter-spacing:-.2px; }
+.sub { font-size:13.5px; color:#5F5E5A; margin-top:6px; }
+
+.alert {
+  margin-top:14px; padding:11px 16px; border-radius:10px; font-size:13.5px;
+  background:#E1F5EE; color:#085041; display:flex; justify-content:space-between;
+  align-items:center; gap:12px; flex-wrap:wrap;
+}
+.alert.bad { background:#FCEBEB; color:#791F1F; font-weight:500; }
+.alert .r { text-align:right; }
+.btn {
+  border:1px solid rgba(0,0,0,.14); background:#fff; color:#2C2C2A;
+  font-size:12.5px; padding:6px 13px; border-radius:7px; cursor:pointer; font-family:inherit;
+}
+.btn:hover { background:#F1EFE8; }
+
+.tips {
+  margin-top:12px; background:#FAEEDA; border-radius:10px; padding:12px 16px;
+  font-size:12.5px; color:#633806; line-height:1.65;
+}
+.tips b { font-weight:600; }
+.tips ul { margin:5px 0 0 16px; }
+
+.card {
+  margin-top:16px; background:#fff; border:1px solid rgba(0,0,0,.07);
+  border-radius:13px; overflow:hidden; break-inside:avoid;
+}
+.ch {
+  padding:11px 18px; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  border-bottom:1px solid rgba(0,0,0,.05);
+}
+.ch h2 { font-size:16px; font-weight:600; }
+.ch .age { font-size:12px; color:#79776F; }
+.ch .cnt { margin-left:auto; font-size:12px; color:#888780; font-variant-numeric:tabular-nums; }
+.a12 .ch { background:#E6F1FB; } .a15 .ch { background:#E1F5EE; } .a18 .ch { background:#EEEDFE; }
+.a24 .ch { background:#EAF3DE; } .a30 .ch { background:#FAEEDA; } .a36 .ch { background:#FBEAF0; }
+
+.cb { display:grid; grid-template-columns:1.62fr 1fr; gap:0; }
+.col { padding:13px 18px 15px; }
+.col.w { background:#FCFAF8; border-left:1px solid rgba(0,0,0,.06); }
+.colh { font-size:12px; font-weight:600; margin-bottom:8px; }
+.col.w .colh { color:#A32D2D; }
+.col.ok .colh { color:#0F6E56; }
+
+.grp { margin-bottom:9px; }
+.gl { font-size:11px; font-weight:600; color:#79776F; margin-bottom:2px; letter-spacing:.3px; }
+label { display:flex; gap:8px; align-items:flex-start; cursor:pointer; font-size:13px; padding:1.5px 0; }
+input[type=checkbox] { width:14px; height:14px; margin-top:4px; accent-color:#1D9E75; flex:0 0 14px; cursor:pointer; }
+label.done .t { color:#A8A69E; text-decoration:line-through; }
+.col.w input[type=checkbox] { accent-color:#C93636; }
+label.hit { background:#FCEBEB; margin:1px -6px; padding:3px 6px; border-radius:5px; }
+label.hit .t { color:#791F1F; font-weight:500; text-decoration:none; }
+
+.note { font-size:11.5px; color:#79776F; margin-top:7px; line-height:1.55; }
+.col.w .note { color:#A32D2D; }
+
+.rec {
+  border-top:1px solid rgba(0,0,0,.05); padding:9px 18px; font-size:12px; color:#5F5E5A;
+  display:flex; gap:16px; flex-wrap:wrap;
+}
+.rec span { white-space:nowrap; }
+.rec .u { display:inline-block; border-bottom:1px solid #C9C7BF; min-width:52px; }
+.rec .u2 { display:inline-block; border-bottom:1px solid #C9C7BF; min-width:170px; }
+
+.foot {
+  margin-top:18px; background:#fff; border:1px solid rgba(0,0,0,.07);
+  border-radius:13px; padding:18px 22px; font-size:12.5px; color:#5F5E5A; line-height:1.7;
+}
+.foot h3 { font-size:14.5px; font-weight:600; color:#2C2C2A; margin-bottom:8px; }
+.foot ol { margin-left:16px; }
+.foot li { margin-bottom:4px; }
+.foot b { color:#2C2C2A; }
+
+@media (max-width:760px){ .cb { grid-template-columns:1fr; } .col.w { border-left:none; border-top:1px solid rgba(0,0,0,.06); } }
+@media print {
+  @page { size:A4 portrait; margin:10mm; }
+  body { background:#fff; padding:0; font-size:10pt; }
+  .btn, .alert .r { display:none; }
+  .card { border:1px solid #ccc; }
+  .ch, .col.w, .tips, .alert { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  label.hit { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+</style>
+  <link rel="stylesheet" href="/media/parenting/site.css">
+  <link rel="canonical" href="https://nathanlvzs.github.io/parenting/development/">
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "{{ site.google_analytics_measurement_id }}");
+  </script>
+</head>
+<body>
+<nav class="parenting-site-nav" aria-label="育儿工具导航"><a class="parenting-brand" href="/parenting/">育儿工具</a><div class="parenting-nav-links"><a href="/parenting/#growth">成长</a><a href="/parenting/#daily-care">照护</a><a href="/parenting/#safety">安全</a><a href="/parenting/#kindergarten">入园</a><a href="/">博客</a></div></nav>
+<div class="wrap">
+
+  <h1>0–3 岁发育自测卡</h1>
+  <div class="sub">对照月龄勾选「能做到」，右侧红线来自国家卫健委《儿童心理行为发育问题预警征象》——<b style="color:#A32D2D">符合任一条应及时转诊评估。</b></div>
+
+  <div class="alert" id="alert">
+    <span id="alertTxt">预警征象：0 项符合</span>
+    <span class="r"><button class="btn" id="reset">清空重测</button> <button class="btn" onclick="window.print()">打印 / 存 PDF</button></span>
+  </div>
+
+  <div class="tips">
+    <b>怎么用：</b>
+    <ul>
+      <li>在月龄当天前后一周内测，选她精神好、不饿不困的时候。别在陌生环境或生病时测。</li>
+      <li>勾选状态自动保存在这台电脑上，可以边观察边打勾，不必一次完成。</li>
+      <li><b>左侧不通过不等于有问题</b>——每个孩子节奏不同，提前或推后一两个月都常见。</li>
+      <li>但<b>右侧红线任意一条符合，请不要「再等等看」</b>，尽快到儿童保健科或发育行为儿科。发育问题越早干预效果越好。</li>
+      <li>早产儿请一律按<b>矫正月龄</b>计算，不要用出生月龄。</li>
+    </ul>
+  </div>
+
+  <section class="card a12">
+    <div class="ch"><h2>12 月龄</h2><span class="age">约 1 岁</span><span class="cnt"></span></div>
+    <div class="cb">
+      <div class="col ok">
+        <div class="colh">能做到吗 · 勾选已做到的</div>
+        <div class="grp"><div class="gl">大运动</div>
+          <label><input type="checkbox"><span class="t">扶着家具走</span></label>
+          <label><input type="checkbox"><span class="t">独自站几秒钟</span></label>
+          <label><input type="checkbox"><span class="t">从站着能坐下</span></label>
+        </div>
+        <div class="grp"><div class="gl">精细</div>
+          <label><input type="checkbox"><span class="t">拇指食指捏起小东西</span></label>
+          <label><input type="checkbox"><span class="t">把东西放进容器再倒出来</span></label>
+          <label><input type="checkbox"><span class="t">会把东西递给别人</span></label>
+        </div>
+        <div class="grp"><div class="gl">语言</div>
+          <label><input type="checkbox"><span class="t">有意识地叫「爸爸」「妈妈」</span></label>
+          <label><input type="checkbox"><span class="t">听懂「不可以」</span></label>
+          <label><input type="checkbox"><span class="t">会用手势表达（挥手、摇头、伸手要）</span></label>
+        </div>
+        <div class="grp"><div class="gl">社会</div>
+          <label><input type="checkbox"><span class="t">用手指着自己想要的东西</span></label>
+          <label><input type="checkbox"><span class="t">认生，会区分亲疏</span></label>
+          <label><input type="checkbox"><span class="t">穿衣时配合伸手伸脚</span></label>
+        </div>
+      </div>
+      <div class="col w">
+        <div class="colh">预警红线 · 符合请勾选</div>
+        <label class="red"><input type="checkbox"><span class="t">不会挥手表示「再见」或拍手表示「欢迎」</span></label>
+        <label class="red"><input type="checkbox"><span class="t">呼唤名字无反应</span></label>
+        <label class="red"><input type="checkbox"><span class="t">不会用拇食指对捏小物品</span></label>
+        <label class="red"><input type="checkbox"><span class="t">不会扶物站立</span></label>
+        <div class="note">符合任一条 → 尽快到儿童保健科或发育行为儿科评估。<b>「唤名无反应」请先排除听力问题。</b></div>
+      </div>
+    </div>
+    <div class="rec"><span>实测日期 <i class="u"></i> 年 <i class="u" style="min-width:34px"></i> 月 <i class="u" style="min-width:34px"></i> 日</span><span>身高 <i class="u" style="min-width:44px"></i> cm</span><span>体重 <i class="u" style="min-width:44px"></i> kg</span><span>最近新学会 <i class="u2"></i></span></div>
+  </section>
+
+  <section class="card a15">
+    <div class="ch"><h2>15 月龄</h2><span class="age">约 1 岁 3 个月 · 非正式筛查节点</span><span class="cnt"></span></div>
+    <div class="cb">
+      <div class="col ok">
+        <div class="colh">能做到吗 · 勾选已做到的</div>
+        <div class="grp"><div class="gl">大运动</div>
+          <label><input type="checkbox"><span class="t">独立走路</span></label>
+          <label><input type="checkbox"><span class="t">蹲下再站起来</span></label>
+          <label><input type="checkbox"><span class="t">扶着栏杆上台阶</span></label>
+        </div>
+        <div class="grp"><div class="gl">精细</div>
+          <label><input type="checkbox"><span class="t">叠 2–3 块积木</span></label>
+          <label><input type="checkbox"><span class="t">会乱涂乱画</span></label>
+          <label><input type="checkbox"><span class="t">自己用勺子吃（会洒）</span></label>
+        </div>
+        <div class="grp"><div class="gl">语言</div>
+          <label><input type="checkbox"><span class="t">会说 3–10 个词</span></label>
+          <label><input type="checkbox"><span class="t">听懂简单一步指令</span></label>
+          <label><input type="checkbox"><span class="t">能指认身体部位</span></label>
+        </div>
+        <div class="grp"><div class="gl">社会</div>
+          <label><input type="checkbox"><span class="t">模仿大人做家务</span></label>
+          <label><input type="checkbox"><span class="t">会发脾气（自主意识萌芽）</span></label>
+          <label><input type="checkbox"><span class="t">会主动把东西给人看</span></label>
+        </div>
+      </div>
+      <div class="col w">
+        <div class="colh">观察提示 · 非官方预警</div>
+        <label class="red"><input type="checkbox"><span class="t">完全不会独站或扶走</span></label>
+        <label class="red"><input type="checkbox"><span class="t">对任何语言指令都无反应</span></label>
+        <label class="red"><input type="checkbox"><span class="t">不会用手势（指物、挥手）</span></label>
+        <label class="red"><input type="checkbox"><span class="t">不发出任何辅音音节（ba/ma/da）</span></label>
+        <div class="note">这个月龄国家没有正式预警节点，以上为参考观察项。<b>若符合，不必等到 18 月龄，可以提前咨询。</b></div>
+      </div>
+    </div>
+    <div class="rec"><span>实测日期 <i class="u"></i> 年 <i class="u" style="min-width:34px"></i> 月 <i class="u" style="min-width:34px"></i> 日</span><span>身高 <i class="u" style="min-width:44px"></i> cm</span><span>体重 <i class="u" style="min-width:44px"></i> kg</span><span>最近新学会 <i class="u2"></i></span></div>
+  </section>
+
+  <section class="card a18">
+    <div class="ch"><h2>18 月龄</h2><span class="age">约 1 岁半 · 重要筛查节点</span><span class="cnt"></span></div>
+    <div class="cb">
+      <div class="col ok">
+        <div class="colh">能做到吗 · 勾选已做到的</div>
+        <div class="grp"><div class="gl">大运动</div>
+          <label><input type="checkbox"><span class="t">走得很稳，很少摔</span></label>
+          <label><input type="checkbox"><span class="t">会小跑</span></label>
+          <label><input type="checkbox"><span class="t">扶着栏杆上楼梯</span></label>
+        </div>
+        <div class="grp"><div class="gl">精细</div>
+          <label><input type="checkbox"><span class="t">叠 4 块积木</span></label>
+          <label><input type="checkbox"><span class="t">会用杯子喝水</span></label>
+          <label><input type="checkbox"><span class="t">会一页页翻书</span></label>
+        </div>
+        <div class="grp"><div class="gl">语言</div>
+          <label><input type="checkbox"><span class="t">会说 20 个以上的词</span></label>
+          <label><input type="checkbox"><span class="t">两个词组合（「妈妈抱」）</span></label>
+          <label><input type="checkbox"><span class="t">能指认常见物品</span></label>
+        </div>
+        <div class="grp"><div class="gl">社会</div>
+          <label><input type="checkbox"><span class="t">玩假装游戏（喂娃娃、打电话）</span></label>
+          <label><input type="checkbox"><span class="t">会说「我的」</span></label>
+          <label><input type="checkbox"><span class="t">自己用勺吃饭</span></label>
+        </div>
+      </div>
+      <div class="col w">
+        <div class="colh">预警红线 · 符合请勾选</div>
+        <label class="red"><input type="checkbox"><span class="t">不会有意识地叫「爸爸」或「妈妈」</span></label>
+        <label class="red"><input type="checkbox"><span class="t">不会按要求指人或物</span></label>
+        <label class="red"><input type="checkbox"><span class="t">不会独走</span></label>
+        <label class="red"><input type="checkbox"><span class="t">与人无目光对视</span></label>
+        <div class="note">这是孤独症谱系筛查的关键节点。<b>符合任一条 → 尽快转诊。</b>很多家长觉得「贵人语迟」，但语言加社交两条同时落后时，等待的代价最大。</div>
+      </div>
+    </div>
+    <div class="rec"><span>实测日期 <i class="u"></i> 年 <i class="u" style="min-width:34px"></i> 月 <i class="u" style="min-width:34px"></i> 日</span><span>身高 <i class="u" style="min-width:44px"></i> cm</span><span>体重 <i class="u" style="min-width:44px"></i> kg</span><span>最近新学会 <i class="u2"></i></span></div>
+  </section>
+
+  <section class="card a24">
+    <div class="ch"><h2>24 月龄</h2><span class="age">2 岁 · 重要筛查节点</span><span class="cnt"></span></div>
+    <div class="cb">
+      <div class="col ok">
+        <div class="colh">能做到吗 · 勾选已做到的</div>
+        <div class="grp"><div class="gl">大运动</div>
+          <label><input type="checkbox"><span class="t">跑起来不常摔倒</span></label>
+          <label><input type="checkbox"><span class="t">会踢球</span></label>
+          <label><input type="checkbox"><span class="t">双脚离地跳</span></label>
+        </div>
+        <div class="grp"><div class="gl">精细</div>
+          <label><input type="checkbox"><span class="t">叠 6–7 块积木</span></label>
+          <label><input type="checkbox"><span class="t">会画直线或竖线</span></label>
+          <label><input type="checkbox"><span class="t">会拧开瓶盖</span></label>
+        </div>
+        <div class="grp"><div class="gl">语言</div>
+          <label><input type="checkbox"><span class="t">会说 2–3 个词的短语</span></label>
+          <label><input type="checkbox"><span class="t">词汇量 50 个以上</span></label>
+          <label><input type="checkbox"><span class="t">听懂两步指令（「把鞋拿来给爸爸」）</span></label>
+        </div>
+        <div class="grp"><div class="gl">社会</div>
+          <label><input type="checkbox"><span class="t">和其他孩子一起玩（各玩各的也算）</span></label>
+          <label><input type="checkbox"><span class="t">会模仿大人做家务</span></label>
+          <label><input type="checkbox"><span class="t">能把玩具收起来</span></label>
+        </div>
+      </div>
+      <div class="col w">
+        <div class="colh">预警红线 · 符合请勾选</div>
+        <label class="red"><input type="checkbox"><span class="t">不会说 3 个物品的名称</span></label>
+        <label class="red"><input type="checkbox"><span class="t">不会按吩咐做简单事情</span></label>
+        <label class="red"><input type="checkbox"><span class="t">不会用勺吃饭</span></label>
+        <label class="red"><input type="checkbox"><span class="t">不会扶栏上楼梯／台阶</span></label>
+        <div class="note">符合任一条 → 转诊评估。<b>2 岁仍无有意义的语言，是需要认真对待的信号。</b></div>
+      </div>
+    </div>
+    <div class="rec"><span>实测日期 <i class="u"></i> 年 <i class="u" style="min-width:34px"></i> 月 <i class="u" style="min-width:34px"></i> 日</span><span>身高 <i class="u" style="min-width:44px"></i> cm</span><span>体重 <i class="u" style="min-width:44px"></i> kg</span><span>最近新学会 <i class="u2"></i></span></div>
+  </section>
+
+  <section class="card a30">
+    <div class="ch"><h2>30 月龄</h2><span class="age">2 岁半</span><span class="cnt"></span></div>
+    <div class="cb">
+      <div class="col ok">
+        <div class="colh">能做到吗 · 勾选已做到的</div>
+        <div class="grp"><div class="gl">大运动</div>
+          <label><input type="checkbox"><span class="t">双脚跳</span></label>
+          <label><input type="checkbox"><span class="t">踮着脚走几步</span></label>
+          <label><input type="checkbox"><span class="t">会骑三轮车（部分孩子）</span></label>
+        </div>
+        <div class="grp"><div class="gl">精细</div>
+          <label><input type="checkbox"><span class="t">模仿画圆</span></label>
+          <label><input type="checkbox"><span class="t">会用儿童剪刀</span></label>
+          <label><input type="checkbox"><span class="t">会串大珠子</span></label>
+        </div>
+        <div class="grp"><div class="gl">语言</div>
+          <label><input type="checkbox"><span class="t">说 3–4 个词的句子</span></label>
+          <label><input type="checkbox"><span class="t">会说自己的名字</span></label>
+          <label><input type="checkbox"><span class="t">会问「这是什么」</span></label>
+        </div>
+        <div class="grp"><div class="gl">社会</div>
+          <label><input type="checkbox"><span class="t">和其他孩子互动游戏</span></label>
+          <label><input type="checkbox"><span class="t">会等待、会轮流</span></label>
+          <label><input type="checkbox"><span class="t">玩角色扮演（过家家）</span></label>
+        </div>
+      </div>
+      <div class="col w">
+        <div class="colh">预警红线 · 符合请勾选</div>
+        <label class="red"><input type="checkbox"><span class="t">不会说 2–3 个字的短语</span></label>
+        <label class="red"><input type="checkbox"><span class="t">兴趣单一、刻板</span></label>
+        <label class="red"><input type="checkbox"><span class="t">不会示意大小便</span></label>
+        <label class="red"><input type="checkbox"><span class="t">走路经常跌倒</span></label>
+        <div class="note">符合任一条 → 转诊评估。<b>「兴趣单一、刻板」和语言落后同时出现时尤其要重视。</b></div>
+      </div>
+    </div>
+    <div class="rec"><span>实测日期 <i class="u"></i> 年 <i class="u" style="min-width:34px"></i> 月 <i class="u" style="min-width:34px"></i> 日</span><span>身高 <i class="u" style="min-width:44px"></i> cm</span><span>体重 <i class="u" style="min-width:44px"></i> kg</span><span>最近新学会 <i class="u2"></i></span></div>
+  </section>
+
+  <section class="card a36">
+    <div class="ch"><h2>36 月龄</h2><span class="age">3 岁 · 入托前筛查节点</span><span class="cnt"></span></div>
+    <div class="cb">
+      <div class="col ok">
+        <div class="colh">能做到吗 · 勾选已做到的</div>
+        <div class="grp"><div class="gl">大运动</div>
+          <label><input type="checkbox"><span class="t">单脚站 2 秒以上</span></label>
+          <label><input type="checkbox"><span class="t">骑三轮车</span></label>
+          <label><input type="checkbox"><span class="t">上下楼梯交替迈脚</span></label>
+        </div>
+        <div class="grp"><div class="gl">精细</div>
+          <label><input type="checkbox"><span class="t">会模仿画圆</span></label>
+          <label><input type="checkbox"><span class="t">自己穿脱简单衣物</span></label>
+          <label><input type="checkbox"><span class="t">会用筷子（部分孩子）</span></label>
+        </div>
+        <div class="grp"><div class="gl">语言</div>
+          <label><input type="checkbox"><span class="t">说 5–6 个词的完整句子</span></label>
+          <label><input type="checkbox"><span class="t">能讲一件简单的事</span></label>
+          <label><input type="checkbox"><span class="t">理解「一样／不一样」</span></label>
+        </div>
+        <div class="grp"><div class="gl">社会</div>
+          <label><input type="checkbox"><span class="t">和其他孩子合作游戏</span></label>
+          <label><input type="checkbox"><span class="t">能说出自己的感受</span></label>
+          <label><input type="checkbox"><span class="t">白天能自己上厕所</span></label>
+        </div>
+      </div>
+      <div class="col w">
+        <div class="colh">预警红线 · 符合请勾选</div>
+        <label class="red"><input type="checkbox"><span class="t">不会说自己的名字</span></label>
+        <label class="red"><input type="checkbox"><span class="t">不会玩「拿棍当马骑」等假想游戏</span></label>
+        <label class="red"><input type="checkbox"><span class="t">不会模仿画圆</span></label>
+        <label class="red"><input type="checkbox"><span class="t">不会双脚跳</span></label>
+        <div class="note">符合任一条 → 转诊评估。<b>3 岁是干预效果的关键窗口，入托前应完成一次系统评估。</b></div>
+      </div>
+    </div>
+    <div class="rec"><span>实测日期 <i class="u"></i> 年 <i class="u" style="min-width:34px"></i> 月 <i class="u" style="min-width:34px"></i> 日</span><span>身高 <i class="u" style="min-width:44px"></i> cm</span><span>体重 <i class="u" style="min-width:44px"></i> kg</span><span>最近新学会 <i class="u2"></i></span></div>
+  </section>
+
+  <div class="foot">
+    <h3>关于这张卡，有三件事想说清楚</h3>
+    <ol>
+      <li><b>左侧是参考，右侧才是重点。</b>「能做到」那一栏来自普遍发育规律，晚一两个月通常不必焦虑；但右侧每一条红线都来自国家卫健委的官方标准，符合就<b>不要观望</b>。</li>
+      <li><b>最容易被误解的一条是「贵人语迟」。</b>单纯说话晚，孩子听得懂、会指、会互动，往往确实只是节奏问题。但<b>语言落后 + 不指物 + 少目光对视</b>三者同时出现时，等待的代价远大于跑一趟医院。</li>
+      <li><b>发现越早，可塑性越强。</b>3 岁前大脑可塑性最高，同样一个孩子，1 岁半开始干预和 3 岁才开始，结果可能完全不同。宁可白跑一趟，也别赌那一次「再看看」。</li>
+    </ol>
+    <div style="margin-top:10px;font-size:11.5px;color:#888780;">
+      依据：国家卫生健康委《儿童心理行为发育问题预警征象》（3 / 6 / 8 / 12 / 18 / 24 / 30 / 36 月龄）整理。本表不能替代儿童保健科的专业评估与标准化量表筛查（DDST、DST 等）。
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var KEY = 'dev-self-check-v1';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]'));
+  var alertBox = document.getElementById('alert');
+  var alertTxt = document.getElementById('alertTxt');
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ saved = {}; }
+
+  function sync(){
+    var hits = 0;
+    boxes.forEach(function(b, i){
+      var lb = b.closest('label');
+      if (b.checked) {
+        lb.classList.add('done');
+        if (lb.classList.contains('red')) { hits++; lb.classList.add('hit'); } else { lb.classList.remove('hit'); }
+      } else {
+        lb.classList.remove('done');
+        lb.classList.remove('hit');
+      }
+    });
+    if (hits > 0) {
+      alertBox.classList.add('bad');
+      alertTxt.textContent = '注意：有 ' + hits + ' 项预警征象符合，建议尽快到儿童保健科或发育行为儿科评估';
+    } else {
+      alertBox.classList.remove('bad');
+      alertTxt.textContent = '预警征象：0 项符合';
+    }
+    document.querySelectorAll('.card').forEach(function(c){
+      var all = c.querySelectorAll('.col.ok input[type=checkbox]');
+      var ok = c.querySelectorAll('.col.ok input[type=checkbox]:checked');
+      c.querySelector('.cnt').textContent = '已做到 ' + ok.length + '/' + all.length;
+    });
+  }
+
+  function store(){
+    var o = {};
+    boxes.forEach(function(b, i){ o[i] = b.checked; });
+    try { localStorage.setItem(KEY, JSON.stringify(o)); } catch(e){}
+  }
+
+  boxes.forEach(function(b, i){
+    if (saved[i]) b.checked = true;
+    b.addEventListener('change', function(){ sync(); store(); });
+  });
+
+  document.getElementById('reset').addEventListener('click', function(){
+    if (!confirm('清空所有勾选，重新开始？')) return;
+    boxes.forEach(function(b){ b.checked = false; });
+    try { localStorage.removeItem(KEY); } catch(e){}
+    sync();
+  });
+
+  sync();
+})();
+</script>
+</body>
+</html>

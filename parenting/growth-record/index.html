@@ -1,0 +1,536 @@
+---
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>每月成长记录册 · 女宝 12–36 月龄</title>
+<style>
+:root{
+  --blue-bg:#E6F1FB;--blue-bd:#378ADD;--blue-tx:#0C447C;
+  --teal-bg:#E1F5EE;--teal-bd:#1D9E75;--teal-tx:#085041;
+  --green-bg:#EAF3DE;--green-bd:#639922;--green-tx:#27500A;
+  --amber-bg:#FAEEDA;--amber-bd:#BA7517;--amber-tx:#633806;
+  --purple-bg:#EEEDFE;--purple-bd:#7F77DD;--purple-tx:#3C3489;
+  --red-bg:#FCEBEB;--red-bd:#E24B4A;--red-tx:#791F1F;
+  --gray-bg:#F1EFE8;--gray-bd:#D3D1C7;--gray-tx:#2C2C2A;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;padding:22px 16px 60px;background:#FAF9F6;color:#2C2C2A;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:13px;line-height:1.6;
+}
+.wrap{max-width:1080px;margin:0 auto}
+
+/* ── 顶栏 ── */
+.topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+h1{font-size:22px;margin:0 0 4px;letter-spacing:.5px}
+.sub{font-size:12px;color:#5F5E5B}
+.btns{display:flex;gap:8px}
+button{
+  font:inherit;font-size:12px;padding:7px 14px;border-radius:7px;cursor:pointer;
+  border:1px solid var(--gray-bd);background:#fff;color:#444;
+}
+button:hover{background:var(--gray-bg)}
+button.pri{background:var(--blue-bd);border-color:var(--blue-bd);color:#fff}
+button.pri:hover{background:#2A6FB5}
+button.warn{color:var(--red-tx);border-color:#F0B8B7;background:var(--red-bg)}
+
+/* ── 卡片 ── */
+.card{
+  background:#fff;border:1px solid var(--gray-bd);border-radius:12px;
+  padding:16px 18px;margin-bottom:16px;break-inside:avoid;
+}
+.card>h2{
+  font-size:15px;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #EDEBE4;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.card>h2 .tag{font-size:11px;font-weight:400;padding:2px 8px;border-radius:20px;background:var(--gray-bg);color:#5F5E5B}
+.card>h2 .tag.b{background:var(--blue-bg);color:var(--blue-tx)}
+.card>h2 .tag.t{background:var(--teal-bg);color:var(--teal-tx)}
+.card>h2 .tag.r{background:var(--red-bg);color:var(--red-tx)}
+
+/* ── 基本信息 ── */
+.basic{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.f{display:flex;flex-direction:column;gap:4px}
+.f label{font-size:11px;color:#5F5E5B}
+.f input{
+  font:inherit;font-size:13px;padding:7px 9px;border:1px solid #DFDDD5;border-radius:7px;background:#fff;color:#2C2C2A;
+}
+.f input:focus{outline:none;border-color:var(--blue-bd);box-shadow:0 0 0 2px #E6F1FB}
+.calc{
+  margin-top:10px;padding:9px 12px;border-radius:8px;background:var(--purple-bg);
+  border:1px solid #C9C4F0;color:var(--purple-tx);font-size:12px;
+}
+.calc b{font-size:14px}
+
+/* ── 图表 ── */
+.chartbox{margin-bottom:6px}
+.chartbox svg{width:100%;height:auto;display:block}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:#5F5E5B;margin-top:6px}
+.legend i{display:inline-block;width:16px;height:8px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.note{font-size:12px;color:#5F5E5B;background:var(--gray-bg);border-radius:8px;padding:9px 12px;margin-top:10px}
+
+/* ── 表格 ── */
+.tblwrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:12px}
+th,td{border:1px solid #E6E4DC;padding:5px 6px;text-align:center}
+th{background:var(--gray-bg);font-weight:600;font-size:11px;color:#444;white-space:nowrap}
+td.m{background:#FAF9F6;font-weight:600;color:#444;white-space:nowrap}
+td.key{background:var(--amber-bg);}
+td.key .m{background:transparent;color:var(--amber-tx)}
+input.cell{
+  font:inherit;font-size:12px;width:100%;min-width:52px;padding:4px 5px;text-align:center;
+  border:1px solid #E4E2DA;border-radius:5px;background:#fff;color:#2C2C2A;
+}
+input.cell:focus{outline:none;border-color:var(--blue-bd);box-shadow:0 0 0 2px #E6F1FB}
+input.cell.w{text-align:left;min-width:150px}
+.pct{font-size:11px;white-space:nowrap}
+.pct span{display:inline-block;padding:2px 7px;border-radius:20px}
+.p-green{background:var(--green-bg);color:var(--green-tx)}
+.p-gray{background:var(--gray-bg);color:var(--gray-tx)}
+.p-amber{background:var(--amber-bg);color:var(--amber-tx)}
+.p-red{background:var(--red-bg);color:var(--red-tx)}
+.p-none{color:#B4B2A9}
+
+/* ── 提示块 ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.box{border-radius:9px;padding:11px 13px;font-size:12px}
+.box h3{font-size:13px;margin:0 0 7px}
+.box ul{margin:0;padding-left:17px}
+.box li{margin-bottom:4px}
+.box.amber{background:var(--amber-bg);border:1px solid #EBC97E;color:var(--amber-tx)}
+.box.teal{background:var(--teal-bg);border:1px solid #9ADBC8;color:var(--teal-tx)}
+.box.red{background:var(--red-bg);border:1px solid #F0B8B7;color:var(--red-tx)}
+.box.blue{background:var(--blue-bg);border:1px solid #A9D0F0;color:var(--blue-tx)}
+.box b{font-weight:600}
+.kv{display:grid;grid-template-columns:1fr auto;gap:3px 10px;font-size:12px}
+.kv .v{text-align:right;font-variant-numeric:tabular-nums}
+
+footer{font-size:11px;color:#8A8880;text-align:center;margin-top:20px;line-height:1.8}
+
+@media print{
+  @page{size:A4 portrait;margin:10mm}
+  body{background:#fff;padding:0;font-size:10pt}
+  .btns{display:none}
+  .card{border-color:#C9C7BF;break-inside:avoid;page-break-inside:avoid;margin-bottom:10px}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+  <link rel="stylesheet" href="/media/parenting/site.css">
+  <link rel="canonical" href="https://nathanlvzs.github.io/parenting/growth-record/">
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "{{ site.google_analytics_measurement_id }}");
+  </script>
+</head>
+<body>
+<nav class="parenting-site-nav" aria-label="育儿工具导航"><a class="parenting-brand" href="/parenting/">育儿工具</a><div class="parenting-nav-links"><a href="/parenting/#growth">成长</a><a href="/parenting/#daily-care">照护</a><a href="/parenting/#safety">安全</a><a href="/parenting/#kindergarten">入园</a><a href="/">博客</a></div></nav>
+<div class="wrap">
+
+  <div class="topbar">
+    <div>
+      <h1>每月成长记录册</h1>
+      <div class="sub">女宝 · 12–36 月龄 · 参照 WS/T 423—2022《7 岁以下儿童生长标准》（国家卫健委）</div>
+    </div>
+    <div class="btns">
+      <button class="pri" onclick="window.print()">打印 / 存 PDF</button>
+      <button class="warn" onclick="clearAll()">清空重填</button>
+    </div>
+  </div>
+
+  <!-- 基本信息 -->
+  <div class="card">
+    <h2>基本信息 <span class="tag b">填写后自动算遗传靶身高</span></h2>
+    <div class="basic">
+      <div class="f"><label>宝宝昵称</label><input id="b-name" placeholder="如 小满"></div>
+      <div class="f"><label>出生日期</label><input id="b-birth" type="date"></div>
+      <div class="f"><label>性别</label><input value="女" readonly style="background:#FAF9F6;color:#5F5E5B"></div>
+      <div class="f"><label>父亲身高 (cm)</label><input id="b-fa" type="number" step="0.5" placeholder="如 172"></div>
+      <div class="f"><label>母亲身高 (cm)</label><input id="b-ma" type="number" step="0.5" placeholder="如 160"></div>
+      <div class="f"><label>出生身长 / 体重</label><input id="b-b0" placeholder="如 50cm / 3.2kg"></div>
+    </div>
+    <div class="calc" id="calc">遗传靶身高：<b>—</b>　（女孩公式：（父身高 + 母身高 − 13）÷ 2，± 5 cm 为波动范围。填入父母身高后自动计算）</div>
+  </div>
+
+  <!-- 生长曲线 -->
+  <div class="card">
+    <h2>生长曲线 <span class="tag t">填入下方表格后自动生成</span></h2>
+    <div class="chartbox"><svg id="ch-h" viewBox="0 0 760 300" role="img"></svg></div>
+    <div class="chartbox"><svg id="ch-w" viewBox="0 0 760 300" role="img"></svg></div>
+    <div class="legend">
+      <span><i style="background:#CFE3F7"></i>P25–P75 常见区间</span>
+      <span><i style="background:#EDF4FC"></i>P3–P97 正常范围</span>
+      <span><i style="background:#378ADD"></i>P50 同龄中位数</span>
+      <span><i style="background:#1D9E75"></i>自家宝宝的曲线</span>
+    </div>
+    <div class="note">
+      <b>怎么读这张图：</b>不要盯着某一个点高不高，要看<b>曲线的走势</b>。只要一直贴着某条百分位线附近平行往前走，就是健康的；哪怕一直在 P10 也正常。
+      真正需要警惕的是<b>曲线掉档</b>——比如原本沿着 P50 走，连续两三次测量后跌破 P10。另外，<b>2 岁前量身长（躺着）、2 岁后量身高（站着）</b>，两者相差约 0.5–1 cm，换方法时数值可能有个小台阶，属正常。
+    </div>
+  </div>
+
+  <!-- 测量记录表 -->
+  <div class="card">
+    <h2>我的测量记录 <span class="tag">黄底为建议测量的关键月龄（每 3 个月）</span></h2>
+    <div class="tblwrap">
+      <table id="tbl-data">
+        <thead><tr>
+          <th style="width:64px">月龄</th><th style="width:110px">测量日期</th>
+          <th style="width:88px">身长/身高<br><span style="font-weight:400">cm</span></th>
+          <th style="width:80px">体重<br><span style="font-weight:400">kg</span></th>
+          <th style="width:80px">头围<br><span style="font-weight:400">cm</span></th>
+          <th style="width:78px">牙齿<br><span style="font-weight:400">颗</span></th>
+          <th>身高百分位（自动）</th><th>体重百分位（自动）</th>
+        </tr></thead>
+        <tbody id="tb-data"></tbody>
+      </table>
+    </div>
+    <div class="note">身高建议<b>每 3 个月量一次</b>（太频繁反而是测量误差），体重可以每月记。头围主要在 2 岁内监测，2 岁后通常不再常规测量。百分位为本工具按标准表线性插值的<b>估算值</b>，供家庭观察趋势用，不作诊断。</div>
+  </div>
+
+  <!-- 参考值速查 -->
+  <div class="card">
+    <h2>女童参考值速查 <span class="tag b">WS/T 423—2022</span></h2>
+    <div class="tblwrap">
+      <table>
+        <thead><tr>
+          <th>月龄</th><th>身高 P3</th><th>身高 P50</th><th>身高 P97</th>
+          <th>体重 P3</th><th>体重 P50</th><th>体重 P97</th>
+        </tr></thead>
+        <tbody id="tb-ref"></tbody>
+      </table>
+    </div>
+    <div class="note">P50 是同年龄女童的中位数；P3–P97 之间都属于正常范围，涵盖 94% 的健康儿童。<b>不必追求 P50</b>——偏下不等于不好，稳定才是最重要的。</div>
+  </div>
+
+  <!-- 每月手记 -->
+  <div class="card">
+    <h2>每月成长手记 <span class="tag">写给她自己也写给你</span></h2>
+    <div class="tblwrap">
+      <table>
+        <thead><tr>
+          <th style="width:64px">月龄</th><th style="width:104px">日期</th>
+          <th>这个月新学会的（动作 / 词 / 本事）</th><th>值得记住的一件事</th>
+        </tr></thead>
+        <tbody id="tb-note"></tbody>
+      </table>
+    </div>
+    <div class="note">不用写满。<b>记「第一次」最有价值</b>：第一次自己走了三步、第一次说「妈妈抱」、第一次把积木塞进形状盒…… 三年后翻回来，这些比数字动人得多。</div>
+  </div>
+
+  <!-- 测量方法 -->
+  <div class="card">
+    <h2>怎么量才准 <span class="tag r">量不准，曲线就白画了</span></h2>
+    <div class="grid2">
+      <div class="box blue">
+        <h3>身长 / 身高</h3>
+        <ul>
+          <li><b>2 岁前量身长</b>：脱鞋袜仰卧，一人固定头部、一人压直膝盖、一人抵住脚底，读头顶到脚底。</li>
+          <li><b>2 岁后量身高</b>：靠墙站立，脚跟、臀、肩胛、后脑贴墙，视线水平，用直角板压头顶。</li>
+          <li>固定<b>同一时间</b>——早晨比晚上高约 1–2 cm（椎间盘白天被压缩）。</li>
+          <li>同一把量尺、同一个测量人，误差最小。记录到 <b>0.1 cm</b>。</li>
+        </ul>
+      </div>
+      <div class="box teal">
+        <h3>体重</h3>
+        <ul>
+          <li>空腹或餐后 2 小时，<b>排空大小便</b>，脱掉厚外套和鞋袜。</li>
+          <li>用同一台秤；婴儿可先称大人、再抱着称、相减。</li>
+          <li>记录到 <b>0.1 kg</b>。生病期间体重会掉，别在生病时记入趋势判断。</li>
+        </ul>
+        <h3 style="margin-top:10px">头围</h3>
+        <ul>
+          <li>软尺经<b>眉弓上缘 → 枕骨粗隆</b>绕头一周，贴头皮拉紧，取最大值。</li>
+          <li>2 岁后一般不再常规测量，<b>异常与否由医生判断</b>。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 速度 + 就医 -->
+  <div class="card">
+    <h2>生长速度参考 与 就医信号</h2>
+    <div class="grid2">
+      <div class="box amber">
+        <h3>按 P50 计算的年均增长（女童）</h3>
+        <div class="kv">
+          <span>1 → 2 岁　身高</span><span class="v">约 +12 cm</span>
+          <span>2 → 3 岁　身高</span><span class="v">约 +9 cm</span>
+          <span>1 → 2 岁　体重</span><span class="v">约 +2.5 kg</span>
+          <span>2 → 3 岁　体重</span><span class="v">约 +2.2 kg</span>
+        </div>
+        <div style="margin-top:8px">速度是会自然放缓的——1 岁后不再像婴儿期那样猛长，只要整体没掉档就正常。</div>
+      </div>
+      <div class="box red">
+        <h3>这些情况建议去儿童保健 / 内分泌科</h3>
+        <ul>
+          <li>身高或体重<b>持续低于 P3，或高于 P97</b>。</li>
+          <li>曲线<b>跨过两条主要百分位线</b>（如从 P50 掉到 P10 以下、或一路向上冲破 P90）。</li>
+          <li>2 岁后<b>半年身高增长不足 3 cm</b>，或体重连续 2–3 个月不增 / 下降。</li>
+          <li>头围增长过快或过慢（需医生测量判断）。</li>
+          <li>伴随<b>食欲差、反复腹泻、睡眠打鼾张口呼吸</b>，或明显落后于发育里程碑。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note" style="background:var(--green-bg);color:var(--green-tx)">
+      <b>反过来，这些都不是问题：</b>一直稳定在 P10 或 P15、某一个月没长（测量误差或刚好在平台期）、比同龄玩伴矮半个头（遗传占身高 60–80%）、生病后短暂掉秤又补回来。<b>看趋势，不看单点。</b>
+    </div>
+  </div>
+
+  <footer>
+    数据依据：国家卫生健康委员会 WS/T 423—2022《7 岁以下儿童生长标准》表 A.1 / 表 A.2（女童）。<br>
+    百分位为本页按标准表线性插值估算，仅供家庭日常观察，不能替代医生评估。记录保存在本机浏览器，换设备或清缓存会丢失，建议定期打印留存。
+  </footer>
+</div>
+
+<script>
+/* ───── 标准数据：WS/T 423—2022 女童 ─────
+   每行 = [P3, P10, P25, P50, P75, P90, P97]            */
+var H = {
+  12:[70.4,71.9,73.5,75.2,77.0,78.6,80.2],
+  13:[71.4,73.0,74.6,76.4,78.2,79.8,81.4],
+  14:[72.5,74.1,75.7,77.5,79.3,81.0,82.7],
+  15:[73.5,75.2,76.8,78.6,80.5,82.1,83.7],
+  16:[74.6,76.2,77.9,79.7,81.6,83.3,85.0],
+  17:[75.5,77.2,78.9,80.8,82.7,84.4,86.1],
+  18:[76.5,78.2,79.9,81.9,83.8,85.5,87.2],
+  19:[77.5,79.2,80.9,82.9,84.8,86.6,88.3],
+  20:[78.4,80.2,81.9,83.9,85.9,87.6,89.4],
+  21:[79.3,81.1,82.9,84.9,86.9,88.7,90.4],
+  22:[80.2,82.0,83.8,85.8,87.9,89.7,91.5],
+  23:[81.1,82.9,84.7,86.8,88.8,90.7,92.5],
+  24:[81.2,83.0,84.9,87.0,89.1,90.9,92.8],
+  27:[83.6,85.5,87.4,89.5,91.7,93.6,95.5],
+  30:[85.7,87.7,89.7,91.9,94.1,96.1,98.1],
+  33:[87.7,89.8,91.8,94.1,96.4,98.4,100.5],
+  36:[89.7,91.8,93.9,96.2,98.5,100.7,102.7]
+};
+var W = {
+  12:[7.7,8.2,8.8,9.4,10.1,10.9,11.6],
+  13:[7.9,8.4,9.0,9.6,10.4,11.1,11.9],
+  14:[8.1,8.6,9.2,9.8,10.6,11.3,12.2],
+  15:[8.3,8.8,9.3,10.0,10.8,11.6,12.4],
+  16:[8.4,9.0,9.5,10.3,11.0,11.8,12.7],
+  17:[8.6,9.1,9.7,10.5,11.3,12.1,12.9],
+  18:[8.8,9.3,9.9,10.7,11.5,12.3,13.2],
+  19:[9.0,9.5,10.1,10.9,11.7,12.6,13.5],
+  20:[9.1,9.7,10.3,11.1,12.0,12.8,13.8],
+  21:[9.3,9.9,10.5,11.3,12.2,13.1,14.0],
+  22:[9.5,10.1,10.7,11.5,12.4,13.3,14.3],
+  23:[9.7,10.3,10.9,11.7,12.6,13.6,14.6],
+  24:[9.8,10.4,11.1,11.9,12.9,13.8,14.8],
+  27:[10.3,10.9,11.6,12.5,13.5,14.4,15.5],
+  30:[10.7,11.4,12.1,13.0,14.1,15.1,16.2],
+  33:[11.1,11.8,12.6,13.6,14.6,15.7,16.9],
+  36:[11.5,12.3,13.1,14.1,15.3,16.4,17.7]
+};
+var PCT=[3,10,25,50,75,90,97];
+var MONTHS=Object.keys(H).map(Number).sort(function(a,b){return a-b;});
+
+function refAt(ref,m,i){
+  if(m<=MONTHS[0]) return ref[MONTHS[0]][i];
+  if(m>=MONTHS[MONTHS.length-1]) return ref[MONTHS[MONTHS.length-1]][i];
+  for(var k=0;k<MONTHS.length-1;k++){
+    if(m>=MONTHS[k]&&m<=MONTHS[k+1]){
+      var a=MONTHS[k],b=MONTHS[k+1],t=(m-a)/(b-a);
+      return ref[a][i]+(ref[b][i]-ref[a][i])*t;
+    }
+  }
+  return ref[MONTHS[0]][i];
+}
+function pctOf(ref,m,v){
+  if(v===null||v===''||!isFinite(v)) return null;
+  var r=PCT.map(function(_,i){return refAt(ref,m,i);});
+  if(v<r[0]) return {p:3,lo:true};
+  if(v>r[6]) return {p:97,hi:true};
+  for(var i=0;i<6;i++){
+    if(v>=r[i]&&v<=r[i+1]){
+      var t=(v-r[i])/(r[i+1]-r[i]||1);
+      return {p:Math.round(PCT[i]+(PCT[i+1]-PCT[i])*t)};
+    }
+  }
+  return null;
+}
+function band(r){
+  if(!r) return {t:'—',c:'p-none'};
+  if(r.lo) return {t:'< P3 偏低',c:'p-red'};
+  if(r.hi) return {t:'> P97 偏高',c:'p-red'};
+  var p=r.p;
+  if(p<10) return {t:'≈P'+p+' 偏下',c:'p-amber'};
+  if(p<25) return {t:'≈P'+p+' 中下',c:'p-gray'};
+  if(p<=75) return {t:'≈P'+p+' 中等',c:'p-green'};
+  if(p<=90) return {t:'≈P'+p+' 中上',c:'p-gray'};
+  return {t:'≈P'+p+' 偏上',c:'p-amber'};
+}
+function mLabel(m){
+  var y=Math.floor(m/12), mo=m%12;
+  if(mo===0) return y+'岁';
+  if(mo===6) return y+'岁半';
+  return y+'岁'+mo+'月';
+}
+
+/* ───── 状态 ───── */
+var KEY='growth-record-girl-v1';
+var S={basic:{},rows:{},notes:{}};
+try{ var raw=localStorage.getItem(KEY); if(raw) S=JSON.parse(raw); }catch(e){}
+if(!S.basic) S.basic={}; if(!S.rows) S.rows={}; if(!S.notes) S.notes={};
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
+function clearAll(){
+  if(!confirm('确定清空所有已填内容？此操作不可撤销。')) return;
+  S={basic:{},rows:{},notes:{}}; save(); location.reload();
+}
+
+/* ───── 基本信息 ───── */
+['b-name','b-birth','b-fa','b-ma','b-b0'].forEach(function(id){
+  var el=document.getElementById(id);
+  var k=id.slice(2);
+  el.value=S.basic[k]||'';
+  el.addEventListener('input',function(){ S.basic[k]=el.value; save(); calcTarget(); });
+});
+function calcTarget(){
+  var fa=parseFloat(document.getElementById('b-fa').value);
+  var ma=parseFloat(document.getElementById('b-ma').value);
+  var box=document.getElementById('calc');
+  if(isFinite(fa)&&isFinite(ma)&&fa>100&&ma>100){
+    var t=(fa+ma-13)/2;
+    box.innerHTML='遗传靶身高：<b>'+t.toFixed(1)+' cm</b>　（波动范围 '+(t-5).toFixed(1)+' – '+(t+5).toFixed(1)+' cm）　遗传约占身高决定因素的 60–80%，其余靠营养、睡眠与运动。';
+  }else{
+    box.innerHTML='遗传靶身高：<b>—</b>　（女孩公式：（父身高 + 母身高 − 13）÷ 2，± 5 cm 为波动范围。填入父母身高后自动计算）';
+  }
+}
+calcTarget();
+
+/* ───── 测量记录表 ───── */
+var tbData=document.getElementById('tb-data');
+[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36].forEach(function(m){
+  var tr=document.createElement('tr');
+  var key=([12,15,18,21,24,27,30,33,36].indexOf(m)>=0);
+  var r=S.rows[m]||{};
+  tr.innerHTML='<td class="m'+(key?' key':'')+'">'+mLabel(m)+'</td>'+
+    '<td><input class="cell" data-m="'+m+'" data-f="d" value="'+(r.d||'')+'" placeholder="月/日"></td>'+
+    '<td><input class="cell" type="number" step="0.1" data-m="'+m+'" data-f="h" value="'+(r.h||'')+'"></td>'+
+    '<td><input class="cell" type="number" step="0.1" data-m="'+m+'" data-f="w" value="'+(r.w||'')+'"></td>'+
+    '<td><input class="cell" type="number" step="0.1" data-m="'+m+'" data-f="c" value="'+(r.c||'')+'"></td>'+
+    '<td><input class="cell" type="number" step="1" data-m="'+m+'" data-f="t" value="'+(r.t||'')+'"></td>'+
+    '<td class="pct" id="ph-'+m+'"></td><td class="pct" id="pw-'+m+'"></td>';
+  tbData.appendChild(tr);
+});
+tbData.addEventListener('input',function(e){
+  var el=e.target; if(!el.dataset||!el.dataset.m) return;
+  var m=el.dataset.m, f=el.dataset.f;
+  if(!S.rows[m]) S.rows[m]={};
+  S.rows[m][f]=el.value; save(); refresh();
+});
+
+/* ───── 每月手记 ───── */
+var tbNote=document.getElementById('tb-note');
+[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36].forEach(function(m){
+  var tr=document.createElement('tr');
+  var n=S.notes[m]||{};
+  tr.innerHTML='<td class="m">'+mLabel(m)+'</td>'+
+    '<td><input class="cell" data-n="'+m+'" data-f="d" value="'+(n.d||'')+'" placeholder="月/日"></td>'+
+    '<td><input class="cell w" data-n="'+m+'" data-f="a" value="'+(n.a||'')+'" placeholder="如 第一次自己走了三步"></td>'+
+    '<td><input class="cell w" data-n="'+m+'" data-f="b" value="'+(n.b||'')+'" placeholder="如 抱着娃娃给它盖被子"></td>';
+  tbNote.appendChild(tr);
+});
+tbNote.addEventListener('input',function(e){
+  var el=e.target; if(!el.dataset||!el.dataset.n) return;
+  var m=el.dataset.n, f=el.dataset.f;
+  if(!S.notes[m]) S.notes[m]={};
+  S.notes[m][f]=el.value; save();
+});
+
+/* ───── 参考值速查表 ───── */
+var tbRef=document.getElementById('tb-ref');
+[12,15,18,21,24,27,30,33,36].forEach(function(m){
+  var tr=document.createElement('tr');
+  tr.innerHTML='<td class="m">'+mLabel(m)+'</td>'+
+    '<td>'+refAt(H,m,0).toFixed(1)+'</td><td><b>'+refAt(H,m,3).toFixed(1)+'</b></td><td>'+refAt(H,m,6).toFixed(1)+'</td>'+
+    '<td>'+refAt(W,m,0).toFixed(1)+'</td><td><b>'+refAt(W,m,3).toFixed(1)+'</b></td><td>'+refAt(W,m,6).toFixed(1)+'</td>';
+  tbRef.appendChild(tr);
+});
+
+/* ───── 百分位 + 图表 ───── */
+function getPts(ref,field){
+  var pts=[];
+  for(var m=12;m<=36;m++){
+    var r=S.rows[m]; if(!r) continue;
+    var v=parseFloat(r[field]);
+    if(isFinite(v)) pts.push({m:m,v:v});
+  }
+  return pts;
+}
+function refresh(){
+  for(var m=12;m<=36;m++){
+    var r=S.rows[m]||{};
+    var h=parseFloat(r.h), w=parseFloat(r.w);
+    var bh=isFinite(h)?band(pctOf(H,m,h)):null;
+    var bw=isFinite(w)?band(pctOf(W,m,w)):null;
+    var eh=document.getElementById('ph-'+m), ew=document.getElementById('pw-'+m);
+    eh.innerHTML=bh?'<span class="'+bh.c+'">'+bh.t+'</span>':'<span class="p-none">—</span>';
+    ew.innerHTML=bw?'<span class="'+bw.c+'">'+bw.t+'</span>':'<span class="p-none">—</span>';
+  }
+  draw('ch-h',H,'h',68,104,70,105,5,'身长 / 身高 (cm)');
+  draw('ch-w',W,'w',7,18,8,18,2,'体重 (kg)');
+}
+function draw(id,ref,field,yMin,yMax,t0,t1,tick,label){
+  var L=56,R=18,T=20,B=36, Wd=760, Ht=300;
+  var pw=Wd-L-R, ph=Ht-T-B;
+  function X(m){ return L+(m-12)/24*pw; }
+  function Y(v){ return T+(yMax-v)/(yMax-yMin)*ph; }
+  var s='';
+  var xt=[12,15,18,21,24,27,30,33,36], xl=['1岁','1岁3月','1岁半','1岁9月','2岁','2岁3月','2岁半','2岁9月','3岁'];
+  // y grid
+  for(var v=t0;v<=t1;v+=tick){
+    s+='<line x1="'+L+'" y1="'+Y(v)+'" x2="'+(Wd-R)+'" y2="'+Y(v)+'" stroke="#EDEBE4" stroke-width="1"/>';
+    s+='<text x="'+(L-7)+'" y="'+(Y(v)+4)+'" font-size="10" fill="#8A8880" text-anchor="end">'+v+'</text>';
+  }
+  // x grid + labels
+  xt.forEach(function(m,i){
+    s+='<line x1="'+X(m)+'" y1="'+T+'" x2="'+X(m)+'" y2="'+(T+ph)+'" stroke="#F4F2EC" stroke-width="1"/>';
+    s+='<text x="'+X(m)+'" y="'+(T+ph+16)+'" font-size="10" fill="#5F5E5B" text-anchor="middle">'+xl[i]+'</text>';
+  });
+  s+='<text x="'+(L+pw/2)+'" y="'+(Ht-6)+'" font-size="10" fill="#8A8880" text-anchor="middle">月龄</text>';
+  s+='<text x="14" y="'+(T+ph/2)+'" font-size="10" fill="#8A8880" text-anchor="middle" transform="rotate(-90 14 '+(T+ph/2)+')">'+label+'</text>';
+
+  function path(i1,i2){
+    var p='', up=[], dn=[];
+    for(var m=12;m<=36;m++){ up.push(X(m).toFixed(1)+','+Y(refAt(ref,m,i2)).toFixed(1)); }
+    for(var m2=36;m2>=12;m2--){ dn.push(X(m2).toFixed(1)+','+Y(refAt(ref,m2,i1)).toFixed(1)); }
+    return 'M'+up.join(' L')+' L'+dn.join(' L')+' Z';
+  }
+  s+='<path d="'+path(0,6)+'" fill="#EDF4FC"/>';
+  s+='<path d="'+path(2,4)+'" fill="#CFE3F7"/>';
+  function line(i,dash){
+    var d='';
+    for(var m=12;m<=36;m++){ d+=(m===12?'M':'L')+X(m).toFixed(1)+','+Y(refAt(ref,m,i)).toFixed(1)+' '; }
+    return '<path d="'+d.trim()+'" fill="none" stroke="#85B7EB" stroke-width="1" '+(dash?'stroke-dasharray="4 3"':'')+'/>';
+  }
+  s+=line(0,true); s+=line(6,true);
+  var d50='';
+  for(var m=12;m<=36;m++){ d50+=(m===12?'M':'L')+X(m).toFixed(1)+','+Y(refAt(ref,m,3)).toFixed(1)+' '; }
+  s+='<path d="'+d50.trim()+'" fill="none" stroke="#378ADD" stroke-width="2"/>';
+
+  var pts=getPts(ref,field);
+  if(pts.length){
+    var dp='';
+    pts.forEach(function(p,i){ dp+=(i===0?'M':'L')+X(p.m).toFixed(1)+','+Y(p.v).toFixed(1)+' '; });
+    s+='<path d="'+dp.trim()+'" fill="none" stroke="#1D9E75" stroke-width="2.4" stroke-linejoin="round"/>';
+    pts.forEach(function(p){
+      s+='<circle cx="'+X(p.m).toFixed(1)+'" cy="'+Y(p.v).toFixed(1)+'" r="3.6" fill="#fff" stroke="#085041" stroke-width="2"/>';
+    });
+  }
+  s+='<rect x="'+L+'" y="'+T+'" width="'+pw+'" height="'+ph+'" fill="none" stroke="#D3D1C7" stroke-width="1"/>';
+  document.getElementById(id).innerHTML=s;
+}
+refresh();
+</script>
+</body>
+</html>

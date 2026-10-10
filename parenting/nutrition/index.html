@@ -1,0 +1,307 @@
+---
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1 岁后辅食过渡与营养清单</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:-apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background:#F7F6F2; color:#2C2C2A; padding:28px 18px 56px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap { max-width:1000px; margin:0 auto; }
+
+h1 { font-size:22px; font-weight:600; letter-spacing:-.2px; }
+.sub { font-size:13.5px; color:#5F5E5A; margin-top:6px; }
+.sub b { color:#A32D2D; }
+
+.bar { display:flex; justify-content:flex-end; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
+.btn {
+  border:1px solid rgba(0,0,0,.13); background:#fff; color:#2C2C2A;
+  font-size:12.5px; padding:6px 13px; border-radius:7px; cursor:pointer; font-family:inherit;
+}
+.btn:hover { background:#F1EFE8; }
+
+.card {
+  background:#fff; border:1px solid rgba(0,0,0,.07); border-radius:13px;
+  overflow:hidden; margin-bottom:15px; break-inside:avoid;
+}
+.ch { padding:11px 18px; font-size:15.5px; font-weight:600; border-bottom:1px solid rgba(0,0,0,.05); }
+.c-amt .ch { background:#FAEEDA; }
+.c-day .ch { background:#E6F1FB; }
+.c-key .ch { background:#FCEBEB; }
+.c-rule .ch { background:#EAF3DE; }
+.c-eat .ch { background:#EEEDFE; }
+.c-wk .ch { background:#E1F5EE; }
+
+.cb { padding:13px 18px 16px; font-size:13px; }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:0 26px; }
+
+table { width:100%; border-collapse:collapse; font-size:12.5px; }
+th, td { text-align:left; padding:5px 8px; border-bottom:1px solid rgba(0,0,0,.06); }
+th { font-size:12px; color:#5F5E5A; font-weight:600; }
+td.n { font-weight:600; white-space:nowrap; }
+td.q { font-variant-numeric:tabular-nums; }
+tr:last-child td { border-bottom:none; }
+td .hint { color:#79776F; font-size:11.5px; }
+
+ol, ul { margin-left:16px; }
+li { margin-bottom:4px; }
+li:last-child { margin-bottom:0; }
+.n2 { font-weight:600; }
+
+.subh { font-size:13px; font-weight:600; margin:10px 0 5px; }
+.subh:first-child { margin-top:0; }
+
+.warn {
+  margin-top:10px; padding:9px 12px; border-radius:8px;
+  background:#FCEBEB; font-size:12px; color:#791F1F; line-height:1.6;
+}
+.warn b { font-weight:600; }
+.tip {
+  margin-top:10px; padding:9px 12px; border-radius:8px;
+  background:#F1EFE8; font-size:12px; color:#444441; line-height:1.6;
+}
+
+.tl { display:grid; grid-template-columns:auto 1fr; gap:4px 12px; font-size:13px; }
+.tl .t { font-weight:600; color:#0C447C; white-space:nowrap; font-variant-numeric:tabular-nums; }
+
+.wk { width:100%; border-collapse:collapse; font-size:12px; }
+.wk th { text-align:center; padding:5px 4px; font-size:11.5px; }
+.wk th.r { text-align:left; min-width:104px; }
+.wk td { text-align:center; padding:4px; }
+.wk td.r { text-align:left; font-size:12px; padding-left:2px; }
+.wk td.r small { color:#79776F; font-size:10.5px; }
+.wk input { width:14px; height:14px; accent-color:#1D9E75; cursor:pointer; vertical-align:middle; }
+
+.foot {
+  background:#fff; border:1px solid rgba(0,0,0,.07); border-radius:13px;
+  padding:18px 22px; font-size:12.5px; color:#5F5E5A; line-height:1.7;
+}
+.foot h3 { font-size:14.5px; font-weight:600; color:#2C2C2A; margin-bottom:8px; }
+.foot ol { margin-left:16px; }
+.foot li { margin-bottom:4px; }
+.foot b { color:#2C2C2A; }
+.src { margin-top:10px; font-size:11.5px; color:#888780; }
+
+@media (max-width:760px){ .two { grid-template-columns:1fr; } .wk { font-size:11px; } }
+@media print {
+  @page { size:A4 portrait; margin:10mm; }
+  body { background:#fff; padding:0; font-size:10pt; }
+  .bar { display:none; }
+  .card { border:1px solid #ccc; }
+  .ch, .warn, .tip { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+</style>
+  <link rel="stylesheet" href="/media/parenting/site.css">
+  <link rel="canonical" href="https://nathanlvzs.github.io/parenting/nutrition/">
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "{{ site.google_analytics_measurement_id }}");
+  </script>
+</head>
+<body>
+<nav class="parenting-site-nav" aria-label="育儿工具导航"><a class="parenting-brand" href="/parenting/">育儿工具</a><div class="parenting-nav-links"><a href="/parenting/#growth">成长</a><a href="/parenting/#daily-care">照护</a><a href="/parenting/#safety">安全</a><a href="/parenting/#kindergarten">入园</a><a href="/">博客</a></div></nav>
+<div class="wrap">
+
+  <h1>1 岁后辅食过渡与营养清单</h1>
+  <div class="sub">适用于 13–24 月龄。这一阶段最常见的问题不是吃得太少，而是<b>奶喝太多、饭吃太少</b>导致的缺铁。</div>
+
+  <div class="bar">
+    <button class="btn" id="reset">清空本周</button>
+    <button class="btn" onclick="window.print()">打印 / 存 PDF</button>
+  </div>
+
+  <section class="card c-amt">
+    <div class="ch">每天吃多少 · 13–24 月龄参考量</div>
+    <div class="cb">
+      <table>
+        <tr><th>食物类别</th><th>每天</th><th>直观对照与说明</th></tr>
+        <tr><td>母乳 / 配方奶 / 全脂牛奶</td><td class="n q">500 ml</td><td>分 2–3 次，不超过 4 次。<span class="hint">1 岁后可引入纯牛奶（全脂），不必再喝配方奶。</span></td></tr>
+        <tr><td>谷薯类</td><td class="n q">50–100 g</td><td>约小半碗到一碗软饭，或等价的面条、馒头、薯类</td></tr>
+        <tr><td>肉禽鱼</td><td class="n q">50–75 g</td><td>红肉优先。<span class="hint">每周安排 1–2 次动物肝或动物血。</span></td></tr>
+        <tr><td>鸡蛋</td><td class="n q">1 个</td><td>吃全蛋，不必只给蛋黄</td></tr>
+        <tr><td>蔬菜</td><td class="n q">50–150 g</td><td>深色蔬菜占一半以上</td></tr>
+        <tr><td>水果</td><td class="n q">50–150 g</td><td>直接吃果肉，<span class="hint">不要榨汁</span></td></tr>
+        <tr><td>烹调油</td><td class="n q">5–15 g</td><td>少量即可</td></tr>
+        <tr><td>盐</td><td class="n q">0–1.5 g</td><td>约一粒黄豆大小。<span class="hint">越少越好，不是必须加到这个量。</span></td></tr>
+        <tr><td>水</td><td class="n q">按需</td><td>白天主动提供；2 岁后约 600–700 ml/天</td></tr>
+      </table>
+      <div class="tip">这个量是<b>平均参考</b>，不是每天必须精确达到。看一周的总量比看某一天更有意义——她今天吃得少、明天吃得多，完全正常。</div>
+    </div>
+  </section>
+
+  <div class="two">
+
+    <section class="card c-day">
+      <div class="ch">一日安排示例</div>
+      <div class="cb">
+        <div class="tl">
+          <span class="t">7:00</span><span>奶 200 ml</span>
+          <span class="t">8:30</span><span>早餐：鸡蛋 1 个 + 小半碗粥／面条／馒头</span>
+          <span class="t">10:00</span><span>点心：水果块</span>
+          <span class="t">12:00</span><span>午餐：软饭 + 肉或鱼 + 蔬菜（部分做成手指食物）</span>
+          <span class="t">15:00</span><span>奶 150–200 ml + 小点心</span>
+          <span class="t">18:00</span><span>晚餐：软饭／面 + 肉或蛋 + 蔬菜</span>
+          <span class="t">20:00</span><span>奶 150–200 ml，<span class="n2">喝完刷牙，之后不再进食</span></span>
+        </div>
+        <div class="tip">全天随时提供水；维生素 D 400 IU 每天固定一次。<b>睡前这顿奶喝完必须刷牙</b>，否则是奶瓶性龋齿的主要来源。</div>
+      </div>
+    </section>
+
+    <section class="card c-key">
+      <div class="ch">四个必须盯住的营养素</div>
+      <div class="cb">
+        <div class="subh">铁 · 最容易缺</div>
+        <ul>
+          <li>1–3 岁每天需要 <span class="n2">9 mg</span>。</li>
+          <li>来源：红肉（牛、羊、猪瘦肉）、动物肝（每周 1–2 次，每次 20–25 g）、动物血。</li>
+          <li>搭配维生素 C 一起吃（番茄、青椒、柑橘、猕猴桃）能明显提高吸收率。</li>
+        </ul>
+        <div class="warn"><b>牛奶每天超过 700 ml 是缺铁性贫血的常见原因</b>——奶喝饱了就不吃肉和饭，而牛奶本身几乎不含铁，还会让部分孩子肠道微量失血。所以是 500 ml 上限，不是越多越好。</div>
+        <div class="subh">钙</div>
+        <ul><li>每天 500 ml 奶基本够用，<span class="n2">奶量充足不需要额外补钙</span>。</li></ul>
+        <div class="subh">维生素 D</div>
+        <ul><li><span class="n2">400 IU（10 μg）/ 天，继续补</span>，至少到 2 岁。食物里几乎没有，靠补充剂 + 户外活动。</li></ul>
+        <div class="subh">DHA</div>
+        <ul><li>每周 2–3 次深海鱼（三文鱼、鳕鱼、鲈鱼）。<span class="n2">避开高汞鱼</span>：鲨鱼、剑鱼、方头鱼、大眼金枪鱼。</li></ul>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="two">
+
+    <section class="card c-rule">
+      <div class="ch">质地过渡 · 别一直吃泥糊</div>
+      <div class="cb">
+        <ul>
+          <li><span class="n2">12–14 月：</span>软饭、碎菜、指甲盖大小的小块肉（能被手指捏碎的软度），手指食物为主。</li>
+          <li><span class="n2">15–18 月：</span>接近家庭餐，切成条状块状，开始练习用勺子和叉子。</li>
+          <li><span class="n2">18 月以后：</span>基本跟大人一起吃（淡味版），能咀嚼大部分食物。</li>
+        </ul>
+        <div class="warn"><b>长期停留在泥糊状，会让咀嚼能力发育滞后</b>，之后更容易挑食、拒吃块状食物。牙齿长出来就是要用来嚼的，即使还没长臼齿，牙床也能处理软烂的小块。</div>
+      </div>
+    </section>
+
+    <section class="card c-eat">
+      <div class="ch">盐糖控制 · 看得到和看不到的</div>
+      <div class="cb">
+        <div class="subh">盐：每天 0–1.5 g</div>
+        <ul>
+          <li><span class="n2">隐藏盐比炒菜放的盐多得多</span>：酱油、蚝油、鸡精、挂面、面包、奶酪、海苔、肉松、儿童酱油。</li>
+          <li>「儿童酱油」的钠含量通常并不低，看营养成分表里的钠，别看包装上的「儿童」两个字。</li>
+        </ul>
+        <div class="subh">糖：不额外添加</div>
+        <ul>
+          <li>WHO 建议 3 岁以下婴幼儿食品<span class="n2">不应添加游离糖</span>。</li>
+          <li>隐藏糖：儿童酸奶、果泥、米饼、饼干、乳酸菌饮料、果汁。买之前看配料表，白砂糖／果葡糖浆排在前三位的放下。</li>
+          <li><span class="n2">果汁：不喝最好。</span>1 岁以上如果要给，每天不超过 120 ml，且不如直接吃果肉——榨汁丢掉了纤维，糖吸收得更快。</li>
+          <li>蜂蜜：1 岁内绝对禁止（肉毒杆菌风险），1 岁后可少量。</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="two">
+
+    <section class="card c-key">
+      <div class="ch">呛噎高危食物 · 这个年龄别给</div>
+      <div class="cb">
+        <ul>
+          <li><span class="n2">整颗坚果</span>——要磨粉或做成坚果酱抹开</li>
+          <li><span class="n2">葡萄、圣女果</span>——必须纵向切成四瓣，不能对半切</li>
+          <li><span class="n2">果冻、爆米花、硬糖、软糖</span></li>
+          <li><span class="n2">年糕、汤圆、麻薯</span>——黏性食物最危险</li>
+          <li><span class="n2">大块肉、整块生胡萝卜</span>——要切碎、煮软</li>
+          <li><span class="n2">一整勺花生酱</span>——黏稠，要抹薄在面包上</li>
+        </ul>
+        <div class="tip">吃饭必须坐餐椅，<b>不追着喂、不躺着吃、不边跑边吃、不大笑时喂食</b>。</div>
+      </div>
+    </section>
+
+    <section class="card c-rule">
+      <div class="ch">自主进食 · 谁决定什么</div>
+      <div class="cb">
+        <div class="subh">分工原则（很重要）</div>
+        <ul>
+          <li><span class="n2">大人决定：</span>提供什么、什么时候吃、在哪里吃。</li>
+          <li><span class="n2">孩子决定：</span>吃不吃、吃多少。</li>
+        </ul>
+        <div class="subh">具体做法</div>
+        <ul>
+          <li>固定餐椅、固定时间，一餐 <span class="n2">20–30 分钟</span>结束，不拖。</li>
+          <li>允许用手抓、允许弄得一团糟——这是学习，不是捣乱。</li>
+          <li><span class="n2">不追喂、不哄喂、不用玩具或屏幕换饭吃。</span></li>
+          <li>不跟别的孩子比饭量。</li>
+          <li>1 岁后生长速度放慢，<span class="n2">食欲明显下降是正常现象</span>，不是厌食，不必焦虑。</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="card c-wk">
+    <div class="ch">本周饮食核对 · 吃到了就打勾</div>
+    <div class="cb">
+      <table class="wk">
+        <tr><th class="r"></th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr>
+        <tr><td class="r">奶 500 ml<small>（不超量）</small></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+        <tr><td class="r">谷薯类<small>（饭／面／薯）</small></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+        <tr><td class="r">肉鱼蛋<small>（50–75 g）</small></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+        <tr><td class="r">蔬菜<small>（深色占一半）</small></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+        <tr><td class="r">水果<small>（果肉，非果汁）</small></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+        <tr><td class="r">铁来源<small>（红肉／肝／血）</small></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+        <tr><td class="r">维生素 D<small>（400 IU）</small></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+        <tr><td class="r">睡前奶后刷牙</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+      </table>
+      <div class="tip">一周里某一类缺了两三天不用紧张，补回来就行；<b>但如果连着两三周都缺同一类，就该调整了</b>。打印一份贴冰箱，每周换一张。</div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <h3>六个常见坑，按顺序说</h3>
+    <ol>
+      <li><b>把奶当水喝。</b>奶量超过 700 ml/天 → 挤占正餐 → 缺铁性贫血。这是 1 岁后最普遍、也最容易被忽视的问题。</li>
+      <li><b>一直吃泥糊。</b>咀嚼能力发育滞后，之后更难接受块状食物，挑食概率上升。</li>
+      <li><b>果汁当水喝。</b>糖摄入超标、龋齿、还养成了「不喝白水」的习惯。</li>
+      <li><b>「儿童食品」陷阱。</b>儿童酱油、儿童奶酪、儿童饼干、儿童肉松——钠和糖常常并不比成人版低。看营养成分表，不看包装上写的「儿童」。</li>
+      <li><b>追着喂、边玩边喂。</b>短期看是多吃了几口，长期是自主进食能力倒退，饭量越来越依赖大人哄。</li>
+      <li><b>用零食补正餐。</b>正餐没吃好就给饼干垫肚子，下一顿更不吃，形成恶性循环。饿了就等下一餐，中间只给水和水果。</li>
+    </ol>
+    <div class="src">依据：《中国居民膳食指南（2022）》13–24 月龄婴幼儿平衡膳食宝塔；中国营养学会 7–24 月龄婴幼儿喂养指南。本表为家庭参考，不能替代儿童保健科的个体化营养评估；如有生长曲线下滑、贫血、反复拒食等情况请就医。</div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var KEY = 'toddler-nutrition-week-v1';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]'));
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ saved = {}; }
+  boxes.forEach(function(b, i){
+    if (saved[i]) b.checked = true;
+    b.addEventListener('change', function(){
+      var o = {};
+      boxes.forEach(function(x, j){ o[j] = x.checked; });
+      try { localStorage.setItem(KEY, JSON.stringify(o)); } catch(e){}
+    });
+  });
+  document.getElementById('reset').addEventListener('click', function(){
+    if (!confirm('清空本周所有勾选？')) return;
+    boxes.forEach(function(b){ b.checked = false; });
+    try { localStorage.removeItem(KEY); } catch(e){}
+  });
+})();
+</script>
+</body>
+</html>

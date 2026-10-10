@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://nathanlvzs.github.io/sitemap.xml

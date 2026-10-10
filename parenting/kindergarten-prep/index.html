@@ -1,0 +1,441 @@
+---
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>入园准备清单 · 幼儿园小班</title>
+<style>
+:root{
+  --blue-bg:#E6F1FB;--blue-bd:#378ADD;--blue-tx:#0C447C;
+  --teal-bg:#E1F5EE;--teal-bd:#1D9E75;--teal-tx:#085041;
+  --green-bg:#EAF3DE;--green-bd:#639922;--green-tx:#27500A;
+  --amber-bg:#FAEEDA;--amber-bd:#BA7517;--amber-tx:#633806;
+  --purple-bg:#EEEDFE;--purple-bd:#7F77DD;--purple-tx:#3C3489;
+  --red-bg:#FCEBEB;--red-bd:#E24B4A;--red-tx:#791F1F;
+  --gray-bg:#F1EFE8;--gray-bd:#D3D1C7;--gray-tx:#2C2C2A;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:22px 16px 60px;background:#FAF9F6;color:#2C2C2A;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:13px;line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto}
+
+.topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+h1{font-size:22px;margin:0 0 4px;letter-spacing:.5px}
+.sub{font-size:12px;color:#5F5E5B}
+.btns{display:flex;gap:8px}
+button{font:inherit;font-size:12px;padding:7px 14px;border-radius:7px;cursor:pointer;border:1px solid var(--gray-bd);background:#fff;color:#444}
+button:hover{background:var(--gray-bg)}
+button.pri{background:var(--blue-bd);border-color:var(--blue-bd);color:#fff}
+button.pri:hover{background:#2A6FB5}
+button.warn{color:var(--red-tx);border-color:#F0B8B7;background:var(--red-bg)}
+
+.prog{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--gray-bd);border-radius:10px;padding:11px 15px;margin-bottom:14px}
+.prog .bar{flex:1;height:9px;background:var(--gray-bg);border-radius:20px;overflow:hidden}
+.prog .bar i{display:block;height:100%;width:0;background:var(--teal-bd);border-radius:20px;transition:width .25s}
+.prog .n{font-size:13px;font-weight:600;white-space:nowrap}
+.prog .n b{color:var(--teal-tx);font-size:16px}
+
+.card{background:#fff;border:1px solid var(--gray-bd);border-radius:12px;padding:15px 17px;margin-bottom:15px;break-inside:avoid}
+.card>h2{font-size:15px;margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid #EDEBE4;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.card>h2 .tag{font-size:11px;font-weight:400;padding:2px 8px;border-radius:20px;background:var(--gray-bg);color:#5F5E5B}
+.card>h2 .tag.b{background:var(--blue-bg);color:var(--blue-tx)}
+.card>h2 .tag.t{background:var(--teal-bg);color:var(--teal-tx)}
+.card>h2 .tag.a{background:var(--amber-bg);color:var(--amber-tx)}
+.card>h2 .tag.p{background:var(--purple-bg);color:var(--purple-tx)}
+.card>h2 .tag.r{background:var(--red-bg);color:var(--red-tx)}
+.card>h2 .cnt{margin-left:auto;font-size:11px;font-weight:400;color:#8A8880}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.it{display:flex;gap:8px;align-items:flex-start;padding:5px 6px;border-radius:6px;font-size:12.5px;line-height:1.55}
+.it:hover{background:#FAF9F6}
+.it input{margin:2px 0 0;flex:none;width:14px;height:14px;accent-color:var(--teal-bd);cursor:pointer}
+.it.hit{background:var(--red-bg);border-radius:6px}
+.it.hit span{color:var(--red-tx);font-weight:600}
+.it .num{color:#B4B2A9;font-size:11px;margin-right:2px}
+.it em{font-style:normal;color:#8A8880;font-size:11px;display:block}
+.hd{font-size:12px;font-weight:600;color:#5F5E5B;margin:10px 0 3px;padding-bottom:3px;border-bottom:1px dashed #E6E4DC}
+.hd:first-child{margin-top:0}
+
+.note{font-size:12px;color:#5F5E5B;background:var(--gray-bg);border-radius:8px;padding:9px 12px;margin-top:10px}
+.box{border-radius:9px;padding:11px 13px;font-size:12px}
+.box h3{font-size:13px;margin:0 0 7px}
+.box ul{margin:0;padding-left:17px}
+.box li{margin-bottom:4px}
+.box.amber{background:var(--amber-bg);border:1px solid #EBC97E;color:var(--amber-tx)}
+.box.teal{background:var(--teal-bg);border:1px solid #9ADBC8;color:var(--teal-tx)}
+.box.red{background:var(--red-bg);border:1px solid #F0B8B7;color:var(--red-tx)}
+.box.blue{background:var(--blue-bg);border:1px solid #A9D0F0;color:var(--blue-tx)}
+.box b{font-weight:600}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+
+table{border-collapse:collapse;width:100%;font-size:12px}
+th,td{border:1px solid #E6E4DC;padding:5px 7px;text-align:left;vertical-align:top}
+th{background:var(--gray-bg);font-weight:600;font-size:11px;color:#444}
+td.c{text-align:center;white-space:nowrap}
+.tl{display:grid;grid-template-columns:88px 1fr;gap:0;font-size:12px}
+.tl .k{background:var(--amber-bg);color:var(--amber-tx);font-weight:600;padding:9px 8px;border:1px solid #EBC97E;text-align:center}
+.tl .v{border:1px solid #E6E4DC;border-left:none;padding:9px 12px}
+.tl .k:not(:first-of-type),.tl .v:not(:first-of-type){border-top:none}
+.tl .k.k1{background:var(--purple-bg);color:var(--purple-tx);border-color:#C9C4F0}
+.tl .k.k2{background:var(--blue-bg);color:var(--blue-tx);border-color:#A9D0F0}
+.tl .k.k3{background:var(--teal-bg);color:var(--teal-tx);border-color:#9ADBC8}
+.tl .k.k4{background:var(--green-bg);color:var(--green-tx);border-color:#B5D38A}
+
+.say{display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:12px}
+@media(max-width:760px){.say{grid-template-columns:1fr}}
+.say>div{padding:10px 13px;border:1px solid #E6E4DC}
+.say .y{background:var(--green-bg);color:var(--green-tx)}
+.say .n{background:var(--red-bg);color:var(--red-tx);border-left:none}
+@media(max-width:760px){.say .n{border-left:1px solid #E6E4DC;border-top:none}}
+.say h3{margin:0 0 6px;font-size:12.5px}
+.say ul{margin:0;padding-left:16px}
+
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.f{display:flex;flex-direction:column;gap:4px}
+.f label{font-size:11px;color:#5F5E5B}
+.f input{font:inherit;font-size:13px;padding:7px 9px;border:1px solid #DFDDD5;border-radius:7px;background:#fff;color:#2C2C2A}
+.f input:focus{outline:none;border-color:var(--blue-bd);box-shadow:0 0 0 2px #E6F1FB}
+.res{margin-top:10px;padding:9px 12px;border-radius:8px;font-size:12px;background:var(--purple-bg);border:1px solid #C9C4F0;color:var(--purple-tx)}
+.res b{font-size:14px}
+
+footer{font-size:11px;color:#8A8880;text-align:center;margin-top:20px;line-height:1.8}
+
+@media print{
+  @page{size:A4 portrait;margin:10mm}
+  body{background:#fff;padding:0;font-size:10pt}
+  .btns{display:none}
+  .card{border-color:#C9C7BF;break-inside:avoid;page-break-inside:avoid;margin-bottom:10px}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+  <link rel="stylesheet" href="/media/parenting/site.css">
+  <link rel="canonical" href="https://nathanlvzs.github.io/parenting/kindergarten-prep/">
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "{{ site.google_analytics_measurement_id }}");
+  </script>
+</head>
+<body>
+<nav class="parenting-site-nav" aria-label="育儿工具导航"><a class="parenting-brand" href="/parenting/">育儿工具</a><div class="parenting-nav-links"><a href="/parenting/#growth">成长</a><a href="/parenting/#daily-care">照护</a><a href="/parenting/#safety">安全</a><a href="/parenting/#kindergarten">入园</a><a href="/">博客</a></div></nav>
+<div class="wrap">
+
+  <div class="topbar">
+    <div>
+      <h1>入园准备清单</h1>
+      <div class="sub">幼儿园小班 · 从倒推 6 个月到入园第四周 · 公办园流程为主，民办/普惠略有差异</div>
+    </div>
+    <div class="btns">
+      <button class="pri" onclick="window.print()">打印 / 存 PDF</button>
+      <button class="warn" onclick="clearAll()">清空重填</button>
+    </div>
+  </div>
+
+  <div class="prog">
+    <span class="n">已完成 <b id="p-done">0</b> / <span id="p-all">0</span> 项</span>
+    <span class="bar"><i id="p-bar"></i></span>
+    <span class="n" style="font-weight:400;color:#8A8880;font-size:11px">勾选状态自动保存在本机</span>
+  </div>
+
+  <!-- 资格 -->
+  <div class="card">
+    <h2>入园资格速算 <span class="tag p">公办园小班最硬的一条：满 3 周岁</span></h2>
+    <div class="calc">
+      <div class="f"><label>宝宝出生日期</label><input id="q-birth" type="date"></div>
+      <div class="f"><label>计划入园年份</label><input id="q-year" type="number" placeholder="如 2028" min="2020" max="2040"></div>
+      <div class="f"><label>目标园所名称</label><input id="q-name" placeholder="选填"></div>
+    </div>
+    <div class="res" id="q-res">填入出生日期与计划入园年份后，自动判断是否符合「当年 8 月 31 日前满 3 周岁」这一常见门槛。</div>
+    <div class="note">绝大多数地区公办园小班的口径是<b>当年 8 月 31 日（部分地区为 12 月 31 日）前满 3 周岁</b>，差一天都要再等一年。也有少量地区或民办园接收 2 岁半的「托班/小小班」。<b>具体以你所在区教育局当年发布的招生简章为准</b>——这一条每年都可能微调。</div>
+  </div>
+
+  <!-- 时间线 -->
+  <div class="card">
+    <h2>倒推时间线 <span class="tag a">别等到 8 月才动手</span></h2>
+    <div class="tl">
+      <div class="k k1">入园前<br>6 个月</div>
+      <div class="v"><b>定园 + 查漏种。</b>确认划片/对口园或选定民办园并了解收费与师生比；翻出接种证逐项核对有没有漏种（漏了要补，补完还要重新查验）；开始让她自己吃饭。</div>
+      <div class="k k2">入园前<br>3 个月</div>
+      <div class="v"><b>报名 + 体检 + 疫苗查验。</b>关注区教育局公众号的招生简章（多数在 4–6 月发布）；完成 3 周岁剂次；错峰做入园体检（报告有效期 3 个月，别卡在 8 月高峰）；作息往幼儿园节奏调。</div>
+      <div class="k k3">入园前<br>1 个月</div>
+      <div class="v"><b>物品 + 心理。</b>采购物品、缝姓名贴；读入园绘本、玩「上幼儿园」角色扮演；练习短暂分离（1 小时 → 半天 → 一整天）；带她去园门口看小朋友放学。</div>
+      <div class="k k4">入园前<br>1 周</div>
+      <div class="v"><b>按园所作息生活。</b>早睡早起、12:30 午睡；备用衣物袋装好放书包；全家统一接送人、告别暗号和「谁来接」的说法。</div>
+      <div class="k" style="background:var(--red-bg);color:var(--red-tx);border-color:#F0B8B7">入园后<br>1–4 周</div>
+      <div class="v"><b>坚持送 + 固定仪式。</b>告别干脆不回头；准时接；不问负面问题；观察适应信号（见最下方）。这四周最难熬的是家长，不是孩子。</div>
+    </div>
+  </div>
+
+  <div id="secs"></div>
+
+  <!-- 该说 / 不该说 -->
+  <div class="card">
+    <h2>送园时：该说与不该说 <span class="tag r">这几句话的影响比你想的大</span></h2>
+    <div class="say">
+      <div class="y"><h3>这样说</h3><ul>
+        <li>「妈妈下午睡完觉、吃完点心就来接你。」<em style="color:#5F5E5B">（说她懂的具体时间点，不要说「下午四点」）</em></li>
+        <li>「你想哭就哭一会儿，哭完老师陪你玩。」</li>
+        <li>「这里有好多玩具，还有小朋友等你。」</li>
+        <li>「昨天你自己把饭吃完了，今天也可以。」</li>
+        <li>告别仪式：击掌 / 亲三下 / 一句固定暗号，<b>说完就走</b>。</li>
+      </ul></div>
+      <div class="n"><h3>绝对不说</h3><ul>
+        <li>「再哭妈妈就不要你了。」</li>
+        <li>「你看别的小朋友都没哭。」</li>
+        <li>「妈妈就在门口不走。」<em style="color:#791F1F">（骗她，被发现后信任崩塌）</em></li>
+        <li>「今天有没有人欺负你 / 老师凶不凶？」<em style="color:#791F1F">（暗示幼儿园是危险的地方）</em></li>
+        <li>「你再这样老师会不喜欢你。」</li>
+        <li>接园时第一句就问「哭了没」。</li>
+      </ul></div>
+    </div>
+    <div class="note">接园时换成这些问法：<b>「今天玩了什么？」「中午吃的什么？」「有没有交到新朋友？」</b>——问具体、正向的事，她才会慢慢把幼儿园和好事连在一起。</div>
+  </div>
+
+  <!-- 适应期 -->
+  <div class="card">
+    <h2>适应期：什么是正常的，什么要干预</h2>
+    <div class="grid2">
+      <div class="box teal">
+        <h3>这些都在正常范围内（一般 2–4 周缓解，最多 6 周）</h3>
+        <ul>
+          <li>送园那一刻大哭，但家长走后 5–15 分钟内能平静下来。</li>
+          <li>回家特别黏人、要抱、脾气大。</li>
+          <li>夜里惊醒、说梦话、睡不踏实。</li>
+          <li>食欲波动，在园吃得少、回家补。</li>
+          <li><b>能力倒退</b>：又尿裤子、要喂饭、要奶瓶——压力下的退行非常常见。</li>
+          <li>在家反复说「我不去幼儿园」，但到了园里能玩。</li>
+        </ul>
+      </div>
+      <div class="box red">
+        <h3>出现这些，就要认真处理了</h3>
+        <ul>
+          <li>超过 <b>6 周</b>仍然每天剧烈哭闹、无法安抚。</li>
+          <li>持续拒食、<b>体重下降</b>，或反复呕吐腹痛。</li>
+          <li>长期失眠、频繁夜惊，白天精神萎靡。</li>
+          <li>明显退缩：在园不说话、不参与、不与任何人对视。</li>
+          <li>出现自伤或攻击行为且频率上升。</li>
+          <li>你观察到具体的师幼互动问题（先与老师正式沟通，再考虑换班/换园或儿保心理门诊）。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note"><b>家长自己也要过关：</b>第一周不要在门外偷听偷看、不要中途去探视、不要因为心疼就请假停送——断断续续比天天送更难适应。<b>坚持、准时、情绪平稳</b>，这三件事比任何技巧都有用。</div>
+  </div>
+
+  <footer>
+    依据：《托儿所幼儿园卫生保健管理办法》《托儿所幼儿园卫生保健工作规范》；国家免疫规划疫苗儿童免疫程序（2025 年版）；各地妇幼保健院入园体检须知。<br>
+    招生年龄、报名时间、所需材料<b>各区每年都可能调整</b>，本清单为通用框架，请务必以所在区教育局当年招生简章和目标园所通知为准。
+  </footer>
+</div>
+
+<script>
+var SEC=[
+{id:'a',t:'报名与材料',tag:'以当地当年招生简章为准',tagc:'b',items:[
+ ['确认所在区的招生政策：划片/对口范围、户籍与房产要求'],
+ ['确认年龄门槛：多数地区要求<b>当年 8 月 31 日前满 3 周岁</b>',1],
+ ['关注区教育局公众号 / 园所公告，招生简章多在 4–6 月发布',1],
+ ['户口簿（原件 + 首页/户主页/儿童页复印件）'],
+ ['儿童出生医学证明'],
+ ['预防接种证（绿本）+ 查验证明 / 查验报告',1],
+ ['房产证，或非本地户籍的居住证 + 租房备案'],
+ ['父母双方身份证'],
+ ['儿童近期一寸 / 二寸照片，多备几张（底色按园方要求）'],
+ ['妇幼保健院出具的《儿童入园健康检查表》',1],
+ ['儿童保健手册 / 母子健康手册'],
+ ['提前电话确认：要原件还是复印件、复印件要不要盖章'],
+ ['报名当天带齐，并另留一套完整复印件在家'],
+ ['记下园方联系人电话、班级与两位老师的姓名']
+]},
+{id:'b',t:'体检与疫苗查验',tag:'最容易卡住报名的一环',tagc:'r',items:[
+ ['翻出《儿童预防接种证》，逐项核对有无漏种',1],
+ ['完成 <b>3 周岁剂次：A 群 C 群流脑多糖疫苗第 1 剂</b>（入托必查）',1],
+ ['核对满 3 岁时应完成的国家免疫规划疫苗（共 19 剂）',1],
+ ['有漏种 → 提前至少 1 个月补种，<b>补完须重新查验</b>',1],
+ ['在接种门诊或当地疾控公众号开具《查验证明》并打印',1],
+ ['预约妇幼保健院入园体检，避开 8 月高峰'],
+ ['体检当天需<b>空腹</b>（抽血查肝功能），带好食物，抽完立刻吃'],
+ ['体检前一周生病或服药 → 病愈停药 1 周再去，否则结果不准'],
+ ['携带：户口簿、预防接种证、儿童保健手册'],
+ ['抽血后<b>务必回儿保科盖章 / 完成系统录入</b>，否则园方查不到',1],
+ ['报告自体检日起<b>3 个月内有效</b>，按入园日期倒推安排',1],
+ ['领取报告后复印一份留底']
+]},
+{id:'c',t:'自理能力自评',tag:'做不到很正常，做不到才需要提前练',tagc:'t',items:[
+ ['【吃饭】自己用勺（或筷子）吃完一顿饭'],
+ ['【吃饭】自己喝水，认得出自己的水杯'],
+ ['【吃饭】会说「我吃饱了 / 我还饿」'],
+ ['【穿衣】自己穿脱鞋子'],
+ ['【穿衣】自己穿脱松紧带裤子'],
+ ['【穿衣】尝试扣大扣子、拉拉链'],
+ ['【如厕】会说「我要尿尿 / 拉臭臭」',1],
+ ['【如厕】白天基本不尿裤子'],
+ ['【如厕】自己脱裤子、提裤子（<b>擦屁股还不会很正常</b>）'],
+ ['【洗手】自己搓出泡泡、冲干净'],
+ ['【洗手】知道饭前便后要洗手'],
+ ['【洗手】自己擦嘴、擦鼻涕'],
+ ['【表达】能说清「老师，我想……」',1],
+ ['【表达】能表达「疼 / 难受 / 我害怕」',1],
+ ['【表达】听得懂「排队」「等一下」「收玩具」'],
+ ['【睡眠】能独立午睡'],
+ ['【睡眠】睡前不需要奶瓶或抱睡'],
+ ['【睡眠】作息能对齐幼儿园（约 12:30 午睡、21:00 前入睡）'],
+ ['【收拾】会把玩具放回筐里'],
+ ['【收拾】认得自己的书包和水杯'],
+ ['【收拾】在提示下能帮忙摆碗筷、递东西']
+]},
+{id:'d',t:'社交与规则准备',tag:'不必满分，有概念就够',tagc:'a',items:[
+ ['会对小朋友说「我可以一起玩吗」'],
+ ['知道「轮流」和「等一会儿」（做不到没关系，有概念即可）'],
+ ['玩具被抢时会求助大人，而不是只会哭或只会打人'],
+ ['能在不熟悉的成人面前回应（至少点头、眼神接触）'],
+ ['听到「不可以」能停下（尤其是危险时）',1],
+ ['离开家长能玩 1–2 小时（此前有过成功经验）'],
+ ['至少去过一次集体环境：亲子班 / 游乐场 / 朋友家'],
+ ['知道自己和家长的名字，能背出一个联系电话',1],
+ ['能说清小区名或家庭地址']
+]},
+{id:'e',t:'物品准备',tag:'姓名贴是刚需，别省',tagc:'p',items:[
+ ['姓名贴 / 姓名章（衣物、被褥、水杯、书包全覆盖，防水可缝可熨）',1],
+ ['书包：轻便、能装下换洗衣物'],
+ ['换洗衣物 1–2 套（上衣+裤子+内裤+袜子），装密封袋'],
+ ['汗巾 / 吸汗巾 2 条'],
+ ['室内鞋：一脚蹬、软底、比脚长 0.5–1 cm（<b>不要系带鞋</b>）'],
+ ['水杯（按园方要求，吸管杯或敞口杯）'],
+ ['被褥 / 床品（先问园方尺寸再买）'],
+ ['一寸 / 二寸照片多备几张'],
+ ['隔尿垫或午睡用品（按园方要求）'],
+ ['防晒帽、适合户外活动的外套'],
+ ['湿巾 / 纸巾（按园方要求）'],
+ ['一件安抚物：小玩偶、小方巾（先确认园方允许）'],
+ ['一张全家福或小挂件挂书包上，想家时看'],
+ ['检查所有衣物：避开<b>帽绳、长带子、复杂纽扣、背带裤</b>（如厕不便）',1],
+ ['提前一周穿新鞋新衣适应，别入园当天才第一次穿'],
+ ['备用衣物袋写好姓名，固定放在书包同一位置'],
+ ['所有带去的东西都拍照留档，丢了说得清'],
+ ['准备一个「接送人清单」交给老师，非名单内的人不接走',1]
+]},
+{id:'f',t:'心理与分离（家长篇）',tag:'这张才是真正的难点',tagc:'t',items:[
+ ['入园前 1–2 个月，带她去园门口看小朋友户外活动 / 放学'],
+ ['共读入园绘本：《魔法亲亲》《一口袋的吻》《幼儿园里我最棒》《大卫上学去》'],
+ ['玩「上幼儿园」角色扮演：你演老师，她演小朋友'],
+ ['建立固定告别仪式（击掌 / 亲三下 / 一句暗号），说完干脆离开',1],
+ ['练习短暂分离：1 小时 → 半天 → 一整天'],
+ ['提前 1–2 周把作息调到幼儿园节奏（早睡早起、12:30 午睡）'],
+ ['送园时<b>不偷偷溜走、不反复回头、不拖延</b>',1],
+ ['接园先给拥抱，问「今天玩了什么」而不是「哭了没」'],
+ ['不在她面前说「再哭妈妈就不要你了」这类话',1],
+ ['允许她带一件家里的小东西（安抚物）'],
+ ['第一周尽量不请假、不迟到早退、坚持天天送',1],
+ ['和家里所有接送人统一口径：谁来接、几点、说什么']
+]}
+];
+
+var KEY='kindergarten-checklist-v1';
+var S={};
+try{ var raw=localStorage.getItem(KEY); if(raw) S=JSON.parse(raw); }catch(e){}
+if(!S) S={};
+
+var host=document.getElementById('secs');
+var total=0;
+SEC.forEach(function(sec){
+  var c=document.createElement('div');
+  c.className='card';
+  var h=document.createElement('h2');
+  h.innerHTML=sec.t+' <span class="tag '+sec.tagc+'">'+sec.tag+'</span><span class="cnt" id="cnt-'+sec.id+'">0/'+sec.items.length+'</span>';
+  c.appendChild(h);
+  var g=document.createElement('div');
+  g.className='grid';
+  var num=0, lastGrp='';
+  sec.items.forEach(function(it,k){
+    var txt=it[0], danger=it[1];
+    var m=txt.match(/^【(.+?)】/);
+    if(m && m[1]!==lastGrp){
+      lastGrp=m[1];
+      var hd=document.createElement('div');
+      hd.className='hd'; hd.style.gridColumn='1 / -1';
+      hd.textContent=lastGrp;
+      g.appendChild(hd);
+    }
+    var lab=document.createElement('label');
+    lab.className='it'+(danger?' danger':'');
+    var cb=document.createElement('input');
+    cb.type='checkbox'; cb.dataset.k=sec.id+'-'+k;
+    cb.checked=!!S[cb.dataset.k];
+    if(danger) cb.dataset.danger='1';
+    var sp=document.createElement('span');
+    sp.innerHTML='<span class="num">'+(k+1)+'.</span>'+txt.replace(/^【.+?】/,'');
+    lab.appendChild(cb); lab.appendChild(sp);
+    g.appendChild(lab);
+    num++; total++;
+  });
+  c.appendChild(g);
+  host.appendChild(c);
+});
+document.getElementById('p-all').textContent=total;
+
+function paint(){
+  var ok=0;
+  document.querySelectorAll('.it').forEach(function(lab){
+    var cb=lab.querySelector('input');
+    if(cb.checked){ ok++; lab.classList.toggle('hit', !!cb.dataset.danger); }
+    else lab.classList.remove('hit');
+  });
+  document.getElementById('p-done').textContent=ok;
+  document.getElementById('p-bar').style.width=(total? ok/total*100:0)+'%';
+  SEC.forEach(function(sec){
+    var n=0;
+    sec.items.forEach(function(_,k){ if(S[sec.id+'-'+k]) n++; });
+    var e=document.getElementById('cnt-'+sec.id);
+    if(e){ e.textContent=n+'/'+sec.items.length; e.style.color=(n===sec.items.length)?'var(--teal-tx)':'#8A8880'; }
+  });
+}
+host.addEventListener('change',function(e){
+  if(e.target.type!=='checkbox') return;
+  S[e.target.dataset.k]=e.target.checked;
+  try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(err){}
+  paint();
+});
+paint();
+
+function clearAll(){
+  if(!confirm('确定清空所有勾选？此操作不可撤销。')) return;
+  S={}; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){}
+  document.querySelectorAll('.it input').forEach(function(cb){ cb.checked=false; });
+  paint();
+}
+
+/* 资格速算 */
+['q-birth','q-year','q-name'].forEach(function(id){
+  var el=document.getElementById(id);
+  el.addEventListener('input',function(){ S[id]=el.value; try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){} calcQ(); });
+  if(S[id]) el.value=S[id];
+});
+function calcQ(){
+  var b=document.getElementById('q-birth').value;
+  var y=parseInt(document.getElementById('q-year').value,10);
+  var box=document.getElementById('q-res');
+  if(!b||!isFinite(y)){ box.innerHTML='填入出生日期与计划入园年份后，自动判断是否符合「当年 8 月 31 日前满 3 周岁」这一常见门槛。'; return; }
+  var bd=new Date(b+'T00:00:00');
+  var cut=new Date(y+'-08-31T23:59:59');
+  var age=(cut-bd)/1000/60/60/24/365.25;
+  var months=Math.floor(age*12);
+  var nm=document.getElementById('q-name').value;
+  var head=(nm?('「'+nm+'」'):'目标园所')+' · '+y+' 年入园：';
+  if(age>=3){
+    var over=Math.floor(age*12-36);
+    box.innerHTML=head+'<b>符合</b>，当年 8 月 31 日时约 '+months+' 月龄（超出 '+over+' 个月）。可以按常规小班流程准备。';
+  }else{
+    var lack=Math.ceil(36-age*12);
+    box.innerHTML=head+'<b>差 '+lack+' 个月</b>，当年 8 月 31 日时约 '+months+' 月龄，按「8 月 31 日前满 3 周岁」口径<b>不满足</b>。可考虑托班 / 小小班，或顺延到下一年（部分地区口径为 12 月 31 日，请以当地简章为准）。';
+  }
+}
+calcQ();
+</script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+---
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12–18 月龄家庭安全排查清单</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:-apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background:#F7F6F2; color:#2C2C2A; padding:30px 20px 60px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap { max-width:1020px; margin:0 auto; }
+
+header { margin-bottom:20px; }
+h1 { font-size:23px; font-weight:600; letter-spacing:-.2px; }
+.sub { font-size:13.5px; color:#5F5E5A; margin-top:6px; }
+.sub b { color:#A32D2D; font-weight:600; }
+
+.bar {
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  background:#fff; border:1px solid rgba(0,0,0,.07); border-radius:12px;
+  padding:13px 18px; margin-bottom:8px;
+}
+.prog { font-size:13.5px; font-weight:600; white-space:nowrap; }
+.track { flex:1; min-width:140px; height:7px; background:#F1EFE8; border-radius:4px; overflow:hidden; }
+.fill { height:100%; width:0%; background:#1D9E75; border-radius:4px; transition:width .2s; }
+.spacer { flex:0 0 auto; }
+.btn {
+  border:1px solid rgba(0,0,0,.13); background:#fff; color:#2C2C2A;
+  font-size:12.5px; padding:6px 13px; border-radius:7px; cursor:pointer; font-family:inherit;
+}
+.btn:hover { background:#F1EFE8; }
+
+.hint {
+  font-size:12.5px; color:#5F5E5A; background:#FAEEDA; border-radius:9px;
+  padding:10px 15px; margin-bottom:20px;
+}
+.hint b { color:#633806; }
+
+.grid { display:grid; grid-template-columns:repeat(2,1fr); gap:15px; align-items:start; }
+
+.room {
+  background:#fff; border:1px solid rgba(0,0,0,.07); border-radius:13px;
+  overflow:hidden; break-inside:avoid;
+}
+.room-head {
+  padding:12px 18px; border-bottom:1px solid rgba(0,0,0,.05);
+  display:flex; justify-content:space-between; align-items:baseline;
+}
+.room-head h2 { font-size:15.5px; font-weight:600; }
+.cnt { font-size:12px; color:#888780; font-variant-numeric:tabular-nums; }
+.room.urgent .room-head { background:#FCEBEB; }
+.c-normal .room-head { background:#F1EFE8; }
+.c-kitchen .room-head { background:#FAEEDA; }
+.c-bath .room-head { background:#E6F1FB; }
+.c-window .room-head { background:#FCEBEB; }
+.c-bed .room-head { background:#EEEDFE; }
+.c-out .room-head { background:#EAF3DE; }
+.c-aid .room-head { background:#E1F5EE; }
+
+ul { list-style:none; padding:8px 18px 14px; }
+li { padding:7px 0; border-bottom:1px solid rgba(0,0,0,.04); }
+li:last-child { border-bottom:none; }
+label { display:flex; gap:9px; align-items:flex-start; cursor:pointer; font-size:13.5px; }
+input[type=checkbox] { width:15px; height:15px; margin-top:3px; accent-color:#1D9E75; flex:0 0 15px; cursor:pointer; }
+.txt { flex:1; }
+label.done .txt { color:#A8A69E; text-decoration:line-through; }
+.tag {
+  font-size:10.5px; font-weight:600; padding:1px 6px; border-radius:4px;
+  flex:0 0 auto; margin-top:2px; letter-spacing:.2px;
+}
+.tag.danger { background:#FCEBEB; color:#A32D2D; }
+.note { font-size:12px; color:#79776F; margin:3px 0 0 24px; line-height:1.55; }
+li.done .note { color:#B4B2A9; }
+
+.foot {
+  margin-top:22px; background:#fff; border:1px solid rgba(0,0,0,.07);
+  border-radius:13px; padding:19px 22px;
+}
+.foot h3 { font-size:15px; font-weight:600; margin-bottom:11px; }
+.four { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.four .ft { font-size:13.5px; font-weight:600; margin-bottom:3px; }
+.four .fd { font-size:12px; color:#5F5E5A; line-height:1.55; }
+.four .fd em { font-style:normal; color:#A32D2D; font-weight:600; }
+
+@media (max-width:780px){
+  .grid, .four { grid-template-columns:1fr; }
+}
+@media print {
+  @page { size:A4 portrait; margin:11mm; }
+  body { background:#fff; padding:0; font-size:10.5pt; }
+  .bar .btn, .spacer { display:none; }
+  .grid { grid-template-columns:repeat(2,1fr); gap:9px; }
+  .room { border:1px solid #ccc; }
+  .room-head, .hint { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .tag { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+</style>
+  <link rel="stylesheet" href="/media/parenting/site.css">
+  <link rel="canonical" href="https://nathanlvzs.github.io/parenting/home-safety/">
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "{{ site.google_analytics_measurement_id }}");
+  </script>
+</head>
+<body>
+<nav class="parenting-site-nav" aria-label="育儿工具导航"><a class="parenting-brand" href="/parenting/">育儿工具</a><div class="parenting-nav-links"><a href="/parenting/#growth">成长</a><a href="/parenting/#daily-care">照护</a><a href="/parenting/#safety">安全</a><a href="/parenting/#kindergarten">入园</a><a href="/">博客</a></div></nav>
+<div class="wrap">
+
+  <header>
+    <h1>12–18 月龄家庭安全排查清单</h1>
+    <div class="sub">按房间逐项打勾。重点：<b>蹲下来，按她的视角（约 80 cm 高）走一遍每个房间。</b></div>
+  </header>
+
+  <div class="bar">
+    <span class="prog" id="prog">已完成 0 / 0</span>
+    <span class="track"><span class="fill" id="fill"></span></span>
+    <span class="spacer"></span>
+    <button class="btn" id="reset">清空重查</button>
+    <button class="btn" onclick="window.print()">打印 / 存 PDF</button>
+  </div>
+
+  <div class="hint">
+    <b>怎么用：</b>勾选状态会自动保存在这台电脑上，可以分房间慢慢查。带「高危」标记的项是致死或重伤风险，优先处理。
+    建议每季度复查一次——她每长高 5 厘米，能触及的范围就完全不同。
+  </div>
+
+  <div class="grid">
+
+    <section class="room urgent c-window">
+      <div class="room-head"><h2>阳台 / 窗户</h2><span class="cnt"></span></div>
+      <ul>
+        <li><label><input type="checkbox"><span class="txt">窗户安装限位器，开启宽度不超过 10 cm</span><span class="tag danger">高危</span></label><div class="note">纱窗不防坠——孩子能顶破。这是跌落致死的第一位原因。</div></li>
+        <li><label><input type="checkbox"><span class="txt">阳台封闭，或装竖栏护栏（间距 &lt; 10 cm，无横向可踩踏栏）</span><span class="tag danger">高危</span></label><div class="note">横向栏杆等于给她搭了把梯子。</div></li>
+        <li><label><input type="checkbox"><span class="txt">窗边、阳台不放可攀爬物：凳子、箱子、花盆、洗衣机、床</span><span class="tag danger">高危</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">床、沙发、桌子不紧贴窗户摆放</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">防盗网牢固，间距安全，无锈蚀松动</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">阳台门、窗户随手锁闭</span></label></li>
+      </ul>
+    </section>
+
+    <section class="room urgent c-kitchen">
+      <div class="room-head"><h2>厨房</h2><span class="cnt"></span></div>
+      <ul>
+        <li><label><input type="checkbox"><span class="txt">锅柄一律朝内，灶台装防烫挡板</span><span class="tag danger">高危</span></label><div class="note">她够得着灶台边缘，一拉就是一锅热汤。这是烫伤的首要场景。</div></li>
+        <li><label><input type="checkbox"><span class="txt">做饭时用围栏把她隔在厨房外，或放进餐椅</span><span class="tag danger">高危</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">洗碗块、洗衣凝珠、洁厕剂、酒精——全部上锁</span><span class="tag danger">高危</span></label><div class="note">洗衣凝珠颜色鲜艳像糖果，误食后果极重。凝珠不是「放高处」就够，必须锁。</div></li>
+        <li><label><input type="checkbox"><span class="txt">刀具、剪刀、开瓶器锁进抽屉</span><span class="tag danger">高危</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">塑料袋、保鲜膜、保鲜袋收进柜子</span><span class="tag danger">高危</span></label><div class="note">套头窒息，几十秒就够。</div></li>
+        <li><label><input type="checkbox"><span class="txt">热水壶、电饭煲电线不垂落，蒸汽口朝内</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">冰箱、洗碗机、洗衣机用完即关门</span></label><div class="note">洗衣机滚筒是她会钻进去的地方。</div></li>
+        <li><label><input type="checkbox"><span class="txt">垃圾桶带盖，或放进柜内</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">地面及时擦干水渍油渍</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">不用灶台时关闭燃气总阀</span></label></li>
+      </ul>
+    </section>
+
+    <section class="room urgent c-bath">
+      <div class="room-head"><h2>卫生间 / 浴室</h2><span class="cnt"></span></div>
+      <ul>
+        <li><label><input type="checkbox"><span class="txt">任何有水时绝不留她独处——浴缸、脸盆、水桶、马桶</span><span class="tag danger">高危</span></label><div class="note">几厘米水就足以溺水。哪怕只是转身拿条毛巾的 30 秒。</div></li>
+        <li><label><input type="checkbox"><span class="txt">浴缸、水桶、脸盆用完立即倒空</span><span class="tag danger">高危</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">热水器出水温度调至 50℃ 以下</span><span class="tag danger">高危</span></label><div class="note">60℃ 只需 2 秒造成深度烫伤，50℃ 需要约 10 分钟——差别就是能否躲开。</div></li>
+        <li><label><input type="checkbox"><span class="txt">洗澡先放冷水再兑热水；水温 37–38℃，用手腕内侧试</span><span class="tag danger">高危</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">马桶盖盖并装马桶锁</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">药品、外用药、含氟牙膏、化妆品、指甲油、香水全部上锁</span><span class="tag danger">高危</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">剃须刀片、剪刀、镊子上锁</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">吹风机、卷发棒用后拔电收纳，不挂在插座旁</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">地面铺防滑垫，浴缸内贴防滑条</span></label></li>
+      </ul>
+    </section>
+
+    <section class="room c-normal">
+      <div class="room-head"><h2>全屋通用</h2><span class="cnt"></span></div>
+      <ul>
+        <li><label><input type="checkbox"><span class="txt">所有高柜、书架、斗柜用 L 型固定件固定在墙上</span><span class="tag danger">高危</span></label><div class="note">只「靠墙放」不够——她会拉开抽屉当梯子往上爬，柜子会整体翻倒。</div></li>
+        <li><label><input type="checkbox"><span class="txt">电视固定在墙上或用固定带，不直接立在电视柜上</span><span class="tag danger">高危</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">纽扣电池、磁力珠、硬币、图钉、发夹——放到 1.5 m 以上或锁起来</span><span class="tag danger">高危</span></label><div class="note">纽扣电池卡在食道 2 小时即可穿孔。磁力珠多颗吞入会互相吸引导致肠穿孔。这两样是这个年龄最凶险的东西。</div></li>
+        <li><label><input type="checkbox"><span class="txt">所有药品、保健品锁起来（不只是放高处——她会爬）</span><span class="tag danger">高危</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">收纳判据：能穿过卷筒纸芯（直径约 4 cm）的东西，都要收走</span><span class="tag danger">高危</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">未用插座装保护盖，常用插座换成带保护门的安全插座</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">垂落的电线、充电线收纳固定</span></label><div class="note">拉扯会拽下重物，也有缠绕和啃咬触电风险。</div></li>
+        <li><label><input type="checkbox"><span class="txt">茶几、餐桌、柜子的尖角贴防撞角</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">撤掉垂边的桌布、餐垫</span></label><div class="note">她一拉，桌上的东西全砸下来。</div></li>
+        <li><label><input type="checkbox"><span class="txt">抽屉、柜门装儿童安全锁</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">房门装防夹手门挡 + 门吸固定</span></label><div class="note">风一吹就夹手，夹断指尖的案例不少。</div></li>
+        <li><label><input type="checkbox"><span class="txt">确认家中植物无毒，或移到够不到的地方</span></label><div class="note">绿萝、滴水观音、万年青、夹竹桃都有毒。</div></li>
+        <li><label><input type="checkbox"><span class="txt">垃圾桶统一换成带盖款</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">低处玻璃、镜子贴防爆膜或换钢化玻璃</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">热饮不放桌边，不抱着她喝热的</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">不放她独自在沙发、床、换尿布台上</span><span class="tag danger">高危</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">宠物：绝不与她单独相处</span></label></li>
+      </ul>
+    </section>
+
+    <section class="room c-bed">
+      <div class="room-head"><h2>卧室 / 儿童房</h2><span class="cnt"></span></div>
+      <ul>
+        <li><label><input type="checkbox"><span class="txt">窗帘绳、百叶窗拉绳卷起并固定在高处</span><span class="tag danger">高危</span></label><div class="note">缠绕颈部窒息，发生得非常安静。</div></li>
+        <li><label><input type="checkbox"><span class="txt">婴儿床：床垫降到最低位，围栏间距 &lt; 6 cm</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">床上清空：无枕头、床围、毛绒玩具、厚被</span><span class="tag danger">高危</span></label><div class="note">1 岁后仍有窒息风险，尤其她开始会爬会翻。</div></li>
+        <li><label><input type="checkbox"><span class="txt">若她已能爬出婴儿床，及时换成矮床</span><span class="tag danger">高危</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">换尿布时一只手始终不离开她；换尿布台有围栏且用品在伸手可及处</span><span class="tag danger">高危</span></label><div class="note">换尿布台是跌落的高发地点。</div></li>
+        <li><label><input type="checkbox"><span class="txt">床头柜、衣柜用固定件固定防倒，衣柜门装锁</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">窗边不放床、椅子、收纳箱</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">小夜灯、加湿器的电线收纳固定</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">玩具按年龄分开放：小颗粒积木、弹珠、气球碎片收在够不到处</span><span class="tag danger">高危</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">玩具箱用带缓降杆的，或干脆用无盖收纳筐</span></label></li>
+      </ul>
+    </section>
+
+    <section class="room c-normal">
+      <div class="room-head"><h2>客厅 / 餐厅</h2><span class="cnt"></span></div>
+      <ul>
+        <li><label><input type="checkbox"><span class="txt">饮水机、热水壶加锁或放到够不到的位置</span><span class="tag danger">高危</span></label><div class="note">饮水机热水龙头她一按就出。</div></li>
+        <li><label><input type="checkbox"><span class="txt">落地灯电线固定，灯座稳固不易拽倒</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">餐椅带安全带、结构稳固，不放高处或桌面</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">餐桌、茶几尖角贴防撞条</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">食物处理：葡萄纵向切四瓣，坚果磨粉，不给她整颗坚果、果冻、爆米花</span><span class="tag danger">高危</span></label><div class="note">这个年龄磨牙还嚼不碎坚果，整颗坚果是最常见的呛噎物。</div></li>
+        <li><label><input type="checkbox"><span class="txt">吃饭必须坐餐椅，不追着喂、不躺着吃、不边跑边吃</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">地毯、地垫防滑或固定，不卷边</span></label></li>
+      </ul>
+    </section>
+
+    <section class="room c-normal">
+      <div class="room-head"><h2>楼梯 / 门口</h2><span class="cnt"></span></div>
+      <ul>
+        <li><label><input type="checkbox"><span class="txt">楼梯上下口装门栏，且必须是螺丝固定式</span><span class="tag danger">高危</span></label><div class="note">楼梯顶部不能用压力杆式门栏——受力会被推倒，人带着孩子一起摔下去。</div></li>
+        <li><label><input type="checkbox"><span class="txt">楼梯台阶贴防滑条</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">楼梯扶手间隙装防护网，防止钻出或卡头</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">入户门、防盗门装防夹手装置，随手锁</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">门口、玄关不放可攀爬的鞋柜、箱子</span></label></li>
+      </ul>
+    </section>
+
+    <section class="room c-out">
+      <div class="room-head"><h2>出行 / 汽车</h2><span class="cnt"></span></div>
+      <ul>
+        <li><label><input type="checkbox"><span class="txt">安全座椅装在后排，每次都系好</span><span class="tag danger">高危</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">继续后向乘坐，至少到 2 岁或达到座椅身高体重上限</span><span class="tag danger">高危</span></label><div class="note">后向能在碰撞时把冲击力分散到整个背部，对颈椎的保护远好于前向。不要因为「看着憋屈」就提前转过来。</div></li>
+        <li><label><input type="checkbox"><span class="txt">养成习惯：下车后回头看后排</span><span class="tag danger">高危</span></label><div class="note">夏季车内十几分钟即可致命。把包或手机放后排作为提醒。</div></li>
+        <li><label><input type="checkbox"><span class="txt">婴儿车系好安全带，下坡、上下电梯、乘扶梯时格外注意</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">不使用学步车</span><span class="tag danger">高危</span></label><div class="note">延迟独立行走，且让她能够快速移动到危险处——是明确的伤害源。</div></li>
+        <li><label><input type="checkbox"><span class="txt">户外活动时远离水景、喷泉、池塘</span></label></li>
+      </ul>
+    </section>
+
+    <section class="room c-aid">
+      <div class="room-head"><h2>急救准备</h2><span class="cnt"></span></div>
+      <ul>
+        <li><label><input type="checkbox"><span class="txt">手机存好 120 与就近儿童医院电话</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">急救包：纱布、创可贴、生理盐水、碘伏、体温计、镊子、冰袋</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">备儿童退烧药（对乙酰氨基酚 / 布洛芬），并写下按体重计算的剂量</span></label><div class="note">发烧时临时算容易出错，提前写好贴在药盒上。</div></li>
+        <li><label><input type="checkbox"><span class="txt">家长学会气道异物急救（1 岁以下用拍背压胸法）与心肺复苏</span><span class="tag danger">高危</span></label><div class="note">窒息的黄金抢救时间只有几分钟，等救护车来不及。</div></li>
+        <li><label><input type="checkbox"><span class="txt">把急救步骤打印贴在冰箱上：窒息、烫伤、跌落、误食</span></label></li>
+        <li><label><input type="checkbox"><span class="txt">烫伤处理记牢：冲（流动冷水 15–20 分钟）、脱、泡、盖、送</span></label><div class="note">不要涂牙膏、酱油、香油——会加重损伤并干扰判断。</div></li>
+      </ul>
+    </section>
+
+  </div>
+
+  <div class="foot">
+    <h3>这个年龄四大伤害类型，记住它们的样子</h3>
+    <div class="four">
+      <div><div class="ft">跌落</div><div class="fd">窗、阳台、换尿布台、沙发。<em>永远不把她单独留在高处，哪怕只有几秒。</em></div></div>
+      <div><div class="ft">误食</div><div class="fd">纽扣电池、磁力珠、药品、洗衣凝珠。<em>任何能穿过卷筒纸芯的东西都要收走。</em></div></div>
+      <div><div class="ft">烫伤</div><div class="fd">热汤、饮水机、热水器、蒸汽。<em>热水器调到 50℃ 以下是性价比最高的一件事。</em></div></div>
+      <div><div class="ft">溺水</div><div class="fd">浴缸、水桶、马桶、水景。<em>几厘米水就够，水边永远有大人伸手可及。</em></div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var KEY = 'toddler-safety-checklist-v1';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]'));
+  var lab = document.getElementById('prog');
+  var fill = document.getElementById('fill');
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ saved = {}; }
+
+  function sync(){
+    var done = 0;
+    boxes.forEach(function(b, i){
+      var li = b.closest('li');
+      if (b.checked) { done++; li.classList.add('done'); b.closest('label').classList.add('done'); }
+      else { li.classList.remove('done'); b.closest('label').classList.remove('done'); }
+    });
+    lab.textContent = '已完成 ' + done + ' / ' + boxes.length;
+    fill.style.width = (done / boxes.length * 100) + '%';
+    document.querySelectorAll('.room').forEach(function(r){
+      var all = r.querySelectorAll('input[type=checkbox]');
+      var ok = r.querySelectorAll('input[type=checkbox]:checked');
+      r.querySelector('.cnt').textContent = ok.length + '/' + all.length;
+    });
+  }
+
+  function store(){
+    var o = {};
+    boxes.forEach(function(b, i){ o[i] = b.checked; });
+    try { localStorage.setItem(KEY, JSON.stringify(o)); } catch(e){}
+  }
+
+  boxes.forEach(function(b, i){
+    if (saved[i]) b.checked = true;
+    b.addEventListener('change', function(){ sync(); store(); });
+  });
+
+  document.getElementById('reset').addEventListener('click', function(){
+    if (!confirm('清空所有勾选，重新开始排查？')) return;
+    boxes.forEach(function(b){ b.checked = false; });
+    try { localStorage.removeItem(KEY); } catch(e){}
+    sync();
+  });
+
+  sync();
+})();
+</script>
+</body>
+</html>

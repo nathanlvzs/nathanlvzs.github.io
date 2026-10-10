@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} - 育儿工具</title>
+  <link rel="stylesheet" href="/media/parenting/site.css">
+  <link rel="icon" type="image/jpeg" href="/media/images/puppy.jpg">
+  {% assign canonical_url = site.url | append: page.url %}
+  <link rel="canonical" href="{{ canonical_url }}">
+  {% if page.description %}<meta name="description" content="{{ page.description | escape }}">{% endif %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page.title | escape }}">
+  {% if page.description %}<meta property="og:description" content="{{ page.description | escape }}">{% endif %}
+  <meta property="og:url" content="{{ canonical_url }}">
+  {% if site.google_analytics_measurement_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ site.google_analytics_measurement_id }}');
+    </script>
+  {% endif %}
+</head>
+<body class="parenting-body">
+  {% include parenting-nav.html %}
+  <main class="parenting-container">
+    {{ content }}
+  </main>
+</body>
+</html>

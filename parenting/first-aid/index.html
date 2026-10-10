@@ -1,0 +1,216 @@
+---
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>婴幼儿急救速查卡 · 贴冰箱</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:-apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background:#EDEBE5; color:#2C2C2A; padding:22px 14px 40px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.sheet {
+  max-width:190mm; margin:0 auto; background:#fff; padding:7mm 7mm 6mm;
+  border-radius:4px; box-shadow:0 1px 4px rgba(0,0,0,.12);
+}
+
+.top { background:#A32D2D; color:#fff; border-radius:6px; padding:7px 11px; margin-bottom:6px; }
+.top .l { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+.tel { font-size:20px; font-weight:600; letter-spacing:.5px; }
+.tel em { font-style:normal; font-size:11.5px; font-weight:400; opacity:.9; }
+.sig { font-size:10.5px; line-height:1.5; }
+.sig b { font-weight:600; }
+.sig span { display:inline-block; margin-right:3px; }
+
+.blk { border-radius:6px; overflow:hidden; margin-bottom:5px; break-inside:avoid; }
+.bh { padding:4.5px 10px; font-size:12px; font-weight:600; letter-spacing:.2px; }
+.bb { padding:6px 10px 7px; font-size:10.5px; line-height:1.5; }
+.bb ol, .bb ul { list-style:none; }
+.bb li { margin-bottom:2px; }
+.bb li:last-child { margin-bottom:0; }
+.n { font-weight:600; }
+.warn {
+  margin-top:4px; padding:3.5px 7px; border-radius:4px;
+  background:rgba(163,45,45,.09); font-size:10px; color:#791F1F; line-height:1.45;
+}
+.warn b { font-weight:600; }
+.warn.soft { background:rgba(0,0,0,.05); color:#444441; }
+
+.c-choke .bh { background:#F1C1C1; color:#501313; } .c-choke .bb { background:#FCEBEB; }
+.c-burn   .bh { background:#FAC775; color:#412402; } .c-burn   .bb { background:#FFF9EE; }
+.c-fall   .bh { background:#CECBF6; color:#26215C; } .c-fall   .bb { background:#FAF9FE; }
+.c-swallow .bh { background:#ED93B1; color:#4B1528; } .c-swallow .bb { background:#FDF2F6; }
+.c-drown  .bh { background:#B5D4F4; color:#042C53; } .c-drown  .bb { background:#F5FAFF; }
+.c-fit    .bh { background:#9FE1CB; color:#04342C; } .c-fit    .bb { background:#F2FBF8; }
+.c-no     .bh { background:#D3D1C7; color:#2C2C2A; } .c-no     .bb { background:#F7F6F2; }
+
+.two { display:grid; grid-template-columns:1fr 1fr; gap:5px; }
+.subh { font-size:10.5px; font-weight:600; margin-bottom:2px; }
+.age { font-size:9.5px; font-weight:400; opacity:.75; }
+
+.grid6 { display:grid; grid-template-columns:1fr 1fr; gap:5px; }
+
+.foot { font-size:9px; color:#79776F; margin-top:5px; text-align:center; line-height:1.5; }
+
+@media (max-width:700px){ .two, .grid6 { grid-template-columns:1fr; } }
+@media print {
+  @page { size:A4 portrait; margin:8mm; }
+  body { background:#fff; padding:0; }
+  .sheet { max-width:none; padding:0; box-shadow:none; border-radius:0; }
+  .top, .bh, .bb, .warn { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+</style>
+  <link rel="stylesheet" href="/media/parenting/site.css">
+  <link rel="canonical" href="https://nathanlvzs.github.io/parenting/first-aid/">
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "{{ site.google_analytics_measurement_id }}");
+  </script>
+</head>
+<body>
+<nav class="parenting-site-nav" aria-label="育儿工具导航"><a class="parenting-brand" href="/parenting/">育儿工具</a><div class="parenting-nav-links"><a href="/parenting/#growth">成长</a><a href="/parenting/#daily-care">照护</a><a href="/parenting/#safety">安全</a><a href="/parenting/#kindergarten">入园</a><a href="/">博客</a></div></nav>
+<div class="sheet">
+
+  <div class="top">
+    <div class="l">
+      <span class="tel">120<em>　急救电话</em></span>
+      <span class="sig"><b>出现以下任一情况，立即拨打：</b>
+        <span>· 叫不醒、意识不清</span>
+        <span>· 呼吸困难或嘴唇发紫</span>
+        <span>· 抽搐超过 5 分钟</span>
+        <span>· 出血压不住</span>
+        <span>· 摔后意识不清或反复呕吐</span>
+        <span>· 大面积或深度烫伤</span>
+        <span>· 溺水后</span>
+      </span>
+    </div>
+  </div>
+
+  <section class="blk c-choke">
+    <div class="bh">气道异物梗阻 · 黄金时间只有几分钟</div>
+    <div class="bb">
+      <div style="margin-bottom:5px;"><span class="n">先判断：</span>能哭、能咳、能出声 → <span class="n">鼓励咳嗽</span>，先别拍背。说不出声、双手掐喉、脸色发紫 → <span class="n">立即施救</span>。</div>
+      <div class="two">
+        <div>
+          <div class="subh">1 岁以下<span class="age">　严禁腹部冲击</span></div>
+          <ol>
+            <li><span class="n">5 次拍背：</span>面朝下俯卧在前臂上，头低于身体，托住下巴（别捂口鼻），掌根拍两肩胛骨之间。</li>
+            <li><span class="n">5 次胸部冲击：</span>翻成面朝上，仍头低脚高，<span class="n">单手掌根</span>按两乳头连线中点下方，深度约胸廓 1/3。</li>
+            <li><span class="n">重复 5+5</span>，直到异物排出或失去意识。</li>
+          </ol>
+        </div>
+        <div>
+          <div class="subh">1 岁以上儿童<span class="age">　背 5 腹 5</span></div>
+          <ol>
+            <li><span class="n">5 次拍背：</span>身体前倾、头略低，掌根用力拍两肩胛骨之间。</li>
+            <li><span class="n">5 次腹部冲击（剪刀石头布）：</span>两指定位<span class="n">脐上两横指</span> → 拳眼放定位点 → 另一手包住，<span class="n">向内向上</span>冲击。力度约 3–5 千克，别过猛。</li>
+            <li><span class="n">重复 5+5</span>，直到异物排出或失去反应。</li>
+          </ol>
+        </div>
+      </div>
+      <div class="warn">
+        <b>失去反应：</b>立刻停下，开始心肺复苏并叫 120。每次人工呼吸前看一眼口腔，<b>看得见才取，不要盲目用手指掏</b>。
+        <b>异物排出后仍要就医</b>，并观察至少 15 分钟；呕吐时把头转向一侧。
+      </div>
+    </div>
+  </section>
+
+  <div class="grid6">
+
+    <section class="blk c-burn">
+      <div class="bh">烫伤 · 冲脱泡盖送</div>
+      <div class="bb">
+        <ol>
+          <li><span class="n">冲：</span>流动冷水冲 15–20 分钟（不是冰水）。</li>
+          <li><span class="n">脱：</span>小心脱去衣物；<span class="n">粘住的剪开，别硬扯</span>。</li>
+          <li><span class="n">泡：</span>继续浸在冷水里降温、镇痛。</li>
+          <li><span class="n">盖：</span>干净纱布或保鲜膜松松覆盖。</li>
+          <li><span class="n">送：</span>起水泡、面积超过手掌、在脸/手/脚/关节/私处 → 就医。</li>
+        </ol>
+        <div class="warn"><b>绝对不要：</b>涂牙膏、酱油、香油、酒精、碘酒；不要冰敷；不要挑破水泡。</div>
+      </div>
+    </section>
+
+    <section class="blk c-fall">
+      <div class="bh">跌落 · 摔后 48 小时是关键</div>
+      <div class="bb">
+        <ol>
+          <li><span class="n">先别急着抱起</span>，蹲下观察 10 秒：有没有意识、哪里疼、能不能动。</li>
+          <li><span class="n">出血：</span>干净纱布直接压住 10 分钟，别反复掀开看。</li>
+          <li><span class="n">肿包：</span>冷敷 15 分钟，<span class="n">别揉、别热敷</span>。</li>
+          <li><span class="n">观察 24–48 小时</span>，尤其头部着地。夜间也留意。</li>
+        </ol>
+        <div class="warn"><b>出现任一情况立即就医：</b>反复呕吐、嗜睡叫不醒、抽搐、耳鼻流血或流水、瞳孔不一样大、走路姿势变了、囟门隆起、持续哭闹安抚不了。</div>
+      </div>
+    </section>
+
+    <section class="blk c-swallow">
+      <div class="bh">误食 / 中毒</div>
+      <div class="bb">
+        <ol>
+          <li><span class="n">带上东西就医：</span>包装、残留物、呕吐物，帮助医生快速判断。</li>
+          <li><span class="n">不要催吐。</span>强酸强碱、汽油类催吐会造成二次灼伤或吸入。</li>
+          <li>腐蚀性物质：清醒能吞咽的话用清水漱口，少量饮水稀释。</li>
+          <li>皮肤、眼睛沾到：大量清水冲洗 15 分钟以上。</li>
+        </ol>
+        <div class="warn"><b>纽扣电池、磁力珠：</b>立即急诊，禁食禁水，不要催吐、不要等。纽扣电池 2 小时即可造成食管穿孔。</div>
+      </div>
+    </section>
+
+    <section class="blk c-drown">
+      <div class="bh">溺水 · 几厘米水就够</div>
+      <div class="bb">
+        <ol>
+          <li><span class="n">立刻脱离水源</span>，检查有没有反应和呼吸。</li>
+          <li><span class="n">没呼吸：立即心肺复苏</span>，先给 5 次人工呼吸，再按压与吹气 30:2 循环。同时叫 120。</li>
+          <li>有呼吸：侧卧保暖，清理口鼻，等救护车。</li>
+          <li><span class="n">即使"看着没事"也要就医观察</span>——几小时后仍可能出现肺水肿。</li>
+        </ol>
+        <div class="warn"><b>不要控水：</b>倒挂、抱着抖、拍背控水都无效且有害，会延误心肺复苏并引起呕吐误吸。</div>
+      </div>
+    </section>
+
+    <section class="blk c-fit">
+      <div class="bh">热性惊厥 · 1 岁左右高发</div>
+      <div class="bb">
+        <ol>
+          <li><span class="n">侧卧</span>，解开衣领，让口水流出，防止误吸。</li>
+          <li>移开周围硬物尖物，别约束、别按压四肢。</li>
+          <li><span class="n">看表记时长</span>，尽量看清发作的样子（哪侧肢体、眼睛怎么动）。</li>
+          <li>多数 1–3 分钟内自行停止。停止后测体温、补水分。</li>
+        </ol>
+        <div class="warn"><b>不要：</b>往嘴里塞任何东西（勺子、手指、毛巾）、不要喂水喂药、不要掐人中、不要摇晃。<b>超过 5 分钟或反复发作 → 120。</b></div>
+      </div>
+    </section>
+
+    <section class="blk c-no">
+      <div class="bh">通用禁忌 · 这几件事千万别做</div>
+      <div class="bb">
+        <ul>
+          <li><span class="n">不催吐</span>——腐蚀性物质会二次灼伤。</li>
+          <li><span class="n">不涂牙膏酱油香油</span>——掩盖创面、加重感染。</li>
+          <li><span class="n">不往嘴里塞东西</span>——抽搐时塞只会造成损伤。</li>
+          <li><span class="n">不控水</span>——溺水时倒挂拍背有害。</li>
+          <li><span class="n">不盲目掏喉咙</span>——看不见的异物会把东西推得更深。</li>
+          <li><span class="n">不摇晃孩子</span>——婴幼儿摇晃综合征可致脑损伤。</li>
+          <li><span class="n">不马上抱起摔了的孩子</span>——先观察 10 秒。</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="foot">
+    依据美国心脏协会（AHA）与国际复苏联盟（ILCOR）2025 版急救指南整理 · 气道异物手法为新版「先拍背」流程　｜　建议全家人一起看一遍、练一遍，真出事时才不会手忙脚乱
+  </div>
+
+</div>
+</body>
+</html>
