@@ -1,0 +1,234 @@
+---
+layout: null
+title: 广东麻将速算训练
+description: 面向广东推倒胡规则的麻将牌效与决策速度训练器。
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#10151b">
+<meta name="description" content="{{ page.description | escape }}">
+<link rel="icon" type="image/jpeg" href="/media/images/puppy.jpg">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ page.title | escape }}">
+<meta property="og:description" content="{{ page.description | escape }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ page.title | escape }}">
+<meta name="twitter:description" content="{{ page.description | escape }}">
+<title>{{ page.title }} | NathanLVZS</title>
+<link rel="stylesheet" href="style.css">
+{% if site.google_analytics_measurement_id %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "{{ site.google_analytics_measurement_id }}");
+</script>
+{% endif %}
+</head>
+<body>
+<div id="app">
+
+  <div class="rotate-tip" id="rotate-tip">
+    <span class="rt-icon">↻</span>
+    <span class="rt-text">横屏可一屏看全牌桌，体验更佳</span>
+    <button class="rt-fs" id="rt-fs">全屏横屏</button>
+    <button class="rt-close" id="rt-close" aria-label="关闭提示">✕</button>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">麻</span>
+      <div>
+        <div class="title">广东麻将 · 速算训练</div>
+        <div class="sub">推倒胡 · 不可吃 · 练决策速度与牌效计算</div>
+      </div>
+    </div>
+    <div class="hud">
+      <div class="hud-item"><span>牌山</span><b id="hud-remain">-</b></div>
+      <div class="hud-item"><span>巡</span><b id="hud-turn">0</b></div>
+      <div class="hud-item"><span>牌效</span><b id="hud-shanten">-</b></div>
+    </div>
+    <div class="topbtns">
+      <button id="btn-mode" class="btn ghost">切换：牌效快问</button>
+      <button id="btn-new" class="btn primary">新的一局</button>
+      <button id="btn-settings" class="btn">设置</button>
+      <button id="btn-stats" class="btn">统计</button>
+      <button id="btn-help" class="btn">规则</button>
+    </div>
+  </header>
+
+  <main class="board">
+    <div class="table">
+      <div class="seat-top">
+        <div class="seat-label">对家<b class="seat-count" id="seat-0-count"></b></div>
+        <div class="row-hand" id="seat-0-hand"></div>
+        <div class="river" id="seat-0-river"></div>
+      </div>
+
+      <div class="seat-left">
+        <div class="seat-label">上家<b class="seat-count" id="seat-1-count"></b></div>
+        <div class="col-hand" id="seat-1-hand"></div>
+        <div class="river rv-left" id="seat-1-river"></div>
+      </div>
+
+      <div class="center">
+        <div class="phase" id="phase">准备中</div>
+        <div id="timer" class="timer" style="display:none">
+          <div class="timer-text" id="timer-text">0.00s</div>
+          <div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div>
+        </div>
+      </div>
+
+      <div class="seat-right">
+        <div class="seat-label">下家<b class="seat-count" id="seat-2-count"></b></div>
+        <div class="river rv-right" id="seat-2-river"></div>
+        <div class="col-hand" id="seat-2-hand"></div>
+      </div>
+
+      <div class="seat-bottom">
+        <div class="river rv-me" id="my-river"></div>
+      </div>
+    </div>
+
+    <div class="info-bar" id="info-bar"></div>
+    <div class="feedback" id="feedback"></div>
+
+    <div class="myarea">
+      <div class="melds" id="my-melds"></div>
+      <div class="hand" id="my-hand"></div>
+      <div class="action-bar" id="action-bar"></div>
+    </div>
+
+    <section class="drill" id="drill">
+      <div class="drill-head">
+        <div class="drill-q">第 <b id="drill-n">1</b> 题 · <span id="drill-ask">这手牌打哪张进张最多？</span></div>
+        <div class="drill-stats">
+          正确 <b id="drill-ok">0</b>/<b id="drill-total">0</b> ·
+          命中率 <b id="drill-rate">-</b> ·
+          连击 <b id="drill-combo">0</b> ·
+          平均 <b id="drill-avg">-</b>
+        </div>
+        <button class="btn small-btn" id="btn-drill-stats">练习记录</button>
+      </div>
+      <div class="drill-timer" id="drill-timer"><span id="drill-time">0.00s</span></div>
+      <div class="hand drill-hand" id="drill-hand"></div>
+      <div class="drill-fb" id="drill-fb">点击一张牌打出，系统会立刻告诉你打得对不对</div>
+      <div class="drill-table" id="drill-table"></div>
+      <div class="drill-btns">
+        <button class="btn" id="btn-drill-next">下一题 (空格)</button>
+        <button class="btn" id="btn-drill-quit">返回对战</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="modal-settings">
+    <div class="modal-box">
+      <h3>设置</h3>
+      <div class="form-row">
+        <label>决策限时</label>
+        <select id="set-limit">
+          <option value="3000">3 秒（极限）</option>
+          <option value="5000">5 秒（推荐）</option>
+          <option value="8000">8 秒</option>
+          <option value="0">不限时</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>提示等级</label>
+        <select id="set-hint">
+          <option value="0">0 · 全关闭（硬核）</option>
+          <option value="1">1 · 仅向听数</option>
+          <option value="2">2 · 向听数 + 有效进张</option>
+          <option value="3">3 · 含推荐打法</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>思考时显示推荐打法</label>
+        <input type="checkbox" id="set-best">
+      </div>
+      <div class="form-row">
+        <label>对手出牌速度</label>
+        <select id="set-speed">
+          <option value="120">快</option>
+          <option value="280">中</option>
+          <option value="500">慢</option>
+        </select>
+      </div>
+      <p class="dim small">提示：把提示等级调到 0 或 1，才能真正逼自己心算向听与进张。</p>
+      <div class="modal-btns"><button class="btn" data-close>关闭</button></div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-stats">
+    <div class="modal-box">
+      <h3>历史统计</h3>
+      <div id="stats-body"></div>
+      <div class="modal-btns">
+        <button class="btn danger" id="btn-reset-stats">清空记录</button>
+        <button class="btn" data-close>关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-result">
+    <div class="modal-box wide">
+      <h3 id="result-title">本局结束</h3>
+      <div id="result-body"></div>
+      <div class="modal-btns">
+        <button class="btn primary" id="btn-result-new">再来一局</button>
+        <button class="btn" data-close>查看牌面</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-drill">
+    <div class="modal-box">
+      <h3>牌效练习记录</h3>
+      <div id="drill-body"></div>
+      <div class="modal-btns">
+        <button class="btn danger" id="btn-reset-drill">清空记录</button>
+        <button class="btn" data-close>关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-help">
+    <div class="modal-box wide">
+      <h3>规则与玩法</h3>
+      <div class="help">
+        <p><b>玩法：</b>你是庄家（东），每轮摸一张打一张。三家电脑自动摸打，<b>不吃牌</b>（广东麻将规则），可碰可杠。目标：用最少巡数听牌、和牌。</p>
+        <p><b>训练核心：</b>每次摸牌后必须在限时内决定打哪张。打完立刻给出反馈——你的决策耗时、打完后的有效进张枚数，以及最优打法的对比。<b>进张枚数差</b>就是你的计算误差。</p>
+        <p><b>关键指标：</b></p>
+        <ul>
+          <li><b>向听数</b>：还差几张有效牌才能听牌（听牌=0，和牌=-1）</li>
+          <li><b>有效进张</b>：能降低向听数的牌种及剩余枚数</li>
+          <li><b>最优打法</b>：使打后有效进张枚数最大的那张牌</li>
+        </ul>
+        <p><b>快捷键：</b>数字 1-9 打第 N 张牌，Enter = 胡，空格 = 过，N = 新局。</p>
+        <p><b>和牌型：</b>4 面子 + 1 雀头，或七小对（4 张同牌算两对）。鸡胡即可和，另有门前清、碰碰胡、混一色、清一色、字一色、大小三元、大小四喜等番种。</p>
+      </div>
+      <div class="modal-btns"><button class="btn" data-close>知道了</button></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/tiles.js"></script>
+<script src="js/mahjong.js"></script>
+<script src="js/game.js"></script>
+<script>
+  document.getElementById('btn-result-new').onclick = function () {
+    document.querySelectorAll('.modal').forEach(function (m) { m.classList.remove('show'); });
+    document.getElementById('btn-new').click();
+  };
+</script>
+</body>
+</html>
