@@ -1,0 +1,3357 @@
+---
+layout: null
+title: 从光子到决策：穿戴健康传感器与 AI 健康教练算法全景
+description: 系统梳理通用健康场景智能穿戴设备的传感器、生理信号链路、事件识别原理，以及 AI 健康教练的算法与安全边界。
+categories: [AI, Health]
+tags: [wearable, digital-health, sensors, health-coach]
+language: zh
+published: true
+permalink: /wearable-health-sensors-and-ai-health-coach.html
+---
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>从光子到决策：穿戴健康传感器与 AI 健康教练算法全景</title>
+<meta name="description" content="{{ page.description | escape }}">
+<link rel="icon" type="image/jpeg" href="/media/images/puppy.jpg">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ page.title | escape }}">
+<meta property="og:description" content="{{ page.description | escape }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ page.title | escape }}">
+<meta name="twitter:description" content="{{ page.description | escape }}">
+{% if site.google_analytics_measurement_id %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id }}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","{{ site.google_analytics_measurement_id }}");</script>
+{% endif %}
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f0f3f6; --border:#e2e6ea;
+  --text:#1b2027; --text-2:#4d5763; --text-3:#7b8794;
+  --brand:#0d8f8f; --brand-2:#0f766e; --brand-soft:#e4f5f3;
+  --accent:#c2410c; --warn:#b45309; --warn-soft:#fef3c7;
+  --code-bg:#0f1720; --code-text:#e6edf3;
+  --radius:14px; --maxw:900px;
+  --shadow:0 1px 2px rgba(16,24,40,.04), 0 8px 24px -12px rgba(16,24,40,.12);
+}
+html[data-theme="dark"]{
+  --bg:#0d1117; --surface:#151b23; --surface-2:#1b222c; --border:#262d38;
+  --text:#e7edf3; --text-2:#aab6c3; --text-3:#7d8b9a;
+  --brand:#2dd4bf; --brand-2:#5eead4; --brand-soft:#10312f;
+  --accent:#fb923c; --warn:#fbbf24; --warn-soft:#3b2f10;
+  --code-bg:#0b1116; --code-text:#e6edf3;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -12px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:16.5px;line-height:1.85;-webkit-font-smoothing:antialiased;
+}
+/* ---------- progress ---------- */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--brand),var(--accent));z-index:100;transition:width .1s linear}
+/* ---------- layout ---------- */
+.wrap{display:flex;gap:0;max-width:1440px;margin:0 auto}
+#sidebar{
+  position:sticky;top:0;align-self:flex-start;height:100vh;width:288px;flex:0 0 288px;
+  overflow-y:auto;padding:26px 18px 60px;border-right:1px solid var(--border);
+  background:var(--surface);
+}
+#sidebar::-webkit-scrollbar{width:6px}
+#sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.sb-brand{font-weight:800;font-size:14px;letter-spacing:.04em;color:var(--brand);margin-bottom:4px}
+.sb-title{font-size:13.5px;color:var(--text-2);line-height:1.6;margin-bottom:18px}
+#tocSearch{
+  width:100%;padding:9px 12px;border-radius:9px;border:1px solid var(--border);
+  background:var(--surface-2);color:var(--text);font-size:13px;outline:none;margin-bottom:14px;font-family:inherit;
+}
+#tocSearch:focus{border-color:var(--brand)}
+.toc-h1,.toc-h2{display:block;padding:7px 10px;border-radius:8px;text-decoration:none;color:var(--text-2);font-size:13px;line-height:1.5;border-left:2px solid transparent}
+.toc-h1{font-weight:700;color:var(--text);margin-top:12px;font-size:13.5px}
+.toc-h2{padding-left:22px;font-size:12.5px}
+.toc-h1:hover,.toc-h2:hover{background:var(--surface-2);color:var(--brand)}
+.toc-h1.active,.toc-h2.active{background:var(--brand-soft);color:var(--brand);border-left-color:var(--brand);font-weight:600}
+main{flex:1;min-width:0;padding:0 40px 100px}
+.container{max-width:var(--maxw);margin:0 auto}
+/* ---------- topbar (mobile) ---------- */
+#topbar{display:none}
+#menuBtn{display:none}
+/* ---------- hero ---------- */
+.hero{
+  margin:34px 0 30px;padding:38px 40px;border-radius:20px;
+  background:
+    radial-gradient(1000px 300px at 100% 0%, var(--brand-soft) 0%, transparent 62%),
+    linear-gradient(135deg,var(--surface) 0%, var(--surface-2) 100%);
+  border:1px solid var(--border);box-shadow:var(--shadow);
+}
+.hero h1,.hero .hero-title{font-size:31px;line-height:1.35;margin:0 0 14px;letter-spacing:-.01em;font-weight:800}
+.notice{margin:22px 0;padding:16px 18px;border:1px solid var(--warn);border-radius:var(--radius);background:var(--warn-soft);color:var(--text);font-size:14px;line-height:1.75}
+.sources{margin:28px 0;padding:20px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+.sources h2{margin:0 0 10px;font-size:20px}.sources li{margin:8px 0}
+.hero .sub{color:var(--text-2);font-size:16px;margin-bottom:20px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:12.5px;padding:5px 11px;border-radius:100px;background:var(--brand-soft);color:var(--brand-2);border:1px solid color-mix(in srgb,var(--brand) 25%, transparent);font-weight:600}
+.chip.g{background:var(--surface);color:var(--text-2);border:1px solid var(--border)}
+/* ---------- stat grid ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:24px 0 8px}
+.stat{padding:16px 18px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow)}
+.stat .v{font-size:23px;font-weight:800;color:var(--brand);letter-spacing:-.02em;line-height:1.2}
+.stat .l{font-size:12.5px;color:var(--text-2);margin-top:6px;line-height:1.55}
+.stat .n{font-size:11.5px;color:var(--text-3);margin-top:5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+/* ---------- typography ---------- */
+h1{font-size:29px;margin:64px 0 22px;padding-bottom:14px;border-bottom:2px solid var(--brand);letter-spacing:-.01em}
+h2{font-size:22px;margin:46px 0 16px;color:var(--text);letter-spacing:-.005em;scroll-margin-top:20px}
+h3{font-size:18px;margin:34px 0 12px;color:var(--brand-2)}
+h4{font-size:16px;margin:24px 0 10px;color:var(--text-2)}
+p{margin:14px 0}
+a{color:var(--brand);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--brand) 32%, transparent)}
+a:hover{border-bottom-color:var(--brand)}
+strong{font-weight:700;color:var(--text)}
+em{color:var(--text-2)}
+hr{border:0;border-top:1px solid var(--border);margin:44px 0}
+ul,ol{padding-left:26px;margin:14px 0}
+li{margin:6px 0}
+li::marker{color:var(--brand)}
+/* ---------- table ---------- */
+.tw{overflow-x:auto;margin:20px 0;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+thead th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--text);border-bottom:2px solid var(--border);position:sticky;top:0;white-space:nowrap}
+tbody td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2);line-height:1.7}
+tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface-2) 45%, transparent)}
+tbody tr:hover{background:var(--brand-soft)}
+tbody tr:last-child td{border-bottom:0}
+/* ---------- code ---------- */
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;
+  background:var(--surface-2);color:var(--accent);padding:2px 6px;border-radius:5px;border:1px solid var(--border)}
+pre{background:var(--code-bg);color:var(--code-text);padding:18px 20px;border-radius:var(--radius);
+  overflow-x:auto;font-size:13.2px;line-height:1.75;margin:18px 0;box-shadow:var(--shadow)}
+pre code{background:none;color:inherit;padding:0;border:0;font-size:inherit}
+/* ---------- blockquote ---------- */
+blockquote{margin:20px 0;padding:14px 20px;border-left:4px solid var(--brand);
+  background:var(--brand-soft);border-radius:0 var(--radius) var(--radius) 0;color:var(--text)}
+blockquote p{margin:8px 0}
+blockquote strong{color:var(--brand-2)}
+/* ---------- theme toggle ---------- */
+#themeBtn{
+  position:fixed;right:22px;bottom:22px;z-index:90;width:46px;height:46px;border-radius:50%;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;
+  font-size:18px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;
+}
+#topBtn{
+  position:fixed;right:22px;bottom:80px;z-index:90;width:46px;height:46px;border-radius:50%;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;
+  font-size:16px;box-shadow:var(--shadow);display:none;align-items:center;justify-content:center;
+}
+footer{margin-top:70px;padding:28px 0 10px;border-top:1px solid var(--border);color:var(--text-3);font-size:13px}
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  #sidebar{position:fixed;left:0;top:0;z-index:80;transform:translateX(-100%);transition:transform .25s ease;box-shadow:var(--shadow)}
+  #sidebar.open{transform:translateX(0)}
+  main{padding:0 20px 100px}
+  #topbar{display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:70;
+    background:color-mix(in srgb,var(--bg) 88%, transparent);backdrop-filter:blur(10px);
+    padding:10px 20px;border-bottom:1px solid var(--border);margin:0 -20px}
+  #menuBtn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;
+    border-radius:9px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:16px;cursor:pointer}
+  .tb-title{font-weight:700;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .hero{padding:28px 22px;margin-top:18px}
+  .hero h1{font-size:24px}
+  h1{font-size:24px;margin-top:44px}
+  h2{font-size:19.5px}
+}
+@media print{
+  #sidebar,#themeBtn,#topBtn,#progress,#topbar{display:none}
+  body{background:#fff;font-size:11pt}
+  main{padding:0}
+  .tw{box-shadow:none}
+  pre,table{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div class="wrap">
+  <nav id="sidebar">
+    <div class="sb-brand">WEARABLE HEALTH TECH</div>
+    <div class="sb-title">穿戴传感器 · 生理信号 ·<br>AI 健康教练 Agent 全景</div>
+    <input id="tocSearch" placeholder="搜索章节…" autocomplete="off">
+    <div id="toc">
+<a class="toc-h1" href="#从光子到决策通用健康场景智能穿戴设备的传感器生理信号与-AI-健康教练算法全景" data-toc="从光子到决策：通用健康场景智能穿戴设备的传感器、生理信号与 ai 健康教练算法全景">从光子到决策：通用健康场景智能穿戴设备的传感器、生理信号与 AI 健康教练算法全景</a>
+<a class="toc-h2" href="#序一句话讲清这件事的本质" data-toc="序：一句话讲清这件事的本质">序：一句话讲清这件事的本质</a>
+<a class="toc-h2" href="#目录" data-toc="目录">目录</a>
+<a class="toc-h1" href="#第一章-传感器篇手上这几颗脏器件到底在测什么" data-toc="第一章 传感器篇：手上这几颗脏器件到底在测什么">第一章 传感器篇：手上这几颗脏器件到底在测什么</a>
+<a class="toc-h2" href="#1.1-先建立一个分类直觉" data-toc="1.1 先建立一个分类直觉">1.1 先建立一个分类直觉</a>
+<a class="toc-h2" href="#1.2-光学PPG-是整个行业的地基" data-toc="1.2 光学：ppg 是整个行业的地基">1.2 光学：PPG 是整个行业的地基</a>
+<a class="toc-h2" href="#1.3-电学ECG-与生物阻抗" data-toc="1.3 电学：ecg 与生物阻抗">1.3 电学：ECG 与生物阻抗</a>
+<a class="toc-h2" href="#1.4-化学CGM-是目前唯一成熟的「分子级」穿戴" data-toc="1.4 化学：cgm 是目前唯一成熟的「分子级」穿戴">1.4 化学：CGM 是目前唯一成熟的「分子级」穿戴</a>
+<a class="toc-h2" href="#1.5-惯性与其他" data-toc="1.5 惯性与其他">1.5 惯性与其他</a>
+<a class="toc-h2" href="#1.6-代表性产品的传感器配置横评" data-toc="1.6 代表性产品的传感器配置横评">1.6 代表性产品的传感器配置横评</a>
+<a class="toc-h1" href="#第二章-信号篇从波形到生理指标的-14-条链路" data-toc="第二章 信号篇：从波形到生理指标的 14 条链路">第二章 信号篇：从波形到生理指标的 14 条链路</a>
+<a class="toc-h2" href="#2.1-链路一PPG-→-心率HR" data-toc="2.1 链路一：ppg → 心率（hr）">2.1 链路一：PPG → 心率（HR）</a>
+<a class="toc-h2" href="#2.2-链路二RR-间期序列-→-HRV心率变异性" data-toc="2.2 链路二：rr 间期序列 → hrv（心率变异性）">2.2 链路二：RR 间期序列 → HRV（心率变异性）</a>
+<a class="toc-h2" href="#2.3-链路三双波长-PPG-→-血氧饱和度-SpO₂" data-toc="2.3 链路三：双波长 ppg → 血氧饱和度 spo₂">2.3 链路三：双波长 PPG → 血氧饱和度 SpO₂</a>
+<a class="toc-h2" href="#2.4-链路四IMU-→-步数-活动识别-能量消耗" data-toc="2.4 链路四：imu → 步数 / 活动识别 / 能量消耗">2.4 链路四：IMU → 步数 / 活动识别 / 能量消耗</a>
+<a class="toc-h2" href="#2.5-链路五IMU-PPG-→-睡眠分期" data-toc="2.5 链路五：imu + ppg → 睡眠分期">2.5 链路五：IMU + PPG → 睡眠分期</a>
+<a class="toc-h2" href="#2.6-链路六PPG-IMU-→-呼吸率" data-toc="2.6 链路六：ppg / imu → 呼吸率">2.6 链路六：PPG / IMU → 呼吸率</a>
+<a class="toc-h2" href="#2.7-链路七夜间信号-→-睡眠呼吸暂停OSA筛查" data-toc="2.7 链路七：夜间信号 → 睡眠呼吸暂停（osa）筛查">2.7 链路七：夜间信号 → 睡眠呼吸暂停（OSA）筛查</a>
+<a class="toc-h2" href="#2.8-链路八PPG-心动周期图-→-房颤机会式筛查" data-toc="2.8 链路八：ppg 心动周期图 → 房颤机会式筛查">2.8 链路八：PPG 心动周期图 → 房颤机会式筛查</a>
+<a class="toc-h2" href="#2.9-链路九单导联-ECG-→-心律失常分类" data-toc="2.9 链路九：单导联 ecg → 心律失常分类">2.9 链路九：单导联 ECG → 心律失常分类</a>
+<a class="toc-h2" href="#2.10-链路十PPG-波形-→-血压最重要也最被误解的一条" data-toc="2.10 链路十：ppg 波形 → 血压（最重要、也最被误解的一条）">2.10 链路十：PPG 波形 → 血压（最重要、也最被误解的一条）</a>
+<a class="toc-h2" href="#2.11-链路十一Bio-Z-→-体成分与水合状态" data-toc="2.11 链路十一：bio-z → 体成分与水合状态">2.11 链路十一：Bio-Z → 体成分与水合状态</a>
+<a class="toc-h2" href="#2.12-链路十二皮温-→-排卵发热疾病预警" data-toc="2.12 链路十二：皮温 → 排卵、发热、疾病预警">2.12 链路十二：皮温 → 排卵、发热、疾病预警</a>
+<a class="toc-h2" href="#2.13-链路十三CGM-→-血糖动力学" data-toc="2.13 链路十三：cgm → 血糖动力学">2.13 链路十三：CGM → 血糖动力学</a>
+<a class="toc-h2" href="#2.14-链路十四EDA-多模态-→-唤醒度而非「情绪」" data-toc="2.14 链路十四：eda + 多模态 → 唤醒度（而非「情绪」）">2.14 链路十四：EDA + 多模态 → 唤醒度（而非「情绪」）</a>
+<a class="toc-h1" href="#第三章-引擎篇所有穿戴算法共享的那套通用方法" data-toc="第三章 引擎篇：所有穿戴算法共享的那套通用方法">第三章 引擎篇：所有穿戴算法共享的那套通用方法</a>
+<a class="toc-h2" href="#3.1-第一道关口信号质量评估SQI" data-toc="3.1 第一道关口：信号质量评估（sqi）">3.1 第一道关口：信号质量评估（SQI）</a>
+<a class="toc-h2" href="#3.2-第二道关口运动伪影消除" data-toc="3.2 第二道关口：运动伪影消除">3.2 第二道关口：运动伪影消除</a>
+<a class="toc-h2" href="#3.3-传感器融合的三个层次" data-toc="3.3 传感器融合的三个层次">3.3 传感器融合的三个层次</a>
+<a class="toc-h2" href="#3.4-个人基线穿戴健康的灵魂" data-toc="3.4 个人基线：穿戴健康的灵魂">3.4 个人基线：穿戴健康的灵魂</a>
+<a class="toc-h2" href="#3.5-时间尺度工程不同生理过程有不同的「响应时间」" data-toc="3.5 时间尺度工程：不同生理过程有不同的「响应时间」">3.5 时间尺度工程：不同生理过程有不同的「响应时间」</a>
+<a class="toc-h2" href="#3.6-边缘-vs-云功耗隐私与延迟的三角" data-toc="3.6 边缘 vs 云：功耗、隐私与延迟的三角">3.6 边缘 vs 云：功耗、隐私与延迟的三角</a>
+<a class="toc-h1" href="#第四章-事件篇能识别出哪些事件各自有多可信" data-toc="第四章 事件篇：能识别出哪些事件，各自有多可信">第四章 事件篇：能识别出哪些事件，各自有多可信</a>
+<a class="toc-h2" href="#4.1-事件总表" data-toc="4.1 事件总表">4.1 事件总表</a>
+<a class="toc-h2" href="#4.2-三条最重要的「元结论」" data-toc="4.2 三条最重要的「元结论」">4.2 三条最重要的「元结论」</a>
+<a class="toc-h1" href="#第五章-Agent-篇AI-健康教练算法研发需要拓展的-12-个维度" data-toc="第五章 agent 篇：ai 健康教练算法研发需要拓展的 12 个维度">第五章 Agent 篇：AI 健康教练算法研发需要拓展的 12 个维度</a>
+<a class="toc-h2" href="#D1.-测量科学素养Metrology学会把每个数字当成「估计值」" data-toc="d1. 测量科学素养（metrology）：学会把每个数字当成「估计值」">D1. 测量科学素养（Metrology）：学会把每个数字当成「估计值」</a>
+<a class="toc-h2" href="#D2.-生理动力学与时间尺度学会正确的决策节奏决策尺度" data-toc="d2. 生理动力学与时间尺度：学会正确的决策节奏（决策尺度）">D2. 生理动力学与时间尺度：学会正确的决策节奏（决策尺度）</a>
+<a class="toc-h2" href="#D3.-隐状态推断从「指标」到「状态」" data-toc="d3. 隐状态推断：从「指标」到「状态」">D3. 隐状态推断：从「指标」到「状态」</a>
+<a class="toc-h2" href="#D4.-个性化与-N-of-1穿戴健康的统计分析单位是「人内」不是「人间」" data-toc="d4. 个性化与 n-of-1：穿戴健康的统计分析单位是「人内」，不是「人间」">D4. 个性化与 N-of-1：穿戴健康的统计分析单位是「人内」，不是「人间」</a>
+<a class="toc-h2" href="#D5.-行为改变科学LLM-Coach-的「内容」从哪来" data-toc="d5. 行为改变科学：llm coach 的「内容」从哪来">D5. 行为改变科学：LLM Coach 的「内容」从哪来</a>
+<a class="toc-h2" href="#D6.-主动测量你的-Agent-应该能设计「生理测试」而不只是读数据" data-toc="d6. 主动测量：你的 agent 应该能设计「生理测试」，而不只是读数据">D6. 主动测量：你的 Agent 应该能设计「生理测试」，而不只是读数据</a>
+<a class="toc-h2" href="#D7.-因果推断与-Bandit把「相关性」升级为「可行动的因果」" data-toc="d7. 因果推断与 bandit：把「相关性」升级为「可行动的因果」">D7. 因果推断与 Bandit：把「相关性」升级为「可行动的因果」</a>
+<a class="toc-h2" href="#D8.-数据工程与互操作脏活决定上限" data-toc="d8. 数据工程与互操作：脏活决定上限">D8. 数据工程与互操作：脏活决定上限</a>
+<a class="toc-h2" href="#D9.-不确定性量化公平性与「失效的优雅」" data-toc="d9. 不确定性量化、公平性与「失效的优雅」">D9. 不确定性量化、公平性与「失效的优雅」</a>
+<a class="toc-h2" href="#D10.-合规监管与安全边界Red-Line-在哪里" data-toc="d10. 合规、监管与安全边界：red line 在哪里">D10. 合规、监管与安全边界：Red Line 在哪里</a>
+<a class="toc-h2" href="#D11.-基础模型与表征学习什么时候用什么时候别用" data-toc="d11. 基础模型与表征学习：什么时候用，什么时候别用">D11. 基础模型与表征学习：什么时候用，什么时候别用</a>
+<a class="toc-h2" href="#D12.-评测体系与商业闭环没有-ImageNet-的世界怎么迭代" data-toc="d12. 评测体系与商业闭环：没有 imagenet 的世界怎么迭代">D12. 评测体系与商业闭环：没有 ImageNet 的世界怎么迭代</a>
+<a class="toc-h2" href="#第五章小结一张优先序地图" data-toc="第五章小结：一张优先序地图">第五章小结：一张优先序地图</a>
+<a class="toc-h1" href="#第六章-资源篇数据集论文与-90-天学习路线" data-toc="第六章 资源篇：数据集、论文与 90 天学习路线">第六章 资源篇：数据集、论文与 90 天学习路线</a>
+<a class="toc-h2" href="#6.1-公开数据集按「能练什么」分类" data-toc="6.1 公开数据集（按「能练什么」分类）">6.1 公开数据集（按「能练什么」分类）</a>
+<a class="toc-h2" href="#6.2-必读论文清单按主题标注为什么读" data-toc="6.2 必读论文清单（按主题，标注为什么读）">6.2 必读论文清单（按主题，标注为什么读）</a>
+<a class="toc-h2" href="#6.3-90-天学习路线" data-toc="6.3 90 天学习路线">6.3 90 天学习路线</a>
+<a class="toc-h2" href="#6.4-值得持续跟踪的信息源" data-toc="6.4 值得持续跟踪的信息源">6.4 值得持续跟踪的信息源</a>
+<a class="toc-h1" href="#附录术语表与常见误区" data-toc="附录：术语表与常见误区">附录：术语表与常见误区</a>
+<a class="toc-h2" href="#A.-术语速查" data-toc="a. 术语速查">A. 术语速查</a>
+<a class="toc-h2" href="#B.-常见误区清单值得贴在工位上" data-toc="b. 常见误区清单（值得贴在工位上）">B. 常见误区清单（值得贴在工位上）</a>
+<a class="toc-h2" href="#C.-一句话的心智模型送给你" data-toc="c. 一句话的心智模型（送给你）">C. 一句话的心智模型（送给你）</a>
+    </div>
+  </nav>
+  <main>
+    <div id="topbar">
+      <button id="menuBtn">☰</button>
+      <span class="tb-title">穿戴传感器与 AI 健康教练算法全景</span>
+    </div>
+    <div class="container">
+      <header class="hero">
+        <div class="hero-title">从光子到决策：通用健康场景智能穿戴设备的传感器、生理信号与 AI 健康教练算法全景</div>
+        <div class="sub">七类传感器 · 14 条信号链路 · 30+ 可识别事件 · 12 个 Agent 研发维度。一份面向 AI 健康教练 Agent 算法研发者的系统性调研笔记。</div>
+        <div class="chips">
+          <span class="chip">版本 v1.0</span>
+          <span class="chip g">更新 2026-09-29</span>
+          <span class="chip g">深入 + 浅出</span>
+          <span class="chip g">关键断言附一手来源</span>
+          <span class="chip g">可转博客系列</span>
+        </div>
+      </header>
+      <div class="notice"><strong>阅读边界：</strong>本文用于技术学习与产品研究，不提供诊断、治疗或个体化医疗建议。消费级设备的输出常为估计或筛查信号；任何异常、症状或设备通知均应依照具体设备的预期用途处理，并由合格医疗专业人员确认。</div>
+<h1 id="从光子到决策通用健康场景智能穿戴设备的传感器生理信号与-AI-健康教练算法全景">从光子到决策：通用健康场景智能穿戴设备的传感器、生理信号与 AI 健康教练算法全景</h1>
+<blockquote>
+<p>一份面向「AI 健康教练 Agent 算法研发者」的系统性调研笔记
+版本：v1.0 ｜ 更新时间：2026-09-29
+阅读定位：既可作为深入学习的技术地图，也可直接改写为系列博客文章</p>
+</blockquote>
+<hr />
+<h2 id="序一句话讲清这件事的本质">序：一句话讲清这件事的本质</h2>
+<p>所有消费级健康穿戴设备做的事情，本质上都是同一件事：</p>
+<blockquote>
+<p><strong>用一束光、一枚电极、一颗加速度计，去反演（inverse problem）人体内部那些本来需要 CT、抽血、多导睡眠监测才能看到的生理过程。</strong></p>
+</blockquote>
+<p>这句话有三个隐藏含义，理解它比记住任何一个硬件参数都重要：</p>
+<ol>
+<li><strong>穿戴设备几乎从不「直接测量」目标量。</strong> 它测量的是一个<strong>代理量（proxy）</strong>，再用模型把代理量映射成你想要的数字。血压就是最典型的例子：手表从未测过血压，它测的是脉搏波传播速度/形态，再用一条标定曲线把它翻译成 mmHg。</li>
+<li><strong>代理关系的稳定性决定了这个产品的天花板。</strong> 而这个关系会被血流灌注、肤色、体毛、佩戴松紧、体温、姿势、水合状态、药物共同扰动。</li>
+<li><strong>因此，AI 健康教练 Agent 的第一性原则不是「多准」，而是「知道什么时候不可信」。</strong> 一个能对自己输出的置信度诚实的 Agent，价值远高于一个把估算值吹成检测值的 Agent。</li>
+</ol>
+<p>本文件按下面这条链路展开——这也是穿戴厂商内部实际的产品架构：</p>
+<pre><code>物理世界 ──► 传感器（Sensor） ──► 原始信号（Raw Signal）
+        ──► 信号处理（Denoise / SQI / Feature）──► 指标（Metric）
+        ──► 事件识别（Event）──► 状态推断（State）──► 洞察 / 干预（Agent）
+</code></pre>
+<hr />
+<h2 id="目录">目录</h2>
+<ul>
+<li><a href="#第一章-传感器篇手上这几颗脏器件到底在测什么">第一章 传感器篇：手上这几颗脏器件到底在测什么</a></li>
+<li><a href="#第二章-信号篇从波形到生理指标的-14-条链路">第二章 信号篇：从波形到生理指标的 14 条链路</a></li>
+<li><a href="#第三章-引擎篇所有穿戴算法共享的那套通用方法">第三章 引擎篇：所有穿戴算法共享的那套通用方法</a></li>
+<li><a href="#第四章-事件篇能识别出哪些事件各自有多可信">第四章 事件篇：能识别出哪些事件，各自有多可信</a></li>
+<li><a href="#第五章-agent-篇ai-健康教练算法研发需要拓展的-12-个维度">第五章 Agent 篇：AI 健康教练算法研发需要拓展的 12 个维度</a></li>
+<li><a href="#第六章-资源篇数据集论文与-90-天学习路线">第六章 资源篇：数据集、论文与 90 天学习路线</a></li>
+<li><a href="#附录术语表与常见误区">附录：术语表与常见误区</a></li>
+</ul>
+<hr />
+<h1 id="第一章-传感器篇手上这几颗脏器件到底在测什么">第一章 传感器篇：手上这几颗脏器件到底在测什么</h1>
+<h2 id="1.1-先建立一个分类直觉">1.1 先建立一个分类直觉</h2>
+<p>穿戴里的传感器可以按「它感知的是哪种物理量」分成七大类。这个分类不是学术洁癖——<strong>每一类对应一套完全不同的误差来源和算法处理方式</strong>，混淆它们是新手最常见的错误。</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>感知的物理量</th>
+<th>具体器件</th>
+<th>从它身上能榨出的信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>光学</strong></td>
+<td>组织对光的吸收/散射随时间的周期性变化</td>
+<td>LED（绿/红/红外/黄/蓝）+ 光电二极管 PD、环境光传感器、红外测温热电堆</td>
+<td>PPG 波形、心率、SpO₂、呼吸率、血压代理、血管老化、AFib 筛查、睡眠分期、抗氧化水平</td>
+</tr>
+<tr>
+<td><strong>电学</strong></td>
+<td>体表电位差、组织阻抗</td>
+<td>单导联 ECG 电极（不锈钢/ITO 镀层）、Bio-Z 生物阻抗电极、EDA 皮电电极</td>
+<td>心电节律、房颤/早搏、QT、体成分（脂肪/水分/肌肉）、呼吸阻抗、交感兴奋/情绪唤醒</td>
+</tr>
+<tr>
+<td><strong>化学</strong></td>
+<td>特定分子的浓度（电化学/光谱）</td>
+<td>CGM 酶电极（葡萄糖氧化酶）、乳酸/酒精传感器、汗液离子选择性电极、类胡萝卜素光谱</td>
+<td>组织间液葡萄糖曲线、电解质流失、代谢灵活性、膳食反应</td>
+</tr>
+<tr>
+<td><strong>惯性/运动</strong></td>
+<td>加速度、角速度、地磁</td>
+<td>3 轴加速度计、陀螺仪、磁力计（合称 IMU）</td>
+<td>步数、活动识别、能量消耗、睡眠/觉醒、呼吸扰动、跌倒、震颤、吞咽、姿势</td>
+</tr>
+<tr>
+<td><strong>热力学</strong></td>
+<td>温度</td>
+<td>NTC/热敏电阻（皮温）、热电堆（红外耳温）、环境温度传感器</td>
+<td>皮温相对基线偏移、排卵窗口、发热/疾病预警、核心温度估算、热适应</td>
+</tr>
+<tr>
+<td><strong>声学</strong></td>
+<td>气压振动</td>
+<td>MEMS 麦克风（多个，含骨传导/入耳麦克风）</td>
+<td>鼾声、咳嗽、呼吸音、语音情绪、环境噪声暴露、身份声纹、咽部听诊</td>
+</tr>
+<tr>
+<td><strong>环境/位置</strong></td>
+<td>压强、海拔、光、坐标</td>
+<td>气压计、GNSS（GPS/北斗/伽利略双频）、光传感器</td>
+<td>爬楼层、海拔适应、户外运动能耗、日照暴露、昼夜节律/蓝光暴露、地理位置带来的环境与运动语境</td>
+</tr>
+</tbody>
+</table>
+<p>一句话记忆：<strong>光学看血、电学看电、化学看分子、惯性看运动、热力学看温度、声学看气体流动与振动、环境看语境。</strong></p>
+<h2 id="1.2-光学PPG-是整个行业的地基">1.2 光学：PPG 是整个行业的地基</h2>
+<h3 id="硬件长什么样">硬件长什么样</h3>
+<p>一个典型的反射式 PPG 模组包含：</p>
+<ul>
+<li><strong>发光端</strong>：若干 LED。主流是绿光（~525nm）、红光（~660nm）、红外（~850nm 或 ~940nm）。高端方案追加黄光（~590nm）、甚至蓝/紫光，用来探测更深或更浅的组织层——因为<strong>波长越长，穿透越深：</strong></li>
+<li>绿光：穿透浅（~1–2mm），主要被真皮层毛细血管丛感知，<strong>血流灌注变化引起的交流成分（AC）幅度大</strong>，所以最适合测心率；但受运动伪影影响最大。</li>
+<li>红光/红外：穿透深（可达 5–10mm），能到达小动脉层，主要用于 SpO₂（因为血红蛋白在这两个波长上的吸收差异最显著）。</li>
+<li><strong>接收端</strong>：光电二极管（PD），把返回光强转成电流。</li>
+<li><strong>前端</strong>：AFE（模拟前端，如 ADI、TI、汇顶、天易合芯方案）负责 LED 驱动、跨阻放大、环境光抵消、ADC。</li>
+<li><strong>辅助</strong>：加速度计几乎是 PPG 的法定搭档，原因见 §3.2。</li>
+</ul>
+<h3 id="为什么戒指比手表更容易测得准这是个真问题">为什么戒指比手表更容易测得准（这是个真问题）</h3>
+<p>这不是玄学。手指腹/指根的<strong>动脉密度高、毛细血管丛丰富、组织厚度薄、环形结构的稳定贴合也有助于形成稳定光路</strong>；而手腕有桡动脉+尺动脉双重路径、骨骼与肌腱多、且极易在运动中产生传感器位移。<strong>同一颗 sensor，戴手指上的 SNR（信噪比）通常可能高于手腕。</strong> 代价是：典型戒指通常不提供 ECG（难以形成心电回路），也放不下 ECG 电极与更大的电池。</p>
+<p>Oura Ring 4 是目前把这条路线走到极致的产品：采用厂商称为 <strong>18-path multi-wavelength PPG</strong> 的 Smart Sensing，按佩戴条件选择 LED，以兼顾信号质量与功耗。厂商报告的相对上一代改进包括血氧信号质量、夜间平均 SpO₂ 准确度及心率图缺口；这些是特定研究条件下的厂商结果，不能外推为通用临床准确度。<a href="https://ouraring.com/blog/smart-sensing/" rel="noopener noreferrer">Oura 的方法与限定条件</a>这套「用算法换信噪比、用信噪比换功耗」的思路，是所有穿戴信号链的通用范式。</p>
+<h3 id="光学传感器演进的三种典型方向">光学传感器演进的三种典型方向</h3>
+<ol>
+<li><strong>多通道 &amp; 多光路选择</strong>：一个发射多个接收，或反过来；动态选路（Oura Smart Sensing），本质是<strong>在时变的物理接触条件下做自适应采样</strong>。</li>
+<li><strong>多波长光谱</strong>：从 3 波长扩展到 5–8 波长，目标是把「只看血流」升级为「看血的成分」——这是无创血糖、无创乳酸、血红蛋白、甚至类胡萝卜素（三星 Galaxy Watch8 的 Antioxidant Index 就走反射光谱路线）的物理前提。</li>
+<li><strong>换测量部位</strong>：耳朵（AirPods Pro 3）、前额、锁骨下、上臂。耳道的好处是<strong>灌注好、几乎无环境光泄漏、相对稳定</strong>；代价是极端情况下 颅面/耳道几何差异巨大，所以苹果说他们测试了数千参与者的耳道几何与肤色来找最优传感器位置。</li>
+</ol>
+<h2 id="1.3-电学ECG-与生物阻抗">1.3 电学：ECG 与生物阻抗</h2>
+<h3 id="单导联-ECG">单导联 ECG</h3>
+<p>结构上就是两个（或三个）电极：</p>
+<ul>
+<li>手表背面电极（贴手腕）</li>
+<li>表冠/边框电极（另一只手手指按住）</li>
+</ul>
+<p>这样就形成了一条近似 <strong>Lead I</strong> 的回路（左手腕 → 右手手指），可以记录 30 秒的单通道心电。它的价值在于：<strong>这是穿戴里唯一「直接测量」而非代理测量的生理信号之一</strong>——心电是心脏电活动的直接表达，不像血压/血糖是反演出来的。所以它的 FDA 性能可以做到很高（Apple ECG 1.0 临床研究中，算法对 AFib 的灵敏度/特异度均在 98%+/99% 量级）。</p>
+<p>局限也一眼可见：<strong>单视角</strong>。医院是 12 导联，从不同角度「拍照」心脏；手表只有 1 个角度。它能可靠回答「节律规不规整」，无法回答心电图医生关心的很多问题（如 ST 段缺血形态、轴偏、大多数传导异常）。</p>
+<p>一个常被忽略的工程事实：<strong>ECG 需要用户主动配合</strong>（手指按住表冠 30 秒且保持静止），所以它是<strong>按需式（episodic）</strong>而非连续式的。这与 PPG 的<strong>机会式 opportunistic 连续监测</strong>形成互补——行业已经形成了稳定的两级架构：</p>
+<pre><code>PPG 连续/机会式 粗筛  ──►  可疑  ──►  ECG 按需 确认  ──►  就医/贴片进一步确诊
+</code></pre>
+<p><strong>这是穿戴健康最重要的架构模式，做 Agent 时必须理解：你的信号源天然是「低成本低保真 + 高成本高保真」的两级体系，而不是单一数据源。</strong></p>
+<h3 id="生物阻抗-Bio-Z-BIA">生物阻抗 Bio-Z / BIA</h3>
+<p>原理：向组织注入一段<strong>微弱、高频（通常 5kHz–200kHz 多频）交流电</strong>，测量两点间的阻抗 <code>Z</code> 与相位角 <code>\theta</code>。</p>
+<p>物理基础：
+- <strong>细胞内/外液是良导体</strong>（电解质溶液），<strong>细胞膜是电容器</strong>，<strong>脂肪几乎绝缘</strong>。
+- 低频电流主要走细胞外液，高频电流能穿透细胞膜走细胞内液 —— 这是<strong>多频 BIA 能区分细胞内液/外液</strong>的原理。
+- 经验模型（Cole-Cole 模型）把 <code>Z(f)</code> 拟合为：<code>Z = R_\infty + \frac{R_0 - R_\infty}{1 + (j\omega\tau)^{1-\alpha}}</code></p>
+<p>可推出的东西：
+- <strong>体成分</strong>：结合身高体重与阻抗指数 <code>H^2/R</code>，用回归估算去脂体重 → 脂肪率 → 肌肉量。八电极体脂秤精度尚可，手表/戒指的局部测量（手到手）误差明显更大。
+- <strong>水合状态 / 体液潴留</strong>：这对心衰监测特别有价值（胸腔积液 → 阻抗下降）。
+- <strong>呼吸率</strong>：胸腔容积变化 → 跨胸阻抗变化（约 0.1–1Ω），这是医院呼吸监护的标准方法之一。手表上很难实现，因为电流路径不经过胸腔。
+- <strong>EDA / 皮肤电</strong>：汗腺活动改变皮肤导电性 → 交感神经兴奋的窗口这是理解 EDA 的关键：<strong>EDA 测的是交感唤醒（arousal），不是情绪效价（valence）</strong>。害怕、兴奋、愤怒、运动前的紧张，EDA 都长一个样。很多「AI 情绪手表」在这里犯严重的解释错误。</p>
+<h2 id="1.4-化学CGM-是目前唯一成熟的「分子级」穿戴">1.4 化学：CGM 是目前唯一成熟的「分子级」穿戴</h2>
+<h3 id="原理务必搞清楚因为它定义了「连续」的含义">原理（务必搞清楚，因为它定义了「连续」的含义）</h3>
+<ol>
+<li>一根比头发丝略粗的柔性电极丝植入皮下（真皮层深处，通常是上臂或腹部），停留在<strong>组织间液（interstitial fluid）</strong>中。</li>
+<li>电极丝尖端固定着<strong>葡萄糖氧化酶（GOx）</strong>。</li>
+<li>葡萄糖扩散进来：<code>葡萄糖 + O_2 \xrightarrow{GOx} 葡萄糖酸 + H_2O_2</code></li>
+<li>工作电极检测 <code>H_2O_2</code> 氧化产生的<strong>电流</strong>，或通过氧化还原介体传递电子 → <strong>电流大小 ∝ 葡萄糖浓度</strong>。</li>
+<li>每 1–5 分钟采样一次，蓝牙发给手机。</li>
+</ol>
+<p>关键数字（这决定了 Agent 怎么用它）：
+- <strong>生理滞后</strong>：组织间液葡萄糖相对血液葡萄糖滞后 <strong>5–15 分钟</strong>。血糖在快速变化（进餐后、运动后、胰岛素作用期）时，这个滞后会让 CGM 和实际血糖差得很远。
+- <strong>精度指标用 MARD</strong>（Mean Absolute Relative Difference，平均绝对相对差异）。新一代产品 MARD 约 7–9%（Dexcom G7、Libre 3 级别），微创 CGM 是 Gold Standard；<strong>任何号称无创光学血糖的产品都要拿它做对比</strong>。
+- <strong>寿命</strong>：7–15 天（Dexcom G7 10 天，Libre 3 14 天），到后期酶衰减 + 异物反应包裹 → 精度下滑。
+- <strong>factory calibration</strong>：现代产品出厂标定，无需指血校准。</p>
+<h3 id="「无创血糖」为什么这么难对你判断技术新闻很有用">「无创血糖」为什么这么难（对你判断技术新闻很有用）</h3>
+<p>葡萄糖在血液中浓度约 5 mmol/L（~90mg/dL），而<strong>红外光谱区葡萄糖的摩尔吸光系数极小，且与水、血红蛋白、蛋白、温度的重叠吸收混淆</strong>。结果就是：葡萄糖对光谱的贡献可能只占总信号变化的万分之几。要在噪声里提取出这么小的信号，还要排除个体间巨大的皮肤/血流差异——这是物理学级别的困难，不是算法能短期突破的。</p>
+<blockquote>
+<p><strong>判断准则</strong>：看到「无创血糖手表」的新闻，先问三个问题：①有没有拿介入式 CGM 或静脉血做同步对照？②MARD 是多少？③是否报告了个体校准需求？如果只用「趋势一致率」「方向一致率」这种指标（例如某些被试 A1C 或静脉空腹血糖的「变化方向一致率」），那基本等于没验证。</p>
+<p>目前市面上合法的所谓「手表血糖」，几乎都是<strong>多模态建模的趋势/倾向指数</strong>（HRV、皮温、睡眠结构、活动等推算），而不是血糖测量。这在监管上属于健康建议而非血糖监测，界线必须清楚。</p>
+</blockquote>
+<h2 id="1.5-惯性与其他">1.5 惯性与其他</h2>
+<p><strong>IMU（三轴加速度计 ± 陀螺仪 ± 磁力计）</strong> 是除 PPG 外性价比最高的传感器，因为它便宜、极低功耗、而且<strong>几乎永不失效</strong>。它能做：</p>
+<ul>
+<li>步数（峰值检测 + 时频处理，需抗「抖手伪造」）</li>
+<li>活动识别（走路/跑步/骑车/游泳/器械/睡眠）：这是经典的 HAR（Human Activity Recognition）问题，深度模型在公开数据集上早已 &gt;95%，难点在<strong>个体差异与未见过活动</strong>而非训练集精度。</li>
+<li><strong>睡眠/觉醒区分</strong>（体动 Wear/Donning）</li>
+<li><strong>能量消耗</strong>（加速度积分 + 心率回归）</li>
+<li><strong>跌倒检测</strong>（自由落体→撞击→静止三阶段模板）</li>
+<li><strong>震颤量化</strong>（帕金森病药物疗效评估，已在临床研究中成熟）</li>
+<li><strong>呼吸扰动</strong>（这是苹果睡眠呼吸暂停检测的核心输入，见 §2.7）</li>
+<li><strong>吞咽次数 / 咬合 / 手势 / 打字</strong>（扩展交互）</li>
+</ul>
+<p><strong>气压计</strong>：能算爬楼层（每层约 10–12 hPa 变化被人误解，实际每层 ≈ 0.36 hPa，约 3 米），也能估算海拔适应；配合天气 API 可估算环境气压对生理的影响。</p>
+<p><strong>GNSS（双频 L1+L5）</strong>：跑步经济性、配速、距离；多星系统（GPS/北斗/伽利略/格洛纳斯）提升城市峡谷精度。它消耗的功耗最高，是穿戴功耗预算的主要矛盾之一。</p>
+<p><strong>麦克风</strong>：鼾声录音 + 频谱分析可以辅助打鼾/呼吸暂停判断；咳嗽频次是慢阻肺、哮喘、心衰的重要标记；语音的情感韵律（prosody）与认知退化筛查（语速、停顿、词汇多样性）正在成为研究热点。<strong>注意：这是隐私敏感度最高的传感器，很多产品干脆不采样只做本地特征。</strong></p>
+<h2 id="1.6-代表性产品的传感器配置横评">1.6 代表性产品的传感器配置横评</h2>
+<table>
+<thead>
+<tr>
+<th>产品</th>
+<th>光学</th>
+<th>电学</th>
+<th>化学</th>
+<th>运动/环境</th>
+<th>特色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Apple Watch S11 / Ultra 3</strong></td>
+<td>绿+红+红外多波长 PPG，AFE 自适应</td>
+<td>单导联 ECG（背面+表冠电极）</td>
+<td>无</td>
+<td>IMU + 气压 + 双频 GNSS + 麦克风 + 光 + 皮温</td>
+<td>IRNF / ECG / 睡眠呼吸暂停通知 / 高血压通知，全部已获 FDA 许可；背后依托的是 10 万至百万级参与者规模的研究</td>
+</tr>
+<tr>
+<td><strong>Samsung Galaxy Watch8 / Ultra</strong></td>
+<td>Samsung BioActive Sensor（集成光学生物信号 + 心电信号 + BIA 三合一）</td>
+<td>同上（ECG + BIA）</td>
+<td>无</td>
+<td>IMU + 气压 + 光 + 温度 + 地磁</td>
+<td>新增 <strong>血管负荷趋势（Vascular Load）</strong> 与 <strong>抗氧化指数（Antioxidant Index，反射光谱测皮肤类胡萝卜素）</strong>；血压（需三星手机，周期校准）</td>
+</tr>
+<tr>
+<td><strong>Oura Ring 4</strong></td>
+<td>18-path 多波长 PPG（6 LED / 3 PD）</td>
+<td>无</td>
+<td>无</td>
+<td>3D 加速度计 + NTC 皮温</td>
+<td>Smart Sensing 动态选路；8 天续航；30+ 生理指标；睡眠追踪标杆</td>
+</tr>
+<tr>
+<td><strong>AirPods Pro 3</strong></td>
+<td><strong>入耳 PPG</strong>（红外，每秒 256 次脉冲）</td>
+<td>无</td>
+<td>无</td>
+<td>IMU + 麦克风 + 皮肤检测传感器</td>
+<td>在耳机中加入训练心率传感器；支持最多 50 种训练类型；听力健康功能。<a href="https://www.apple.com/airpods-pro/specs/" rel="noopener noreferrer">Apple 技术规格</a></td>
+</tr>
+<tr>
+<td><strong>华为 Watch 系列 / WATCH D2</strong></td>
+<td>TruSeen 多通道光学系统</td>
+<td>单导联 ECG（部分型号）；<strong>WATCH D2：微型气泵 + 气囊袖带（真示波法）</strong></td>
+<td>无</td>
+<td>IMU + 气压 + GNSS + 温度</td>
+<td>WATCH D2 是「另一条路线」的代表：在表带中使用气囊袖带，以体积换取按其获准预期用途进行的袖带式血压测量。</td>
+</tr>
+<tr>
+<td><strong>Whoop 5.0 / Garmin / Fitbit</strong></td>
+<td>多通道 PPG</td>
+<td>部分型号带 ECG</td>
+<td>无</td>
+<td>IMU + GNSS + 气压</td>
+<td>Whoop 主打 HRV/恢复/strain 体系 + <strong>血压估算（Blood Pressure Insights）</strong>；Garmin 主打运动生理指标群（VO₂max、Training Readiness、HRV Status）</td>
+</tr>
+<tr>
+<td><strong>Dexcom G7 / Abbott Libre 3 / 硅基动感</strong></td>
+<td>无</td>
+<td>无</td>
+<td><strong>CGM 酶电极</strong></td>
+<td>无</td>
+<td>真·连续代谢数据流；是 AI 代谢健康教练的关键外接数据源</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>给 Agent 研发者的提醒</strong>：你的数据画像里，「是否有 ECG」「是否有 SpO₂」「是否有 CGM」是三个<strong>质变级差异</strong>，不是渐变。不要假设用户的设备能力；要设计一个<strong>能力协商（capability negotiation）层</strong>：先问设备能做什么，再决定能承诺什么洞察。</p>
+</blockquote>
+<h1 id="第二章-信号篇从波形到生理指标的-14-条链路">第二章 信号篇：从波形到生理指标的 14 条链路</h1>
+<p>这一章是全文的核心。每条链路都按同一模板展开：</p>
+<blockquote>
+<p><strong>物理 → 处理链路 → 关键数学 → 精度/失效 → 对 Agent 的启示</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>链路</th>
+<th>产物的主要用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>PPG → 心率</td>
+<td>运动强度、静息心率趋势</td>
+</tr>
+<tr>
+<td>2</td>
+<td>RR 序列 → HRV</td>
+<td>恢复、训练负荷、自主神经状态</td>
+</tr>
+<tr>
+<td>3</td>
+<td>双波长 PPG → SpO₂</td>
+<td>夜间氧合、呼吸事件、高原适应</td>
+</tr>
+<tr>
+<td>4</td>
+<td>IMU → 步数/活动/能耗</td>
+<td>活动量、久坐、能量平衡</td>
+</tr>
+<tr>
+<td>5</td>
+<td>IMU + PPG → 睡眠分期</td>
+<td>睡眠质量承诺</td>
+</tr>
+<tr>
+<td>6</td>
+<td>PPG/IMU → 呼吸率</td>
+<td>呼吸健康、压力</td>
+</tr>
+<tr>
+<td>7</td>
+<td>夜间信号 → 睡眠呼吸暂停筛查</td>
+<td>受监管的筛查/通知功能（设备与适用用途特异）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>PPG 心动周期图 → 房颤筛查</td>
+<td>受监管的筛查/通知功能（设备与适用用途特异）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>单导联 ECG → 心律失常</td>
+<td>受监管的记录/确认路径（设备与适用用途特异）</td>
+</tr>
+<tr>
+<td>10</td>
+<td>PPG 波形 → 血压估计</td>
+<td>争议最大、最需谨慎</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Bio-Z → 体成分/水合</td>
+<td>营养、体重管理、心衰监测</td>
+</tr>
+<tr>
+<td>12</td>
+<td>皮温 → 周期/发热/预警</td>
+<td>女性健康、疾病早期预警</td>
+</tr>
+<tr>
+<td>13</td>
+<td>CGM → 血糖动力学</td>
+<td>代谢健康、精准营养</td>
+</tr>
+<tr>
+<td>14</td>
+<td>EDA + 多模态 → 唤醒度</td>
+<td>压力管理、生物反馈</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2.1-链路一PPG-→-心率HR">2.1 链路一：PPG → 心率（HR）</h2>
+<h3 id="物理">物理</h3>
+<p>每次心脏收缩把血泵入外周血管，手腕/手指的毛细血管床体积发生脉动性充盈；对绿光而言，<strong>血液比其他组织吸收得多得多</strong>，于是反射光强出现周期性波动。</p>
+<p>PPG 信号可分解为两部分：</p>
+<pre><code>I(t) = I_DC + I_AC
+I_DC：缓慢漂移（组织、静脉血、呼吸、体温调节）——占绝大部分
+I_AC：心动周期导致的脉动——通常只占总光强的 0.1%~2%
+</code></pre>
+<p>注意这个比例：<strong>有用的交流成分只占总光强的千分之几</strong>。这就是为什么 PPG 处理的第一步永远是 DC 追踪 + AC 放大，AFE 芯片里的环境光抵消和直流扣除电路就是在干这件事。</p>
+<h3 id="波形解剖必须懂因为后面血压血管老化全靠它">波形解剖（必须懂，因为后面血压、血管老化全靠它）</h3>
+<p>一个典型脉搏波包含三段结构：</p>
+<ul>
+<li><strong>主波（Systolic peak）</strong>：左心室射血产生的压力波峰</li>
+<li><strong>重搏切迹（Dicrotic notch）</strong>：主动脉瓣关闭叠加外周反射波回传形成的凹陷</li>
+<li><strong>舒张波（Diastolic peak）</strong>：反射波形成的第二个峰</li>
+</ul>
+<p>从波形可提取的形态学特征主要有：收缩期上升时间、最大上升斜率（与心肌收缩力、血管顺应性相关）、主波峰面积、切迹相对位置、波形面积比 <code>K = A_{sys}/A_{total}</code>、增强指数 AIx（Augmentation Index）。<strong>这类「脉搏波分析（PWA, Pulse Wave Analysis）」特征，是几乎所有高级心血管估算的共同物理基础。</strong></p>
+<h3 id="处理链路">处理链路</h3>
+<pre><code>原始 PPG（采样率通常 25~100Hz 或更高）
+  → 带通滤波（典型 0.5–4Hz，对应 30–240 bpm）
+  → 运动伪影抑制（以 IMU 为参考的自适应滤波 / PCA / SVD / EMD / VMD / 深度学习重建）
+  → 心搏检测（峰值法 / 自相关 / 稀疏信号复原 / U-Net 分割）
+  → 逐拍 IBI（inter-beat interval）/ PRV 序列
+  → 生理合理性检查（相邻 IBI 差 &gt;20% 需判定为异常或伪影）
+  → 心率 = 60 / mean(IBI)
+</code></pre>
+<h3 id="精度与失效模式">精度与失效模式</h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>典型表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>静息 / 睡眠</td>
+<td>误差通常 &lt;3 bpm，可接近 ECG 参考水平</td>
+</tr>
+<tr>
+<td>稳态有氧跑</td>
+<td>光学腕式通常 2%~5% 误差；第三方对比测试中，Apple Watch 对胸带的误差约 0.63%~0.98%，入耳式 AirPods Pro 3 约 1.67%</td>
+</tr>
+<tr>
+<td>HIIT / 间歇跑</td>
+<td>峰值延迟 2~4 秒，误差显著放大（生理延迟叠加算法平滑）</td>
+</tr>
+<tr>
+<td>力量训练</td>
+<td>最差：握持、肌肉收缩、手表位移导致严重伪影</td>
+</tr>
+<tr>
+<td>冷水 / 低温</td>
+<td>外周血管收缩 → 灌注下降 → AC 幅度骤降，甚至测不出</td>
+</tr>
+<tr>
+<td>深肤色 / 手腕纹身</td>
+<td>黑色素吸收绿光降低 SNR。厂商通过动态调整 LED 输出功率与接收灵敏度部分补偿，但无法彻底消除</td>
+</tr>
+<tr>
+<td><strong>节律锁定（cadence lock）</strong></td>
+<td>跑步步频恰好与心率频段重叠（160 spm = 2.67Hz，160 bpm = 2.67Hz），频域滤波无法分离</td>
+</tr>
+</tbody>
+</table>
+<h3 id="对-Agent-的启示">对 Agent 的启示</h3>
+<p><strong>心率是一个「准但有延迟」的量，不是一个实时真值。</strong> 用它做闭环控制（例如「根据实时心率调整今日训练量」）时，必须设计<strong>滞后容忍</strong>与<strong>趋势优先</strong>：用 30~60 秒滑动窗口，不要对单点心率做反应式决策。</p>
+<h2 id="2.2-链路二RR-间期序列-→-HRV心率变异性">2.2 链路二：RR 间期序列 → HRV（心率变异性）</h2>
+<h3 id="物理-1">物理</h3>
+<p>心跳不是节拍器。相邻 RR 间期的微小波动来自窦房结对自主神经输入的响应：</p>
+<ul>
+<li><strong>副交感（迷走神经）</strong>作用快，产生心率的呼吸性变异（RSA，0.15~0.4 Hz 高频带）</li>
+<li><strong>交感</strong>作用慢（低频带 0.04~0.15 Hz，与压力反射回路相关）</li>
+</ul>
+<p>所以 HRV 是<strong>自主神经系统功能的一个非侵入窗口</strong>——注意是「窗口」不是「测量」：它测不出交感或副交感的绝对强度。</p>
+<h3 id="三类特征">三类特征</h3>
+<p><strong>时域（最常用、最稳）</strong></p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>定义</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RMSSD</strong></td>
+<td>相邻 RR 差值平方和均值的平方根</td>
+<td><strong>最常用</strong>。反映逐拍差异，主要由副交感/迷走张力决定。<strong>夜间或晨起 RMSSD 是恢复判断的主力指标</strong></td>
+</tr>
+<tr>
+<td>SDNN</td>
+<td>RR 序列标准差</td>
+<td>总变异量。需注意：短时段（&lt;5 分钟）的 SDNN 生理意义有限，常被误用</td>
+</tr>
+<tr>
+<td>pNN50</td>
+<td>相邻 RR 差 &gt;50ms 的占比</td>
+<td>与 RMSSD 高度相关</td>
+</tr>
+</tbody>
+</table>
+<p><strong>频域</strong>（先把 RR 序列重采样为等间距序列，再用 Welch 或 AR 模型估计功率谱）</p>
+<table>
+<thead>
+<tr>
+<th>频段</th>
+<th>范围</th>
+<th>解释（<strong>存在争议，勿过度解读</strong>）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VLF</td>
+<td>0.003–0.04 Hz</td>
+<td>体温调节、肾素系统；生理意义争议大</td>
+</tr>
+<tr>
+<td>LF</td>
+<td>0.04–0.15 Hz</td>
+<td>传统解读为「交感」，但现代观点认为它包含压力反射的混合成分</td>
+</tr>
+<tr>
+<td>HF</td>
+<td>0.15–0.4 Hz</td>
+<td>呼吸性变异（RSA），主要反映副交感活动</td>
+</tr>
+<tr>
+<td>LF/HF</td>
+<td>比值</td>
+<td><strong>历史上被当作「交感/副交感平衡」，今天被大量方法学者批评为过度简化</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>非线性</strong>：SD1/SD2（Poincaré 散点图）、样本熵、<strong>DFA-α1</strong>（去趋势波动分析的短期标度指数）。其中 DFA-α1 在运动生理领域被用于划定有氧阈/第一乳酸阈，是目前实用性较强的非线性指标。</p>
+<h3 id="四个关键陷阱做产品必读">四个关键陷阱（做产品必读）</h3>
+<ol>
+<li><strong>HRV 的个体差异极大</strong>（RMSSD 从 15ms 到 150ms 都有正常人），<strong>人群分位数对比几乎没有意义，必须做个体内基线</strong>。这是 Oura、Whoop、Garmin 全部采用「相对你的基线」呈现的根本原因。</li>
+<li><strong>测量窗口必须标准化</strong>：HRV 受呼吸频率、体位、测量时间、是否进食排尿影响极大。<strong>只有「晨起、静卧、固定时间、固定姿势」的 RMSSD 才可纵向比较。</strong></li>
+<li><strong>PPG-HRV vs ECG-HRV</strong>：静息高质量信号下二者在 RR 序列层面高度一致（这是它的合法性基础）；但在运动伪影下，PPG 的 RR 序列会被后处理平滑化，<strong>人为压低 RMSSD</strong>。所以不要在运动期间用 PPG-HRV 当训练强度指标。</li>
+<li><strong>HRV 不是压力，也不是恢复本身。</strong> 它同时被睡眠、训练负荷、酒精、感染、脱水、情绪、咖啡因、昼夜相位影响。单看 HRV 下降做归因，是消费级产品最大的解释失效点。</li>
+</ol>
+<h3 id="对-Agent-的启示-1">对 Agent 的启示</h3>
+<p><strong>HRV 的正确用法是「多个原因共同指向的果」，而不是「推断原因的因」。</strong> 换句话说：不是「HRV 低了所以今天疲劳」，而是「若 HRV 低 + 静息心率↑ + 睡眠时长↓ + 主观疲劳高 → 大概率确实过度」。<strong>多证据汇聚（evidence accumulation）远比单一指标阈值可靠</strong>，这是第五章要反复展开的核心方法。</p>
+<h2 id="2.3-链路三双波长-PPG-→-血氧饱和度-SpO₂">2.3 链路三：双波长 PPG → 血氧饱和度 SpO₂</h2>
+<h3 id="物理Beer-Lambert-定律-血红蛋白的光学指纹">物理：Beer-Lambert 定律 + 血红蛋白的光学指纹</h3>
+<p>核心事实：<strong>氧合血红蛋白（HbO₂）与脱氧血红蛋白（Hb）在红光与红外光上的吸收系数差异，是这件事的全部基础。</strong></p>
+<ul>
+<li>红光（~660nm）：<strong>Hb 吸收远大于 HbO₂</strong>（缺氧的血液「更暗」）</li>
+<li>红外（~940nm）：<strong>HbO₂ 吸收略大于 Hb</strong></li>
+<li>等吸收点（~805nm）：两者吸收相同，可单独测量血流体积而不含饱和度信息</li>
+</ul>
+<p>修正的 Beer-Lambert 定律：</p>
+<pre><code>A = log(I0 / I) = ε · c · d · DPF + G
+ε：摩尔消光系数   c：浓度   d：光程
+DPF：微分路径因子（组织散射导致路径变长）
+G：散射损耗项
+</code></pre>
+<p>工程推导的关键是<strong>取比值以消去未知的光程 d 与散射项 G</strong>：</p>
+<pre><code>R = (AC/DC)_Red  ÷  (AC/DC)_IR
+SpO₂ = f(R)      ← 经验标定曲线
+</code></pre>
+<p>最后那条 <code>f(R)</code> 必须由厂商用健康志愿者在<strong>低氧舱</strong>（受控去饱和研究）中标定。伦理上不可能把人降到危险血氧值，因此<strong>低于约 80% 的血氧区往往是外推的</strong>——这是低血氧区精度差的根源之一。早期常用线性近似 <code>SpO_2 \approx 110 - 25R</code>，实际关系是非线性的。</p>
+<h3 id="失效模式">失效模式</h3>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>机制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>运动伪影</td>
+<td>上一节全部适用，低灌注下更严重</td>
+</tr>
+<tr>
+<td>低灌注 / 休克 / 低温</td>
+<td>AC 幅度降到噪声底，直接失效</td>
+</tr>
+<tr>
+<td><strong>肤色偏差</strong></td>
+<td>有确凿临床证据的问题：深色皮肤人群的血氧测量存在<strong>隐匿性低氧漏检风险</strong>（FDA 曾就此发布安全通告）。腕式方案 SNR 本就更低，风险更高</td>
+</tr>
+<tr>
+<td>指甲油 / 假指甲</td>
+<td>特定色素（尤其蓝、黑）干扰光谱</td>
+</tr>
+<tr>
+<td><strong>SpO₂ 是比例而非总量</strong></td>
+<td>贫血者 SpO₂ 可为 98% 却严重缺氧（血红蛋白总量不足）；一氧化碳中毒时甚至显示 100%（碳氧血红蛋白被误判为氧合血红蛋白）</td>
+</tr>
+<tr>
+<td>测量部位差异</td>
+<td>腕式精度显著低于指夹式</td>
+</tr>
+</tbody>
+</table>
+<h3 id="对-Agent-的启示-1-2">对 Agent 的启示</h3>
+<p><strong>SpO₂ 单次读数的医疗价值很低，但「夜间反复出现的氧减事件模式」价值很高</strong>——这正是睡眠呼吸暂停筛查（§2.7）能成立的原因。</p>
+<p>请把这条变成你的默认方法：<strong>单点有偏 → 重复模式可信。</strong> 这是穿戴数据分析里最通用的一条技巧，值得反复使用。</p>
+<h2 id="2.4-链路四IMU-→-步数-活动识别-能量消耗">2.4 链路四：IMU → 步数 / 活动识别 / 能量消耗</h2>
+<h3 id="步数">步数</h3>
+<pre><code>三轴加速度 → 幅值 |a| = sqrt(ax² + ay² + az²)
+  → 去除重力分量（高通滤波 / 姿态解算）
+  → 带通滤波（典型 0.5–5Hz，对应 30–300 步/分）
+  → 峰值/过零检测 + 自适应阈值
+  → 时间窗口去抖（需连续节律才算真的在走）
+</code></pre>
+<p>误计来源：抖手臂、打字、开车、推购物车。成熟方案会结合 GNSS、PPG 与活动上下文做后处理。</p>
+<p>更有价值的方向不是「步数」而是<strong>步态特征</strong>：步速、步幅变异度、对称性、支撑期/摆动期比、转身速度。这些是老年跌倒风险、帕金森病、认知衰退的客观标记——<strong>步速在老年医学中被称作「第六生命体征」</strong>，对长期健康 Coach 是极高价值的慢变量。</p>
+<h3 id="活动识别HAR">活动识别（HAR）</h3>
+<p>经典 pipeline（仍有生命力，因为可解释、能耗低）：</p>
+<pre><code>滑动窗口（1–5 秒，50% 重叠）
+  → 手工特征：均值/方差/能量/熵/FFT 主频/轴间相关系数/姿态角
+  → Random Forest / SVM / XGBoost
+</code></pre>
+<p>现代 pipeline：</p>
+<pre><code>原始 IMU（或多模态）→ CNN / CNN-LSTM / Transformer → 多分类
+</code></pre>
+<p><strong>清醒认识</strong>：公开数据集（UCI HAR、WISDM、Opportunity）上 &gt;95% 精度早已不是瓶颈。真正难的是：</p>
+<ul>
+<li><strong>开放集问题</strong>：用户做了模型没见过的运动（椭圆机、滑板、举重），模型会自信地误分类</li>
+<li><strong>个体差异</strong>：老年人、病理性步态与训练集分布差异大</li>
+<li><strong>传感器位置迁移</strong>：手 vs 腕 vs 口袋 vs 耳朵，同一模型换位置就崩（domain shift）</li>
+<li><strong>行为粒度</strong>：用户说「我今天动了」，但你要区分是久坐 8 小时里的碎片活动，还是连续 45 分钟中等强度——<strong>这才是健康意义上的差别</strong></li>
+</ul>
+<h3 id="能量消耗卡路里">能量消耗（卡路里）</h3>
+<p>最诚实的说法：这是<strong>估算链条最长、误差最大的指标之一</strong>：</p>
+<pre><code>EE = f(体重, 年龄, 性别, 心率, 加速度, 运动类型, 环境条件)
+</code></pre>
+<p>业界主流是「心率-耗氧量线性关系」（个体标定后可好很多）叠加「加速度计数回归」。第三方验证中，腕戴消费设备的能耗误差常在 20%~50% 量级。</p>
+<h3 id="对-Agent-的启示-1-3">对 Agent 的启示</h3>
+<p><strong>永远不要用「今日消耗 2100 千卡」这种精度幻象来做饮食建议。</strong> 更好的做法是：</p>
+<ul>
+<li>用<strong>相对变化</strong>（相对你过去 4 周均值），而非绝对值</li>
+<li>用<strong>强度分层</strong>（sedentary / light / moderate / vigorous 分钟数，这套分类源自流行病学大型队列证据），而非卡路里</li>
+<li>用<strong>体重趋势</strong>（7 日移动平均）作为能量平衡的最终仲裁者</li>
+</ul>
+<p>这样你依然能自信地谈论运动，但不再依赖不可靠的能量数字。</p>
+<h2 id="2.5-链路五IMU-PPG-→-睡眠分期">2.5 链路五：IMU + PPG → 睡眠分期</h2>
+<h3 id="为什么这是「多模态融合」最好的教科书案例">为什么这是「多模态融合」最好的教科书案例</h3>
+<p>睡眠分期的金标准是 PSG（多导睡眠监测）：EEG + EOG + EMG + ECG + 呼吸气流 + 胸腹运动 + 血氧，同时记录<strong>大脑状态</strong>与<strong>身体状态</strong>。</p>
+<p>穿戴设备只有身体侧：IMU（体动）+ PPG（心率/HRV/脉搏波振幅），对应自主神经维度；<strong>大脑侧完全没有</strong>。</p>
+<p>所以穿戴睡眠分期的本质是：<strong>用自主神经变化 + 体动，去反演大脑皮层的睡眠分期。</strong> 这是一个典型的病态反问题——不同睡眠阶段可以有相似的自主神经表现（例如 N1 与 Wake 的辨别，几乎只能靠体动量）。</p>
+<h3 id="生理知识这是算法的先验也是特征设计的依据">生理知识（这是算法的先验，也是特征设计的依据）</h3>
+<table>
+<thead>
+<tr>
+<th>分期</th>
+<th>自主神经特征</th>
+<th>EEG 特征（穿戴看不到）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wake</td>
+<td>HR 较高、HRV 较低、体动多</td>
+<td>α/β 波，低幅混合频率</td>
+</tr>
+<tr>
+<td>N1 入睡期</td>
+<td>HR 开始下降，缓慢眼动</td>
+<td>θ 波为主</td>
+</tr>
+<tr>
+<td>N2 浅睡</td>
+<td>HR 进一步降，HRV 上升</td>
+<td>θ 波 + 睡眠纺锤波 / K 复合波</td>
+</tr>
+<tr>
+<td><strong>N3 深睡/慢波</strong></td>
+<td><strong>HR 最低、HRV 最高（副交感绝对主导）、体动最少、呼吸最规整</strong></td>
+<td>δ 波（0.5–2Hz）高幅慢波</td>
+</tr>
+<tr>
+<td><strong>REM</strong></td>
+<td><strong>HR 和血压回到接近觉醒水平且变异大，呼吸不规则，肌肉张力消失（所以体动反而可能很少）</strong></td>
+<td>低幅混合频率（类似 Wake），伴快速眼动</td>
+</tr>
+</tbody>
+</table>
+<p>读懂 N3 与 REM 的差别，你就明白为什么 REM/N3 的混淆远多于 N3/Wake 的混淆。</p>
+<h3 id="三代方法">三代方法</h3>
+<p><strong>第一代：纯体动计（actigraphy）</strong>
+- 原理：连续静止的一段时间判定为睡眠（Cole-Kripke 类加权移动平均规则）
+- 性能：检测「睡眠」的灵敏度很高（90%+），但<strong>区分「躺床清醒」的特异性很低</strong>——躺着刷手机会被判为睡眠
+- 今天仍是所有低价手环的实现方式</p>
+<p><strong>第二代：HR/HRV + Actigraphy 的传统机器学习</strong>
+- 每 30 秒一个 epoch，提取时域（RMSSD/SDNN/pNN50）、频域（LF/HF/总功率）、非线性特征，加体动计数，喂给 Random Forest / LSTM
+- 代表性结果：面向睡眠障碍人群，4 类分期（Wake / N1+N2 / N3 / REM），<strong>132 个 HRV 特征 + 活动计数的 LSTM 模型：Cohen's κ ≈ 0.60，准确率 75.9%</strong>
+- 工程痛点：<strong>132 个 HRV 特征在嵌入式设备上算不起</strong></p>
+<p><strong>第三代：端到端深度学习 + 迁移学习</strong>
+- 直接输入原始加速度 + RR 间期/瞬时心率序列，让网络自己学表示（Temporal CNN / U-Net / Transformer）
+- 代表性结果：4 类分期 κ ≈ 0.638、准确率 77.8%，且<strong>推理速度快约 50 倍</strong>，使嵌入式实时部署成为可能
+- 迁移学习是关键：在大规模队列（如 SHHS）预训练 → 在小规模设备专用数据上微调，准确率从 68.9% 提升到 73.8%，κ 从 0.51 提升到 0.59
+- Oura 官方表述：其机器学习睡眠分期算法以 <strong>PSG 为参照</strong>进行了科学验证</p>
+<p><strong>κ ≈ 0.6~0.65 算什么水平？</strong>
+- 人类睡眠技师之间的一致性 κ 约 0.7~0.8
+- 所以穿戴处于「接近但未达到人类专家」的水平
+- 但这是<strong>逐 30 秒 epoch 与 PSG 对比</strong>的结果。用户真正关心的聚合量（总睡眠时长、睡眠效率、深睡占比、夜间觉醒次数）误差远小于单 epoch 分类误差——<strong>这又是同一个「聚合换稳健」原则。</strong></p>
+<h3 id="对-Agent-的启示-1-4">对 Agent 的启示</h3>
+<ol>
+<li><strong>聚合量远比分期的分钟级细节可靠。</strong> 用「总睡眠时长」「睡眠效率」「夜间觉醒次数」说话，不要说「你昨晚 REM 少了 8 分钟」。</li>
+<li><strong>睡眠是所有健康行为的枢纽变量。</strong> 睡眠不足的下游效应：胰岛素敏感性下降、食欲激素紊乱（ghrelin↑/leptin↓）、运动表现下降、情绪调节能力下降、免疫下降。<strong>如果只能给一条建议，通常是睡眠。</strong> 这会让你的 Coach 显得比一上来就推 HIIT 的 App 专业得多。</li>
+<li><strong>主观睡眠与客观测量会系统性不一致，而两者都有价值。</strong> 客观数据反映睡眠的「量」，主观体验反映睡眠的「质」。失眠的诊断依赖主观体验而非 PSG。</li>
+</ol>
+<h2 id="2.6-链路六PPG-IMU-→-呼吸率">2.6 链路六：PPG / IMU → 呼吸率</h2>
+<h3 id="呼吸调制-PPG-的三条机制">呼吸调制 PPG 的三条机制</h3>
+<table>
+<thead>
+<tr>
+<th>调制类型</th>
+<th>机制</th>
+<th>体现在何处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>强度变异（RIAV）</strong></td>
+<td>胸内压变化 → 静脉回流变化 → 每搏输出量变化 → 脉搏波<strong>幅度</strong>的呼吸性起伏</td>
+<td>波峰高度 / 积分面积</td>
+</tr>
+<tr>
+<td><strong>基线漂移（BW）</strong></td>
+<td>同一机制，表现为 PPG 的 <strong>DC 基线</strong>随呼吸慢波摆动</td>
+<td>信号基线</td>
+</tr>
+<tr>
+<td><strong>频率变异（RSA）</strong></td>
+<td>呼吸直接调制心率 → <strong>RR 间期</strong>的呼吸性起伏</td>
+<td>相邻 RR 长度</td>
+</tr>
+</tbody>
+</table>
+<p>三条提取路径再融合：
+1. 对 PPG 的幅度/积分面积序列做带通滤波（典型 0.1–0.7 Hz，对应 6–42 次/分）
+2. 对 RR 间期序列做频域分析，取 HF 峰（0.15–0.4 Hz）位置作为呼吸频率
+3. 用机器学习直接回归：输入多通道 PPG + IMU，输出呼吸率</p>
+<p><strong>局限</strong>：呼吸停止（呼吸暂停）期间调制消失，所以这条链路本身无法察觉呼吸暂停；此外对某些病理呼吸模式（如 Cheyne-Stokes 呼吸）识别能力弱。</p>
+<h3 id="一个必须记住的「反向有效性梯度」">一个必须记住的「反向有效性梯度」</h3>
+<p>一项三星资助的临床研究（195 名睡眠门诊患者同步 PSG）显示：腕式 Galaxy Watch 的夜间呼吸率相对<strong>鼻热敏电阻</strong>（参照标准）的 RMSE = 1.13 次/分。但分层后：</p>
+<ul>
+<li>正常到中度 OSA 人群：准确率 &gt;90%</li>
+<li><strong>重度 OSA 人群：准确率降至 79.45%</strong></li>
+</ul>
+<p>也就是说：<strong>在最需要准确的病人身上最不准。</strong></p>
+<p>这是穿戴健康领域反复出现的「反向有效性梯度」现象，值得作为一条方法论记住：<strong>在重症/极端生理状态下性能的衰减，是所有数据驱动健康模型的共同软肋</strong>，因为训练数据的分布中心在健康人身上。</p>
+<h2 id="2.7-链路七夜间信号-→-睡眠呼吸暂停OSA筛查">2.7 链路七：夜间信号 → 睡眠呼吸暂停（OSA）筛查</h2>
+<p>这是目前最能体现穿戴产品在<strong>受监管预期用途与测量机制</strong>上差异的一条链路，也是「两条技术路线之争」的好例子。</p>
+<h3 id="Apple-路线-vs-Samsung-路线">Apple 路线 vs Samsung 路线</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Apple Watch 睡眠呼吸暂停通知</strong>（FDA 510(k) K240929，2024-09）</th>
+<th><strong>Samsung Galaxy Watch 睡眠呼吸暂停功能</strong>（FDA De Novo DEN230041，2024-02）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心传感器</td>
+<td><strong>加速度计</strong>（不用血氧）</td>
+<td><strong>PPG 衍生血氧 + 加速度计</strong></td>
+</tr>
+<tr>
+<td>信号本质</td>
+<td>呼吸努力引起的<strong>腕部微小运动</strong>（可理解为一台"体动地震仪"）</td>
+<td>夜间反复的<strong>血氧去饱和格局</strong></td>
+</tr>
+<tr>
+<td>输出</td>
+<td>「呼吸扰动（Breathing Disturbances）」二分类：升高 / 未升高</td>
+<td>二分：是否需就医；衍生估计 AHI</td>
+</tr>
+<tr>
+<td>评估窗口</td>
+<td><strong>30 天滚动窗口</strong>（30 天内至少佩戴睡眠 10 晚）</td>
+<td><strong>10 天内至少 2 个有效夜晚</strong>（每晚 ≥4 小时睡眠）</td>
+</tr>
+<tr>
+<td>训练集</td>
+<td>11,000+ 夜的 PSG/HSAT 同步数据，4,700 名成人</td>
+<td>620 人配对 PSG 的关键验证研究</td>
+</tr>
+<tr>
+<td>灵敏度（AHI≥15）</td>
+<td><strong>66.3%</strong>（95%CI 62.2–70.3）</td>
+<td><strong>82.7%</strong>（95%CI 76.7–87.6）</td>
+</tr>
+<tr>
+<td>特异度</td>
+<td><strong>98.5%</strong>（98.0–99.0）</td>
+<td><strong>87.7%</strong>（83.1–91.4）</td>
+</tr>
+<tr>
+<td>参照标准</td>
+<td>Nox T3s 家用睡眠呼吸暂停检测（HSAT）</td>
+<td>实验室内 PSG</td>
+</tr>
+<tr>
+<td>适用年龄</td>
+<td>≥18 岁</td>
+<td>≥22 岁</td>
+</tr>
+</tbody>
+</table>
+<p><strong>如何读这张表</strong>：</p>
+<ul>
+<li>Apple 走「高特异度、低灵敏度」：<strong>响了大概率真有（98.5% 特异度），但漏掉约三分之一的真病人</strong>。这是典型的筛查器设计取向，目的是避免假阳性引发大规模不必要就医。</li>
+<li>Samsung 走「平衡」：灵敏度明显更高，但假阳性也更多，且链路依赖<strong>腕式 SpO₂</strong>，而腕式血氧本身精度弱于指夹式。</li>
+<li>两者<strong>参照标准不同</strong>（HSAT vs PSG），数字不能直接比优劣。</li>
+<li><strong>两者都不是诊断工具</strong>，只是「去找医生」的触发器。这一点在产品文案和 Agent 对话里必须诚实表达。</li>
+</ul>
+<h3 id="Apple-路线的工程智慧在于那个「30-天窗口」">Apple 路线的工程智慧在于那个「30 天窗口」</h3>
+<p>苹果的做法：从加速度计高频信号中提取与呼吸震荡相关的微运动（本质上是 actigraphy 的高阶版本），深度学习模型输出每夜的呼吸扰动值，再在 30 天窗口内判断是否存在「持续升高」。标签来自同步 PSG/HSAT，采用 <strong>4% 氧减阈值</strong>的事件定义。</p>
+<p><strong>为什么是 30 天？</strong> 因为单夜噪声极大（睡姿、被子、伴侣、翻身、环境），但「连续 30 天里多数夜晚都偏高」是极强的稳健信号。<strong>这是第三次看到的「聚合换稳健」套路。</strong></p>
+<p>做穿戴 Agent 的人，请把这条当成默认建模策略：</p>
+<blockquote>
+<p>当单帧/单夜信号不可信时，不要试图提高单帧精度，而应该<strong>拉长观察窗 + 做时间序列聚合</strong>。</p>
+</blockquote>
+<h2 id="2.8-链路八PPG-心动周期图-→-房颤机会式筛查">2.8 链路八：PPG 心动周期图 → 房颤机会式筛查</h2>
+<p>这是 PPG 最广为人知的受监管筛查应用之一；其架构值得完整学习，但结论仍受具体设备的预期用途约束。</p>
+<h3 id="Apple-的实现五步">Apple 的实现（五步）</h3>
+<ol>
+<li><strong>采集心动周期图（tachogram）</strong>：把一段稳定的 PPG 记录转换成「相邻心搏间隔随时间变化」的图，每 2~4 小时采集一次，<strong>机会式（opportunistic）</strong>——只在用户足够静止、信号质量达标时才采集。</li>
+<li><strong>分类</strong>：专有算法判定该 tachogram 是「规整」还是「不规则」。</li>
+<li><strong>级联加密</strong>：一旦判定不规则，立即切换为「尽可能频繁但至少间隔 15 分钟」的加密采集与分析。</li>
+<li><strong>触发规则</strong>：<strong>48 小时内，连续 6 次 tachogram 中有 5 次被判为不规则（含最初触发那次）→ 推送通知。</strong></li>
+<li><strong>重置规则</strong>：若在此之前有 2 次被判为正常，则恢复每 2 小时的基线采样频率。</li>
+</ol>
+<p>这套规则本质上就是一枚<strong>灵敏度/特异度调节旋钮</strong>，在「漏诊」与「过度就医」之间做明确的商业与伦理权衡。</p>
+<h3 id="性能务必区分三个来源">性能（务必区分三个来源）</h3>
+<table>
+<thead>
+<tr>
+<th>来源</th>
+<th>数字</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apple 官方 IFU</td>
+<td>灵敏度 88.6%，特异度 99.3%</td>
+<td>针对 ECG 贴片确认的 AFib 时段</td>
+</tr>
+<tr>
+<td><strong>Apple Heart Study</strong>（&gt;40 万人，斯坦福主导）</td>
+<td>收到通知的时间点上有 84% 确实处于房颤；收到通知后做一周 ECG 贴片的人中 34% 检出 AFib</td>
+<td>房颤是发作性的，一周不发作很正常</td>
+</tr>
+<tr>
+<td>人口层面</td>
+<td><strong>仅 0.5% 的参与者收到通知</strong></td>
+<td>说明过度警报风险很小</td>
+</tr>
+</tbody>
+</table>
+<p><strong>局限（Apple IFU 原文诚实列举）</strong>：不持续监测；22 岁以下不适用；已确诊房颤者不适用；<strong>无法检测心脏病发作</strong>；受运动、手指/手腕活动、环境温度、手腕纹身、低温导致皮肤血流减少影响；强电磁场会干扰数据采集。</p>
+<p><strong>其他厂商</strong>：Fitbit 同类功能 PPV 达 98.2%；华为 Heart Study PPV 91.6%。</p>
+<h3 id="架构价值远大于医学价值请把这套模式搬进你的-Agent">架构价值远大于医学价值：请把这套模式搬进你的 Agent</h3>
+<p><strong>「低成本连续筛查 + 高成本间歇确认」这种两级确认结构，应该被 AI Coach 直接复用。</strong></p>
+<pre><code>每天被动监测（睡眠/静息心率/HRV/体重）
+  → 发现发现需要复核的趋势信号
+  → 在适用人群、禁忌与停止条件明确时，提供低风险问卷或建议联系专业人员
+  → 症状、红旗提示、既往疾病、孕期和设备正式告警优先于任何观察窗口
+</code></pre>
+<p>中间那个「主动任务」台阶，是当前绝大多数消费健康 App 缺失的环节，而它是<strong>把被动观察升级为主动测量</strong>的关键。<strong>主动复核的阈值、测试形式和升级路径都应经过前瞻性验证；通用 Agent 不应自行安排可能不适合用户的体力测试。</strong></p>
+<h2 id="2.9-链路九单导联-ECG-→-心律失常分类">2.9 链路九：单导联 ECG → 心律失常分类</h2>
+<p>PPG 只能告诉你「节律不规则」，不能告诉你<strong>是什么</strong>；ECG 可以。</p>
+<h3 id="实现与陷阱">实现与陷阱</h3>
+<ul>
+<li>手指按住表冠与背面电极形成回路 → 记录 30 秒近似 <strong>Lead I</strong> 的波形</li>
+<li>自动分类输出：<strong>窦性心律 / 房颤 / 心率过高或过低 / 结果不确定（Inconclusive）</strong>；后续版本追加「房颤伴高心率」「记录质量差」</li>
+<li><strong>实际使用中最常见的失败</strong>：心率 &lt;50 bpm、&gt;120 bpm，或处于 100–120 bpm 区间时无法分类 → 输出「不确定」。某些研究中「不确定」可达三分之一的记录。<strong>Agent 的对话设计必须能优雅地处理「不确定」，而不是把它显示为一个失败。</strong></li>
+</ul>
+<h3 id="一组极具启发性的对比数字">一组极具启发性的对比数字</h3>
+<p>在第三方研究中，同一批记录：</p>
+<table>
+<thead>
+<tr>
+<th>判读者</th>
+<th>灵敏度</th>
+<th>特异度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>医生审阅导出的 PDF 波形</strong></td>
+<td>96%</td>
+<td>100%</td>
+</tr>
+<tr>
+<td><strong>手表内置自动算法</strong></td>
+<td>41%</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table>
+<p>差距来自哪里？自动算法把大量记录标成了「不确定」（它把 31% 的正常节律也判为不确定）。Apple 自己的临床数据（588 例）则显示算法 &gt;98% 灵敏度 / 99% 特异度——实验条件差异很大。</p>
+<p><strong>这一课很重要</strong>：同一份数据，在「人读」和「算法读」下的可用性差距巨大。所以<strong>把波形导出给专业人士的功能，价值往往高于 App 内的自动结论</strong>。你的 Agent 应该有一条「我把这份原始记录整理好，你拿去给医生看」的路径。</p>
+<h3 id="为什么房颤值得单独强调">为什么房颤值得单独强调</h3>
+<ul>
+<li>房颤 → 左心耳血栓 → 心源性卒中，风险增加约 5 倍</li>
+<li>常无症状（阵发性），年度体检一次心电图基本抓不到</li>
+<li><strong>高度可干预</strong>：一旦确诊可抗凝治疗，大幅降低卒中风险</li>
+</ul>
+<p>房颤、高血压、睡眠呼吸暂停，是<strong>目前仅有的几个被监管机构认可为「筛查具有临床净收益」的穿戴场景</strong>。</p>
+<blockquote>
+<p><strong>AI Coach 应该知道这三项是被监管背书的高价值场景，把用户注意力引导到这里，而不是整天纠结 HRV 的 2 毫秒波动。</strong></p>
+</blockquote>
+<h2 id="2.10-链路十PPG-波形-→-血压最重要也最被误解的一条">2.10 链路十：PPG 波形 → 血压（最重要、也最被误解的一条）</h2>
+<h3 id="物理脉搏波传播速度PWV的压力依赖性">物理：脉搏波传播速度（PWV）的压力依赖性</h3>
+<p>Moens-Korteweg 方程：</p>
+<pre><code>PWV = sqrt( E · h / (2 · ρ · r) )
+
+E：动脉壁弹性模量    h：管壁厚度
+ρ：血液密度          r：血管半径
+</code></pre>
+<p><strong>关键生理事实</strong>：血压升高 → 动脉壁被撑得更硬 → <code>E</code> 增大 → <strong>PWV 增大，脉搏波传播更快</strong>。这就是用传播时间反推血压的物理基础。粗略关系（Hughes 方程流派）：</p>
+<pre><code>BP = α · ln(PTT) + β
+</code></pre>
+<h3 id="三条代理链路务必分清">三条代理链路（务必分清）</h3>
+<table>
+<thead>
+<tr>
+<th>代理量</th>
+<th>定义</th>
+<th>可获得性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PTT</strong>（脉搏传导时间）</td>
+<td>脉搏波在两个<strong>动脉位点</strong>之间的传导时间（如颈动脉→桡动脉）</td>
+<td>需两个传感位点，穿戴上难实现</td>
+</tr>
+<tr>
+<td><strong>PAT</strong>（脉搏到达时间）</td>
+<td>从 ECG 的 <strong>R 波峰</strong>（心室电激动）到外周 PPG 某个<strong>特征点</strong>（波足/峰值/二阶导最大点）的延迟</td>
+<td>需 ECG+PPG 同步；手表可算，但 ECG 只能按需触发</td>
+</tr>
+<tr>
+<td><strong>PWA</strong>（脉搏波分析）</td>
+<td>只用<strong>单个 PPG 波形形态</strong>回归血压：上升斜率、K 值、切迹位置、二阶导 / 增强指数、波形面积比等</td>
+<td>只需一个 PPG → 最易部署，但最依赖 ML 与个体校准</td>
+</tr>
+</tbody>
+</table>
+<p>关键区别：<strong>PTT/PAT 是物理机制驱动（有明确力学方程），PWA 是数据驱动（把形态映射到血压）。</strong> 且注意 <strong>PAT = PEP + PTT</strong>——PAT 里包含了<strong>射血前期 PEP</strong>，而 PEP 受心肌收缩力、情绪、药物影响很大，所以 <strong>PAT 比 PTT 更脏</strong>。</p>
+<h3 id="为什么「无袖带血压」至今没真正成功">为什么「无袖带血压」至今没真正成功</h3>
+<p>这不是算法不够好，而是<strong>物理 + 生理 + 校准</strong>三重困难叠加：</p>
+<p><strong>① 个体校准的必然性与漂移</strong></p>
+<p><code>\alpha, \beta</code>（或神经网络映射）里隐含着个体参数：血管半径、壁厚、路径长度、血液密度。这些都因人而异，而且<strong>随时间变化</strong>（老化、动脉硬化、妊娠、水合状态、昼夜节律）。后果是：</p>
+<ul>
+<li>必须用袖带做初始标定</li>
+<li>标定会漂移。Avolio 等人指出：<strong>单点标定只确定了曲线上的一个点，斜率可以任意选取</strong>，误差会随血压偏离标定点而放大</li>
+<li>而「每次测量前先标定」会<strong>彻底取消无袖带的意义</strong>——这就是著名的<strong>无袖带血压悖论</strong></li>
+</ul>
+<p><strong>② 校准悖论 / 先验泄漏（Priors Leakage）</strong></p>
+<p>研究者发现：某些无袖带系统在仿真评估中，当模型输入包含「标定血压、人群均值、年龄、性别」等先验时，表现比只用生理信号更好。这暗示<strong>某些产品可能主要在「记忆」用户上次的标定值与人口统计先验，而非真正测量</strong>。</p>
+<p>这是一个非常值得 AI 从业警惕的现象——它在穿戴领域的形式是「看起来很准，其实在用先验」，在 LLM 领域的形式是「看起来很懂，其实在背语料」。我们在 §5.4 会再谈这类「伪装成测量的记忆」。</p>
+<p><strong>③ PAT 里的 PEP 污染</strong></p>
+<p>任何改变心肌收缩力的因素（情绪、REM 睡眠、运动后恢复、升压药）都会改变 PEP → PAT 改变 → <strong>但血压可能没变</strong>。这就是为什么运动、睡眠、体位变化时误差最大，而这些恰恰是最需要连续监测的场景。</p>
+<p><strong>④ 继承 PPG 的全部失效模式</strong>（§2.1）</p>
+<h3 id="权威界的态度2025–2026">权威界的态度（2025–2026）</h3>
+<ul>
+<li><strong>2025 AHA/ACC 高血压指南</strong>：明确<strong>不建议</strong>使用无袖带设备进行高血压的诊断或管理</li>
+<li>2025 国际立场声明与 AHA 科学声明：<strong>目前没有任何无袖带技术达到临床可用精度</strong></li>
+<li>但监管路径在前进：2025 年 7 月，一款无袖带腕式血压系统获得 FDA 510(k) 许可用于居家非处方场景，<strong>其获准的适用范围明确要求每 24 小时校准一次</strong>以维持精度</li>
+</ul>
+<h3 id="Apple-HTNF一个「诚实误用」的绝佳案例">Apple HTNF：一个「诚实误用」的绝佳案例</h3>
+<p><strong>高血压通知功能（Hypertension Notification Feature，FDA 510(k)，2025-09-11 获批）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>事实</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输出</td>
+<td><strong>不给出血压数值</strong>，仅通知「可能有高血压迹象」</td>
+</tr>
+<tr>
+<td>机制</td>
+<td>清醒时段机会式采集 <strong>60 秒 PPG 片段，约每 2 小时一次</strong>，在<strong>30 天非重叠窗口</strong>内（要求窗口内至少 14 天可用清醒数据）</td>
+</tr>
+<tr>
+<td>训练阶段一</td>
+<td>自监督深度学习，来自 <strong>&gt;86,000 名参与者</strong>的无标签 Apple Watch 传感器数据</td>
+</tr>
+<tr>
+<td>训练阶段二</td>
+<td>用 <strong>&gt;9,800 名参与者</strong>的 PPG + 家庭血压配对数据训练线性模型</td>
+</tr>
+<tr>
+<td>灵敏度</td>
+<td><strong>41.2%</strong>（95%CI 37.2–45.3）；Stage 2 高血压升至 53.7%</td>
+</tr>
+<tr>
+<td>特异度</td>
+<td><strong>92.3%</strong>；血压正常者 95.3%；<strong>血压「偏高但未达诊断」者仅 82.8%</strong></td>
+</tr>
+<tr>
+<td>模型治理</td>
+<td><strong>模型锁定（locked）</strong>，不在用户数据上持续自适应学习；FDA 变更控制计划允许受控的重训练</td>
+</tr>
+<tr>
+<td>定位</td>
+<td>二类「心血管机器学习通知软件」。通过 510(k) 的实质等同路径，参照物是另一个心血管机器学习通知产品，<strong>而不是充气式血压计</strong></td>
+</tr>
+</tbody>
+</table>
+<p>换句话说：<strong>超过一半的真高血压不会被通知到。</strong> Apple 明确选择了高特异度的工作点。</p>
+<blockquote>
+<p><strong>这个功能的用途是「给从不体检的人一个去量血压的理由」，而不是「监测我的血压」。</strong></p>
+</blockquote>
+<h3 id="另一条真正走通的路线表带内置气囊示波法">另一条真正走通的路线：表带内置气囊（示波法）</h3>
+<ul>
+<li><strong>Omron HeartGuide</strong>（2019 年）：首款手表形态的袖带式示波法血压计，表带内置可充气薄气囊</li>
+<li><strong>华为 WATCH D2</strong>：微型气泵 + 气囊，已过 NMPA 认证，可被编程执行 24 小时动态血压监测（ABPM）</li>
+<li>优点：误差接近上臂式（±3mmHg 量级），因为它<strong>真的在测量</strong>，而不是估算</li>
+<li>缺点：体积、佩戴舒适度；且<strong>日间测量时必须把手腕抬到心脏水平</strong>（否则静水压效应会引入数 mmHg 误差），睡眠时手腕恰好接近心脏水平，反而更准</li>
+</ul>
+<p>夜间血压是心血管预后的最强预测因子之一（优于日间与诊室血压），而它恰恰是「袖带测不了（会吵醒）、ABPM 舒适度差、无袖带方法又最不准」的场景。<strong>这是一个明确未被满足的需求缺口</strong>——如果你的 Agent 能找到合理解法（机会式夜间多信号融合 + 定期锚校准 + 显式置信度输出），值得押注。</p>
+<h3 id="对-Agent-的启示-1-5">对 Agent 的启示</h3>
+<ol>
+<li><strong>如果你没有接入 HTNF、WATCH D2 这类受监管数据源，就不要在你的 Coach 里复述血压数值。</strong></li>
+<li>可行且有价值的做法：<strong>把用户的家庭电子血压计读数（手输或智能血压计同步）作为金标准锚点，把穿戴数据作为期间的语境插值，并在界面和话术中明确区分二者的证据等级。</strong></li>
+<li>永远不要说「你的血压是 128/82」，而应该说「上一次测量是 128/82；在这之后的 6 天里，夜间心率和脉搏波特征的走势是……」</li>
+</ol>
+<h2 id="2.11-链路十一Bio-Z-→-体成分与水合状态">2.11 链路十一：Bio-Z → 体成分与水合状态</h2>
+<p>原理已在 §1.3 讲过，这里补充算法侧要点：</p>
+<ul>
+<li><strong>它是回归，不是测量</strong>：体脂率来自「脂肪% = f(身高, 体重, 阻抗, 年龄, 性别)」的统计模型。群体上有用，<strong>个体偏差可达 ±3~5 个百分点</strong></li>
+<li><strong>多频优于单频</strong>：单频只能得到总体阻抗；多频（5k/50k/200kHz）才能区分细胞内液与细胞外液</li>
+<li><strong>八电极（手-脚）明显优于手腕两点</strong>：后者对躯干的代表性有限</li>
+<li><strong>最容易自欺的行为</strong>：饭后、运动后、桑拿后、大量饮水后立即测量都会显著漂移。这就是为什么体脂秤都要求「晨起排空后」测量</li>
+<li><strong>真正有价值的不是体脂率的绝对值，而是趋势与相位角（50kHz 下测得的阻抗相角 θ）</strong>——相位角与细胞膜完整性、营养状态相关，在临床营养领域是有意义的参数</li>
+</ul>
+<h2 id="2.12-链路十二皮温-→-排卵发热疾病预警">2.12 链路十二：皮温 → 排卵、发热、疾病预警</h2>
+<h3 id="一个残酷而重要的测量事实">一个残酷而重要的测量事实</h3>
+<ul>
+<li>手表/戒指用 <strong>NTC 热敏电阻</strong>（负温度系数：温度升高 → 半导体热激发 → 载流子增多 → 电阻下降）</li>
+<li><strong>它测的是皮肤温度，不是核心体温。</strong> 皮温受环境温度、血流灌注、衣物、佩戴松紧影响巨大，<strong>绝对值几乎没有意义</strong>（成人皮肤温度可在 30–36°C 之间大幅波动）</li>
+<li>因此所有产品都采用<strong>相对个人基线的偏移</strong>：</li>
+</ul>
+<pre><code>ΔT(t) = T_skin(t) − EWMA_baseline(t−τ)
+</code></pre>
+<p>这也解释了为什么戒指在体温上比手表准：<strong>贴合紧密、与外界空气交换少，且指根温度更接近核心温度的调节行为</strong>。Oura 官方文档明确表示其温度读数只有相对偏差意义、没有绝对意义。</p>
+<h3 id="三条有价值的应用">三条有价值的应用</h3>
+<p><strong>① 月经周期与排卵确认</strong></p>
+<p>排卵后黄体酮上升 → 基础体温上升约 <strong>0.3~0.5°C</strong> 并维持到月经来潮。于是夜间/晨起皮温的<strong>双相曲线</strong>（低温相 → 高温相）可以：</p>
+<ul>
+<li><strong>回溯性确认排卵已发生</strong>（注意：是「已发生」，不是「预测」）</li>
+<li>结合静息心率同步上升（黄体期升高约 2–5 bpm）可增强判断</li>
+<li>局限：本质是回顾性的，对备孕窗口的指导滞后约一天；且仅对有双相周期的人群有效</li>
+</ul>
+<p><strong>② 疾病 / 感染早期预警</strong></p>
+<p>这是近年最有说服力的应用之一。生理逻辑：病原体入侵 → 免疫应答 → 炎性反应 → 体温调定点上移，<strong>同时伴随皮温↑、静息心率↑、HRV↓、呼吸率↑</strong>。</p>
+<p><strong>多参数联合远比单看体温有效</strong>。这正是 Oura 的「Symptom Radar / 疾病预警」、Whoop 的「Health Monitor」等功能的理论基础。</p>
+<p><strong>③ 恢复状态</strong></p>
+<ul>
+<li>皮温↓ + HRV↑ → 训练适应良好</li>
+<li>皮温↑ + HRV↓ + 静息心率↑ → 应激、过度疲劳、热负荷或感染前兆</li>
+</ul>
+<h3 id="对-Agent-的启示-1-6">对 Agent 的启示</h3>
+<p>皮温是<strong>一个绝佳的「Agent 可以诚实使用」案例</strong>：绝对值完全不可用，但<strong>相对偏移 + 多参数联合</strong>就变成了有价值的健康信号。这是「<strong>数据即使没有绝对精度，也能产生决策价值</strong>」的最佳教学例子，值得在产品与话术中反复强调。</p>
+<h2 id="2.13-链路十三CGM-→-血糖动力学">2.13 链路十三：CGM → 血糖动力学</h2>
+<h3 id="从单点血糖到代谢画像">从单点血糖到代谢画像</h3>
+<p>CGM 的价值不在单次读数，而在<strong>曲线形状</strong>与派生统计指标：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>含义</th>
+<th>参考基准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TIR</strong>（Time in Range）</td>
+<td>处于 3.9–10.0 mmol/L（70–180 mg/dL）的时间占比</td>
+<td>糖尿病 CGM 的常用目标之一；须由治疗团队按人群与治疗方案个体化设定</td>
+</tr>
+<tr>
+<td><strong>GV</strong>（血糖变异性）</td>
+<td>SD、CV（变异系数）、MAGE（平均血糖波动幅度）</td>
+<td>糖尿病 CGM 的常用参考；不应外推为普通人健康阈值</td>
+</tr>
+<tr>
+<td><strong>TAR / TBR</strong></td>
+<td>高/低于目标范围的时间占比</td>
+<td>TBR &lt;4%，越接近 0 越好</td>
+</tr>
+<tr>
+<td><strong>夜间 TIR</strong></td>
+<td>睡眠期间的平稳程度</td>
+<td>可用于与治疗团队讨论夜间曲线；不能单独推断病因</td>
+</tr>
+<tr>
+<td><strong>餐后峰值与回落时间</strong></td>
+<td>餐后 1 小时峰值、回到基线所需时间</td>
+<td>识别「对你个人最不友好的食物」</td>
+</tr>
+</tbody>
+</table>
+<p><strong>适用范围：</strong>本表面向糖尿病 CGM 管理；非糖尿病人群没有可直接套用的 TIR/CV 健康目标。<a href="https://diabetesjournals.org/care/article/49/Supplement_1/S132/163927/6-Glycemic-Goals-Hypoglycemia-and-Hyperglycemic" rel="noopener noreferrer">ADA CGM 目标与适用范围</a></p>
+<p>HbA1c 是所有这些的长期平均代理，<strong>它看不见波动</strong>。两个 HbA1c 都是 7.0% 的人，一个可能非常平稳，另一个可能反复高低血糖。<strong>CGM 相对 HbA1c 的增量价值，全部在这里。</strong></p>
+<h3 id="健康人群非糖尿病使用-CGM-的三个硬结论">健康人群（非糖尿病）使用 CGM 的三个硬结论</h3>
+<ol>
+<li><strong>个体间餐后血糖反应差异巨大。</strong> 同一份食物（甚至标准化白面包），不同人的餐后曲线天差地别——这是 Weizmann 研究所 Segal 组「精准营养」系列研究的核心发现。<strong>人群平均 GI 表对特定个体的参考价值有限。</strong></li>
+<li>这直接催生了「用机器学习预测个体餐后血糖曲线」：输入 CGM 历史、膳食记录、肠道菌群、人体测量、活动与睡眠，预测这个人对这份食物的反应。<strong>这是做「AI 营养教练」最硬核的算法地基。</strong></li>
+<li><strong>必须显式建模滞后</strong>：餐后 CGM 上升滞后血液 5–15 分钟 → 若你做「进食时机提醒 / 运动降糖建议」，必须以<strong>预测式</strong>提前动作，而不是反应式。这在闭环胰岛素（人工胰腺）领域已经成熟，在生活方式教练领域还很少有人做对。</li>
+</ol>
+<h3 id="对-Agent-的启示这一条非常关键">对 Agent 的启示（这一条非常关键）</h3>
+<p><strong>如果你能拿到 CGM 数据，你的 Coach 产品力会发生质变</strong>——因为它终于有了<strong>即时反馈闭环</strong>（吃 → 看到结果 → 改），而 HRV、睡眠、体重的反馈周期是天到周的量级。</p>
+<ul>
+<li>短期反馈的行为学习效率远高于长期反馈</li>
+<li>但也带来风险：过度关注每一次峰值 → 食物焦虑、进食障碍倾向。<strong>产品设计必须内置「把注意力从单次数字转向长期趋势」的机制</strong>，例如：只展示 TIR 与周趋势，禁止逐餐评判。</li>
+</ul>
+<h2 id="2.14-链路十四EDA-多模态-→-唤醒度而非「情绪」">2.14 链路十四：EDA + 多模态 → 唤醒度（而非「情绪」）</h2>
+<h3 id="原理">原理</h3>
+<p>汗腺是<strong>唯一只受交感神经支配、不接受副交感支配</strong>的器官，因此它的活动是交感兴奋的纯净窗口。EDA 信号同样分为两层：</p>
+<ul>
+<li><strong>SCL</strong>（皮肤电导水平）：缓慢变化，反映一般性唤醒背景</li>
+<li><strong>SCR</strong>（皮肤电导反应）：瞬态事件（典型上升相 1–5 秒），反映对特定刺激的交感反应</li>
+</ul>
+<h3 id="一个必须说清楚的批判">一个必须说清楚的批判</h3>
+<p><strong>EDA / HR / HRV 能测的是「唤醒度（arousal）」，测不出「情绪种类」。</strong></p>
+<p>这是情感计算领域被反复忽视的基本事实。按 Russell 的<strong>情绪环模型（Circumplex Model）</strong>，情绪空间至少是二维的——<strong>效价（valence：正/负）× 唤醒（arousal：高/低）</strong>——而 EDA 与 HR 只落在<strong>唤醒这一个维度</strong>上：</p>
+<pre><code>                高唤醒
+                  │
+        愤怒 ●    │    ● 兴奋
+    紧张/焦虑 ●   │       ● 喜悦
+  ────────────────┼────────────────► 效价（正/负）
+      沮丧 ●      │     ● 平静
+        倦怠 ●    │   ● 放松
+                  │
+                低唤醒
+              ↑
+    EDA / HR / HRV 只能在这个方向上有分辨力
+</code></pre>
+<p><strong>EDA 在图的左右方向上几乎没有分辨能力。</strong> 当一个 App 告诉你「检测到你正在焦虑」，它实际测到的是「你的交感唤醒升高了」——而你在做 HIIT、喝了咖啡、赶地铁、被表白、看恐怖片，都会长这样。</p>
+<p>诚实的结论：</p>
+<ul>
+<li>✅ <strong>可以做</strong>：静息/冥想场景下的唤醒度生物反馈训练（HRV biofeedback 对焦虑与失眠的干预是有循证支持的）</li>
+<li>✅ <strong>可以做</strong>：把主观报告（EMA）与客观唤醒联合，用客观数据佐证回忆</li>
+<li>❌ <strong>不该做</strong>：宣称「识别出你的 7 种情绪」</li>
+<li>❌ <strong>不该做</strong>：用单点唤醒数据直接断言「你压力很大」</li>
+</ul>
+<h3 id="对-Agent-的启示-1-7">对 Agent 的启示</h3>
+<p><strong>把 EDA / 唤醒当作「一个待解释的信号」，永远不要把它当用户情绪本身。</strong> 正确姿势：</p>
+<blockquote>
+<p>「刚才这段静息时段，你的交感唤醒偏高（这是客观数据）。你自己当时是什么感觉？」</p>
+</blockquote>
+<p>让模型的输出是<strong>开启对话</strong>，而不是<strong>下结论</strong>。这类「把不确定性暴露给用户，以交换上下文」的设计，是 AI Coach 相较传统仪表盘最大的优势，第五章会详细展开。</p>
+<h1 id="第三章-引擎篇所有穿戴算法共享的那套通用方法">第三章 引擎篇：所有穿戴算法共享的那套通用方法</h1>
+<p>看完第二章的 14 条链路，你会发现它们背后反复出现同一批技术手段。这一章把这些共性抽出来——<strong>这是可以迁移到你任何一条新链路上的「方法论底座」。</strong></p>
+<h2 id="3.1-第一道关口信号质量评估SQI">3.1 第一道关口：信号质量评估（SQI）</h2>
+<p>穿戴数据的第一原则是：<strong>垃圾进 → 更糟的出。</strong> 所有严肃的穿戴算法栈，第一层都是 SQI（Signal Quality Index），它的作用不是「美化数据」，而是<strong>决定要不要丢弃这段数据</strong>。</p>
+<p>常见的 SQI 判据：</p>
+<table>
+<thead>
+<tr>
+<th>判据</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>** perfusion / AC 幅度**</td>
+<td><code>I_{AC}/I_{DC}</code> 过低 → 灌注不足（低温、缺血、佩戴松）</td>
+</tr>
+<tr>
+<td><strong>模板相关性</strong></td>
+<td>当前脉搏波与「典型脉搏波模板」的相关系数，低于阈值判为伪影</td>
+</tr>
+<tr>
+<td><strong>生理合理性（plausibility）</strong></td>
+<td>心率是否在 30–220 bpm；相邻 RR 差是否 &gt;20%</td>
+</tr>
+<tr>
+<td><strong>频谱纯度</strong></td>
+<td>主频能量占比是否足够高</td>
+</tr>
+<tr>
+<td><strong>加速度能量</strong></td>
+<td>同步 IMU 的 RMS 是否超过静息阈值</td>
+</tr>
+<tr>
+<td><strong>动态时间规整距离</strong></td>
+<td>波形序列与参考的距离</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程洞察</strong>：一个设计良好的系统会维护一个「数据可用性账本」：今天 24 小时里，PPG 有多少分钟是可信的？其中夜间睡眠时段的可信覆盖率是多少？<strong>这个账本身就是一个高价值特征</strong>——它直接决定了用户对设备的依从度与数据可靠性，也是 Agent 判断「今天能不能下结论」的输入。</p>
+<blockquote>
+<p>对 Agent 的实际意义：<strong>当设备告诉你心率 178 时，你应该先问「这段数据的 SQI 是多少」，而不是直接推送「你在高强度运动」。</strong> 这是专业与业余的分水岭。</p>
+</blockquote>
+<h2 id="3.2-第二道关口运动伪影消除">3.2 第二道关口：运动伪影消除</h2>
+<p>这是穿戴信号处理里最核心的技术。方法谱系从简单到复杂：</p>
+<h3 id="a-自适应噪声抵消ANC-LMS-RLS——最经典">(a) 自适应噪声抵消（ANC / LMS / RLS）——最经典</h3>
+<p>结构：把 IMU 信号作为<strong>噪声参考</strong>输入自适应滤波器，从含噪 PPG 中减去它的估计。</p>
+<pre><code>参考输入：三轴加速度 ──► 自适应滤波器 W(z) ──► ň(t)
+                                              ↓
+含噪 PPG x(t) = s(t) + n(t)  ──►  (+)  ──► e(t) ≈ s(t)
+                                  ↑(-)
+学习规则：最小化 E[e²(t)]（LMS）或加权最小二乘（RLS）
+</code></pre>
+<p>为什么有效：因为运动造成的伪影<strong>与 IMU 测到的振动高度相关</strong>，而与真实心动节律不相关。这个方法的功耗极低、可在 MCU 上跑，是绝大多数产品的主力。它也正是 AirPods Pro 3 用来处理跑步落地冲击的技术路径（虽然 Apple 用的是自己的实现）。</p>
+<h3 id="b-盲源分离PCA-ICA-SVD">(b) 盲源分离（PCA / ICA / SVD）</h3>
+<p>假设 PPG 多通道观测是若干独立源的线性混合，通过分解把「心动成分」与「运动成分」分离。<strong>典型是保留第一个主成分</strong>（通常对应最强的周期性——心动）或用 ICA 直接分离。</p>
+<h3 id="c-时频分解EMD-VMD-小波">(c) 时频分解（EMD / VMD / 小波）</h3>
+<p>把信号分解成若干本征模态，识别落在运动频带（通常 0.5–4Hz 外的特定能量块）或与非生理频带对应的模态，剔掉后重建。<strong>注意这会带来相位失真</strong>，在需要精确逐拍 IBI/PRV 的场景要谨慎。</p>
+<h3 id="d-深度学习重建">(d) 深度学习重建</h3>
+<p>用 U-Net / Transformer 直接从含噪 PPG 重建干净 PPG，或用 GAN 做同一个任务。优点是效果好，缺点是：①需大量「含噪-干净」配对数据（真实世界的干净标签从哪来？通常只能用 ECG 同步提供 RR 真值，波形真值几乎不存在）；②难以在 MCU 上部署。</p>
+<h3 id="e-「干脆不算」——机会式采样">(e) 「干脆不算」——机会式采样</h3>
+<p>这是 Apple 的 IRNF 用的策略，也是最务实的一种：<strong>只在信号足够好时才采集和分析。</strong> 它的代价是「不连续监测」，但换来的是高得多的稳健性。</p>
+<blockquote>
+<p><strong>给你的建议组合</strong>：ANC 做在线实时处理（便宜、必然能做），SQI 做门禁（决定用不用），深度学习只用在「可以离线跑、且错误的代价不高」的环节。<strong>不要指望一个端到端神经网络解决所有问题——这是穿戴产品里最贵的教训。</strong></p>
+</blockquote>
+<h2 id="3.3-传感器融合的三个层次">3.3 传感器融合的三个层次</h2>
+<p>多模态融合有三种基本范式，它们的差别不是技术风格，而是<strong>信息损失与对齐难度的权衡</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>范式</th>
+<th>做法</th>
+<th>优点</th>
+<th>缺点</th>
+<th>典型用处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>数据级融合（早期）</strong></td>
+<td>把不同模态的原始波形拼成一个张量输入网络</td>
+<td>信息损失最小</td>
+<td>模态采样率不一致、需严格时间对齐；噪声模态会拖累整体</td>
+<td>端到端睡眠分期</td>
+</tr>
+<tr>
+<td><strong>特征级融合（中期）</strong></td>
+<td>各模态独立提特征，再拼接后联合学习</td>
+<td>平衡；可处理不同采样率</td>
+<td>手工设计仍有信息损失</td>
+<td>主流选择（活动识别、压力检测）</td>
+</tr>
+<tr>
+<td><strong>决策级融合（晚期）</strong></td>
+<td>每个模态独立出一个结论/概率，再加权投票或用贝叶斯规则合并</td>
+<td>最简单、最鲁棒、易调试</td>
+<td>丢失模态间的交互信息</td>
+<td>Orél产业的发展生成式、健康评分体系</td>
+</tr>
+</tbody>
+</table>
+<h3 id="实践中的几个真问题">实践中的几个真问题</h3>
+<ol>
+<li><strong>时间对齐</strong>是所有融合的第一杀手。PPG 25Hz、加速度 50Hz、ECG 512Hz、体温每 5 分钟一次、CGM 每 5 分钟一次——必须通过时间戳重采样统一到公共网格，而<strong>插值本身会引入人工相关性</strong>。</li>
+<li><strong>缺失模态</strong>：用户今天没戴表睡觉；某个传感器接触不好；CGM 第 12 天信号衰减。<strong>你的模型必须能在任意模态缺失下工作</strong>——这是穿戴领域比 CV/NLP 更难的地方。常见解法是 modality dropout 训练 + 显式的缺失指示向量。</li>
+<li><strong>模态间因果混淆</strong>：温度和心率都随昼夜节律变化，如果你直接把它们当独立特征，模型会学到「规律 Shared driver」的假相关。正确处理往往需要先<strong>去趋势（detrend）或对每个人做昼夜节律对齐</strong>。</li>
+</ol>
+<h2 id="3.4-个人基线穿戴健康的灵魂">3.4 个人基线：穿戴健康的灵魂</h2>
+<p><strong>这是穿戴健康与「普通 ML」最大的概念差异，也是你最需要内化的一条。</strong></p>
+<p>同一个 RMSSD=42ms，对一个基线 65ms 的人是「显著下降」，对一个基线 20ms 的人是「正常波动」。因此几乎所有有价值的穿戴指标都必须是：</p>
+<pre><code>指标的意义 = 当前值 相对于 该用户自己的长期基线 的偏移（z-score / 百分位）
+</code></pre>
+<h3 id="基线怎么算工程细节决定成败">基线怎么算（工程细节决定成败）</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>简单移动平均</td>
+<td>过去 N 天均值</td>
+<td>简单但滞后大、易被异常值污染</td>
+</tr>
+<tr>
+<td><strong>指数加权移动平均 EWMA</strong></td>
+<td><code>b_t = \alpha x_t + (1-\alpha)b_{t-1}</code>；α 通常取 0.05–0.15</td>
+<td><strong>最常用</strong>。轻量、可递推、在线更新</td>
+</tr>
+<tr>
+<td>7 日/28 日双基线</td>
+<td>短期基线 vs 长期基线对比 → 判断「急性变化」还是「慢趋势」</td>
+<td>Whoop/Garmin 类的应变平衡(training load) 设计</td>
+</tr>
+<tr>
+<td>稳健统计（中位数/MAD）</td>
+<td>用中位数与绝对中位差替代均值与标准差</td>
+<td><strong>强烈推荐</strong>：穿戴数据异常值极多</td>
+</tr>
+<tr>
+<td>贝叶斯动态线性模型</td>
+<td>把「真实状态」与「观测」分开，显式建模过程噪声与观测噪声</td>
+<td>最严谨；适合关键指标</td>
+</tr>
+</tbody>
+</table>
+<h3 id="一旦有了基线你就能做「变点检测」">一旦有了基线，你就能做「变点检测」</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CUSUM</strong>（累积和）</td>
+<td>检测均值的持续小漂移，工业界标准工具</td>
+</tr>
+<tr>
+<td><strong>贝叶斯在线变点检测</strong></td>
+<td>给出「从哪一天开始变了」的后验分布</td>
+</tr>
+<tr>
+<td><strong>EWMA 控制图</strong>（SPC，统计过程控制）</td>
+<td>常用于定性为超出 2σ/3σ 的警报</td>
+</tr>
+<tr>
+<td>分层/多变量扩展</td>
+<td>同时监控多个指标的联合偏离 → §2.12 的「多参数联合预警」就是它</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么这套方法这么重要</strong>：它把「健康管理」从「阈值判断」变成了「过程监控」。这一句话的分量，决定了你的 Coach 是「又一个记步 App」还是「一个真的能提前告警的系统」——想想 Apple 的房颤通知、斯坦福团队的感染发热预警研究、以及智能手表的睡眠呼吸暂停检测，<strong>它们的底层全都是这套东西</strong>。</p>
+<h2 id="3.5-时间尺度工程不同生理过程有不同的「响应时间」">3.5 时间尺度工程：不同生理过程有不同的「响应时间」</h2>
+<p>这是被绝大多数 AI 工程师忽略、但在生理数据里极其关键的一点——<strong>所有生理变量都有自己的固有时间常数 τ</strong>。用错了尺度，模型就是在找噪声。</p>
+<table>
+<thead>
+<tr>
+<th>时间常数</th>
+<th>过程</th>
+<th>对 Agent 的含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>秒级</td>
+<td>心率对运动的响应（τ≈10–30s）、RSA</td>
+<td>实时反馈需容忍延迟；不要做秒级决策</td>
+</tr>
+<tr>
+<td>分钟级</td>
+<td>HRV 的 RSA、运动后心率恢复（HRR）、餐后血糖开始上升</td>
+<td>主动任务的最小合理观察窗</td>
+</tr>
+<tr>
+<td>小时级</td>
+<td>餐后胰岛素反应、训练后 EPOC、咖啡因</td>
+<td>「今天练完之后恢复得如何」的合理尺度</td>
+</tr>
+<tr>
+<td>天级</td>
+<td>静息心率、HRV 基线、睡眠结构、体重（需 7 日移动平均）、<strong>训练负荷的慢性累积</strong></td>
+<td>** Coach 的主要决策尺度**</td>
+</tr>
+<tr>
+<td>周~月级</td>
+<td>VO₂max、体成分、CRF（心肺适能）、HbA1c、血压真正的变化</td>
+<td>效果评估的最小周期；别在第 5 天宣称训练有效</td>
+</tr>
+<tr>
+<td>季~年</td>
+<td>动脉硬化、骨密度、慢性风险标志、衰老生物标记</td>
+<td>长期价值主张，但几乎无法在商业产品里做闭环验证</td>
+</tr>
+</tbody>
+</table>
+<p><strong>由此衍生出两个必须在产品里实现的概念</strong>：</p>
+<ol>
+<li>
+<p><strong>急性-慢性负荷比（ACWR, Acute:Chronic Workload Ratio）</strong>：
+   <code>ACWR = 最近 7 天训练负荷  /  过去 28 天平均周负荷
+   甜蜜区通常被认为在 0.8 ~ 1.3；&gt;1.5 显著升高受伤风险</code>
+   这是运动医学里最有用、也最常被误用的一个数字（近年也受到方法学批评，不宜当教条），但它「<strong>把急性刺激与慢性适应做对比</strong>」的思想是完全正确的。</p>
+</li>
+<li>
+<p><strong>昼夜节律相位（circadian phase）</strong>：几乎所有生理变量都有 24 小时节律（皮质醇、核心体温、褪黑素、血压、心率、胰岛素敏感性）。<strong>同一个指标在一天不同时间测量有不同的意义。</strong> 若不建模这个节律，你的模型会把它当成噪声或信号混淆。近年兴起的「昼夜健康 / chronomedicine」正是这个方向的延伸。</p>
+</li>
+</ol>
+<h2 id="3.6-边缘-vs-云功耗隐私与延迟的三角">3.6 边缘 vs 云：功耗、隐私与延迟的三角</h2>
+<p>穿戴产品的取舍表里，这三项永远互相打架：</p>
+<table>
+<thead>
+<tr>
+<th>计算位置</th>
+<th>优势</th>
+<th>劣势</th>
+<th>典型任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>设备端（MCU/DSP/NPU）</strong></td>
+<td>实时、省流量、隐私好、离线可用</td>
+<td>算力受限、内存 KB–MB 级、无法频繁更新模型</td>
+<td>PPG 滤波、心率、跌倒检测、活动识别、SQI</td>
+</tr>
+<tr>
+<td><strong>手机端</strong></td>
+<td>算力中等、有历史数据上下文</td>
+<td>要求手机在身边</td>
+<td>传感器融合、复杂提示词的 LLM 小模型、数据整合</td>
+</tr>
+<tr>
+<td><strong>云端</strong></td>
+<td>算力无限、可用大模型、易迭代</td>
+<td>延迟、隐私风险、需联网、成本高</td>
+<td>长期趋势分析、基础模型推理、LLM Coach 生成、群体模型训练</td>
+</tr>
+</tbody>
+</table>
+<p><strong>功耗预算是硬约束</strong>。一颗典型智能手表电池约 300–500mAh，要撑 1–7 天。这意味着：
+- PPG 必须 <strong>duty cycle</strong>（亮几十毫秒、采样几百毫秒、然后休眠）
+- GNSS 是最贵的（几十 mA），只能间歇开
+- 「连续监测」在大多数情况下其实是<strong>周期性的机会式采样</strong></p>
+<p>最新的趋势是把小模型推到设备上（行业里已经在做 0.31M 参数级的卷积基础模型，用来替代 110M 参数级的 Transformer，内存从 441MB 降到 3.6MB，CPU 加速约 4 倍）。<strong>这对 AI Coach 的直接意义是：你可以把「感知层」放到设备端实时跑，把「理解层」放手机上，把「生成层」放云端，形成三级 Agents 流水线。</strong></p>
+<hr />
+<h1 id="第四章-事件篇能识别出哪些事件各自有多可信">第四章 事件篇：能识别出哪些事件，各自有多可信</h1>
+<p>第二章讲了链路，这一章做<strong>横向盘点</strong>，并给出一个我认为每个 AI 健康 Coach 研发者都应该内置的<strong>证据分级框架</strong>。</p>
+<h2 id="4.1-事件总表">4.1 事件总表</h2>
+<p><strong>可信度等级说明</strong>：</p>
+<ul>
+<li><strong>★★★★★ 获授权功能</strong>：特定设备在已获授权的预期用途内提供筛查、通知或记录；阳性/异常仍须标准方法确认，不能替代临床评估</li>
+<li><strong>★★★★☆ 强证据</strong>：有大量独立验证研究，与金标准一致性良好，但未获监管许可或仅作健康/ wellness 用途</li>
+<li><strong>★★★☆☆ 中等</strong>：有一定验证，个体层面可用于趋势跟踪，绝对值不可信</li>
+<li><strong>★★☆☆☆ 弱/探索</strong>：有限验证，或存在已知的重大混淆因素，需谨慎解读</li>
+<li><strong>★☆☆☆☆ 营销性</strong>：多以「方向一致率」这类替代指标宣传，缺乏严格对照</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>事件 / 状态</th>
+<th>主要传感器</th>
+<th>算法要点</th>
+<th>代表产品的表现</th>
+<th>可信度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>步数 / 活动分钟数</strong></td>
+<td>IMU</td>
+<td>峰值检测 + 活动分类</td>
+<td>日常行走误差通常 &lt;10%，生活质量不高时为 3–5%</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td><strong>睡眠/觉醒二分</strong></td>
+<td>IMU + PPG</td>
+<td>Actigraphy + 心率</td>
+<td>睡眠检测灵敏度 &gt;90%，但「躺床清醒」易误判</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td><strong>睡眠分期（W/N1/N2/N3/REM）</strong></td>
+<td>IMU + PPG</td>
+<td>深度时序模型</td>
+<td>κ≈0.6–0.65 vs PSG（人类专家 κ≈0.7–0.8）</td>
+<td>★★★☆☆</td>
+</tr>
+<tr>
+<td><strong>总睡眠时长 / 睡眠效率</strong></td>
+<td>IMU + PPG</td>
+<td>上述模型的聚合</td>
+<td>明显优于单 epoch 分期精度</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td><strong>运动心率（稳态有氧）</strong></td>
+<td>PPG</td>
+<td>ANC + 心搏检测</td>
+<td>好的产品对胸带误差 &lt;2%</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td><strong>运动心率（HIIT / 力量）</strong></td>
+<td>PPG</td>
+<td>同上，但更难</td>
+<td>峰值延迟 2–4 秒，误差显著</td>
+<td>★★☆☆☆</td>
+</tr>
+<tr>
+<td><strong>静息心率 / 睡眠心率趋势</strong></td>
+<td>PPG</td>
+<td>长期 EWMA 基线</td>
+<td>稳定可靠，是所有衍生指标里性价比最高的一个</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td><strong>HRV（RMSSD，标准化晨测）</strong></td>
+<td>PPG 或 ECG</td>
+<td>RR 序列 + 时域</td>
+<td>静息下与 ECG 高度一致；受测量条件影响大</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td><strong>HRV（运动中 / 非标准化）</strong></td>
+<td>PPG</td>
+<td>同上</td>
+<td>伪影修正会人为压低 RMSSD</td>
+<td>★★☆☆☆</td>
+</tr>
+<tr>
+<td><strong>呼吸率（夜间静息）</strong></td>
+<td>PPG + IMU</td>
+<td>RIAV/RSA/模型回归</td>
+<td>相对鼻气流 RMSE≈1.1 次/分；重度 OSA 人群准确率降至 ~79%</td>
+<td>★★★☆☆</td>
+</tr>
+<tr>
+<td><strong>SpO₂ 单点读数</strong></td>
+<td>双波长 PPG</td>
+<td>比值法</td>
+<td>腕式精度弱于指夹；深色 / 低灌注偏倚明确存在</td>
+<td>★★★☆☆</td>
+</tr>
+<tr>
+<td><strong>夜间氧减事件模式</strong></td>
+<td>双波长 PPG</td>
+<td>去饱和计数</td>
+<td>比单点 SpO₂ 可靠得多</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td><strong>睡眠呼吸暂停筛查（OSA）</strong></td>
+<td>PPG+SpO₂ 或 IMU</td>
+<td>长期窗口 + ML</td>
+<td>Apple：灵敏度 66.3% / 特异度 98.5%；Samsung：82.7% / 87.7%</td>
+<td>★★★★★ <strong>（FDA cleared 筛查）</strong></td>
+</tr>
+<tr>
+<td><strong>房颤筛查（PPG 机会式）</strong></td>
+<td>PPG tachogram</td>
+<td>5/6 触发规则 + ML</td>
+<td>灵敏度 88.6% / 特异度 99.3%；人口层仅 0.5% 触发</td>
+<td>★★★★★ <strong>（FDA cleared）</strong></td>
+</tr>
+<tr>
+<td><strong>房颤确认（单导联 ECG）</strong></td>
+<td>ECG 电极</td>
+<td>节律分类 30s</td>
+<td>灵敏度/特异度 &gt;98%/99%（厂商条件）；第三方:医生读图 96%/100%</td>
+<td>★★★★★ <strong>（FDA cleared）</strong></td>
+</tr>
+<tr>
+<td><strong>其他心律失常（早搏、传导阻滞等）</strong></td>
+<td>ECG</td>
+<td>形态学 + ML</td>
+<td>研究活跃，监管清除有限</td>
+<td>★★★☆☆</td>
+</tr>
+<tr>
+<td><strong>高血压筛查（趋势/通知）</strong></td>
+<td>PPG 波形</td>
+<td>自监督表征 + 线性模型 + 30 天窗口</td>
+<td>Apple HTNF：灵敏度 41.2% / 特异度 92.3%</td>
+<td>★★★★☆ <strong>（FDA cleared 通知，非数值）</strong></td>
+</tr>
+<tr>
+<td><strong>无袖带血压数值</strong></td>
+<td>PPG（±ECG）</td>
+<td>PTT/PAT/PWA + 标定</td>
+<td><strong>AHA/ACC 2025 指南明确不建议用于诊断/管理</strong></td>
+<td>★★☆☆☆</td>
+</tr>
+<tr>
+<td><strong>袖带式 / 气囊式血压（表带）</strong></td>
+<td>微型气泵 + 气囊</td>
+<td>示波法</td>
+<td>接近上臂式（±3mmHg 量级），NMPA 认证</td>
+<td>★★★★★</td>
+</tr>
+<tr>
+<td><strong>跌倒检测</strong></td>
+<td>IMU</td>
+<td>自由落体→撞击→静止模板</td>
+<td>成熟功能，假阳/假阴仍需权衡</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td><strong>体成分（体脂率）</strong></td>
+<td>Bio-Z</td>
+<td>BIA 回归</td>
+<td>群体有用，个体偏差 ±3–5 个百分点</td>
+<td>★★☆☆☆</td>
+</tr>
+<tr>
+<td><strong>体重趋势</strong></td>
+<td>外接体脂秤</td>
+<td>7 日移动平均</td>
+<td>金标准级可用（这是最不该忽视的输入）</td>
+<td>★★★★★</td>
+</tr>
+<tr>
+<td><strong>体液相角 / 水合趋势</strong></td>
+<td>Bio-Z</td>
+<td>多频阻抗</td>
+<td>有心衰/营养领域的证据，消费级尚早</td>
+<td>★★★☆☆</td>
+</tr>
+<tr>
+<td><strong>排卵（回顾性确认）</strong></td>
+<td>皮温 + 心率</td>
+<td>双相曲线检测</td>
+<td>回顾性确认有用；不预测当天</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td><strong>月经周期 / 经期预测</strong></td>
+<td>皮温 + 心率 + 自报</td>
+<td>周期建模</td>
+<td>规律周期效果好；多囊、压力、围绝经期效果下降</td>
+<td>★★★☆☆</td>
+</tr>
+<tr>
+<td><strong>感染 / 疾病早期预警</strong></td>
+<td>皮温 + HR + HRV + 呼吸率</td>
+<td>多参数联合偏离个人基线</td>
+<td>有生物学依据与厂商验证；对具有明显生理应激的反应有效</td>
+<td>★★★☆☆</td>
+</tr>
+<tr>
+<td><strong>压力 / 精神负荷（唤醒度）</strong></td>
+<td>HRV + EDA + 多模态</td>
+<td>唤醒度分类 + 语境过滤</td>
+<td><strong>只能测唤醒不能测效价</strong>；需与主观报告联合</td>
+<td>★★☆☆☆</td>
+</tr>
+<tr>
+<td><strong>疲劳 / 恢复状态（Readiness / Recovery）</strong></td>
+<td>多元（HRV+RHR+睡眠+主观）</td>
+<td>加权评分体系</td>
+<td>产品差异极大，无统一定义；对使用者有行为价值</td>
+<td>★★☆☆☆（但有实用价值）</td>
+</tr>
+<tr>
+<td><strong>情绪识别（多分类）</strong></td>
+<td>HRV + EDA + 语音</td>
+<td>ML 分类</td>
+<td><strong>强烈不建议商业化宣传</strong></td>
+<td>★☆☆☆☆</td>
+</tr>
+<tr>
+<td><strong>组织间液葡萄糖（CGM）</strong></td>
+<td>CGM 酶电极</td>
+<td>电流→浓度</td>
+<td>MARD 7–9%，滞后 5–15 分钟</td>
+<td>★★★★★ <strong>（真正可用的代谢数据流）</strong></td>
+</tr>
+<tr>
+<td><strong>无创光学血糖（趋势）</strong></td>
+<td>多光谱 PPG / 阻抗组合</td>
+<td>ML 回归</td>
+<td><strong>尚未达到 CGM 级；警惕「方向一致率」宣传</strong></td>
+<td>★☆☆☆☆</td>
+</tr>
+<tr>
+<td><strong>汗液电解质 / 水合</strong></td>
+<td>汗液贴片（电化学）</td>
+<td>离子选择性电极</td>
+<td>多以贴片形式存在，未在手表内量产</td>
+<td>★★★☆☆</td>
+</tr>
+<tr>
+<td><strong>海拔 / 爬楼</strong></td>
+<td>气压计</td>
+<td>高度换算（每层约 3m）</td>
+<td>可靠</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td><strong>鼾声 / 咳嗽频次</strong></td>
+<td>麦克风</td>
+<td>声学事件检测</td>
+<td>有研究支持；受隐私限制，量产形态有限</td>
+<td>★★★☆☆</td>
+</tr>
+<tr>
+<td><strong>VO₂max / 心肺适能估算</strong></td>
+<td>PPG + IMU + GNSS</td>
+<td>心率-速度关系 + ML</td>
+<td>与运动测试相关性中等，趋势有用</td>
+<td>★★★☆☆</td>
+</tr>
+<tr>
+<td><strong>步态老化 / 跌倒风险</strong></td>
+<td>IMU</td>
+<td>步速、步幅变异、对称性</td>
+<td>老年医学证据扎实，产品化不足</td>
+<td>★★★☆☆</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4.2-三条最重要的「元结论」">4.2 三条最重要的「元结论」</h2>
+<h3 id="元结论一被动监测-长期窗口-&gt;-主动单次测量">元结论一：被动监测 + 长期窗口 &gt; 主动单次测量</h3>
+<p>Apple 的高血压通知（30 天窗口）、房颤通知（48 小时 5/6 规则）、睡眠呼吸暂停（30 天窗口），三星的 OSA（10 天内 2 夜）——<strong>所有通过监管审查的功能，无一例外都采用了「长期窗口 + 聚合决策」的架构。</strong> 这是穿戴行业用十年教训换来的共识。</p>
+<h3 id="元结论二越是无事发生的健康人模型越准">元结论二：越是"无事发生"的健康人，模型越准</h3>
+<p>结合前述信号质量限制与适用人群，必须正视一个现实：许多验证研究的参与者和使用条件都较为受限，不能把其表现外推到所有人群。</p>
+<blockquote>
+<p><strong>你的 AI Coach 在健康人身上会表现很好，在真正需要帮助的人身上会逐渐失效。</strong></p>
+</blockquote>
+<p>这句话值得刻在产品团队墙上。应对策略见 §5.9。</p>
+<h3 id="元结论三今天真正被「监管-临床-商业」三方共同验证的场景只有四个">元结论三：今天真正被「监管 + 临床 + 商业」三方共同验证的场景，只有四个</h3>
+<ol>
+<li><strong>房颤筛查</strong>（PPG 机会式 + ECG 确认）</li>
+<li><strong>睡眠呼吸暂停筛查</strong>（加速度 或 SpO₂ 路线）</li>
+<li><strong>高血压趋势通知</strong>（不是血压测量）</li>
+<li><strong>活动与睡眠的行为改善</strong>（作为慢性病预防的一线干预）</li>
+</ol>
+<p><strong>如果你的 Agent 想做出「有真实净收益」的东西，这四个是起点，不是全部，但它们是目前唯一可以诚实承诺的领域。</strong></p>
+<h1 id="第五章-Agent-篇AI-健康教练算法研发需要拓展的-12-个维度">第五章 Agent 篇：AI 健康教练算法研发需要拓展的 12 个维度</h1>
+<p>前面四章是「把数据做出来」。从这一章开始是「把决策做对」——<strong>这才是 AI 健康教练 (Health Coach Agent) 真正的研究与工程难点。</strong></p>
+<p>我的核心判断是：</p>
+<blockquote>
+<p><strong>做穿戴 Health Coach Agent，难点从来不在模型架构，而在于：你对生理测量的谦卑程度、对时间的理解、对因果的坚持，以及对自己不确定性的诚实。</strong></p>
+</blockquote>
+<p>下面 12 个维度，按「我认为的投入产出比」排序。每个维度我会给三部分：<strong>为什么重要 → 具体要学什么 → 怎么落进产品。</strong></p>
+<hr />
+<h2 id="D1.-测量科学素养Metrology学会把每个数字当成「估计值」">D1. 测量科学素养（Metrology）：学会把每个数字当成「估计值」</h2>
+<h3 id="为什么最重要">为什么最重要</h3>
+<p>我在调研中反复看到同一个模式的失败：工程团队拿到了 <code>heartRate</code>、<code>hrv</code>、<code>sleepScore</code> 这些 API 返回值，然后当作「用户真实的心率」去做决策。殊不知它们分别是：</p>
+<ul>
+<li>一个经过多层滤波与平滑、<strong>有 2–4 秒延迟</strong>的估计</li>
+<li>一个<strong>强依赖测量窗口标准化</strong>的统计量</li>
+<li>一个厂商私有权重算出的、<strong>定义都无从查证</strong>的综合分</li>
+</ul>
+<p><strong>不具备测量科学素养的团队，会造出一个「很自信地错」的产品。</strong> 而这在一个涉及医疗建议的场景里，代价远大于收益。</p>
+<h3 id="要学什么">要学什么</h3>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>为什么必须懂</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>准确度（accuracy）vs 精密度（precision）</strong></td>
+<td>穿戴设备往往精密度尚可（重复性好）但准确度差（有偏）。<strong>对趋势跟踪来说，精密度比准确度更重要</strong>——这是穿戴数据的合法性基础，也是你做设计取舍的依据</td>
+</tr>
+<tr>
+<td><strong>Bland-Altman 分析 vs 相关系数</strong></td>
+<td>相关系数是穿戴领域最常见的统计骗术：两个测量高度相关，但一个系统性偏高 20%。<strong>永远用 Bland-Altman（差值 vs 均值图）和平均绝对误差/ MARD 类指标，而不是 r</strong></td>
+</tr>
+<tr>
+<td><strong>MAE / MAPE / RMSE / MARD 的适用场景</strong></td>
+<td>MARD 适合血糖这类比例型；MAE 适合心率这类绝对型</td>
+</tr>
+<tr>
+<td><strong>灵敏度/特异度/PPV/NPV 与患病率的关系</strong></td>
+<td>PPV 强烈依赖人群中该疾病的患病率（Bayes）。Apple 房颤通知 PPV 在不同研究中从 84% 到別人可以推算差异巨大，就是因为人群不同。<strong>你在设计自己的告警时必须做同样的计算</strong></td>
+</tr>
+<tr>
+<td><strong>Limits of Agreement（95% LoA）</strong></td>
+<td>判断「两个测量能否互换」的金标准</td>
+</tr>
+<tr>
+<td><strong>校准 / 漂移 / 有效期</strong></td>
+<td>无袖带血压的全部困境都在这里</td>
+</tr>
+<tr>
+<td><strong>混淆变量与反向有效性梯度</strong></td>
+<td>§2.6、§4.2 已述</td>
+</tr>
+<tr>
+<td><strong>测量单位与溯源</strong></td>
+<td>HealthKit 的 <code>HKUnit</code>、FHIR 的 UCUM 编码。<strong>单位搞错是医疗软件事故的经典来源之一</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="怎么落进产品">怎么落进产品</h3>
+<p>在你们的数据层建立一张<strong>「指标元信息表」（Metric Card）</strong>，每一个指标都有如下字段，并在 LLM prompt 里作为结构化上下文注入：</p>
+<pre><code class="language-json">{
+  &quot;metric&quot;: &quot;hrv_rmssd&quot;,
+  &quot;unit&quot;: &quot;ms&quot;,
+  &quot;source&quot;: &quot;device_ppg_nightly&quot;,
+  &quot;reliability_tier&quot;: &quot;★★★★☆&quot;,
+  &quot;absolute_trustworthy&quot;: false,
+  &quot;requires_personal_baseline&quot;: true,
+  &quot;standardized_window&quot;: &quot;晨起静卧3分钟 或 夜间全程&quot;,
+  &quot;known_confounders&quot;: [&quot;运动伪影&quot;, &quot;呼吸频率&quot;, &quot;酒精&quot;, &quot;咖啡因&quot;, &quot;感染&quot;, &quot;室温&quot;],
+  &quot;typical_within_subject_sd&quot;: &quot;10-20%&quot;,
+  &quot;do_not_use_for&quot;: [&quot;单次绝对值归因&quot;, &quot;运动中强度判断&quot;],
+  &quot;evidence_note&quot;: &quot;绝不作为压力的直接证据；需与至少2个其他指标联合&quot;
+}
+</code></pre>
+<p><strong>这一步的收益极大</strong>：它让你的 Agent 天然不会说出「你的 HRV 是 38ms，所以你压力很大」这种话，因为它读到的上下文里写着不可这样使用。而且它强制团队把「我们知道什么、不知道什么」显性化。</p>
+<hr />
+<h2 id="D2.-生理动力学与时间尺度学会正确的决策节奏决策尺度">D2. 生理动力学与时间尺度：学会正确的决策节奏（决策尺度）</h2>
+<h3 id="为什么重要">为什么重要</h3>
+<p>大部分 AI Agent 产品的最大缺陷是<strong>决策节奏错了</strong>：</p>
+<ul>
+<li>看到 HRV 一天低就建议休息（实际是噪声）</li>
+<li>第 5 天就说「你的训练方案有效」（实际 VO₂max 变化需要 6–8 周）</li>
+<li>用户体重一天涨 0.8kg 就发警报（实际是水合波动）</li>
+</ul>
+<p><strong>生理系统的时间常数决定了 Agent 的行为节奏。</strong> 复习 §3.5 的时间尺度表，然后往下落实三件事：</p>
+<h3 id="要学什么-1">要学什么</h3>
+<ol>
+<li><strong>Supercompensation（超量恢复）模型与训练负荷理论</strong>
+   - Fitness（慢性适应）/ Fatigue（急性疲劳）/ Form = Fitness − Fatigue
+   - Banister impulse-response 模型：把训练量当输入、把表现当输出的双阶线性时不变系统
+   - <strong>ACWR</strong>（急性:慢性负荷比）：甜蜜区 0.8–1.3，&gt;1.5 风险显著升高（近年有方法学批评，不宜当教条，但思想正确）</li>
+<li><strong>昼夜节律科学（Chronobiology）</strong>
+   - 核心体温、皮质醇、褪黑素、血压、胰岛素敏感性都有 24h 节律
+   - <strong>胰岛素敏感性与食物热效应下午比晚上更好</strong>；运动时间（chronotherapy）会影响效果
+   - 昼夜相位偏移（social jetlag）本身就是一个健康风险因子
+   - <strong>实践含义：把 <code>time-of-day</code> 作为模型的一个显式特征，而不是噪声</strong></li>
+<li><strong>睡眠稳态模型（Two-Process Model）</strong>
+   - Process S（睡眠压力常数上升）+ Process C（昼夜节律）→ 决定睡眠时机和质量
+   - 这是理解「为什么熬夜后补觉不能彻底恢复」的模型基础</li>
+<li><strong>长期适应vs短期波动的区分</strong>：最小有意义变化不等于差异、测量误差 vs 真实变化 → 用<strong>最小可检出变化（MDC, Minimal Detectable Change）</strong>判断「这个变化是真的吗」</li>
+</ol>
+<h3 id="怎么落进产品-1">怎么落进产品</h3>
+<p>做一个<strong>「决策日历」（Decision Cadence）配置表</strong>，明确写下每一种洞察的合理尺度：</p>
+<table>
+<thead>
+<tr>
+<th>洞察类型</th>
+<th>合理时间窗</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实时反馈（秒~分钟）</td>
+<td>运动中</td>
+<td>心率区间提醒、卡路里实时显示</td>
+</tr>
+<tr>
+<td>当日总结（24h）</td>
+<td>每日早晚</td>
+<td>睡眠回顾、当日活动达成、早起为社会</td>
+</tr>
+<tr>
+<td><strong>周度趋势（7d）</strong></td>
+<td>每周</td>
+<td><strong>HRV/RHR 双基线对比、训练负荷平衡、睡眠债务累积</strong></td>
+</tr>
+<tr>
+<td>月度评估（28d）</td>
+<td>每月</td>
+<td>体重趋势线、运动习惯稳固度、周期规律性</td>
+</tr>
+<tr>
+<td>季度/半年（3–6月）</td>
+<td>长期目标</td>
+<td>VO₂max、静息心率、代谢指标的真正变化</td>
+</tr>
+</tbody>
+</table>
+<p><strong>并且，把这条 surgically 写进 Agent 的系统提示：</strong></p>
+<blockquote>
+<p>单日数据通常不足以支持归因或效果结论；观察窗口应由具体问题、信号质量和验证证据决定。出现症状、红旗提示、既往疾病相关变化或设备正式告警时，应优先遵循设备说明与医疗升级路径，而不是等待固定天数。</p>
+</blockquote>
+<hr />
+<h2 id="D3.-隐状态推断从「指标」到「状态」">D3. 隐状态推断：从「指标」到「状态」</h2>
+<h3 id="为什么重要-1">为什么重要</h3>
+<p>用户的真实生理状态（恢复程度、应激水平、代谢健康、训练适应）是<strong>不可直接观测的隐变量（latent state）</strong>。你观测到的是它的若干带噪声的「果」。</p>
+<p>这是一个标准的<strong>状态空间模型（State Space Model）</strong>问题：</p>
+<pre><code>状态方程： x_t = A·x_{t-1} + B·u_t + w_t     （隐状态演化 + 训练/饮食/睡眠等输入 + 过程噪声）
+观测方程： y_t = H·x_t + v_t                  （多个带噪观测：HRV、RHR、皮温、主观评分…）
+</code></pre>
+<p><strong>卡尔曼滤波（及其非线性扩展 EKF/UKF/粒子滤波）就是这个问题的标准解法。</strong> 这是我认为最应该被 AI 工程师引入穿戴领域、但目前极少被使用的一组工具。</p>
+<h3 id="它的实际威力在哪">它的实际威力在哪</h3>
+<p>假设我们想推断「用户的真实疲劳水平 <code>x_t</code>」，手上有四个带噪声观测：</p>
+<table>
+<thead>
+<tr>
+<th>观测 <code>y</code></th>
+<th>噪声来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RMSSD 下降</td>
+<td>测量伪影、昨晚餐食、室温</td>
+</tr>
+<tr>
+<td>静息心率上升</td>
+<td>睡眠不足、脱水、饮酒</td>
+</tr>
+<tr>
+<td>深睡比例下降</td>
+<td>分期算法误差、睡前饮酒</td>
+</tr>
+<tr>
+<td>主观疲劳评分（EMA）</td>
+<td>回忆偏差、情绪状态</td>
+</tr>
+</tbody>
+</table>
+<p>单独看任何一个都不可靠。但卡尔曼滤波（或任何贝叶斯状态推断）会：</p>
+<ol>
+<li>按<strong>每个观测的噪声方差</strong>加权融合（今天是夏天，我知道皮温传感器不太行 → 降权）</li>
+<li>按<strong>状态演化的惯性</strong>平滑（疲劳不会一天暴涨暴跌 → 抑制单点跳变）</li>
+<li>输出<strong>带置信区间</strong>的估计：<code>\hat{x}_t \pm \sigma_t</code></li>
+</ol>
+<p>第 3 点是关键：<strong>你的 Agent 终于可以对用户说「我有 75% 的把握你今天处于过度疲劳」而不是「你今天状态不好」。</strong></p>
+<h3 id="怎么落进产品-1-2">怎么落进产品</h3>
+<ul>
+<li>用任何一款贝叶斯时间序列库起步（Python 的 <code>statsmodels</code>、<code>pykalman</code>、<code>pymc</code>、<code>cmdstanpy</code>）</li>
+<li>最小可行版本：<strong>一维隐状态 + 3~5 个观测</strong>的一阶卡尔曼滤波，几百行代码就能上线</li>
+<li>把输出的后验分布作为 LLM prompt 里的上下文：「恢复状态估计 62/100，95%CI [48, 76]，较昨日下降 8 点」</li>
+<li><strong>主观报告（EMA）作为观测之一纳入模型</strong>——这一点极其重要，且恰恰是统计学上最优雅的做法：主观体验有偏差但也有信息客观数据缺失的那部分</li>
+</ul>
+<hr />
+<h2 id="D4.-个性化与-N-of-1穿戴健康的统计分析单位是「人内」不是「人间」">D4. 个性化与 N-of-1：穿戴健康的统计分析单位是「人内」，不是「人间」</h2>
+<h3 id="为什么重要-1-2">为什么重要</h3>
+<p>这是穿戴数据最反直觉的一点。在传统 ML/NLP 里，我们追求「更多样本 = 更好」。在穿戴健康里：</p>
+<blockquote>
+<p><strong>10,000 个人 × 1 天的数据，价值远小于 100 个人 × 100 天的数据。</strong></p>
+</blockquote>
+<p>因为绝大部分生理变量的<strong>个体间方差远大于个体内方差</strong>（RMSSD、静息心率、体温、餐后血糖反应都是如此）。用群体模型套个体，得到的很可能是一个「对所有人都平均不错、对任何一个人都不准」的东西。</p>
+<h3 id="要学什么-1-2">要学什么</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>N-of-1 试验设计</strong></td>
+<td>单个个体的交叉对照试验（ABAB 设计），是精准健康的统计学基础。已有一批高质量的临床案例（见下文）</td>
+</tr>
+<tr>
+<td><strong>混合效应模型（Mixed-effects / HLM）</strong></td>
+<td>同时估计群体效应与个体随机截距/斜率。医学 RCT 的标准分析工具</td>
+</tr>
+<tr>
+<td><strong>层次贝叶斯模型</strong></td>
+<td>群体先验 + 个体数据 → 个体后验。数据少时向群体收缩，数据多时向个体倾斜（partial pooling）。<strong>这几乎是穿戴健康的"最优解框架"</strong></td>
+</tr>
+<tr>
+<td><strong>EMA（生态瞬时评估）</strong></td>
+<td>在自然情境下多次采样主观状态避免回忆偏差。<strong>这是把主观与客观对齐的唯一严肃方法</strong></td>
+</tr>
+<tr>
+<td><strong>个体间/个体内方差分解（ICC）</strong></td>
+<td>先算 ICC（组内相关系数）判断该变量主要是「人各不同」还是「日常波动」，决定建模策略</td>
+</tr>
+</tbody>
+</table>
+<h3 id="一个重要的现实例子">一个重要的现实例子</h3>
+<p>2026 年发表在 npj Digital Medicine 上的 <strong>PerMA 试验</strong>（斯坦福，n=50，单臂开放标签）是一个很好的模板：</p>
+<ul>
+<li>用 2 周数字化监测（每日 4 次手机 EMA + 手表客观数据）为<strong>每个人单独</strong>建立机器学习模型</li>
+<li>找出「对这个个体而言最预测其情绪的生活方式因素」（有人是睡眠，有人是社交，有人是运动）</li>
+<li>生成个体化的行为增强方案（iMAP），配合每周一次人类教练</li>
+<li>结果：PHQ-9 平均下降 3.5 分（Cohen's d = −0.89）， clinician-rated HDRS 下降 7.2（d = −1.03），12 周随访维持</li>
+<li><strong>并且：决策算法与 LLM 能够匹配人类教练的 iMAP 分配，准确率最高达 95%</strong></li>
+</ul>
+<p>这个试验就是「N-of-1 ML + LLM Coach」的最清晰示范。它告诉我们：<strong>与其训练一个"识别所有人压力"的通用模型，不如为每个人训练一个"识别哪件事在影响他"的小模型。</strong></p>
+<p>另一个待出的里程碑是斯坦福 <strong>My Heart Counts 2.0</strong>（2026 年 3 月开始招募，目标 N=15,000，英美两国）：在前瞻性数字队列中嵌入<strong>随机交叉试验</strong>，比较「基于跨理论模型（TTM / Stages of Change）的 LLM 生成个性化提示」vs「通用提示」，主终点是日均步数。这类研究的结果会在未来 2–3 年内定义「LLM Coach 到底有没有用」这个争论。</p>
+<h3 id="怎么落进产品-1-3">怎么落进产品</h3>
+<ol>
+<li>冷启动：用<strong>层次贝叶斯</strong>从群体先验起步，随着用户数据累积逐步个性化</li>
+<li>至少保留 14 天的「只观察、不归因」期，用来建立个人基线</li>
+<li>主动 EMA 设计是你的秘密武器：<strong>每天 1–2 个极低负担的问题（如 1–5 分的精力条），价值超过一堆被动传感器</strong></li>
+<li>把「个体 causality discovery」作为产品功能：找到「对你而言，睡眠不足 → 次日 HRV 下降 → 下午精力低」这条<strong>属于他的链路</strong></li>
+</ol>
+<hr />
+<h2 id="D5.-行为改变科学LLM-Coach-的「内容」从哪来">D5. 行为改变科学：LLM Coach 的「内容」从哪来</h2>
+<h3 id="为什么重要-1-3">为什么重要</h3>
+<p>很多健康 AI 团队的假设是：LLM 已经足够强，只要把生理数据塞给它，它自然能给出好的健康建议。</p>
+<p>这是个危险的假设。<strong>LLM 知道很多健康知识，但几乎不知道行为怎么改变。</strong> 而健康教练的价值 100% 落在后者。</p>
+<p>公共卫生界有一个稳定且被反复验证的结论：<strong>知识不足很少是行为失败的原因，环境与动机才是。</strong> 你知道熬夜不好，但你还是刷到两点——这不是认知问题。</p>
+<h3 id="必须学的行为理论框架">必须学的行为理论框架</h3>
+<table>
+<thead>
+<tr>
+<th>框架</th>
+<th>核心</th>
+<th>产品映射</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>COM-B 模型</strong></td>
+<td>行为 = 能力(Capability) × 机会(Opportunity) × 动机(Motivation)。英国 NICE 与行为改变车轮（Behaviour Change Wheel）的基础</td>
+<td><strong>归因框架</strong>：用户不运动是因为「不知道怎么练」(能力)、「没时间/没场地」(机会)、还是「不想动」(动机)？三者干预完全不同</td>
+</tr>
+<tr>
+<td><strong>跨理论模型 TTM</strong>（Stages of Change）</td>
+<td>前意向 → 意向 → 准备 → 行动 → 维持</td>
+<td><strong>最重要的实用框架</strong>：对「前意向期」的人讲训练计划是浪费时间；对他要做的是动机的唤起。斯坦福 MHC 2.0 的 LLM prompting 正是基于它</td>
+</tr>
+<tr>
+<td><strong>自我决定理论 SDT</strong></td>
+<td>自主性、胜任感、归属感是内在动机的三大支柱</td>
+<td>为什么「外部奖励/打卡 streak」长期有害而「自主选择」长期有益；为什么把目标变成"你要完成"会摧毁动机</td>
+</tr>
+<tr>
+<td><strong>执行意图 / If-Then Planning</strong></td>
+<td>「如果 [情境]，我就 [行为]」的具体计划显著提升执行率</td>
+<td>直接可产品化为 Coach 的核心输出形式</td>
+</tr>
+<tr>
+<td><strong>习惯形成（Habit Formation）</strong></td>
+<td>线索→行为→奖励的自动回路；平均形成时间被高估，中位约 10 周量级且个体差异极大</td>
+<td>不要承诺 21 天养成习惯</td>
+</tr>
+<tr>
+<td><strong>动机性访谈（Motivational Interviewing）</strong></td>
+<td>开放式提问、肯定、反映性倾听、总结；唤起当事人自己的论据</td>
+<td><strong>这正是 LLM 的天然强项</strong>（对话生成），也是 LLM Coach 最应该被训练的方向</td>
+</tr>
+<tr>
+<td><strong>助推 / 选择架构</strong></td>
+<td>改变环境而非改变人</td>
+<td>冰箱里放什么、App 默认选项、运动鞋放在哪里</td>
+</tr>
+</tbody>
+</table>
+<h3 id="LLM-Coach-的证据现状要诚实">LLM Coach 的证据现状（要诚实）</h3>
+<p>截至 2026 年中的状态：</p>
+<ul>
+<li><strong>PerMA 试验</strong>（n=50）：LLM 匹配人类教练决策准确率最高 95%，个体差异化的 ML iMAP 显示出有临床意义的抑郁改善（单臂，需 RCT 验证）</li>
+<li><strong>My Heart Counts 2.0</strong>（N=15,000，2026 年 3 月启动）：第一个大规模检验 LLM 生成 coaching 提示 vs 通用提示的 RCT，尚无结果</li>
+<li><strong>普遍现状</strong>：大量「AI Coach」产品没有公开发表的疗效数据</li>
+</ul>
+<p><strong>诚实的结论：LLM Coach 目前处于「有希望、有初步试点证据、缺乏大规模确证性 RCT」的阶段。</strong></p>
+<h3 id="怎么落进产品-1-4">怎么落进产品</h3>
+<ol>
+<li><strong>把行为理论的 Operating Promise：对的不同 TTM 阶段用完全不同的对话策略。</strong> 这比任何 prompt 技巧的影响都大。</li>
+<li><strong>Prompt 里注入结构化的用户状态</strong>，而不是 raw data dump：
+   <code>用户状态：
+   - 行为改变阶段：准备期（已表达意愿，尚未行动）
+   - 主要障碍类型（COM-B）：机会型（工作日午休只有30分钟且健身房远）
+   - 自主性倾向：高（讨厌被安排）
+   - 已承诺的最小行动：工作日午餐后步行 10 分钟
+   → 本轮目标：协同设计一个他主导提出的、明天可执行的具体计划；不要给方案清单，要提问。</code></li>
+<li><strong>训练/评测 LLM Coach 的指标不应该是「回答好不好」，而应该是「是否推进了行为阶段」</strong>（从前意向→意向→准备→行动→维持）。这是唯一诚实的代理终点，且可以做成 rubric-based LLM-as-judge 评测集。</li>
+</ol>
+<hr />
+<h2 id="D6.-主动测量你的-Agent-应该能设计「生理测试」而不只是读数据">D6. 主动测量：你的 Agent 应该能设计「生理测试」，而不只是读数据</h2>
+<h3 id="为什么重要-1-4">为什么重要</h3>
+<p>回到 §2.8 那个洞察：Apple 的架构是「被动机会式筛查 → 触发加密采集 → 通知 → 就医」。中间那个「加密采集」本质上是一次<strong>主动测量</strong>。</p>
+<p><strong>当前的消费健康 App 几乎全是被动数据消费者。</strong> 但真正有诊断价值的很多东西，必须通过主动任务来获取：</p>
+<table>
+<thead>
+<tr>
+<th>主动任务</th>
+<th>可获得什么</th>
+<th>医学依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>6 分钟步行测试（6MWT）</strong></td>
+<td>心肺适能、功能容量的粗略估计</td>
+<td>临床标准工具，有明确参照方程</td>
+</tr>
+<tr>
+<td><strong>直立/站立测试（Orthostatic test）</strong></td>
+<td>自主神经功能、体位性心动过速、脱水</td>
+<td>HR 增幅 &gt;30bpm 提示 POTS/脱水/自主病变</td>
+</tr>
+<tr>
+<td><strong>深呼吸 HRV 测试（RSA 测试）</strong></td>
+<td>副交感功能储备</td>
+<td>标准化的临床自主神经检查（Ewing battery）</td>
+</tr>
+<tr>
+<td><strong>30 秒坐立测试（30-second Chair Stand）</strong></td>
+<td>下肢力量与功能</td>
+<td>老年功能评估标准工具</td>
+</tr>
+<tr>
+<td><strong>握力测试</strong>（外接设备）</td>
+<td>肌肉力量，是<strong>全因死亡率的强预测因子</strong></td>
+<td>大型 cohort 证据（PURE 研究）</td>
+</tr>
+<tr>
+<td><strong>结构化心肺运动测试</strong>（需设备）</td>
+<td>VO₂max 金标准</td>
+<td>实验室标准</td>
+</tr>
+<tr>
+<td><strong>问卷</strong>：PHQ-9 / GAD-7 / PSQI / STOP-BANG / IPAQ</td>
+<td>抑郁、焦虑、睡眠质量、OSA 风险、活动量</td>
+<td>全部有验证的量表</td>
+</tr>
+</tbody>
+</table>
+<h3 id="怎么落进产品-1-5">怎么落进产品</h3>
+<p><strong>设计一个「Assessment Protocol」工具箱</strong>，你的 Agent 在系统里应该像医生一样：</p>
+<pre><code>被动数据发现异常（例如静息心率连续 5 天上升 8bpm）
+  → Agent 主动调用评估工具：「要不要花 1 分钟做一个站立起测试？这个能帮我们判断
+     是脱水、疲劳还是别的。」
+  → 用户执行（穿戴 + 手机引导计时）
+  → 结果入库，成为新的结构化特征
+  → 更新推断（贝叶斯更新）
+</code></pre>
+<p>这个设计有三个巨大好处：
+1. <strong>数据质量远比被动采集高</strong>（标准化条件下）
+2. <strong>它本身就是一次干预</strong>（用户在参与自己的健康评估，这是 SDT 里自主性的体现）
+3. <strong>它是 LLM Agent 最好的工具调用（tool-use）落地形态</strong>——比让它调天气 API 有意义得多</p>
+<hr />
+<h2 id="D7.-因果推断与-Bandit把「相关性」升级为「可行动的因果」">D7. 因果推断与 Bandit：把「相关性」升级为「可行动的因果」</h2>
+<h3 id="为什么重要-1-5">为什么重要</h3>
+<p>你的 Agent 每天在向用户提建议。每一条建议都是一个干预。<strong>你的系统是否有能力知道哪条建议真的有效？</strong></p>
+<p>绝大多数产品的答案是：不知道。它们用留存、打开率来评价。而这带来一个严重问题：</p>
+<blockquote>
+<p><strong>Engagement（参与度）作为健康产品的北极星指标是有害的。</strong></p>
+<p>最能提升 engagement 的东西，往往不是最能改善健康的东西：焦虑驱动的红点通知、夸张的警告、社交比较、连续打卡的损失厌恶。<strong>这些手段会同时提升 DAU 和用户的焦虑水平。</strong></p>
+</blockquote>
+<h3 id="要学什么-1-3">要学什么</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>随机对照试验 RCT</strong></td>
+<td>最可靠，但成本高、周期长。适合关键功能一次</td>
+</tr>
+<tr>
+<td><strong>微随机试验 MRT（Micro-Randomized Trial）</strong></td>
+<td><strong>最适合穿戴 JITAI 的方法</strong>：在成百上千个决策点上随机决定是否推送，直接估计「推送 X 的即时因果效应」。这是行为科学界为穿戴干预量身打造的工具</td>
+</tr>
+<tr>
+<td><strong>多臂老虎机 / Contextual Bandit</strong></td>
+<td>在线学习「在状态 s 下推送干预 a 的效果」，自动平衡探索与利用。<strong>这是 LLM Coach 最强、最现实的推荐引擎形态</strong></td>
+</tr>
+<tr>
+<td><strong>时序差分/强化学习</strong></td>
+<td>用于长期目标分解与序列决策（但要注意样本效率与安全性）</td>
+</tr>
+<tr>
+<td><strong>Off-policy evaluation（离线策略评估）</strong></td>
+<td>用历史日志估计新策略效果，不必上线。穿戴场景必需的省钱工具</td>
+</tr>
+<tr>
+<td><strong>因果图（DAG）/ do-calculus</strong></td>
+<td>明确识别混杂变量（confounders）并避免「控制了对撞机」这类经典错误</td>
+</tr>
+<tr>
+<td><strong>工具变量 / 孟德尔随机化（Instrumental Variables / Mendelian Randomization）</strong></td>
+<td>用遗传变异作工具变量推断因果（如「睡眠是否真的导致抑郁」）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="一个必须建立的因果「陷阱清单」">一个必须建立的因果「陷阱清单」</h3>
+<p>穿戴数据的观察性分析里有几个特别常见的假因果：</p>
+<ul>
+<li><strong>反向因果</strong>：不是「睡眠差导致焦虑」，可能「焦虑导致睡眠差」。因为两个方向的滞后效应都有，简单的滞后回归会得出错误结论</li>
+<li><strong>共同驱动（confounding by indication）</strong>：感觉不舒服的人更容易躺平 + 更容易戴表监测 → 得出「戴表导致不活动」</li>
+<li><strong>健康用户偏差（Healthy user bias）</strong>：依从性好的人本来就更健康，于是任何产品看起来都有效</li>
+<li><strong>回归到均值</strong>：用户在最差的一天开始用你的产品，第二天自然变好，看起来像效果</li>
+<li><strong>测量缺失非随机（MNAR）</strong>：用户停止佩戴手表往往发生在状态差的日子（住院、生病、情绪低落）→ <strong>缺失本身就是最强的信号之一，而绝大多数分析直接丢掉它</strong></li>
+</ul>
+<h3 id="怎么落进产品-1-6">怎么落进产品</h3>
+<ol>
+<li><strong>把每一次干预当成一次随机化机会</strong>：至少用 ε-greedy 或 Thompson Sampling 做 contextual bandit，而不是固定规则。这是最低成本、最高收益的一步。</li>
+<li><strong>记录完整的干预日志</strong>：做干预决策时的上下文状态 s、可选动作集 A、实际选择 a、随后的 outcome y。<strong>没有这个日志你永远无法评估或改进。</strong></li>
+<li><strong>用 off-policy evaluation 定期在离线评估「如果换成新策略会怎样」，再上线。</strong></li>
+<li><strong>把符号移動到指标体系上</strong>：不要以 DAU 为主指标；改用三层指标：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>指标</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>参与层</strong>（必要但不充分）</td>
+<td>周活跃天数、有效交互天数、任务完成率</td>
+<td>是前提，不是目标</td>
+</tr>
+<tr>
+<td><strong>代理结局层</strong>（主 KPI）</td>
+<td>睡眠时长/效率、中等强度活动分钟数、MVPA、体重趋势、TIR</td>
+<td>有生理意义的可测变化</td>
+</tr>
+<tr>
+<td><strong>临床结局层</strong>（最终目标）</td>
+<td>HbA1c、血压、VO₂max、PHQ-9、医疗资源使用</td>
+<td>周期长，需要真实随访设计</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="D8.-数据工程与互操作脏活决定上限">D8. 数据工程与互操作：脏活决定上限</h2>
+<h3 id="为什么重要-1-6">为什么重要</h3>
+<p>这一节最不性感，但<strong>我认为它是决定 Health Coach 产品成败的第二重要因素</strong>（第一是 D1 的测量素养）。</p>
+<p>原因很简单：你的 Agent 是在真实用户的数据流上运行的，而这些数据流是：多源、异步、有缺失、单位混乱、时间戳错位、且<strong>设备型号带来的语义差异根本无法通过接口消解</strong>（同样是 "sleepScore"，Apple 和 Oura 和 Garmin 的定义完全不同）。</p>
+<h3 id="必须处理的具体问题">必须处理的具体问题</h3>
+<p><strong>① 互操作标准</strong>
+- <strong>HL7 FHIR</strong>（尤其是 <code>Observation</code>、<code>Patient</code>、<code>Condition</code>、<code>CarePlan</code> 资源）是医疗互操作的事实标准，FDA 与 EHR 广泛采用。HealthKit 是健康/健身样本 API；Health Records 可读取由支持机构提供的 FHIR 临床资源，互操作时必须显式定义映射、版本与单位。<a href="https://developer.apple.com/documentation/healthkit/accessing-health-records" rel="noopener noreferrer">Apple Health Records 文档</a>
+- <strong>Apple HealthKit</strong>（iOS）/ <strong>Google Health Connect</strong>（Android）：消费侧的入口。它们的类型体系、单位（HKUnit）、数据来源（HKSource）模型值得完整学习
+- <strong>Open mHealth</strong>：为穿戴数据设计的 schema 集合，比 FHIR 更贴近穿戴场景
+- <strong>IEEE 1752 / ISO/IEEE 11073</strong>：个人健康设备（PHD）通信标准</p>
+<p><strong>② 数据缺失的三种机制</strong>（这是统计功底的分水岭）
+- <strong>MCAR</strong>（完全随机缺失）：无所谓，直接删
+- <strong>MAR</strong>（随机缺失，缺失概率可由已观测变量解释）：多重插补 / IPW 加权
+- <strong>MNAR</strong>（非随机缺失，<strong>缺失本身携带信息</strong>）：<strong>穿戴数据的常态</strong>。停用=病了=焦虑了=忘了=度假了。必须显式建模「缺失指示变量」，并且<strong>永远把"多久没同步数据"当作一级特征</strong></p>
+<p><strong>③ 单位与时间</strong>
+- UTC vs 本地时区；夏令时切换（每年两次，必有一个 bug）
+- 旅行跨时区：用户的「夜间」是哪里的时间？
+- 单位统一到 SI / UCUM：<code>mmol/L</code> vs <code>mg/dL</code>（血糖换算因子 18）、<code>lbs</code> vs <code>kg</code></p>
+<p><strong>④ 多设备融合</strong>
+同一用户可能同时有 Apple Watch + Oura Ring + CGM + 智能体重秤。<strong>决策优先级不是「哪个更准」，而是「哪个在你今天拥有的数据里最可靠」</strong>。这需要维护一个 source-of-truth 仲裁层。</p>
+<p><strong>⑤ 数据契约（Data Contract）与漂移</strong>
+穿戴厂商会静默更新算法；同一指标的历史值可能因为算法变更而不可比（这在业内极常见，且几乎从不明示）。<strong>解决办法：记录每条数据的 <code>source_algorithm_version</code>，并在检测到分布漂移时重新校准个人基线。</strong></p>
+<hr />
+<h2 id="D9.-不确定性量化公平性与「失效的优雅」">D9. 不确定性量化、公平性与「失效的优雅」</h2>
+<h3 id="为什么重要-1-7">为什么重要</h3>
+<p>第四章的元结论二我们已经说过：<strong>你的模型在最需要帮助的人身上最容易失效。</strong> 加上这一节的另外三条失效，合起来构成「穿戴 AI 的系统性公平性问题」：</p>
+<table>
+<thead>
+<tr>
+<th>失效类型</th>
+<th>具体表现</th>
+<th>缓解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>肤色偏倚</strong></td>
+<td>光学 PPG/SpO₂ 在深肤色人 SNR 更低；SpO₂ 隐匿性低氧漏检有 FDA 安全通告</td>
+<td>报告按肤色的分层性能；避免过度依赖光学校准</td>
+</tr>
+<tr>
+<td><strong>性别偏倚</strong></td>
+<td>女性-specific 生理（周期、妊娠、绝经）在训练数据中长期代表性不足</td>
+<td>分层评测；周期建模</td>
+</tr>
+<tr>
+<td><strong>年龄/体型偏倚</strong></td>
+<td>老年人皮肤松弛、灌注差、病理步态；BMI 极高者光学路径不同</td>
+<td>分层评测；明确适用人群</td>
+</tr>
+<tr>
+<td><strong>疾病状态偏倚（反向有效性梯度）</strong></td>
+<td>§2.6 已述</td>
+<td>在目标人群中而非健康人中验证</td>
+</tr>
+<tr>
+<td><strong>种族/社会经济偏倚</strong></td>
+<td>训练队列主要是高教育、高收入、白人参与者</td>
+<td>主动招募；报告外部效度</td>
+</tr>
+</tbody>
+</table>
+<h3 id="要学什么-1-4">要学什么</h3>
+<ul>
+<li><strong>不确定性量化</strong>：Bayesian neural network / Deep ensembles / Conformal Prediction（尤其是<strong>保角预测</strong>：给出有统计保证的预测区间，且不依赖分布假设，非常适合医疗场景）</li>
+<li><strong>选择性预测 / Abstention</strong>：模型可以「弃权」。在健康场景里，「我不知道」的处理策略比猜重要一倍</li>
+<li><strong>分布外检测（OOD）</strong>：用户的生理进入了模型没见过的状态</li>
+<li><strong>公平性评测</strong>：分层性能指标（subgroup performance）、equalized odds、<strong>不能只看整体 AUC</strong></li>
+<li>** calibration（校准）<strong>：模型输出的概率是否与实际频率一致。一个说「80% 概率XX」但只有 40% 发生的模型，比一个老实说「50%」的模型危险得多。</strong>可靠性曲线（reliability diagram）与 Brier score 是必备工具**</li>
+</ul>
+<h3 id="怎么落进产品-1-7">怎么落进产品</h3>
+<p>一个我认为应该成为行业标准的<strong>「不确定性三级的界面/话术约定」</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>置信度</th>
+<th>呈现形态</th>
+<th>用户话语示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高（&gt;90%）</td>
+<td>陈述句</td>
+<td>「你的数据显示…」</td>
+</tr>
+<tr>
+<td>中（60–90%）</td>
+<td>带限定词 + 建议验证</td>
+<td>「数据提示… 如果你感觉不是这样，我们可以再看看」</td>
+</tr>
+<tr>
+<td>低（&lt;60%）</td>
+<td><strong>转换为提问</strong></td>
+<td>「我注意到一个变化但不确定原因——最近睡眠和之前比怎么样？」</td>
+</tr>
+</tbody>
+</table>
+<p>第三行就是前面 §2.14 讲过的「把不确定性转化为对话」。<strong>这是 LLM Agent 相比传统仪表盘最大的结构性优势，值得作为核心设计原则。</strong></p>
+<hr />
+<h2 id="D10.-合规监管与安全边界Red-Line-在哪里">D10. 合规、监管与安全边界：Red Line 在哪里</h2>
+<h3 id="为什么重要-1-8">为什么重要</h3>
+<p>健康是少数几个「说错话要付法律责任」的领域。而且<strong>监管并不是在阻挡创新，恰恰相反，它清晰地画出了哪些地方值得创新</strong>。</p>
+<h3 id="必须知道的监管框架">必须知道的监管框架</h3>
+<table>
+<thead>
+<tr>
+<th>管辖区</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>美国 FDA</strong></td>
+<td><strong>SaMD</strong>（Software as a Medical Device）框架。三类路径：510(k)（实质等同 / Apple 房颤通知、HTNF 走这条）、De Novo（全新类别 / Samsung OSA 走这条）、PMA（最高风险）。还有 <strong>De Novo / 510(k) 的变更控制计划</strong>（change control plan）——你更新模型也需要监管许可，这就是为什么 Apple 等厂商会「锁定模型」</td>
+</tr>
+<tr>
+<td><strong>欧盟</strong></td>
+<td><strong>MDR</strong>（医疗器械法规）+ CE 标记；Class IIa 以上需公告机构审核</td>
+</tr>
+<tr>
+<td><strong>中国 NMPA</strong></td>
+<td>二类医疗器械（多数健康手表/血压/ECG 走这条）与三类。近年 CGM、Watch D2 类产品均获批；同时<strong>涉及 AI 的功能遵循《人工智能医疗器械注册审查指导原则》</strong></td>
+</tr>
+<tr>
+<td><strong>wellness vs medical 边界</strong></td>
+<td>关键的红线：<strong>是否受医疗器械监管取决于完整的预期用途、功能、证据与风险，不能只按用词二分；应逐法域评估。<a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/general-wellness-policy-low-risk-devices" rel="noopener noreferrer">FDA general-wellness guidance</a></strong>。即使上游设备不报告数值，下游产品仍须按自身预期用途、证据与风险单独评估。</td>
+</tr>
+<tr>
+<td><strong>数据隐私</strong></td>
+<td>GDPR（欧盟，健康数据是特殊类别数据）、HIPAA（仅适用于 covered entities 及其 business associates）、中国《个人信息保护法》+《数据安全法》+《人类遗传资源管理条例》（涉及生物样本的严格限制）、Apple/Google 平台对健康数据的特殊规则（<strong>不允许用于广告、不允许非必要共享</strong>）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="LLM-Coach-特有的四类风险">LLM Coach 特有的四类风险</h3>
+<ol>
+<li><strong>幻觉（Hallucination）</strong>：编造一个血压值、虚构一条医学引用。<strong>缓解：强制「结构约束生成」——LLM 只能引用系统提供的已验证数据，禁止自由生成数字；输出端做规则校验与数据源回溯</strong></li>
+<li><strong>越界诊断</strong>：用户说头痛，Agent 说「你这是偏头痛，建议吃 X」。<strong>这是明确的执业行为（practice of medicine）。安全做法是：提供可能性 + 说明哪些情况需要立即就医 + 不给出诊断结论与药物建议</strong></li>
+<li><strong>遗漏告警</strong>：用户描述了红旗症状（胸痛、卒中征象、自杀意念），但 Agent 继续聊运动计划。<strong>必须有独立于 LLM 的「红旗过滤器（red flag triage）」，用规则或小模型旁路，识别后强制切换为就医引导</strong></li>
+<li><strong>过度医疗化 / 医源性焦虑</strong>：每天都在告诉用户有什么异常 → 焦虑升高 → 更多异常 → 更多推送。<strong>这个正反馈回路是真实存在的损伤路径。</strong> 需要在产品层面设置「静默日」「警觉预算（alert budget）」</li>
+</ol>
+<h3 id="落地清单">落地清单</h3>
+<ul>
+<li>[ ] 明确定义产品的 intended use（预期用途）与 claim（声称），写在 PRD 首行</li>
+<li>[ ] 建立「不能说的词」词表：诊断、治疗、治愈、预防、检测（用于医疗声称）、建议服用…</li>
+<li>[ ] 设计「红旗三级分流」流水线：红旗规则旁路 → 通用建议 → 个人洞察</li>
+<li>[ ] 所有 LLM 输出的数字必须从结构化数据源注入 + 输出前校验</li>
+<li>[ ] 模型版本 + prompt 版本 + 知识库版本全链路记录，支持事后审计与回滚</li>
+<li>[ ] 隐私设计：本地优先（on-device first）、数据最小化、明确的用户撤回权</li>
+</ul>
+<hr />
+<h2 id="D11.-基础模型与表征学习什么时候用什么时候别用">D11. 基础模型与表征学习：什么时候用，什么时候别用</h2>
+<h3 id="现状穿戴生理信号的-Foundation-Model-时代已经开始2025–2026">现状：穿戴生理信号的 Foundation Model 时代已经开始（2025–2026）</h3>
+<p>这是过去两年这个领域最显著的变化。几个代表性工作：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>机构/来源</th>
+<th>预训练数据</th>
+<th>关键做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PulseOx-FM</strong></td>
+<td>Weizmann Institute（Eran Segal 组，Human Phenotype Project）</td>
+<td>10,704 名参与者的 42,282 夜睡眠记录，共 6,995,558 段脉搏血氧片段</td>
+<td>自监督学习。用<strong>实际年龄</strong>作为全局健康基准任务验证表征质量；表征可预测 64 个表型靶标；前瞻性预测正常血压者的 2 年高血压发病；夜间嵌入还能追踪次日血糖/饮食/活动状态</td>
+</tr>
+<tr>
+<td><strong>MMR（Masked Multiscale Reconstruction）</strong></td>
+<td>厂商级研究团队， NeurIPS 2025 Workshop</td>
+<td>约 17M~18M 段 10 秒 PPG，来自 32K~41K 智能手表用户（自然场景）</td>
+<td><strong>小波多分辨率分解 + 随机 mask 小波系数再重建</strong>。强迫编码器同时学习细粒度波形形态与全局节律动态。在多数健康任务上达到或超过同类开源 PPG 基础模型</td>
+</tr>
+<tr>
+<td><strong>Pulse-PPG</strong></td>
+<td>University of Memphis + UIUC（UbiComp/IMWUT 2025）</td>
+<td>100 天自由生活场景研究，120 名参与者的原始未清洗 PPG</td>
+<td><strong>在现场数据而非临床数据上预训练</strong>；RelCon 相对对比式学习目标 + 可学习 motif 距离。<strong>核心结论：现场数据预训练的跨数据集泛化显著优于临床数据预训练</strong></td>
+</tr>
+<tr>
+<td><strong>SleepFM</strong></td>
+<td>多模态 PSG 睡眠基础模型</td>
+<td>完整多导睡眠监测（含 EEG/ECG/EMG）</td>
+<td>展示了单次夜间记录能做多广的疾病预测；缺点是需要 PSG，难以规模化</td>
+</tr>
+<tr>
+<td><strong>PaPaGei / GPT-PPG</strong></td>
+<td>开源社区</td>
+<td>不同规模的公开与私有 PPG 数据</td>
+<td>提供可复用的开源基线</td>
+</tr>
+<tr>
+<td><strong>端侧卷积 FM</strong></td>
+<td>NeurIPS 2025 Workshop</td>
+<td>8 万小时 PPG</td>
+<td><strong>0.31M 参数 vs Transformer 的 110M</strong>；内存 3.6MB vs 441MB；CPU 4× / GPU 20× 加速；在 10 项临床分类任务上持平或超越。<strong>这是对 Agent 最实用的一条路线</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="三个务实的判断">三个务实的判断</h3>
+<p><strong>判断一：基础模型解决的是「单任务数据不足」的问题，而不是「数据充足任务」的问题。</strong>
+如果你的下游任务有数万标注样本，微调一个专用骨干网络通常仍会优于通用 FM。<strong>FM 的价值在于长尾任务</strong>——特别是那些「某一类标签极少但是你知道生理上应该存在信号」的任务（例如罕见心律失常、早期代谢功能紊乱）。</p>
+<p><strong>判断二：表征好不好，必须用统一的 probe 协议评估，不要用你自己的微调结果自证。</strong>
+标准做法是：<strong>冻结编码器 → 训练线性探针（linear probe）→ 在多个下游任务上比较</strong>。如果一个所谓 FM 的线性探针还不如手工特征 + XGBoost，那它的表征就是失败的。这一点在 CV/NLP 已经是常识，在穿戴领域还常常被跳过。</p>
+<p><strong>判断三：端侧部署是硬约束，别一开始就搞大 Transformer。</strong>
+上面那篇 0.31M 参数的工作给出了明确信号：<strong>卷积 + 时间局部性的归纳偏置，与非平稳的生理波形天然更匹配</strong>，参数量差三个数量级而性能不降。对要在手表上跑的感知层来说，这才是正确路线。</p>
+<h3 id="建议的采用路径">建议的采用路径</h3>
+<pre><code>1. 先用开源 FM（Pulse-PPG / PaPaGei 等）在你自己的数据上跑线性探针，建立 baseline
+2. 同时训练一个「手工特征 + 梯度提升树」的传统 baseline ← 不要跳过，这是最重要的对照
+3. 只有当 FM 显著超越 baseline 时，才进入微调阶段
+4. 上线时考虑蒸馏到小模型（端侧部署）
+5. 关键：评测必须做「人内分层」「时间序列划分（不能用随机打乱）」「跨人群外部验证」
+</code></pre>
+<p><strong>最后一个陷阱</strong>：穿戴数据的划分必须是<strong>按 subject 划分</strong>且<strong>按时间划分</strong>。随机打乱 train/test 会让同一个人的相邻片段同时出现在 train 和 test 里，导致虚高的性能——这是穿戴 ML 论文里最高频的错误，没有之一。</p>
+<hr />
+<h2 id="D12.-评测体系与商业闭环没有-ImageNet-的世界怎么迭代">D12. 评测体系与商业闭环：没有 ImageNet 的世界怎么迭代</h2>
+<h3 id="为什么重要-1-9">为什么重要</h3>
+<p>CV 有 ImageNet，NLP 有 GLUE/MMLU，<strong>穿戴健康没有公认的 benchmark</strong>。原因是任务定义、设备、人群、标签标准都不统一。这带来了两个后果：</p>
+<ol>
+<li>你无法用一个数字证明「我的模型更好」</li>
+<li>团队容易退回到用 engagement 指标自我安慰</li>
+</ol>
+<h3 id="要建立的三套评测">要建立的三套评测</h3>
+<p><strong>第一套：离线算法评测（要有骨气）</strong></p>
+<table>
+<thead>
+<tr>
+<th>要素</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据划分</td>
+<td><strong>必须</strong>按 subject 分 + 按时间分（前瞻式：用前 N 周训练，预测未来）</td>
+</tr>
+<tr>
+<td>报告方式</td>
+<td>Bland-Altman、MAE/MAPE/MARD、95% LoA；分类任务报告分层的 sens/spec/PPV/NPV + 校准曲线</td>
+</tr>
+<tr>
+<td>基线对照</td>
+<td>至少三个：规则基线、传统 ML 基线、<strong>「重复昨天的预测」的朴素基线</strong>（很多产品连这个都打不过）</td>
+</tr>
+<tr>
+<td>分层报告</td>
+<td>按肤色、性别、年龄、BMI、疾病状态分层。发现亚群劣化必须公开在内部报告里</td>
+</tr>
+<tr>
+<td>外部验证</td>
+<td>至少在一个完全独立的设备上验证</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第二套：在线产品评测（要诚实）</strong></p>
+<p>三层指标体系已在 D7 讲过（参与层 / 代理结局层 / 临床结局层）。补充两个容易忽略的：</p>
+<ul>
+<li><strong>依从性曲线（adherence curve）</strong>：用户在第几天弃用？这是产品最真实的「健康度」指标</li>
+<li><strong>负面事件监测</strong>：有多少用户报告焦虑升高？有多少用户因为 App 而产生了不必要的就医或不必要的不就医？这类负向指标极少有人测，但它是负责任的产品标志</li>
+</ul>
+<p><strong>第三套：Agent 自身评测（这个最缺）</strong></p>
+<p>LLM Coach 的评测怎么做？我建议一套 rubric-based 的多维度评测集，至少包含：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评判方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>医学事实正确性</td>
+<td>由专业临床人员标注的金标准 QA 集</td>
+</tr>
+<tr>
+<td>数字保真度</td>
+<td><strong>自动：</strong>LLM 输出中的所有数字是否都能溯源到结构化数据源（这个可以 100% 程序化检查，必做）</td>
+</tr>
+<tr>
+<td>行为科学正确性</td>
+<td>rubric：是否正确识别了用户的 TTM 阶段？干预强度是否匹配？是否推进了阶段？</td>
+</tr>
+<tr>
+<td>不确定性与谦卑</td>
+<td>在信息不足时是否正确弃权/提问，而非编造结论</td>
+</tr>
+<tr>
+<td>安全合规</td>
+<td>是否越过 medical claim 红线；是否正确处理红旗症状</td>
+</tr>
+<tr>
+<td>共情与语气</td>
+<td>rubric 打分或偏好pair对比</td>
+</tr>
+<tr>
+<td>长期推进</td>
+<td><strong>最终指标：</strong>用户在 N 周内是否推进了行为改变阶段</td>
+</tr>
+</tbody>
+</table>
+<h3 id="关于商业闭环的两点观察">关于商业闭环的两点观察</h3>
+<p><strong>观察一：健康产品的留存死在第 21 天到 45 天之间。</strong>
+这个区间的本质是「新鲜感耗尽，而健康改善尚未显现」的死亡谷（因为生理改善的时间常数是周~月级，见 D2）。<strong>唯一能穿越它的东西是「短期可见的小胜利」</strong>——不是体重的下降，而是「你完成了连续 3 天的固定睡眠时间」「你发现午饭后散步确实能让下午精神更好」这类<strong>自我效能感的即时反馈</strong>。</p>
+<p><strong>观察二：CGM 是这个规律的一个例外</strong>，因为它把反馈周期压缩到了分钟级。这就是为什么代谢健康赛道在过去几年增长最快。<strong>如果你能在其他维度上找到「缩短反馈周期」的代理机制，你的产品就获得了不对称优势。</strong> 例如：
+- 睡眠 → 次日午后精力评分（对当天就要experiment）
+- 运动 → 当晚 HRV 与深睡比例
+- 饮食 → 下一餐前的饥饿感/精力（而非体重）</p>
+<p><strong>把延迟结果转化为即时反馈，是 AI Coach 最有价值的产品直觉之一。</strong></p>
+<hr />
+<h2 id="第五章小结一张优先序地图">第五章小结：一张优先序地图</h2>
+<p>如果只能按顺序投入，我的建议是：</p>
+<pre><code>第 1 梯队（立刻做，决定生死）
+  D1 测量素养 + Metric Card
+  D2 时间尺度 / Decision Cadence
+  D10 合规红线与红旗分流
+
+第 2 梯队（3–6 个月，决定专业度）
+  D4 N-of-1 与层次贝叶斯个人基线
+  D3 隐状态推断（卡尔曼 / 状态空间）
+  D8 数据工程与缺失建模
+
+第 3 梯队（6–12 个月，决定差异化）
+  D5 行为科学驱动的对话策略
+  D6 主动评估工具箱（LLM tool-use 的最佳形态）
+  D7 MRT / contextual bandit 的实验文化
+
+第 4 梯队（持续投入）
+  D9 不确定性量化与公平性
+  D11 基础模型（但别忘了最好的对照baseline）
+  D12 三层评测体系
+</code></pre>
+<h1 id="第六章-资源篇数据集论文与-90-天学习路线">第六章 资源篇：数据集、论文与 90 天学习路线</h1>
+<h2 id="6.1-公开数据集按「能练什么」分类">6.1 公开数据集（按「能练什么」分类）</h2>
+<h3 id="睡眠">睡眠</h3>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>规模</th>
+<th>内容</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SHHS</strong>（Sleep Heart Health Study）</td>
+<td>~6,400 人</td>
+<td>PSG + ECG + 呼吸 + 血氧</td>
+<td><strong>睡眠分期预训练的标准大规模语料</strong>。多篇文章用它做迁移学习源域</td>
+</tr>
+<tr>
+<td><strong>MESA Sleep</strong></td>
+<td>~2,200 人</td>
+<td>PSG + 腕式 actigraphy + 心血管结局</td>
+<td>睡眠与心血管结局的黄金队列</td>
+</tr>
+<tr>
+<td><strong>Sleep-EDF</strong>（PhysioNet）</td>
+<td>197 夜</td>
+<td>PSG</td>
+<td>入门首选</td>
+</tr>
+<tr>
+<td><strong>MASS</strong></td>
+<td>200 夜</td>
+<td>PSG</td>
+<td>分期评估</td>
+</tr>
+<tr>
+<td><strong>其他公开 PSG 数据集（如 Montreal Archive of Sleep Studies 等）</strong></td>
+<td>—</td>
+<td>—</td>
+<td>迁移学习与外部验证</td>
+</tr>
+</tbody>
+</table>
+<h3 id="心血管-&amp;-PPG">心血管 &amp; PPG</h3>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>内容</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PhysioNet / Computing in Cardiology Challenge 系列</strong></td>
+<td>PPG、ECG、血压</td>
+<td>质量最高的公开竞赛数据</td>
+</tr>
+<tr>
+<td><strong>PPG-BP Database</strong></td>
+<td>PPG + 袖带血压</td>
+<td>血压估计的标准 benchmark</td>
+</tr>
+<tr>
+<td><strong>MIMIC-III / IV（含 Waveform）</strong></td>
+<td>ICU 波形：ECG/PPG/ABP/呼吸</td>
+<td><strong>有创动脉血压参考</strong>，是血压算法的稀缺资源（需申请 credential）</td>
+</tr>
+<tr>
+<td><strong>Apple Heart and Movement Study 发表的派生结果</strong></td>
+<td>大规模 AFib 筛查结果</td>
+<td>阅读而非直接使用</td>
+</tr>
+<tr>
+<td><strong>UCI Cuffless BP Dataset</strong></td>
+<td>PPG + ECG + ABP</td>
+<td>血压 vs PAT 的经典教学数据</td>
+</tr>
+</tbody>
+</table>
+<h3 id="活动-压力-多模态">活动 / 压力 / 多模态</h3>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>内容</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PPG-DaLiA</strong></td>
+<td>PPG + IMU + ECG，9 种日常活动，15 人</td>
+<td>活动中的心率估计（cadence lock 研究）</td>
+</tr>
+<tr>
+<td><strong>WESAD</strong></td>
+<td>15 人，多传感器，情绪/压力诱发实验</td>
+<td><strong>压力与情绪唤醒的标准 benchmark</strong></td>
+</tr>
+<tr>
+<td><strong>UCI HAR / WISDM / Opportunity / PAMAP2</strong></td>
+<td>IMU 活动识别</td>
+<td>HAR 入门</td>
+</tr>
+<tr>
+<td><strong>Human Activity Recognition 的一些 Combined 数据集</strong></td>
+<td>多部位多模态</td>
+<td>泛化研究</td>
+</tr>
+</tbody>
+</table>
+<h3 id="CGM-代谢">CGM / 代谢</h3>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Weizmann HPP（Human Phenotype Project）</strong></td>
+<td>大规模 CGM + 菌群 + 队列表型；部分成果连带发表，是精准营养研究的基石</td>
+</tr>
+<tr>
+<td><strong>Dexcom / Abbott 公开数据集</strong>（有限）</td>
+<td>商业数据，获取受限</td>
+</tr>
+<tr>
+<td><strong>PhysioNet 的糖尿病相关数据集</strong></td>
+<td>血糖、胰岛素、CGM</td>
+</tr>
+</tbody>
+</table>
+<h3 id="长队列含穿戴">长队列（含穿戴）</h3>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>规模</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>UK Biobank 加速度计子研究</strong></td>
+<td>~100,000 人，7 天腕式三轴加速度</td>
+<td><strong>最大的公开穿戴队列</strong>，体力活动与全因死亡率研究的主力。申请制</td>
+</tr>
+<tr>
+<td><strong>All of Us</strong>（美国 NIH）</td>
+<td>多元化人群 + 部分 Fitbit 数据</td>
+<td>公平性研究的最佳素材</td>
+</tr>
+<tr>
+<td><strong>NHANES</strong></td>
+<td>美国全国健康与营养调查，含加速度计</td>
+<td>人群代表性、PPV 计算的分母来源</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6.2-必读论文清单按主题标注为什么读">6.2 必读论文清单（按主题，标注为什么读）</h2>
+<h3 id="原理类建立物理直觉">原理类（建立物理直觉）</h3>
+<ol>
+<li>Allen J. <em>Photoplethysmography and its application in clinical physiological measurement</em>. Physiol Meas, 2007. —— <strong>PPG 的百科全书式综述</strong>，入门必读</li>
+<li>Nitzan M, et al. 关于 PPG 波形重搏切迹与血管老化的系列论文 —— 理解 PWA</li>
+<li>关于 Beer-Lambert + 光散射修正用于脉搏血氧测量的经典推导 —— 理解为什么指端与前臂的测量条件差别那么大</li>
+<li>Moens-Korteweg / Hughes 方程与血压估算 —— 理解无袖带血压的物理上限</li>
+</ol>
+<h3 id="血压争议最激烈值得一读其-opposing-views">血压（争议最激烈，值得一读其 opposing views）</h3>
+<ol start="5">
+<li><strong>Avolio A, et al.</strong> <em>Challenges Presented by Cuffless Measurement of Blood Pressure if Adopted for Diagnosis and Treatment of Hypertension</em>. Pulse, 2023. —— <strong>最坚定的反对派，论证清晰</strong></li>
+<li>与之对应的社论 <em>Cuffless Measurement of Blood Pressure: Not Good Enough for Diagnosis and Treatment of Hypertension</em> (Karger) —— 读完两边才算真的懂这件事</li>
+<li><strong>Apple HTNF 的 peer-reviewed validation paper</strong>（描述 7 项研究的开发与验证过程）—— 学习「如何诚实地做一个准确度有限但有益的产品」</li>
+<li>2025 AHA 科学声明 / 2025 AHA-ACC 高血压指南的无袖带相关章节 —— 监管与临床团体的官方立场</li>
+</ol>
+<h3 id="睡眠-1">睡眠</h3>
+<ol start="9">
+<li><strong>Sridhar N, et al.</strong> 端到端 dilated CNN 做睡眠分期 + 迁移学习（Comput Biol Med 2023）—— 学习端到端 vs 特征工程的对照</li>
+<li><strong>Sun H, et al.</strong> LSTM + 132 HRV 特征 + actigraphy，面向睡眠障碍人群（Sleep, 2020）—— κ=0.60 的标准参考</li>
+<li>4 类睡眠分期的高效算法的 computationally efficient work（Sci Rep, 2023）—— κ=0.638 且快 50 倍，学习嵌入式部署权衡</li>
+<li><strong>SleepFM</strong>（多模态 PSG 基础模型）—— 学习「一次夜间记录能预测多少疾病」的上限展示</li>
+</ol>
+<h3 id="PPG-基础模型2025–2026-最活跃的方向">PPG 基础模型（2025–2026 最活跃的方向）</h3>
+<ol start="13">
+<li><strong>PulseOx-FM</strong>（Weizmann，medRxiv 2026）—— 学习如何用「实际年龄」作为表征质量的代理任务，以及如何做前瞻性发病预测</li>
+<li><strong>MMR / Masked Multiscale Reconstruction</strong>（NeurIPS 2025 Workshop on Learning from Time Series for Health）—— 小波多分辨率 + 掩码重建。建议精读其对小波设计的消融分析</li>
+<li><strong>Pulse-PPG</strong>（UbiComp / IMWUT 2025）—— 现场数据 vs 临床数据预训练的根本性争论</li>
+<li>Toward On-device Foundation Models for Raw Wearable Signals（NeurIPS 2025 Workshop）—— <strong>端侧小卷积 FM，参数少三个数量级而性能不降</strong></li>
+<li>PaPaGei（开源 PPG 基础模型）—— 拿来当 baseline</li>
+</ol>
+<h3 id="AI-Coach-行为干预最重要的两块">AI Coach / 行为干预（最重要的两块）</h3>
+<ol start="18">
+<li><strong>PerMA 试验</strong>（npj Digit Med, 2026）—— N-of-1 ML + LLM 匹配人类教练方案，可作为个体化干预的产品模板</li>
+<li><strong>My Heart Counts 2.0 design and rationale</strong>（Am J Prev Cardiol, 2026，N=15,000）—— LLM coaching 的大规模 RCT 设计，值得照着设计你自己的研究</li>
+<li>Hardeman W, et al. 行为改变轮与 COM-B 的原始文献 —— 行为科学的产品化基础</li>
+<li>Nahum-Shani I, et al. <strong>微随机试验（MRT）与 JITAI</strong> 的方法学论文 —— <strong>穿戴干预的实验设计圣经</strong></li>
+<li>Klasnja P, et al. JITAI（Just-In-Time Adaptive Intervention）的框架性论文 —— 行为干预的 Agent 化表达</li>
+</ol>
+<h3 id="可靠性与评价方法">可靠性与评价方法</h3>
+<ol start="23">
+<li>Bland JM, Altman DG. <em>Statistical methods for assessing agreement between two methods of clinical measurement</em>. Lancet, 1986. —— <strong>两页纸，改变你看所有「准确性对比」的方式</strong></li>
+<li>Riemann D, et al. AASM 睡眠分期手册 —— 睡眠分期的 ground truth 定义</li>
+<li>关于 Scoping review 的 wearable validity 综述（如 MDPI Sensors 2026 的 Consumer Smartwatch Technology in Health and Performance Research）—— 一个较新、较全面、且诚实的消费手表效度综述，适合作为「哪些指标有证据、哪些没有」的速查表</li>
+</ol>
+<h2 id="6.3-90-天学习路线">6.3 90 天学习路线</h2>
+<h3 id="第-1–30-天建立生理与测量的底层直觉">第 1–30 天：建立生理与测量的底层直觉</h3>
+<p><strong>目标</strong>：不再把任何穿戴数字当真值。</p>
+<ul>
+<li>[ ] 读完 PPG 综述（Allen 2007）+ SpO₂ 的 Beer-Lambert 推导</li>
+<li>[ ] 手工实现一遍：从一段原始 PPG 里做出心率（带通 → 峰值 → RR → 中值）</li>
+<li>[ ] 手工算一遍 RMSSD / SDNN / LF-HF，理解为什么 LF/HF 有争议</li>
+<li>[ ] 读 Bland-Altman 原始论文，并给自己某款设备做一次「手表 vs 胸带」的 Bland-Altman 分析</li>
+<li>[ ] 通读你自己产品的所有指标的 Metric Card，补齐「证据等级」字段</li>
+<li>[ ] 读一遍 Apple 的 IRNF / ECG / HTNF 的 IFU（Instructions for Use）文件——这些是免费的、写得极严谨的工业文档，是最好的「如何诚实表述」教材</li>
+</ul>
+<h3 id="第-31–60-天信号处理-经典模型">第 31–60 天：信号处理 + 经典模型</h3>
+<p><strong>目标</strong>：能独立跑通一条链路的端到端 pipeline。</p>
+<ul>
+<li>[ ] 用 SHHS / Sleep-EDF 跑一遍睡眠分期：先 actigraphy 基线，再特征+LSTM，再端到端 CNN</li>
+<li>[ ] 用 PPG-DaLiA 复现「PPG → 活动心率」，体会到 cadence lock 是什么</li>
+<li>[ ] 实现一次 ANC/LMS：把 IMU 当参考，从含噪 PPG 里滤除伪影 / 滤波</li>
+<li>[ ] 实现一次个人基线 + EWMA + CUSUM 变点检测，可视化</li>
+<li>[ ] 用状态空间/卡尔曼做一个「2 观测 → 1 隐状态」的最小 demo，输出置信区间</li>
+<li>[ ] <strong>重要演习</strong>：把所有数据集做一次「按 subject × 按时间」的划分，重跑一遍你之前的模型，看性能掉多少</li>
+</ul>
+<h3 id="第-61–90-天Agent-化与实验文化">第 61–90 天：Agent 化与实验文化</h3>
+<p><strong>目标</strong>：让一个真正的 Health Coach Agent 跑起来并有迭代机制。</p>
+<ul>
+<li>[ ] 设计 <code>Metric Card</code> schema 并注入 LLM prompt；写自动化测试检查 LLM 输出的数字是否可溯源</li>
+<li>[ ] 实现「红旗三级分流」旁路（规则层，不能依赖 LLM）</li>
+<li>[ ] 基于 COM-B + TTM 写一个分层对话策略库，做成 tools/技能</li>
+<li>[ ] 实现 Assessment Protocol 工具箱（至少一个主动测试：深呼吸 HRV 或坐立测试）</li>
+<li>[ ] 用 contextual bandit（Thompson Sampling）替换掉「固定规则推送」</li>
+<li>[ ] 建立完整干预日志，跑一次 off-policy evaluation</li>
+<li>[ ] 写一个 rubric-based 的 Coach 评测集（50–100 条，覆盖医学正确性、数字保真、行为科学正确性、安全合规）</li>
+</ul>
+<h2 id="6.4-值得持续跟踪的信息源">6.4 值得持续跟踪的信息源</h2>
+<p><strong>机构与公司研究页（一手权威，优于二手摘要）</strong>
+- Apple Health / Apple Research（IRNF、ECG、HTNF、Sleep Apnea 的验证原文与 IFU）
+- Samsung Health / Samsung Medical Center（睡眠相关验证研究）
+- Oura 官方技术博客与研究页（戒指形态的传感器与算法设计）
+- Google Health / Fitbit Research（皮肤温度与发热/传染性疾病相关研究、Project Baseline 健康研究等）
+- Weizmann Institute — Eran Segal / Smadar Shilo 组（HPP 队列，精准营养与 PPG 基础模型）
+- Stanford Medicine — Mintu Turakhia / Michael Snyder 组（My Heart Counts、Apple Heart Study、数字健康）</p>
+<p><strong>学术会议</strong>
+- <strong>NeurIPS Workshop on Learning from Time Series for Health</strong>（穿戴 FM 最活跃的发表场）
+- ML4H（Machine Learning for Health，NeurIPS 旗下）
+- CHIL（Conference on Health, Inference, and Learning）
+- UbiComp / IMWUT（移动健康与普适计算，偏工程与真实场景）
+- SLEEP / AASM 年会（睡眠医学）
+- Computing in Cardiology（CinC）</p>
+<p><strong>数据集平台</strong>
+- PhysioNet（心血管与生理信号的第一选择）
+- UK Biobank / All of Us（大规模队列）
+- NSRR（National Sleep Research Resource，睡眠数据）</p>
+<hr />
+<h1 id="附录术语表与常见误区">附录：术语表与常见误区</h1>
+<h2 id="A.-术语速查">A. 术语速查</h2>
+<table>
+<thead>
+<tr>
+<th>缩写</th>
+<th>全称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PPG</strong></td>
+<td>Photoplethysmography</td>
+<td>光电容积脉搏波描记法</td>
+</tr>
+<tr>
+<td><strong>ECG/EKG</strong></td>
+<td>Electrocardiogram</td>
+<td>心电图</td>
+</tr>
+<tr>
+<td><strong>SpO₂</strong></td>
+<td>Peripheral capillary oxygen saturation</td>
+<td>外周血氧饱和度</td>
+</tr>
+<tr>
+<td><strong>HRV</strong></td>
+<td>Heart Rate Variability</td>
+<td>心率变异性</td>
+</tr>
+<tr>
+<td><strong>RMSSD</strong></td>
+<td>Root Mean Square of Successive Differences</td>
+<td>相邻 RR 差值的均方根</td>
+</tr>
+<tr>
+<td><strong>RR / IBI</strong></td>
+<td>R-R interval / Inter-Beat Interval</td>
+<td>相邻心搏间隔</td>
+</tr>
+<tr>
+<td><strong>RSA</strong></td>
+<td>Respiratory Sinus Arrhythmia</td>
+<td>呼吸性心律不齐</td>
+</tr>
+<tr>
+<td><strong>PTT / PAT / PEP</strong></td>
+<td>Pulse Transit Time / Arrival Time / Pre-Ejection Period</td>
+<td>脉搏传导时间 / 到达时间 / 射血前期</td>
+</tr>
+<tr>
+<td><strong>PWV</strong></td>
+<td>Pulse Wave Velocity</td>
+<td>脉搏波传导速度</td>
+</tr>
+<tr>
+<td><strong>PWA / AIx</strong></td>
+<td>Pulse Wave Analysis / Augmentation Index</td>
+<td>脉搏波分析 / 增强指数</td>
+</tr>
+<tr>
+<td><strong>BIA / Bio-Z</strong></td>
+<td>Bioelectrical Impedance Analysis</td>
+<td>生物电阻抗分析</td>
+</tr>
+<tr>
+<td><strong>EDA / GSR</strong></td>
+<td>Electrodermal Activity / Galvanic Skin Response</td>
+<td>皮肤电活动</td>
+</tr>
+<tr>
+<td><strong>SCL / SCR</strong></td>
+<td>Skin Conductance Level / Response</td>
+<td>皮肤电导水平 / 反应</td>
+</tr>
+<tr>
+<td><strong>EDA 之外</strong>: <strong>SKT</strong></td>
+<td>Skin Temperature</td>
+<td>皮肤温度</td>
+</tr>
+<tr>
+<td><strong>IMU</strong></td>
+<td>Inertial Measurement Unit</td>
+<td>惯性测量单元（加速度+陀螺仪+磁力计）</td>
+</tr>
+<tr>
+<td><strong>PSG</strong></td>
+<td>Polysomnography</td>
+<td>多导睡眠监测（金标准）</td>
+</tr>
+<tr>
+<td><strong>HSAT</strong></td>
+<td>Home Sleep Apnea Test</td>
+<td>家用睡眠呼吸暂停检测</td>
+</tr>
+<tr>
+<td><strong>AHI</strong></td>
+<td>Apnea-Hypopnea Index</td>
+<td>呼吸暂停-低通气指数（次/小时）</td>
+</tr>
+<tr>
+<td><strong>OSA</strong></td>
+<td>Obstructive Sleep Apnea</td>
+<td>阻塞性睡眠呼吸暂停</td>
+</tr>
+<tr>
+<td><strong>AFib / AF</strong></td>
+<td>Atrial Fibrillation</td>
+<td>心房颤动</td>
+</tr>
+<tr>
+<td><strong>CGM</strong></td>
+<td>Continuous Glucose Monitoring</td>
+<td>持续葡萄糖监测</td>
+</tr>
+<tr>
+<td><strong>MARD</strong></td>
+<td>Mean Absolute Relative Difference</td>
+<td>平均绝对相对差异</td>
+</tr>
+<tr>
+<td><strong>TIR</strong></td>
+<td>Time In Range</td>
+<td>目标范围内时间占比</td>
+</tr>
+<tr>
+<td><strong>CV (glucose)</strong></td>
+<td>Coefficient of Variation</td>
+<td>血糖变异系数</td>
+</tr>
+<tr>
+<td><strong>SQI</strong></td>
+<td>Signal Quality Index</td>
+<td>信号质量指数</td>
+</tr>
+<tr>
+<td><strong>ANC</strong></td>
+<td>Adaptive Noise Cancelling</td>
+<td>自适应噪声抵消</td>
+</tr>
+<tr>
+<td><strong>HAR</strong></td>
+<td>Human Activity Recognition</td>
+<td>人体活动识别</td>
+</tr>
+<tr>
+<td><strong>EMA</strong></td>
+<td>Ecological Momentary Assessment</td>
+<td>生态瞬时评估</td>
+</tr>
+<tr>
+<td><strong>MRT</strong></td>
+<td>Micro-Randomized Trial</td>
+<td>微随机试验</td>
+</tr>
+<tr>
+<td><strong>JITAI</strong></td>
+<td>Just-In-Time Adaptive Intervention</td>
+<td>即时自适应干预</td>
+</tr>
+<tr>
+<td><strong>ACWR</strong></td>
+<td>Acute:Chronic Workload Ratio</td>
+<td>急性-慢性负荷比</td>
+</tr>
+<tr>
+<td><strong>VO₂max / CRF</strong></td>
+<td>Maximal oxygen uptake / Cardiorespiratory Fitness</td>
+<td>最大摄氧量 / 心肺适能</td>
+</tr>
+<tr>
+<td><strong>TTM</strong></td>
+<td>Transtheoretical Model (Stages of Change)</td>
+<td>跨理论模型（行为改变阶段）</td>
+</tr>
+<tr>
+<td><strong>COM-B</strong></td>
+<td>Capability, Opportunity, Motivation – Behavior</td>
+<td>行为的 Capability-Opportunity-Motivation 模型</td>
+</tr>
+<tr>
+<td><strong>SDT</strong></td>
+<td>Self-Determination Theory</td>
+<td>自我决定理论</td>
+</tr>
+<tr>
+<td><strong>SaMD</strong></td>
+<td>Software as a Medical Device</td>
+<td>医疗器械软件</td>
+</tr>
+<tr>
+<td><strong>N-of-1 trial</strong></td>
+<td>—</td>
+<td>单一个体的交叉对照试验</td>
+</tr>
+<tr>
+<td><strong>ICC</strong></td>
+<td>Intraclass Correlation Coefficient</td>
+<td>组内相关系数（用于方差分解）</td>
+</tr>
+<tr>
+<td><strong>MAR / MCAR / MNAR</strong></td>
+<td>Missing At Random / Completely At Random / Not At Random</td>
+<td>数据缺失机制</td>
+</tr>
+<tr>
+<td><strong>LOA</strong></td>
+<td>Limits of Agreement</td>
+<td>一致性界限（Bland-Altman）</td>
+</tr>
+<tr>
+<td><strong>FM</strong></td>
+<td>Foundation Model</td>
+<td>基础模型</td>
+</tr>
+<tr>
+<td><strong>NTC thermistor</strong></td>
+<td>Negative Temperature Coefficient thermistor</td>
+<td>负温度系数热敏电阻</td>
+</tr>
+<tr>
+<td><strong>MRI-safe disclaimer</strong></td>
+<td>—</td>
+<td>医疗场景中部分穿戴禁用（如 MRI、电外科）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="B.-常见误区清单值得贴在工位上">B. 常见误区清单（值得贴在工位上）</h2>
+<table>
+<thead>
+<tr>
+<th>❌ 误区</th>
+<th>✅ 事实</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>穿戴测得的心率是"真实心率"</td>
+<td>是<strong>延迟的估计</strong>，且每段有自己的质量等级</td>
+</tr>
+<tr>
+<td>HRV 低 = 压力大</td>
+<td>HRV 是多个原因的共同结果，需要多证据汇聚才能归因</td>
+</tr>
+<tr>
+<td>LF/HF 是"交感/副交感受平衡"</td>
+<td>这是一个被严重过度简化的经典说法，现代方法学普遍不接受</td>
+</tr>
+<tr>
+<td>SpO₂ 98% = 不缺氧</td>
+<td>贫血、CO 中毒时都会假性正常</td>
+</tr>
+<tr>
+<td>手表能测血压</td>
+<td>通常是估算；2025 AHA/ACC 指南不建议用于诊断管理。 Apple HTNF 甚至不报数值</td>
+</tr>
+<tr>
+<td>睡眠分期准确率 80% 意味着我的深睡数据可信</td>
+<td>那是逐 30 秒 epoch 的 κ≈0.6；聚合量可信度更高，但单个夜里深睡 12 分钟 vs 20 分钟的区别基本是噪声</td>
+</tr>
+<tr>
+<td>打鼾录音能诊断睡眠呼吸暂停</td>
+<td>打鼾是 OSA 的症状，不是诊断依据；很多 OSA 患者不打鼾</td>
+</tr>
+<tr>
+<td>汗水排得多 = 排毒效果好</td>
+<td>汗液 99% 是水与电解质，"排毒"是营销概念</td>
+</tr>
+<tr>
+<td>可以靠手表识别你的 7 种情绪</td>
+<td>EDA/HR 只落在唤醒维度，没有效价分辨力</td>
+</tr>
+<tr>
+<td>用了大模型就能做健康教练</td>
+<td>LLM 懂健康知识，但不懂行为改变——后者才是教练的全部价值</td>
+</tr>
+<tr>
+<td>engagement 高 = 产品对健康有益</td>
+<td>最能拉 DAU 的手段往往致病（焦虑驱动通知、红点、损失厌恶）</td>
+</tr>
+<tr>
+<td>随机切分数据做训练/测试没问题</td>
+<td>会导致同一个人的相邻片段同时进 train/test，性能虚高</td>
+</tr>
+<tr>
+<td>用了 PPG 基础模型就自动更好</td>
+<td>先用线性探针对比「手工特征 + GBDT」baseline，否则可能是负优化</td>
+</tr>
+</tbody>
+</table>
+<h2 id="C.-一句话的心智模型送给你">C. 一句话的心智模型（送给你）</h2>
+<blockquote>
+<p>穿戴设备给你的是<strong>影子</strong>，不是物体本身。</p>
+<p>影子有时会骗你——但只要你<strong>知道它是什么角度投下来的、什么时候会变形、并且同时看几个不同角度的影子</strong>，你就能相当可靠地推断出物体的形状。</p>
+<p>这就是 AI 健康教练的全部工作。</p>
+</blockquote>
+<hr />
+<section class="sources" aria-label="关键来源与适用边界"><h2>关键来源与适用边界</h2><p>产品、监管与临床数字必须在原始资料所界定的人群、设备版本、参照标准和预期用途内理解。</p><ul><li><a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/general-wellness-policy-low-risk-devices" rel="noopener noreferrer">FDA：General Wellness Policy</a></li><li><a href="https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250507.pdf" rel="noopener noreferrer">FDA：Apple HTNF 510(k) Summary</a></li><li><a href="https://ouraring.com/blog/smart-sensing/" rel="noopener noreferrer">Oura：Ring 4 Smart Sensing</a></li><li><a href="https://www.apple.com/airpods-pro/specs/" rel="noopener noreferrer">Apple：AirPods Pro 技术规格</a></li><li><a href="https://diabetesjournals.org/care/article/49/Supplement_1/S132/163927/6-Glycemic-Goals-Hypoglycemia-and-Hyperglycemic" rel="noopener noreferrer">ADA：CGM 目标与适用范围</a></li><li><a href="https://developer.apple.com/documentation/healthkit/accessing-health-records" rel="noopener noreferrer">Apple：Health Records</a></li><li><a href="https://www.hhs.gov/hipaa/for-professionals/covered-entities/index.html" rel="noopener noreferrer">HHS：HIPAA 适用主体</a></li><li><a href="https://www.ahajournals.org/doi/full/10.1161/CIR.0000000000001356" rel="noopener noreferrer">AHA/ACC：2025 高血压指南</a></li></ul></section>
+<p><strong>文档结束</strong></p>
+<p><em>本文件中标注的具体数值（灵敏度、特异度、MARD、κ 等）均来自厂商公开的监管文档、官方使用说明与同行评议文献；数字必须在原文的限定条件下理解（人群、参照标准、设备等）。凡涉及无袖带类技术，请优先参考 AHA/ACC 与各国监管机构的最新指南，不要以本文档为准绳做临床决策。</em></p>
+      <footer>
+        <p>文档版本 v1.0 · 2026-09-29 · 本文件数值用于技术学习与产品参考，不作为临床决策依据；涉及无袖带血压等争议技术请以 AHA/ACC 及各国监管机构最新指南为准。</p>
+      </footer>
+    </div>
+  </main>
+</div>
+<button id="themeBtn" title="切换深浅色">☾</button>
+<button id="topBtn" title="回到顶部">↑</button>
+<script>
+// theme
+const root=document.documentElement;
+const saved=localStorage.getItem('wc-theme')||'light';
+root.setAttribute('data-theme',saved);
+document.getElementById('themeBtn').textContent = saved==='dark' ? '☀' : '☾';
+document.getElementById('themeBtn').onclick=()=>{
+  const cur=root.getAttribute('data-theme');
+  const nxt=cur==='dark'?'light':'dark';
+  root.setAttribute('data-theme',nxt);
+  localStorage.setItem('wc-theme',nxt);
+  document.getElementById('themeBtn').textContent = nxt==='dark' ? '☀' : '☾';
+};
+// progress
+const bar=document.getElementById('progress');
+// toc active + top btn
+const links=[...document.querySelectorAll('#toc a')];
+const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+const heads=[...document.querySelectorAll('h1[id],h2[id],h3[id]')];
+const topBtn=document.getElementById('topBtn');
+function onScroll(){
+  const h=document.documentElement;
+  const p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  bar.style.width=p+'%';
+  topBtn.style.display = h.scrollTop>600 ? 'flex' : 'none';
+  let cur=null;
+  for(const s of heads){ if(s.getBoundingClientRect().top<=140) cur=s; else break; }
+  links.forEach(a=>a.classList.remove('active'));
+  if(cur){ const a=map.get(cur.id); if(a) a.classList.add('active');
+    if(document.getElementById('sidebar').classList.contains('open')){}
+  }
+}
+document.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+topBtn.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+// search
+document.getElementById('tocSearch').addEventListener('input',e=>{
+  const q=e.target.value.trim().toLowerCase();
+  links.forEach(a=>{ a.style.display = (!q||a.dataset.toc.includes(q)) ? 'block':'none'; });
+});
+// mobile menu
+const sb=document.getElementById('sidebar');
+document.getElementById('menuBtn').onclick=()=>sb.classList.add('open');
+document.addEventListener('click',e=>{
+  if(window.innerWidth<=1100 && sb.classList.contains('open')){
+    if(!sb.contains(e.target) && e.target.id!=='menuBtn') sb.classList.remove('open');
+  }
+});
+// external table wrapper
+document.querySelectorAll('table').forEach(t=>{
+  if(!t.parentElement.classList.contains('tw')){
+    const w=document.createElement('div'); w.className='tw'; t.parentNode.insertBefore(w,t); w.appendChild(t);
+  }
+});
+</script>
+</body>
+</html>
